@@ -93,10 +93,12 @@ export function findRouteByName(graph, startName, endName) {
   let endNodeId = null;
  
   // Find the node IDs case-insensitively
-  Object.values(graph.nodes).forEach(node => {
-    if (node.name.toLowerCase() === startName.toLowerCase()) startNodeId = node.id;
-    if (node.name.toLowerCase() === endName.toLowerCase()) endNodeId = node.id;
-  });
+ Object.values(graph.nodes).forEach(node => {
+  if (!node.name) return; // skip nodes without names
+  if (node.name.toLowerCase() === startName.toLowerCase()) startNodeId = node.id;
+  if (node.name.toLowerCase() === endName.toLowerCase()) endNodeId = node.id;
+});
+
  
   if (startNodeId === null || endNodeId === null) {
     return {

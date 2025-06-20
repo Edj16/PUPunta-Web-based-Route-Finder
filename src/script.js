@@ -3,20 +3,22 @@ import { cocLocations, findCOCRoute } from './graphs/coc.js';
 import { ceaLocations, findCEARoute } from './graphs/cea.js';
 import { mainCampusData } from './data/graphData.js';
 
-function plotVerticesOnMap() {
+function plotVerticesOnMap(pathNodeIds = []) {
   const map = document.getElementById('map');
-  if (!map) {
-  console.error("❌ No #map element found!");
-  return;
-  }
+  if (!map) return;
 
-  // Clear all existing points and lines
-  map.innerHTML = '';
+  // ✅ Remove only old .point elements
+  map.querySelectorAll('.point').forEach(el => el.remove());
 
   Object.values(mainCampusData.nodes).forEach(node => {
     if (node.x !== undefined && node.y !== undefined) {
       const dot = document.createElement('div');
       dot.className = 'point';
+
+      if (pathNodeIds.includes(node.id)) {
+        dot.classList.add('path-node'); // highlight it
+      }
+
       dot.style.left = `${node.x}px`;
       dot.style.top = `${node.y}px`;
       map.appendChild(dot);
@@ -340,9 +342,10 @@ function findRoute() {
     } else {
       // Handle same-campus routes
       if (startCampus === 'MAIN') {
-        plotVerticesOnMap();
         displayRoute(route, start, end, 'MAIN Campus');
-        highlightPath(route.nodeIds);
+        highlightPath(route.nodeIds, mainCampusData.nodes);      
+        plotVerticesOnMap(route.nodeIds);                       
+
       } else if (startCampus === 'COC') {
         displayCOCRoute(route, start, end);
         highlightCOCPath(route.nodeIds, route.pathWithFloors);
@@ -385,7 +388,9 @@ function displayRoute(route, start, end, campusName) {
     $('#route-result').html(routeHTML);
    
     // Highlight the path on the map (if map visualization is implemented)
-    highlightPath(route.nodeIds, mainCampusData.nodes);
+    highlightPath(route.nodeIds, mainCampusData.nodes);      // ✅ correct
+
+
 
   }
 }
@@ -616,13 +621,15 @@ function highlightPath(nodeIds, nodes) {
   const map = document.getElementById("map");
   if (!map || !nodeIds || nodeIds.length < 2) return;
 
-  // Clear old path lines
+  plotVerticesOnMap(nodeIds); // ✅ Draw points first
+
+  // 🧹 Clear old lines
   map.querySelectorAll(".path-line").forEach(el => el.remove());
 
   for (let i = 0; i < nodeIds.length - 1; i++) {
     const from = nodes[nodeIds[i]];
     const to = nodes[nodeIds[i + 1]];
-    if (!from || !to) continue;
+    if (!from || !to || from.x === undefined || to.x === undefined) continue;
 
     const dx = to.x - from.x;
     const dy = to.y - from.y;
@@ -631,15 +638,18 @@ function highlightPath(nodeIds, nodes) {
 
     const line = document.createElement("div");
     line.className = "path-line";
-    line.style.width = `${length}px`;
     line.style.left = `${from.x}px`;
     line.style.top = `${from.y}px`;
+    line.style.width = `${length}px`;
     line.style.transform = `rotate(${angle}deg)`;
     line.style.transformOrigin = "0 0";
-    line.style.backgroundColor = "lime";
     map.appendChild(line);
   }
 }
+
+
+
+
 
 
 
@@ -831,6 +841,20 @@ export {
   highlightInterCampusPath
 };
 
+// 🧪 Test Route – TEMPORARY DEBUG
+// $(document).ready(() => {
+//   const testRoute = findMainCampusRoute("Main Gate", "Main Building - Dome"); // ✅ Define it here
+
+//   if (testRoute && !testRoute.error) {
+//     console.log("🟢 Test Route Found:", testRoute);
+
+//     plotVerticesOnMap(testRoute.nodeIds); // ✅ Show path dots
+//     highlightPath(testRoute.nodeIds, mainCampusData.nodes); // ✅ Draw line
+//     displayRoute(testRoute, "Main Gate", "Main Building - Dome", "Main Campus"); // ✅ Show text route
+//   } else {
+//     console.error("❌ Test route error:", testRoute?.message);
+//   }
+// });
 
 
 

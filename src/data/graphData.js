@@ -32,7 +32,7 @@ const nodes = {
     23: { id: 23, name: "Open University / Nontraditional Studies Program", type: "building", x:312, y:446 },
     24: { id: 24, name: "Oval Open Field", type: "landmark", x:495, y:344 },
     25: { id: 25, name: "P.E. Building", type: "building", x:322, y:88},
-    26: { id: 26, name: "Pasig River", type: "landmark" },
+    26: { id: 26, name: "Pasig River", type: "landmark" , x:0, y:0},
     27: { id: 27, name: "Pasig River Ferry (Sta. Mesa Station)", type: "entrance", x:154, y:447 },
     28: { id: 28, name: "Proposed Access Road", type: "path", x:399, y:300},
     29: { id: 29, name: "Public Restroom", type: "building", x:148, y:236 },
