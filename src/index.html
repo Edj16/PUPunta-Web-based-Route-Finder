@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>PUPunta - Campus Route Finder</title>
+   
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+   
+    <!-- jQuery (required by Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+<body>
+    <section id="front" class="front">
+        <h1 id="f_header">PUPunta</h1>
+        <img id="f_logo" src="images/puplogo.png" alt="PUP Logo">
+        <h2 id="f_sub-header">Navigate the PUP Sta. Mesa campus with ease.</h2>
+        <button class="btn" onclick="startNavigating()">
+            <img id="btn_icon" src="images/sendicon.png" alt="Send icon" class="rotated-icon">
+            Start navigating
+        </button>
+    </section>
+   
+    <!-- Navigation Section -->
+    <section id="navigation" class="navigation" style="display: none;">
+        <div class="background">
+            <a href="index.html"><img class="bg_logo" src="images/puplogo.png" alt="PUP Logo"></a>
+            <div class="text-container">
+                <h1 class="header">Welcome to PUPunta</h1>
+                <h2 class="sub-header">Navigate the PUP Sta. Mesa campus with ease.</h2>
+            </div>
+        </div>
+       
+        <!-- Route Form with Campus Filters -->
+        <div class="form-container">
+            <form id="route-form" onsubmit="return false;">
+                <!-- Start Campus Filter -->
+                <label for="startCampus">Start Campus:</label>
+                <select id="startCampus" class="select searchable-select" required>
+                    <option value="">-- Select Start Campus --</option>
+                    <option value="MAIN">Main Campus</option>
+                    <option value="CEA">CEA</option>
+                    <option value="COC">COC</option>
+                </select>
+               
+                <!-- Start Location Dropdown -->
+                <label for="start">Start Location:</label>
+                <select id="start" class="select searchable-select" required>
+                    <option value="">-- Select Start Location --</option>
+                </select>
+               
+                <!-- End Campus Filter -->
+                <label for="endCampus">End Campus:</label>
+                <select id="endCampus" class="select searchable-select" required>
+                    <option value="">-- Select End Campus --</option>
+                    <option value="MAIN">Main Campus</option>
+                    <option value="CEA">CEA</option>
+                    <option value="COC">COC</option>
+                </select>
+               
+                <!-- End Location Dropdown -->
+                <label for="end">Destination:</label>
+                <select id="end" class="select searchable-select" required>
+                    <option value="">-- Select Destination --</option>
+                </select>
+               
+                <!-- Submit Button -->
+                <button id="findbtn" type="submit" onclick="findRoute()">Find Route</button>
+            </form>
+        </div>
+       
+        <!-- Map Container - Will hold our campus map visualization -->
+        <div id="map-container" class="map-container">
+            <!-- Map will be loaded here -->
+        </div>
+       
+        <!-- Route Results -->
+        <div id="route-result" style="display: none;" class="route-result-container"></div>
+    </section>
+   
+    <!-- JavaScript modules -->
+    <script type="module" src="script.js"></script>
+   
+    <!-- Fallback for browsers that don't support ES modules -->
+    <script nomodule>
+        document.body.innerHTML = '<p class="error">This application requires a modern browser that supports JavaScript modules. Please update your browser.</p>';
+    </script>
+</body>
+</html>
+
+
+
