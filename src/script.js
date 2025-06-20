@@ -1,7 +1,28 @@
 import { mainLocations, findMainCampusRoute } from './graphs/mainCampus.js';
 import { cocLocations, findCOCRoute } from './graphs/coc.js';
 import { ceaLocations, findCEARoute } from './graphs/cea.js';
+import { mainCampusData } from './data/graphData.js';
 
+function plotVerticesOnMap() {
+  const map = document.getElementById('map');
+  if (!map) {
+  console.error("❌ No #map element found!");
+  return;
+  }
+
+  // Clear all existing points and lines
+  map.innerHTML = '';
+
+  Object.values(mainCampusData.nodes).forEach(node => {
+    if (node.x !== undefined && node.y !== undefined) {
+      const dot = document.createElement('div');
+      dot.className = 'point';
+      dot.style.left = `${node.x}px`;
+      dot.style.top = `${node.y}px`;
+      map.appendChild(dot);
+    }
+  });
+}
 
 
 
@@ -148,9 +169,22 @@ function startNavigating() {
 
 // Initialize the map display
 function initializeMap() {
-  if (!$('#map-container').length) {
-    $('#route-result').before('<div id="map-container" class="map-container"><div class="map-placeholder">Campus Map Placeholder</div></div>');
+   if (!document.getElementById('map')) {
+    const mapDiv = document.createElement('div');
+    mapDiv.id = 'map';
+    mapDiv.style.position = 'relative';
+    mapDiv.style.width = '900px';
+    mapDiv.style.height = '500px';
+    mapDiv.style.backgroundImage = "url('../src/images/MAINlandmarks.jpg')";
+    mapDiv.style.backgroundSize = 'cover';
+    mapDiv.style.border = '2px solid black';
+    document.getElementById('map-container').appendChild(mapDiv);
   }
+
+  plotVerticesOnMap();
+  // if (!$('#map-container').length) {
+  //   $('#route-result').before('<div id="map-container" class="map-container"><div class="map-placeholder">Campus Map Placeholder</div></div>');
+  // }
 }
 
 
@@ -291,7 +325,7 @@ function findRoute() {
   const start = $('#start').val();
   const endCampus = $('#endCampus').val();
   const end = $('#end').val();
-
+ 
 
 
 
@@ -306,6 +340,7 @@ function findRoute() {
     } else {
       // Handle same-campus routes
       if (startCampus === 'MAIN') {
+        plotVerticesOnMap();
         displayRoute(route, start, end, 'MAIN Campus');
         highlightPath(route.nodeIds);
       } else if (startCampus === 'COC') {
@@ -350,7 +385,8 @@ function displayRoute(route, start, end, campusName) {
     $('#route-result').html(routeHTML);
    
     // Highlight the path on the map (if map visualization is implemented)
-    highlightPath(route.nodeIds);
+    highlightPath(route.nodeIds, mainCampusData.nodes);
+
   }
 }
 
@@ -576,23 +612,52 @@ function displayInterCampusRouteEnhanced(route, startLocation, endLocation) {
  
   $('#route-result').html(routeHTML);
 }
+function highlightPath(nodeIds, nodes) {
+  const map = document.getElementById("map");
+  if (!map || !nodeIds || nodeIds.length < 2) return;
 
+  // Clear old path lines
+  map.querySelectorAll(".path-line").forEach(el => el.remove());
 
+  for (let i = 0; i < nodeIds.length - 1; i++) {
+    const from = nodes[nodeIds[i]];
+    const to = nodes[nodeIds[i + 1]];
+    if (!from || !to) continue;
 
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    const length = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
 
-// Function to highlight the path on the map visualization
-function highlightPath(nodeIds) {
-  console.log("Path to highlight:", nodeIds);
- 
-  let mapHTML = `<div class="map-with-path">
-    <div class="map-placeholder">
-      <p>Main Campus Path visualization would go here</p>
-      <p>Nodes: ${nodeIds ? nodeIds.join(' → ') : 'No nodes available'}</p>
-    </div>
-  </div>`;
- 
-  $('#map-container').html(mapHTML);
+    const line = document.createElement("div");
+    line.className = "path-line";
+    line.style.width = `${length}px`;
+    line.style.left = `${from.x}px`;
+    line.style.top = `${from.y}px`;
+    line.style.transform = `rotate(${angle}deg)`;
+    line.style.transformOrigin = "0 0";
+    line.style.backgroundColor = "lime";
+    map.appendChild(line);
+  }
 }
+
+
+
+
+
+// // Function to highlight the path on the map visualization
+// function highlightPath(nodeIds) {
+//   console.log("Path to highlight:", nodeIds);
+ 
+//   let mapHTML = `<div class="map-with-path">
+//     <div class="map-placeholder">
+//       <p>Main Campus Path visualization would go here</p>
+//       <p>Nodes: ${nodeIds ? nodeIds.join(' → ') : 'No nodes available'}</p>
+//     </div>
+//   </div>`;
+ 
+//   $('#map-container').html(mapHTML);
+// }
 
 
 

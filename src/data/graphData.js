@@ -1,151 +1,380 @@
 // Main Campus Graph Data
-export const mainCampusData = {
-  nodes: {
-    1: { id: 1, name: "Amphitheater", type: "building" },
-    2: { id: 2, name: "Banda Kawayan, Sining Lahi Headquarters", type: "building" },
-    3: { id: 3, name: "Building and Grounds Maintenance Office", type: "building" },
-    4: { id: 4, name: "Catwalk", type: "path" },
-    5: { id: 5, name: "Centennial Monument", type: "landmark" },
-    6: { id: 6, name: "Charlie del Rosario Student Development Center", type: "building" },
-    7: { id: 7, name: "East Gate", type: "entrance" },
-    8: { id: 8, name: "Flag Pole", type: "landmark" },
-    9: { id: 9, name: "Grandstand", type: "building" },
-    10: { id: 10, name: "Gymnasium", type: "building" },
-    11: { id: 11, name: "Interfaith Chapel", type: "building" },
-    12: { id: 12, name: "Laboratory High School", type: "building" },
-    13: { id: 13, name: "Lagoon", type: "landmark" },
-    14: { id: 14, name: "Main Building - Dome", type: "building" },
-    15: { id: 15, name: "Main Building - East Wing", type: "building" },
-    16: { id: 16, name: "Main Building - North Wing", type: "building" },
-    17: { id: 17, name: "Main Building - South Wing", type: "building" },
-    18: { id: 18, name: "Main Building - West Wing", type: "building" },
-    19: { id: 19, name: "Main Gate", type: "entrance" },
-    20: { id: 20, name: "Nemesio E. Prudente Freedom Park", type: "landmark" },
-    21: { id: 21, name: "Ninoy Aquino Library and Learning Resources Center", type: "building" },
-    22: { id: 22, name: "Open Court", type: "landmark" },
-    23: { id: 23, name: "Open University / Nontraditional Studies Program", type: "building" },
-    24: { id: 24, name: "Oval Open Field", type: "landmark" },
-    25: { id: 25, name: "P.E. Building", type: "building" },
+
+function calculateDistance(p1, p2) {
+  const dx = p2.x - p1.x;
+  const dy = p2.y - p1.y;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+const nodes = {
+   1: { id: 1, name: "Amphitheater", type: "building" ,x:257,y:261},
+    2: { id: 2, name: "Banda Kawayan, Sining Lahi Headquarters", type: "building", x:187, y:58},
+    3: { id: 3, name: "Building and Grounds Maintenance Office", type: "building", x:232, y:446 },
+    4: { id: 4, name: "Catwalk", type: "path", x:444, y:207  },
+    5: { id: 5, name: "Centennial Monument", type: "landmark", x:330, y:215 },
+    6: { id: 6, name: "Charlie del Rosario Student Development Center", type: "building", x:131, y:200 },
+    7: { id: 7, name: "East Gate", type: "entrance", x:585, y:430},
+    8: { id: 8, name: "Flag Pole", type: "landmark", x:349, y:284 },
+    9: { id: 9, name: "Grandstand", type: "building", x:430, y:305 },
+    10: { id: 10, name: "Gymnasium", type: "building", x:477, y:84 },
+    11: { id: 11, name: "Interfaith Chapel", type: "building", x:326, y:380},
+    12: { id: 12, name: "Laboratory High School", type: "building", x:127, y:127},
+    13: { id: 13, name: "Lagoon", type: "landmark", x:281, y:222 },
+    14: { id: 14, name: "Main Building - Dome", type: "building", x:249, y:331 },
+    15: { id: 15, name: "Main Building - East Wing", type: "building" , x:248, y:388},
+    16: { id: 16, name: "Main Building - North Wing", type: "building", x:298, y:300},
+    17: { id: 17, name: "Main Building - South Wing", type: "building", x:182, y:367},
+    18: { id: 18, name: "Main Building - West Wing", type: "building", x:194, y:299},
+    19: { id: 19, name: "Main Gate", type: "entrance", x:587, y:220 },
+    20: { id: 20, name: "Nemesio E. Prudente Freedom Park", type: "landmark", x:359, y:265 },
+    21: { id: 21, name: "Ninoy Aquino Library and Learning Resources Center", type: "building", x:235, y:120 },
+    22: { id: 22, name: "Open Court", type: "landmark", x:417, y:155 },
+    23: { id: 23, name: "Open University / Nontraditional Studies Program", type: "building", x:312, y:446 },
+    24: { id: 24, name: "Oval Open Field", type: "landmark", x:495, y:344 },
+    25: { id: 25, name: "P.E. Building", type: "building", x:322, y:88},
     26: { id: 26, name: "Pasig River", type: "landmark" },
-    27: { id: 27, name: "Pasig River Ferry (Sta. Mesa Station)", type: "entrance" },
-    28: { id: 28, name: "Proposed Access Road", type: "path" },
-    29: { id: 29, name: "Public Restroom", type: "building" },
-    30: { id: 30, name: "PUP Linear Park", type: "landmark" },
-    31: { id: 31, name: "PUP Mural and the Shrine of Heroism", type: "landmark" },
-    32: { id: 32, name: "PUP Obelisk (and the Mabini Monument)", type: "landmark" },
-    33: { id: 33, name: "PUP Property Building and Motorpool", type: "building" },
-    34: { id: 34, name: "PUP Pylon", type: "landmark" },
-    35: { id: 35, name: "Sampaguita Building", type: "building" },
-    36: { id: 36, name: "Student Pavilion", type: "building" },
-    37: { id: 37, name: "Swimming Pool", type: "landmark" },
-    38: { id: 38, name: "Tennis Open Court", type: "landmark" },
-    39: { id: 39, name: "Water Tank", type: "landmark" },
-    40: { id: 40, name: "West Gate", type: "entrance" }
-  },
-  edges: [
-    // MAIN ENTRANCE AREA
-    { from: 19, to: 4, weight: 10 },   // Main Gate to Catwalk (primary entrance path)
-    { from: 4, to: 19, weight: 10 },   // Catwalk to Main Gate (primary exit path)
-    { from: 4, to: 36, weight: 15 },   // Catwalk to Student Pavilion
-    { from: 36, to: 5, weight: 25 },   // Student Pavilion to Centennial Monument
-    { from: 19, to: 31, weight: 35 },  // Main Gate to Mural area
-    { from: 32, to: 31, weight: 20 },  // Obelisk to Mural (close proximity)
-    { from: 32, to: 36, weight: 25 },  // Obelisk to Student Pavilion
-    { from: 31, to: 36, weight: 20 },  // Mural to Student Pavilion
-    { from: 32, to: 8, weight: 40 },   // Obelisk to Flag Pole
+    27: { id: 27, name: "Pasig River Ferry (Sta. Mesa Station)", type: "entrance", x:154, y:447 },
+    28: { id: 28, name: "Proposed Access Road", type: "path", x:399, y:300},
+    29: { id: 29, name: "Public Restroom", type: "building", x:148, y:236 },
+    30: { id: 30, name: "PUP Linear Park", type: "landmark", x:118, y:310 },
+    31: { id: 31, name: "PUP Mural and the Shrine of Heroism", type: "landmark", x:588, y:235},
+    32: { id: 32, name: "PUP Obelisk (and the Mabini Monument)", type: "landmark", x:374, y:215 },
+    33: { id: 33, name: "PUP Property Building and Motorpool", type: "building", x:72, y:65},
+    34: { id: 34, name: "PUP Pylon", type: "landmark", x:587, y:200 },
+    35: { id: 35, name: "Sampaguita Building", type: "building", x:131, y:266 },
+    36: { id: 36, name: "Student Pavilion", type: "building", x:459, y:233 },
+    37: { id: 37, name: "Swimming Pool", type: "landmark", x:382, y:83 },
+    38: { id: 38, name: "Tennis Open Court", type: "landmark", x:486, y:153 },
+    39: { id: 39, name: "Water Tank", type: "landmark", x:196, y:90 },
+    40: { id: 40, name: "West Gate", type: "entrance", x:591, y:151},
+
+    //path
+    41: { id: 41, type: "path", x: 500, y: 225 },
+    42: { id: 42, type: "path", x: 476, y: 264 },
+    43: { id: 43, type: "path", x: 556, y: 151 },
+    44: { id: 44, type: "path", x: 533, y: 117 },
+    45: { id: 45, type: "path", x: 427, y: 119 },
+    46: { id: 46, type: "path", x: 346, y: 118 },
+    47: { id: 47, type: "path", x: 339, y: 192 },
+    48: { id: 48, type: "path", x: 340, y: 228 },
+    49: { id: 49, type: "path", x: 303, y: 172 },
+    50: { id: 50, type: "path", x: 296, y: 57 },
+    51: { id: 51, type: "path", x: 172, y: 88 },
+    52: { id: 52, type: "path", x: 195, y: 172 },
+    53: { id: 53, type: "path", x: 199, y: 192 },
+    54: { id: 54, type: "path", x: 78, y: 136 },
+    55: { id: 55, type: "path", x: 92, y: 210 },
+    56: { id: 56, type: "path", x: 164, y: 244 },
+    57: { id: 57, type: "path", x: 215, y: 272 },
+    58: { id: 58, type: "path", x: 247, y: 292 },
+    59: { id: 59, type: "path", x: 277, y: 350 },
+    60: { id: 60, type: "path", x: 323, y: 340 },
+    61: { id: 61, type: "path", x: 355, y: 330 },
+    62: { id: 62, type: "path", x: 380, y: 389 },
+    63: { id: 63, type: "path", x: 412, y: 360 },
+    64: { id: 64, type: "path", x: 420, y: 408 },
+    65: { id: 65, type: "path", x: 464, y: 434 },
+    66: { id: 66, type: "path", x: 508, y: 420 },
+    67: { id: 67, type: "path", x: 539, y: 379 },
+    68: { id: 68, type: "path", x: 572, y: 320 },
+    69: { id: 69, type: "path", x: 565, y: 285 },
+    70: { id: 70, type: "path", x: 529, y: 257 },
+    71: { id: 71, type: "path", x: 167, y: 410 },
+    72: { id: 72, type: "path", x: 221, y: 195 },
+    73: { id: 73, type: "path", x: 304, y: 248 },
+    74: { id: 74, type: "path", x: 107, y: 56 },
+    75: { id: 75, type: "path", x: 284, y: 430 },
+    76: { id: 76, type: "path", x: 278, y: 396 },
+    77: { id: 77, type: "path", x: 184, y: 138 },
+    78: { id: 78, type: "path", x: 357, y: 430 },
+    79: { id: 79, type: "path", x: 322, y: 258 },
+    80: { id: 80, type: "path", x: 544, y: 228 },
+    81: { id: 81, type: "path", x: 368, y: 408 }  
+}
+
+export const mainCampusData = {
+  nodes, edges: [
+  { from: 1, to: 13, weight: calculateDistance(nodes[1], nodes[13]) },
+  { from: 1, to: 73, weight: calculateDistance(nodes[1], nodes[73]) },
+  { from: 1, to: 72, weight: calculateDistance(nodes[1], nodes[72]) },
+  { from: 2, to: 51, weight: calculateDistance(nodes[2], nodes[51]) },
+  { from: 2, to: 50, weight: calculateDistance(nodes[2], nodes[50]) },
+  { from: 3, to: 27, weight: calculateDistance(nodes[3], nodes[27]) },
+  { from: 3, to: 71, weight: calculateDistance(nodes[3], nodes[71]) },
+  { from: 3, to: 15, weight: calculateDistance(nodes[3], nodes[15]) },
+  { from: 3, to: 17, weight: calculateDistance(nodes[3], nodes[17]) },
+  { from: 3, to: 75, weight: calculateDistance(nodes[3], nodes[75]) },
+  { from: 3, to: 23, weight: calculateDistance(nodes[3], nodes[23]) },
+  { from: 4, to: 22, weight: calculateDistance(nodes[4], nodes[22]) },
+  { from: 4, to: 38, weight: calculateDistance(nodes[4], nodes[38]) },
+  { from: 4, to: 32, weight: calculateDistance(nodes[4], nodes[32]) },
+  { from: 4, to: 41, weight: calculateDistance(nodes[4], nodes[41]) },
+  { from: 4, to: 36, weight: calculateDistance(nodes[4], nodes[36]) },
+  { from: 4, to: 19, weight: calculateDistance(nodes[4], nodes[19]) },
+  { from: 5, to: 48, weight: calculateDistance(nodes[5], nodes[48]) },
+  { from: 5, to: 47, weight: calculateDistance(nodes[5], nodes[47]) },
+  { from: 5, to: 13, weight: calculateDistance(nodes[5], nodes[13]) },
+  { from: 5, to: 32, weight: calculateDistance(nodes[5], nodes[32]) },
+  { from: 6, to: 55, weight: calculateDistance(nodes[6], nodes[55]) },
+  { from: 6, to: 53, weight: calculateDistance(nodes[6], nodes[53]) },
+  { from: 6, to: 29, weight: calculateDistance(nodes[6], nodes[29]) },
+  { from: 7, to: 66, weight: calculateDistance(nodes[7], nodes[66]) },
+  { from: 7, to: 67, weight: calculateDistance(nodes[7], nodes[67]) },
+  { from: 8, to: 20, weight: calculateDistance(nodes[8], nodes[20]) },
+  { from: 8, to: 28, weight: calculateDistance(nodes[8], nodes[28]) },
+  { from: 8, to: 16, weight: calculateDistance(nodes[8], nodes[16]) },
+  { from: 8, to: 48, weight: calculateDistance(nodes[8], nodes[48]) },
+  { from: 8, to: 60, weight: calculateDistance(nodes[8], nodes[60]) },
+  { from: 8, to: 61, weight: calculateDistance(nodes[8], nodes[61]) },
+  { from: 9, to: 63, weight: calculateDistance(nodes[9], nodes[63]) },
+  { from: 9, to: 42, weight: calculateDistance(nodes[9], nodes[42]) },
+  { from: 9, to: 24, weight: calculateDistance(nodes[9], nodes[24]) },
+  { from: 10, to: 44, weight: calculateDistance(nodes[10], nodes[44]) },
+  { from: 11, to: 15, weight: calculateDistance(nodes[11], nodes[15]) },
+  { from: 11, to: 23, weight: calculateDistance(nodes[11], nodes[23]) },
+  { from: 11, to: 59, weight: calculateDistance(nodes[11], nodes[59]) },
+  { from: 11, to: 61, weight: calculateDistance(nodes[11], nodes[61]) },
+  { from: 11, to: 75, weight: calculateDistance(nodes[11], nodes[75]) },
+  { from: 11, to: 81, weight: calculateDistance(nodes[11], nodes[81]) },
+  { from: 12, to: 54, weight: calculateDistance(nodes[12], nodes[54]) },
+  { from: 12, to: 77, weight: calculateDistance(nodes[12], nodes[77]) },
+  { from: 14, to: 18, weight: calculateDistance(nodes[14], nodes[18]) },
+  { from: 14, to: 17, weight: calculateDistance(nodes[14], nodes[17]) },
+  { from: 14, to: 15, weight: calculateDistance(nodes[14], nodes[15]) },
+  { from: 14, to: 59, weight: calculateDistance(nodes[14], nodes[59]) },
+  { from: 14, to: 16, weight: calculateDistance(nodes[14], nodes[16]) },
+  { from: 14, to: 58, weight: calculateDistance(nodes[14], nodes[58]) },
+  { from: 15, to: 76, weight: calculateDistance(nodes[15], nodes[76]) },
+  { from: 16, to: 60, weight: calculateDistance(nodes[16], nodes[60]) },
+  { from: 17, to: 71, weight: calculateDistance(nodes[17], nodes[71]) },
+  { from: 18, to: 57, weight: calculateDistance(nodes[18], nodes[57]) },
+  { from: 18, to: 56, weight: calculateDistance(nodes[18], nodes[56]) },
+  { from: 18, to: 35, weight: calculateDistance(nodes[18], nodes[35]) },
+  { from: 18, to: 30, weight: calculateDistance(nodes[18], nodes[30]) },
+  { from: 19, to: 41, weight: calculateDistance(nodes[19], nodes[41]) },
+  { from: 19, to: 31, weight: calculateDistance(nodes[19], nodes[31]) },
+  { from: 19, to: 34, weight: calculateDistance(nodes[19], nodes[34]) },
+  { from: 20, to: 32, weight: calculateDistance(nodes[20], nodes[32]) },
+  { from: 20, to: 48, weight: calculateDistance(nodes[20], nodes[48]) },
+  { from: 20, to: 28, weight: calculateDistance(nodes[20], nodes[28]) },
+  { from: 21, to: 51, weight: calculateDistance(nodes[21], nodes[51]) },
+  { from: 21, to: 77, weight: calculateDistance(nodes[21], nodes[77]) },
+  { from: 21, to: 52, weight: calculateDistance(nodes[21], nodes[52]) },
+  { from: 23, to: 75, weight: calculateDistance(nodes[23], nodes[75]) },
+  { from: 23, to: 78, weight: calculateDistance(nodes[23], nodes[78]) },
+  { from: 24, to: 63, weight: calculateDistance(nodes[24], nodes[63]) },
+  { from: 24, to: 24, weight: calculateDistance(nodes[24], nodes[24]) },
+  { from: 25, to: 46, weight: calculateDistance(nodes[25], nodes[46]) },
+  { from: 27, to: 71, weight: calculateDistance(nodes[27], nodes[71]) },
+  { from: 28, to: 61, weight: calculateDistance(nodes[28], nodes[61]) },
+  { from: 28, to: 36, weight: calculateDistance(nodes[28], nodes[36]) },
+  { from: 28, to: 41, weight: calculateDistance(nodes[28], nodes[41]) },
+  { from: 29, to: 35, weight: calculateDistance(nodes[29], nodes[35]) },
+  { from: 29, to: 56, weight: calculateDistance(nodes[29], nodes[56]) },
+  { from: 29, to: 55, weight: calculateDistance(nodes[29], nodes[55]) },
+  { from: 30, to: 17, weight: calculateDistance(nodes[30], nodes[17]) },
+  { from: 30, to: 35, weight: calculateDistance(nodes[30], nodes[35]) },
+  { from: 30, to: 71, weight: calculateDistance(nodes[30], nodes[71]) },
+  { from: 31, to: 7, weight: calculateDistance(nodes[31], nodes[7]) },
+  { from: 31, to: 80, weight: calculateDistance(nodes[31], nodes[80]) },
+  { from: 32, to: 47, weight: calculateDistance(nodes[32], nodes[47]) },
+  { from: 32, to: 46, weight: calculateDistance(nodes[32], nodes[46]) },
+  { from: 32, to: 28, weight: calculateDistance(nodes[32], nodes[28]) },
+  { from: 33, to: 54, weight: calculateDistance(nodes[33], nodes[54]) },
+  { from: 33, to: 74, weight: calculateDistance(nodes[33], nodes[74]) },
+  { from: 35, to: 56, weight: calculateDistance(nodes[35], nodes[56]) },
+  { from: 36, to: 41, weight: calculateDistance(nodes[36], nodes[41]) },
+  { from: 37, to: 46, weight: calculateDistance(nodes[37], nodes[46]) },
+  { from: 39, to: 51, weight: calculateDistance(nodes[39], nodes[51]) },
+  { from: 40, to: 43, weight: calculateDistance(nodes[40], nodes[43]) },
+  { from: 40, to: 44, weight: calculateDistance(nodes[40], nodes[44]) },
+  { from: 41, to: 42, weight: calculateDistance(nodes[41], nodes[42]) },
+  { from: 42, to: 70, weight: calculateDistance(nodes[42], nodes[70]) },
+  { from: 42, to: 36, weight: calculateDistance(nodes[42], nodes[36]) },
+  { from: 43, to: 44, weight: calculateDistance(nodes[43], nodes[44]) },
+  { from: 44, to: 45, weight: calculateDistance(nodes[44], nodes[45]) },
+  { from: 45, to: 46, weight: calculateDistance(nodes[45], nodes[46]) },
+  { from: 46, to: 47, weight: calculateDistance(nodes[46], nodes[47]) },
+  { from: 47, to: 49, weight: calculateDistance(nodes[47], nodes[49]) },
+  { from: 48, to: 79, weight: calculateDistance(nodes[48], nodes[79]) },
+  { from: 49, to: 50, weight: calculateDistance(nodes[49], nodes[50]) },
+  { from: 51, to: 74, weight: calculateDistance(nodes[51], nodes[74]) },
+  { from: 51, to: 77, weight: calculateDistance(nodes[51], nodes[77]) },
+  { from: 52, to: 53, weight: calculateDistance(nodes[52], nodes[53]) },
+  { from: 52, to: 77, weight: calculateDistance(nodes[52], nodes[77]) },
+  { from: 53, to: 56, weight: calculateDistance(nodes[53], nodes[56]) },
+  { from: 53, to: 72, weight: calculateDistance(nodes[53], nodes[72]) },
+  { from: 53, to: 57, weight: calculateDistance(nodes[53], nodes[57]) },
+  { from: 54, to: 55, weight: calculateDistance(nodes[54], nodes[55]) },
+  { from: 56, to: 57, weight: calculateDistance(nodes[56], nodes[57]) },
+  { from: 57, to: 58, weight: calculateDistance(nodes[57], nodes[58]) },
+  { from: 58, to: 79, weight: calculateDistance(nodes[58], nodes[79]) },
+  { from: 59, to: 60, weight: calculateDistance(nodes[59], nodes[60]) },
+  { from: 59, to: 76, weight: calculateDistance(nodes[59], nodes[76]) },
+  { from: 60, to: 61, weight: calculateDistance(nodes[60], nodes[61]) },
+  { from: 61, to: 62, weight: calculateDistance(nodes[61], nodes[62]) },
+  { from: 62, to: 63, weight: calculateDistance(nodes[62], nodes[63]) },
+  { from: 62, to: 81, weight: calculateDistance(nodes[62], nodes[81]) },
+  { from: 63, to: 64, weight: calculateDistance(nodes[63], nodes[64]) },
+  { from: 64, to: 65, weight: calculateDistance(nodes[64], nodes[65]) },
+  { from: 65, to: 66, weight: calculateDistance(nodes[65], nodes[66]) },
+  { from: 66, to: 67, weight: calculateDistance(nodes[66], nodes[67]) },
+  { from: 67, to: 68, weight: calculateDistance(nodes[67], nodes[68]) },
+  { from: 68, to: 69, weight: calculateDistance(nodes[68], nodes[69]) },
+  { from: 69, to: 70, weight: calculateDistance(nodes[69], nodes[70]) },
+  { from: 70, to: 80, weight: calculateDistance(nodes[70], nodes[80]) },
+  { from: 75, to: 76, weight: calculateDistance(nodes[75], nodes[76]) },
+  { from: 78, to: 81, weight: calculateDistance(nodes[78], nodes[81]) },
+  { from: 80, to: 41, weight: calculateDistance(nodes[80], nodes[41]) }
+]
+}
+// export const mainCampusData = {
+//   nodes: {
+//     1: { id: 1, name: "Amphitheater", type: "building" },
+//     2: { id: 2, name: "Banda Kawayan, Sining Lahi Headquarters", type: "building" },
+//     3: { id: 3, name: "Building and Grounds Maintenance Office", type: "building" },
+//     4: { id: 4, name: "Catwalk", type: "path" },
+//     5: { id: 5, name: "Centennial Monument", type: "landmark" },
+//     6: { id: 6, name: "Charlie del Rosario Student Development Center", type: "building" },
+//     7: { id: 7, name: "East Gate", type: "entrance" },
+//     8: { id: 8, name: "Flag Pole", type: "landmark" },
+//     9: { id: 9, name: "Grandstand", type: "building" },
+//     10: { id: 10, name: "Gymnasium", type: "building" },
+//     11: { id: 11, name: "Interfaith Chapel", type: "building" },
+//     12: { id: 12, name: "Laboratory High School", type: "building" },
+//     13: { id: 13, name: "Lagoon", type: "landmark" },
+//     14: { id: 14, name: "Main Building - Dome", type: "building" },
+//     15: { id: 15, name: "Main Building - East Wing", type: "building" },
+//     16: { id: 16, name: "Main Building - North Wing", type: "building" },
+//     17: { id: 17, name: "Main Building - South Wing", type: "building" },
+//     18: { id: 18, name: "Main Building - West Wing", type: "building" },
+//     19: { id: 19, name: "Main Gate", type: "entrance" },
+//     20: { id: 20, name: "Nemesio E. Prudente Freedom Park", type: "landmark" },
+//     21: { id: 21, name: "Ninoy Aquino Library and Learning Resources Center", type: "building" },
+//     22: { id: 22, name: "Open Court", type: "landmark" },
+//     23: { id: 23, name: "Open University / Nontraditional Studies Program", type: "building" },
+//     24: { id: 24, name: "Oval Open Field", type: "landmark" },
+//     25: { id: 25, name: "P.E. Building", type: "building" },
+//     26: { id: 26, name: "Pasig River", type: "landmark" },
+//     27: { id: 27, name: "Pasig River Ferry (Sta. Mesa Station)", type: "entrance" },
+//     28: { id: 28, name: "Proposed Access Road", type: "path" },
+//     29: { id: 29, name: "Public Restroom", type: "building" },
+//     30: { id: 30, name: "PUP Linear Park", type: "landmark" },
+//     31: { id: 31, name: "PUP Mural and the Shrine of Heroism", type: "landmark" },
+//     32: { id: 32, name: "PUP Obelisk (and the Mabini Monument)", type: "landmark" },
+//     33: { id: 33, name: "PUP Property Building and Motorpool", type: "building" },
+//     34: { id: 34, name: "PUP Pylon", type: "landmark" },
+//     35: { id: 35, name: "Sampaguita Building", type: "building" },
+//     36: { id: 36, name: "Student Pavilion", type: "building" },
+//     37: { id: 37, name: "Swimming Pool", type: "landmark" },
+//     38: { id: 38, name: "Tennis Open Court", type: "landmark" },
+//     39: { id: 39, name: "Water Tank", type: "landmark" },
+//     40: { id: 40, name: "West Gate", type: "entrance" }
+//   },
+//   edges: [
+//     // MAIN ENTRANCE AREA
+//     { from: 19, to: 4, weight: 10 },   // Main Gate to Catwalk (primary entrance path)
+//     { from: 4, to: 19, weight: 10 },   // Catwalk to Main Gate (primary exit path)
+//     { from: 4, to: 36, weight: 15 },   // Catwalk to Student Pavilion
+//     { from: 36, to: 5, weight: 25 },   // Student Pavilion to Centennial Monument
+//     { from: 19, to: 31, weight: 35 },  // Main Gate to Mural area
+//     { from: 32, to: 31, weight: 20 },  // Obelisk to Mural (close proximity)
+//     { from: 32, to: 36, weight: 25 },  // Obelisk to Student Pavilion
+//     { from: 31, to: 36, weight: 20 },  // Mural to Student Pavilion
+//     { from: 32, to: 8, weight: 40 },   // Obelisk to Flag Pole
    
-    // MAIN BUILDING COMPLEX
-    { from: 8, to: 14, weight: 35 },   // Flag Pole to Main Building Dome
-    { from: 14, to: 15, weight: 20 },  // Dome to East Wing
-    { from: 14, to: 16, weight: 20 },  // Dome to North Wing
-    { from: 14, to: 17, weight: 20 },  // Dome to South Wing
-    { from: 14, to: 18, weight: 20 },  // Dome to West Wing
-    { from: 15, to: 16, weight: 25 },  // East Wing to North Wing
-    { from: 16, to: 18, weight: 25 },  // North Wing to West Wing
-    { from: 17, to: 18, weight: 25 },  // South Wing to West Wing
-    { from: 15, to: 17, weight: 25 },  // East Wing to South Wing
+//     // MAIN BUILDING COMPLEX
+//     { from: 8, to: 14, weight: 35 },   // Flag Pole to Main Building Dome
+//     { from: 14, to: 15, weight: 20 },  // Dome to East Wing
+//     { from: 14, to: 16, weight: 20 },  // Dome to North Wing
+//     { from: 14, to: 17, weight: 20 },  // Dome to South Wing
+//     { from: 14, to: 18, weight: 20 },  // Dome to West Wing
+//     { from: 15, to: 16, weight: 25 },  // East Wing to North Wing
+//     { from: 16, to: 18, weight: 25 },  // North Wing to West Wing
+//     { from: 17, to: 18, weight: 25 },  // South Wing to West Wing
+//     { from: 15, to: 17, weight: 25 },  // East Wing to South Wing
    
-    // LAGOON AREA
-    { from: 13, to: 1, weight: 15 },   // Lagoon to Amphitheater
-    { from: 13, to: 5, weight: 20 },   // Lagoon to Centennial Monument
-    { from: 13, to: 14, weight: 40 },  // Lagoon to Main Building Dome
-    { from: 13, to: 11, weight: 30 },  // Lagoon to Interfaith Chapel
-    { from: 13, to: 20, weight: 35 },  // Lagoon to Freedom Park
-    { from: 5, to: 1, weight: 20 },    // Centennial Monument to Amphitheater
+//     // LAGOON AREA
+//     { from: 13, to: 1, weight: 15 },   // Lagoon to Amphitheater
+//     { from: 13, to: 5, weight: 20 },   // Lagoon to Centennial Monument
+//     { from: 13, to: 14, weight: 40 },  // Lagoon to Main Building Dome
+//     { from: 13, to: 11, weight: 30 },  // Lagoon to Interfaith Chapel
+//     { from: 13, to: 20, weight: 35 },  // Lagoon to Freedom Park
+//     { from: 5, to: 1, weight: 20 },    // Centennial Monument to Amphitheater
    
-    // FREEDOM PARK AREA
-    { from: 20, to: 9, weight: 35 },   // Freedom Park to Grandstand
-    { from: 20, to: 1, weight: 40 },   // Freedom Park to Amphitheater
-    { from: 9, to: 1, weight: 25 },    // Grandstand to Amphitheater
-    { from: 20, to: 29, weight: 30 },  // Freedom Park to Public Restroom
-    { from: 20, to: 8, weight: 45 },   // Freedom Park to Flag Pole
+//     // FREEDOM PARK AREA
+//     { from: 20, to: 9, weight: 35 },   // Freedom Park to Grandstand
+//     { from: 20, to: 1, weight: 40 },   // Freedom Park to Amphitheater
+//     { from: 9, to: 1, weight: 25 },    // Grandstand to Amphitheater
+//     { from: 20, to: 29, weight: 30 },  // Freedom Park to Public Restroom
+//     { from: 20, to: 8, weight: 45 },   // Freedom Park to Flag Pole
    
-    // EASTERN AREA
-    { from: 7, to: 21, weight: 40 },   // East Gate to Library
-    { from: 21, to: 15, weight: 45 },  // Library to East Wing
-    { from: 21, to: 11, weight: 25 },  // Library to Interfaith Chapel
-    { from: 21, to: 12, weight: 40 },  // Library to Laboratory High School
-    { from: 11, to: 15, weight: 25 },  // Chapel to East Wing
-    { from: 12, to: 21, weight: 35 },  // Lab High School to Library
+//     // EASTERN AREA
+//     { from: 7, to: 21, weight: 40 },   // East Gate to Library
+//     { from: 21, to: 15, weight: 45 },  // Library to East Wing
+//     { from: 21, to: 11, weight: 25 },  // Library to Interfaith Chapel
+//     { from: 21, to: 12, weight: 40 },  // Library to Laboratory High School
+//     { from: 11, to: 15, weight: 25 },  // Chapel to East Wing
+//     { from: 12, to: 21, weight: 35 },  // Lab High School to Library
    
-    // NORTHERN AREA
-    { from: 16, to: 22, weight: 30 },  // North Wing to Open Court
-    { from: 22, to: 38, weight: 25 },  // Open Court to Tennis Court
-    { from: 22, to: 39, weight: 30 },  // Open Court to Water Tank
-    { from: 38, to: 39, weight: 20 },  // Tennis Court to Water Tank
-    { from: 39, to: 40, weight: 25 },  // Water Tank to West Gate
+//     // NORTHERN AREA
+//     { from: 16, to: 22, weight: 30 },  // North Wing to Open Court
+//     { from: 22, to: 38, weight: 25 },  // Open Court to Tennis Court
+//     { from: 22, to: 39, weight: 30 },  // Open Court to Water Tank
+//     { from: 38, to: 39, weight: 20 },  // Tennis Court to Water Tank
+//     { from: 39, to: 40, weight: 25 },  // Water Tank to West Gate
    
-    // UPPER NORTHERN AREA
-    { from: 2, to: 12, weight: 30 },   // Banda Kawayan to Lab High School
-    { from: 2, to: 21, weight: 45 },   // Banda Kawayan to Library
-    { from: 2, to: 25, weight: 35 },   // Banda Kawayan to P.E. Building
-    { from: 25, to: 10, weight: 30 },  // P.E. Building to Gymnasium
-    { from: 10, to: 37, weight: 25 },  // Gymnasium to Swimming Pool
-    { from: 37, to: 38, weight: 30 },  // Swimming Pool to Tennis Court
+//     // UPPER NORTHERN AREA
+//     { from: 2, to: 12, weight: 30 },   // Banda Kawayan to Lab High School
+//     { from: 2, to: 21, weight: 45 },   // Banda Kawayan to Library
+//     { from: 2, to: 25, weight: 35 },   // Banda Kawayan to P.E. Building
+//     { from: 25, to: 10, weight: 30 },  // P.E. Building to Gymnasium
+//     { from: 10, to: 37, weight: 25 },  // Gymnasium to Swimming Pool
+//     { from: 37, to: 38, weight: 30 },  // Swimming Pool to Tennis Court
    
-    // MAINTENANCE AND CATWALK AREA
-    { from: 3, to: 27, weight: 25 },   // Maintenance Office to Ferry Station
-    { from: 4, to: 34, weight: 20 },   // Catwalk to Pylon
-    { from: 4, to: 33, weight: 25 },   // Catwalk to Property Building
-    { from: 4, to: 32, weight: 30 },   // Catwalk to Obelisk
-    { from: 4, to: 19, weight: 35 },   // Catwalk to Main Gate
-    { from: 34, to: 33, weight: 20 },  // Pylon to Property Building
-    { from: 33, to: 32, weight: 30 },  // Property Building to Obelisk
+//     // MAINTENANCE AND CATWALK AREA
+//     { from: 3, to: 27, weight: 25 },   // Maintenance Office to Ferry Station
+//     { from: 4, to: 34, weight: 20 },   // Catwalk to Pylon
+//     { from: 4, to: 33, weight: 25 },   // Catwalk to Property Building
+//     { from: 4, to: 32, weight: 30 },   // Catwalk to Obelisk
+//     { from: 4, to: 19, weight: 35 },   // Catwalk to Main Gate
+//     { from: 34, to: 33, weight: 20 },  // Pylon to Property Building
+//     { from: 33, to: 32, weight: 30 },  // Property Building to Obelisk
    
-    // WESTERN SIDE CONNECTIONS
-    { from: 40, to: 39, weight: 25 },  // West Gate to Water Tank
-    { from: 34, to: 6, weight: 30 },   // Pylon to Charlie del Rosario Center
-    { from: 6, to: 30, weight: 25 },   // Charlie del Rosario to Linear Park
-    { from: 30, to: 35, weight: 20 },  // Linear Park to Sampaguita Building
-    { from: 35, to: 18, weight: 40 },  // Sampaguita to West Wing
+//     // WESTERN SIDE CONNECTIONS
+//     { from: 40, to: 39, weight: 25 },  // West Gate to Water Tank
+//     { from: 34, to: 6, weight: 30 },   // Pylon to Charlie del Rosario Center
+//     { from: 6, to: 30, weight: 25 },   // Charlie del Rosario to Linear Park
+//     { from: 30, to: 35, weight: 20 },  // Linear Park to Sampaguita Building
+//     { from: 35, to: 18, weight: 40 },  // Sampaguita to West Wing
    
-    // SOUTHERN AREA
-    { from: 17, to: 24, weight: 30 },  // South Wing to Oval Field
-    { from: 24, to: 23, weight: 25 },  // Oval Field to Open University
-    { from: 23, to: 3, weight: 35 },   // Open University to Maintenance Office
-    { from: 24, to: 9, weight: 45 },   // Oval Field to Grandstand
+//     // SOUTHERN AREA
+//     { from: 17, to: 24, weight: 30 },  // South Wing to Oval Field
+//     { from: 24, to: 23, weight: 25 },  // Oval Field to Open University
+//     { from: 23, to: 3, weight: 35 },   // Open University to Maintenance Office
+//     { from: 24, to: 9, weight: 45 },   // Oval Field to Grandstand
    
-    // PASIG RIVER AREA
-    { from: 30, to: 26, weight: 25 },  // Linear Park to Pasig River
-    { from: 26, to: 27, weight: 20 },  // Pasig River to Ferry Station
+//     // PASIG RIVER AREA
+//     { from: 30, to: 26, weight: 25 },  // Linear Park to Pasig River
+//     { from: 26, to: 27, weight: 20 },  // Pasig River to Ferry Station
    
-    // PROPOSED ACCESS ROAD
-    { from: 28, to: 24, weight: 30 },  // Proposed Access Road to Oval Field
-    { from: 28, to: 9, weight: 25 },   // Proposed Access Road to Grandstand
+//     // PROPOSED ACCESS ROAD
+//     { from: 28, to: 24, weight: 30 },  // Proposed Access Road to Oval Field
+//     { from: 28, to: 9, weight: 25 },   // Proposed Access Road to Grandstand
    
-    // CROSS-CAMPUS MAJOR PATHWAYS
-    { from: 14, to: 20, weight: 50 },  // Main Building to Freedom Park
-    { from: 21, to: 32, weight: 45 },  // Library to Obelisk
-    { from: 10, to: 5, weight: 35 },   // Gymnasium to Centennial Monument
-    { from: 5, to: 10, weight: 35 },   // Centennial Monument to Gymnasium
+//     // CROSS-CAMPUS MAJOR PATHWAYS
+//     { from: 14, to: 20, weight: 50 },  // Main Building to Freedom Park
+//     { from: 21, to: 32, weight: 45 },  // Library to Obelisk
+//     { from: 10, to: 5, weight: 35 },   // Gymnasium to Centennial Monument
+//     { from: 5, to: 10, weight: 35 },   // Centennial Monument to Gymnasium
    
-    // ADDITIONAL LOGICAL CONNECTIONS
-    { from: 36, to: 35, weight: 25 },  // Student Pavilion to Sampaguita
-    { from: 35, to: 6, weight: 30 },   // Sampaguita to Charlie del Rosario
-    { from: 11, to: 17, weight: 30 },  // Interfaith Chapel to South Wing
-    { from: 23, to: 24, weight: 20 }   // Open University to Oval Field
-  ]
-};
+//     // ADDITIONAL LOGICAL CONNECTIONS
+//     { from: 36, to: 35, weight: 25 },  // Student Pavilion to Sampaguita
+//     { from: 35, to: 6, weight: 30 },   // Sampaguita to Charlie del Rosario
+//     { from: 11, to: 17, weight: 30 },  // Interfaith Chapel to South Wing
+//     { from: 23, to: 24, weight: 20 }   // Open University to Oval Field
+//   ]
+// };
 
 
 // COC Building Graph Data
