@@ -95,8 +95,8 @@ const nodes = {
 export const mainCampusData = {
   nodes, edges: [
   { from: 1, to: 13, weight: calculateDistance(nodes[1], nodes[13]) },
-  { from: 1, to: 73, weight: calculateDistance(nodes[1], nodes[73]) },
   { from: 1, to: 72, weight: calculateDistance(nodes[1], nodes[72]) },
+  { from: 1, to: 73, weight: calculateDistance(nodes[1], nodes[73]) },
   { from: 2, to: 51, weight: calculateDistance(nodes[2], nodes[51]) },
   { from: 2, to: 50, weight: calculateDistance(nodes[2], nodes[50]) },
   { from: 3, to: 27, weight: calculateDistance(nodes[3], nodes[27]) },
@@ -115,6 +115,7 @@ export const mainCampusData = {
   { from: 5, to: 47, weight: calculateDistance(nodes[5], nodes[47]) },
   { from: 5, to: 13, weight: calculateDistance(nodes[5], nodes[13]) },
   { from: 5, to: 32, weight: calculateDistance(nodes[5], nodes[32]) },
+  { from: 5, to: 73, weight: calculateDistance(nodes[5], nodes[73]) },
   { from: 6, to: 55, weight: calculateDistance(nodes[6], nodes[55]) },
   { from: 6, to: 53, weight: calculateDistance(nodes[6], nodes[53]) },
   { from: 6, to: 29, weight: calculateDistance(nodes[6], nodes[29]) },

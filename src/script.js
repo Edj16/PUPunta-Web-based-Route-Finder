@@ -345,9 +345,8 @@ function findRoute() {
         displayRoute(route, start, end, 'MAIN Campus');
         highlightPath(route.nodeIds, mainCampusData.nodes);      
         plotVerticesOnMap(route.nodeIds);                       
-
       } else if (startCampus === 'COC') {
-        displayCOCRoute(route, start, end);
+        displayCOCRoute(route, start, end, 'COC Campus');
         highlightCOCPath(route.nodeIds, route.pathWithFloors);
       } else if (startCampus === 'CEA') {
         displayCEARoute(route, start, end);
@@ -621,7 +620,7 @@ function highlightPath(nodeIds, nodes) {
   const map = document.getElementById("map");
   if (!map || !nodeIds || nodeIds.length < 2) return;
 
-  plotVerticesOnMap(nodeIds); // ✅ Draw points first
+  // plotVerticesOnMap(nodeIds); // ✅ Draw points first
 
   // 🧹 Clear old lines
   map.querySelectorAll(".path-line").forEach(el => el.remove());

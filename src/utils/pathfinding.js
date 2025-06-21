@@ -85,21 +85,17 @@ export function getLocationName(graph, nodeId) {
 }
 
 
-
-
-// Generic route finding function
 export function findRouteByName(graph, startName, endName) {
   let startNodeId = null;
   let endNodeId = null;
- 
-  // Find the node IDs case-insensitively
- Object.values(graph.nodes).forEach(node => {
-  if (!node.name) return; // skip nodes without names
-  if (node.name.toLowerCase() === startName.toLowerCase()) startNodeId = node.id;
-  if (node.name.toLowerCase() === endName.toLowerCase()) endNodeId = node.id;
-});
 
- 
+  // Find the node IDs case-insensitively
+  Object.values(graph.nodes).forEach(node => {
+    if (!node.name) return; // skip nodes without names
+    if (node.name.toLowerCase() === startName.toLowerCase()) startNodeId = node.id;
+    if (node.name.toLowerCase() === endName.toLowerCase()) endNodeId = node.id;
+  });
+
   if (startNodeId === null || endNodeId === null) {
     return {
       error: true,
@@ -107,13 +103,9 @@ export function findRouteByName(graph, startName, endName) {
     };
   }
 
-
-
-
-  // Always use the full graph for pathfinding
+  // Use Dijkstra algorithm
   const result = dijkstra(graph, startNodeId, endNodeId);
- 
-  // If no path is found, return error
+
   if (result.path.length === 0) {
     return {
       error: true,
@@ -121,21 +113,21 @@ export function findRouteByName(graph, startName, endName) {
     };
   }
 
+  // Filter out nodes without names from the path
+  const formattedPath = result.path
+    .filter(nodeId => graph.nodes[nodeId] && graph.nodes[nodeId].name)
+    .map(nodeId => graph.nodes[nodeId].name);
 
-
-
-  const formattedPath = result.path.map(nodeId => getLocationName(graph, nodeId));
-  const pathWithTypes = result.path.map(nodeId => {
-    const node = graph.nodes[nodeId];
-    return {
-      name: node.name,
-      floor: node.floor,
-      type: node.type
-    };
-  });
-
-
-
+  const pathWithTypes = result.path
+    .filter(nodeId => graph.nodes[nodeId] && graph.nodes[nodeId].name)
+    .map(nodeId => {
+      const node = graph.nodes[nodeId];
+      return {
+        name: node.name,
+        floor: node.floor,
+        type: node.type
+      };
+    });
 
   return {
     error: false,
@@ -147,6 +139,68 @@ export function findRouteByName(graph, startName, endName) {
     estimatedMinutes: Math.ceil(result.distance / 60)
   };
 }
+
+
+// Generic route finding function
+// export function findRouteByName(graph, startName, endName) {
+//   let startNodeId = null;
+//   let endNodeId = null;
+ 
+//   // Find the node IDs case-insensitively
+//  Object.values(graph.nodes).forEach(node => {
+//   if (!node.name) return; // skip nodes without names
+//   if (node.name.toLowerCase() === startName.toLowerCase()) startNodeId = node.id;
+//   if (node.name.toLowerCase() === endName.toLowerCase()) endNodeId = node.id;
+// });
+
+ 
+//   if (startNodeId === null || endNodeId === null) {
+//     return {
+//       error: true,
+//       message: `Location not found: ${startNodeId === null ? startName : endName}`
+//     };
+//   }
+
+
+
+
+//   // Always use the full graph for pathfinding
+//   const result = dijkstra(graph, startNodeId, endNodeId);
+ 
+//   // If no path is found, return error
+//   if (result.path.length === 0) {
+//     return {
+//       error: true,
+//       message: `No route found between ${startName} and ${endName}`
+//     };
+//   }
+
+
+
+
+//   const formattedPath = result.path.map(nodeId => getLocationName(graph, nodeId));
+//   const pathWithTypes = result.path.map(nodeId => {
+//     const node = graph.nodes[nodeId];
+//     return {
+//       name: node.name,
+//       floor: node.floor,
+//       type: node.type
+//     };
+//   });
+
+
+
+
+//   return {
+//     error: false,
+//     path: formattedPath,
+//     pathWithTypes: pathWithTypes,
+//     nodeIds: result.path,
+//     distance: result.distance,
+//     formattedDistance: `${result.distance} meters`,
+//     estimatedMinutes: Math.ceil(result.distance / 60)
+//   };
+// }
 
 
 
