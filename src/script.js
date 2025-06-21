@@ -3,20 +3,19 @@ import { cocLocations, findCOCRoute } from './graphs/coc.js';
 import { ceaLocations, findCEARoute } from './graphs/cea.js';
 import { mainCampusData } from './data/graphData.js';
 
-function plotVerticesOnMap(pathNodeIds = []) {
+function plotVerticesOnMap(pathNodeIds = [], nodes = mainCampusData.nodes) {
   const map = document.getElementById('map');
   if (!map) return;
 
-  // ✅ Remove only old .point elements
   map.querySelectorAll('.point').forEach(el => el.remove());
 
-  Object.values(mainCampusData.nodes).forEach(node => {
+  Object.values(nodes).forEach(node => {
     if (node.x !== undefined && node.y !== undefined) {
       const dot = document.createElement('div');
       dot.className = 'point';
 
       if (pathNodeIds.includes(node.id)) {
-        dot.classList.add('path-node'); // highlight it
+        dot.classList.add('path-node');
       }
 
       dot.style.left = `${node.x}px`;
@@ -111,7 +110,11 @@ $(document).ready(function() {
     updateLocationDropdown('end', selectedCampus);
   });
 
-
+  // Auto-change map when campus changes
+  $('#startCampus').on('change', function () {
+    const selectedCampus = $(this).val();
+    initializeMap(getMapImageForCampus(selectedCampus));
+  });
 
 
   // Set up the start navigating button
@@ -156,6 +159,14 @@ function updateLocationDropdown(type, campus) {
   $select.trigger('change');
 }
 
+function getMapImageForCampus(campusCode) {
+  const mapImages = {
+    MAIN: '../src/images/MAINlandmarks.jpg',
+    COC: '../src/images/COC.png',
+    CEA: '../src/images/CEALAYOUT.png'
+  };
+  return mapImages[campusCode] || '../src/images/MAINlandmarks.jpg'; // fallback
+}
 
 
 
@@ -163,32 +174,54 @@ function updateLocationDropdown(type, campus) {
 function startNavigating() {
   $('#front').hide();
   $('#navigation').show();
-  initializeMap();
+
+  const selectedCampus = $('#startCampus').val() || 'MAIN';
+  initializeMap(getMapImageForCampus(selectedCampus));
 }
 
+function initializeMap(backgroundImageURL) {
+  let mapDiv = document.getElementById('map');
 
-
-
-// Initialize the map display
-function initializeMap() {
-   if (!document.getElementById('map')) {
-    const mapDiv = document.createElement('div');
+  if (!mapDiv) {
+    mapDiv = document.createElement('div');
     mapDiv.id = 'map';
     mapDiv.style.position = 'relative';
     mapDiv.style.width = '900px';
     mapDiv.style.height = '500px';
-    mapDiv.style.backgroundImage = "url('../src/images/MAINlandmarks.jpg')";
-    mapDiv.style.backgroundSize = 'cover';
     mapDiv.style.border = '2px solid black';
     document.getElementById('map-container').appendChild(mapDiv);
   }
 
-  plotVerticesOnMap();
-  // if (!$('#map-container').length) {
-  //   $('#route-result').before('<div id="map-container" class="map-container"><div class="map-placeholder">Campus Map Placeholder</div></div>');
-  // }
+  // ✅ Update the background image always
+  mapDiv.style.backgroundImage = `url('${backgroundImageURL}')`;
+  mapDiv.style.backgroundSize = 'cover';
+  mapDiv.style.backgroundPosition = 'center';
+
+  // ✅ Clean old nodes/lines
+  mapDiv.querySelectorAll('.point, .path-line').forEach(el => el.remove());
 }
 
+
+
+// Initialize the map display
+// function initializeMap() {
+//    if (!document.getElementById('map')) {
+//     const mapDiv = document.createElement('div');
+//     mapDiv.id = 'map';
+//     mapDiv.style.position = 'relative';
+//     mapDiv.style.width = '900px';
+//     mapDiv.style.height = '500px';
+//     mapDiv.style.backgroundImage = "url('../src/images/MAINlandmarks.jpg')";
+//     mapDiv.style.backgroundSize = 'cover';
+//     mapDiv.style.border = '2px solid black';
+//     document.getElementById('map-container').appendChild(mapDiv);
+//   }
+
+//   plotVerticesOnMap();
+//   // if (!$('#map-container').length) {
+//   //   $('#route-result').before('<div id="map-container" class="map-container"><div class="map-placeholder">Campus Map Placeholder</div></div>');
+//   // }
+// }
 
 
 
@@ -327,24 +360,23 @@ function findRoute() {
   const start = $('#start').val();
   const endCampus = $('#endCampus').val();
   const end = $('#end').val();
- 
-
-
 
   if (startCampus && start && endCampus && end) {
-    // Use the new complete route finding function
+    // 🖼️ Load appropriate map image based on campus
+    initializeMap(getMapImageForCampus(startCampus));
+
+    // 🚏 Find complete route
     const route = findCompleteRoute(startCampus, start, endCampus, end);
-   
-    // Display the route using the appropriate display function
+
+    // 🧭 Display and highlight route
     if (route.type === 'inter-campus') {
       displayInterCampusRouteEnhanced(route, start, end);
       highlightInterCampusPath(route);
     } else {
-      // Handle same-campus routes
       if (startCampus === 'MAIN') {
         displayRoute(route, start, end, 'MAIN Campus');
-        highlightPath(route.nodeIds, mainCampusData.nodes);      
-        plotVerticesOnMap(route.nodeIds);                       
+        highlightPath(route.nodeIds, mainCampusData.nodes);
+        plotVerticesOnMap(route.nodeIds);
       } else if (startCampus === 'COC') {
         displayCOCRoute(route, start, end, 'COC Campus');
         highlightCOCPath(route.nodeIds, route.pathWithFloors);
@@ -356,9 +388,6 @@ function findRoute() {
   } else {
     alert("Please select both campus and location for start and destination.");
   }
-
-
-
 
   document.getElementById("route-result").style.display = "block";
 }
@@ -616,6 +645,7 @@ function displayInterCampusRouteEnhanced(route, startLocation, endLocation) {
  
   $('#route-result').html(routeHTML);
 }
+
 function highlightPath(nodeIds, nodes) {
   const map = document.getElementById("map");
   if (!map || !nodeIds || nodeIds.length < 2) return;
@@ -669,158 +699,220 @@ function highlightPath(nodeIds, nodes) {
 // }
 
 
+function highlightCOCPath(nodeIds, pathWithFloors) {
+  initializeMap(getMapImageForCampus('COC'));
+
+  if (nodeIds && nodeIds.length > 0) {
+    plotVerticesOnMap(nodeIds, cocLocations); // ✅ now uses COC nodes
+    highlightPath(nodeIds, cocLocations);
+  }
+}
+
+function highlightCEAPath(nodeIds, pathWithFloors) {
+  initializeMap(getMapImageForCampus('CEA'));
+
+  if (nodeIds && nodeIds.length > 0) {
+    plotVerticesOnMap(nodeIds, ceaLocations); // ✅ now uses CEA nodes
+    highlightPath(nodeIds, ceaLocations);
+  }
+}
 
 
 // Function to highlight COC building path with floor information
-function highlightCOCPath(nodeIds, pathWithFloors) {
-  console.log("COC Path to highlight:", nodeIds);
-  console.log("Path with floors:", pathWithFloors);
+// function highlightCOCPath(nodeIds, pathWithFloors) {
+  
+//   // console.log("COC Path to highlight:", nodeIds);
+//   // console.log("Path with floors:", pathWithFloors);
+
+//   // initializeMap(getMapImageForCampus('COC'));
+
+//   // if (nodeIds && nodeIds.length > 0) {
+//   //   plotVerticesOnMap(nodeIds);
+//   //   highlightPath(nodeIds, cocLocations); // pass COC nodes
+//   // }
  
-  let mapHTML = `<div class="coc-map-with-path">
-    <div class="coc-building-visualization">
-      <h4>COC Building Route Visualization</h4>`;
+//   // let mapHTML = `<div class="coc-map-with-path">
+//   //   <div class="coc-building-visualization">
+//   //     <h4>COC Building Route Visualization</h4>`;
  
-  if (pathWithFloors && pathWithFloors.length > 0) {
-    // Group by floors for better visualization
-    const floor1Nodes = pathWithFloors.filter(node => node.floor === 1);
-    const floor2Nodes = pathWithFloors.filter(node => node.floor === 2);
-    const stairNodes = pathWithFloors.filter(node => node.floor === "1-2");
+//   // if (pathWithFloors && pathWithFloors.length > 0) {
+//   //   // Group by floors for better visualization
+//   //   const floor1Nodes = pathWithFloors.filter(node => node.floor === 1);
+//   //   const floor2Nodes = pathWithFloors.filter(node => node.floor === 2);
+//   //   const stairNodes = pathWithFloors.filter(node => node.floor === "1-2");
    
-    if (floor1Nodes.length > 0) {
-      mapHTML += `<div class="floor-section">
-        <h5>1st Floor Route:</h5>
-        <p>${floor1Nodes.map(n => n.name).join(' → ')}</p>
-      </div>`;
-    }
+//   //   if (floor1Nodes.length > 0) {
+//   //     mapHTML += `<div class="floor-section">
+//   //       <h5>1st Floor Route:</h5>
+//   //       <p>${floor1Nodes.map(n => n.name).join(' → ')}</p>
+//   //     </div>`;
+//   //   }
    
-    if (stairNodes.length > 0) {
-      mapHTML += `<div class="stairs-section">
-        <h5>Stairs:</h5>
-        <p>${stairNodes.map(n => n.name).join(' → ')}</p>
-      </div>`;
-    }
+//   //   if (stairNodes.length > 0) {
+//   //     mapHTML += `<div class="stairs-section">
+//   //       <h5>Stairs:</h5>
+//   //       <p>${stairNodes.map(n => n.name).join(' → ')}</p>
+//   //     </div>`;
+//   //   }
    
-    if (floor2Nodes.length > 0) {
-      mapHTML += `<div class="floor-section">
-        <h5>2nd Floor Route:</h5>
-        <p>${floor2Nodes.map(n => n.name).join(' → ')}</p>
-      </div>`;
-    }
-  }
+//   //   if (floor2Nodes.length > 0) {
+//   //     mapHTML += `<div class="floor-section">
+//   //       <h5>2nd Floor Route:</h5>
+//   //       <p>${floor2Nodes.map(n => n.name).join(' → ')}</p>
+//   //     </div>`;
+//   //   }
+//   // }
  
-  mapHTML += `
-      <p class="visualization-note">Detailed floor plan visualization coming soon!</p>
-    </div>
-  </div>`;
+//   // mapHTML += `
+//   //     <p class="visualization-note">Detailed floor plan visualization coming soon!</p>
+//   //   </div>
+//   // </div>`;
  
-  $('#map-container').html(mapHTML);
-}
+//   // $('#map-container').html(mapHTML);
+// }
 
 
 
 
-// Function to highlight CEA building path with floor information
-function highlightCEAPath(nodeIds, pathWithFloors) {
-  console.log("CEA Path to highlight:", nodeIds);
-  console.log("Path with floors:", pathWithFloors);
+// // Function to highlight CEA building path with floor information
+// function highlightCEAPath(nodeIds, pathWithFloors) {
+//   console.log("CEA Path to highlight:", nodeIds);
+//   console.log("Path with floors:", pathWithFloors);
  
-  let mapHTML = `<div class="cea-map-with-path">
-    <div class="cea-building-visualization">
-      <h4>CEA Building Route Visualization</h4>`;
+//   let mapHTML = `<div class="cea-map-with-path">
+//     <div class="cea-building-visualization">
+//       <h4>CEA Building Route Visualization</h4>`;
  
-  if (pathWithFloors && pathWithFloors.length > 0) {
-    // Group by floors for better visualization (CEA has 4 floors)
-    const floor1Nodes = pathWithFloors.filter(node => node.floor === 1);
-    const floor2Nodes = pathWithFloors.filter(node => node.floor === 2);
-    const floor3Nodes = pathWithFloors.filter(node => node.floor === 3);
-    const floor4Nodes = pathWithFloors.filter(node => node.floor === 4);
-    const stairNodes = pathWithFloors.filter(node =>
-      typeof node.floor === 'string' && node.floor.includes('-')
-    );
+//   if (pathWithFloors && pathWithFloors.length > 0) {
+//     // Group by floors for better visualization (CEA has 4 floors)
+//     const floor1Nodes = pathWithFloors.filter(node => node.floor === 1);
+//     const floor2Nodes = pathWithFloors.filter(node => node.floor === 2);
+//     const floor3Nodes = pathWithFloors.filter(node => node.floor === 3);
+//     const floor4Nodes = pathWithFloors.filter(node => node.floor === 4);
+//     const stairNodes = pathWithFloors.filter(node =>
+//       typeof node.floor === 'string' && node.floor.includes('-')
+//     );
    
-    if (floor1Nodes.length > 0) {
-      mapHTML += `<div class="floor-section">
-        <h5>1st Floor Route:</h5>
-        <p>${floor1Nodes.map(n => n.name).join(' → ')}</p>
-      </div>`;
-    }
+//     if (floor1Nodes.length > 0) {
+//       mapHTML += `<div class="floor-section">
+//         <h5>1st Floor Route:</h5>
+//         <p>${floor1Nodes.map(n => n.name).join(' → ')}</p>
+//       </div>`;
+//     }
    
-    if (floor2Nodes.length > 0) {
-      mapHTML += `<div class="floor-section">
-        <h5>2nd Floor Route:</h5>
-        <p>${floor2Nodes.map(n => n.name).join(' → ')}</p>
-      </div>`;
-    }
+//     if (floor2Nodes.length > 0) {
+//       mapHTML += `<div class="floor-section">
+//         <h5>2nd Floor Route:</h5>
+//         <p>${floor2Nodes.map(n => n.name).join(' → ')}</p>
+//       </div>`;
+//     }
    
-    if (floor3Nodes.length > 0) {
-      mapHTML += `<div class="floor-section">
-        <h5>3rd Floor Route:</h5>
-        <p>${floor3Nodes.map(n => n.name).join(' → ')}</p>
-      </div>`;
-    }
+//     if (floor3Nodes.length > 0) {
+//       mapHTML += `<div class="floor-section">
+//         <h5>3rd Floor Route:</h5>
+//         <p>${floor3Nodes.map(n => n.name).join(' → ')}</p>
+//       </div>`;
+//     }
    
-    if (floor4Nodes.length > 0) {
-      mapHTML += `<div class="floor-section">
-        <h5>4th Floor Route:</h5>
-        <p>${floor4Nodes.map(n => n.name).join(' → ')}</p>
-      </div>`;
-    }
+//     if (floor4Nodes.length > 0) {
+//       mapHTML += `<div class="floor-section">
+//         <h5>4th Floor Route:</h5>
+//         <p>${floor4Nodes.map(n => n.name).join(' → ')}</p>
+//       </div>`;
+//     }
    
-    if (stairNodes.length > 0) {
-      mapHTML += `<div class="stairs-section">
-        <h5>Stairs Used:</h5>
-        <p>${stairNodes.map(n => n.name).join(' → ')}</p>
-      </div>`;
-    }
-  }
+//     if (stairNodes.length > 0) {
+//       mapHTML += `<div class="stairs-section">
+//         <h5>Stairs Used:</h5>
+//         <p>${stairNodes.map(n => n.name).join(' → ')}</p>
+//       </div>`;
+//     }
+//   }
  
-  mapHTML += `
-      <p class="visualization-note">Detailed CEA floor plan visualization coming soon!</p>
-    </div>
-  </div>`;
+//   mapHTML += `
+//       <p class="visualization-note">Detailed CEA floor plan visualization coming soon!</p>
+//     </div>
+//   </div>`;
  
-  $('#map-container').html(mapHTML);
-}
+//   $('#map-container').html(mapHTML);
+// }
 
-
-
-
-// Function to highlight inter-campus paths
 function highlightInterCampusPath(route) {
-  let mapHTML = `<div class="inter-campus-map">
-    <div class="campus-connection-visualization">
-      <h4>Inter-Campus Route Visualization</h4>
-     
-      <div class="campus-segment">
-        <h5>${route.startCampus} Campus Route:</h5>
-        <div class="campus-path">${route.segments.withinStartCampus.path.join(' → ')}</div>
-      </div>
-     
-      <div class="connection-segment">
-        <h5>Inter-Campus Connection:</h5>
-        <div class="connection-info">
-          <p><strong>${route.routeDescription}</strong></p>
-          <p>Distance: ${route.segments.interCampus.distance}m</p>
-          <div class="transport-times">
-            <span class="walking-time">🚶 ${route.segments.interCampus.walkingTime} min</span>
-            <span class="tricycle-time">🛺 ${route.segments.interCampus.tricycleTime} min</span>
-          </div>
-        </div>
-      </div>
-     
-      <div class="campus-segment">
-        <h5>${route.endCampus} Campus Route:</h5>
-        <div class="campus-path">${route.segments.withinEndCampus.path.join(' → ')}</div>
-      </div>
-     
-      <div class="total-summary">
-        <p><strong>Total Journey:</strong> ${route.formattedDistance} | 🚶 ${route.walkingTime} min | 🛺 ${route.tricycleTime} min</p>
-      </div>
-    </div>
-  </div>`;
- 
-  $('#map-container').html(mapHTML);
+  // Show the MAIN campus map as base (or create multi-campus if needed)
+  initializeMap(getMapImageForCampus('MAIN'));
+
+  const map = document.getElementById("map");
+
+  if (!map) return;
+
+  // 🧹 Clear old lines and dots
+  map.querySelectorAll(".point, .path-line").forEach(el => el.remove());
+
+  // Highlight start campus path
+  if (route.startCampus === 'MAIN') {
+    highlightPath(route.segments.withinStartCampus.nodeIds, mainLocations);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
+  } else if (route.startCampus === 'COC') {
+    highlightPath(route.segments.withinStartCampus.nodeIds, cocLocations);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
+  } else if (route.startCampus === 'CEA') {
+    highlightPath(route.segments.withinStartCampus.nodeIds, ceaLocations);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
+  }
+
+  // Optional: Add a visual "break" or icon to indicate inter-campus travel
+
+  // Highlight end campus path
+  if (route.endCampus === 'MAIN') {
+    highlightPath(route.segments.withinEndCampus.nodeIds, mainLocations);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
+  } else if (route.endCampus === 'COC') {
+    highlightPath(route.segments.withinEndCampus.nodeIds, cocLocations);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
+  } else if (route.endCampus === 'CEA') {
+    highlightPath(route.segments.withinEndCampus.nodeIds, ceaLocations);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
+  }
 }
+
+
+
+// // Function to highlight inter-campus paths
+// function highlightInterCampusPath(route) {
+//   let mapHTML = `<div class="inter-campus-map">
+//     <div class="campus-connection-visualization">
+//       <h4>Inter-Campus Route Visualization</h4>
+     
+//       <div class="campus-segment">
+//         <h5>${route.startCampus} Campus Route:</h5>
+//         <div class="campus-path">${route.segments.withinStartCampus.path.join(' → ')}</div>
+//       </div>
+     
+//       <div class="connection-segment">
+//         <h5>Inter-Campus Connection:</h5>
+//         <div class="connection-info">
+//           <p><strong>${route.routeDescription}</strong></p>
+//           <p>Distance: ${route.segments.interCampus.distance}m</p>
+//           <div class="transport-times">
+//             <span class="walking-time">🚶 ${route.segments.interCampus.walkingTime} min</span>
+//             <span class="tricycle-time">🛺 ${route.segments.interCampus.tricycleTime} min</span>
+//           </div>
+//         </div>
+//       </div>
+     
+//       <div class="campus-segment">
+//         <h5>${route.endCampus} Campus Route:</h5>
+//         <div class="campus-path">${route.segments.withinEndCampus.path.join(' → ')}</div>
+//       </div>
+     
+//       <div class="total-summary">
+//         <p><strong>Total Journey:</strong> ${route.formattedDistance} | 🚶 ${route.walkingTime} min | 🛺 ${route.tricycleTime} min</p>
+//       </div>
+//     </div>
+//   </div>`;
+ 
+//   $('#map-container').html(mapHTML);
+// }
 
 
 
