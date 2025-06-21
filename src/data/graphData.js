@@ -90,7 +90,6 @@ const nodes = {
     79: { id: 79, type: "path", x: 322, y: 258 },
     80: { id: 80, type: "path", x: 544, y: 228 },
     81: { id: 81, type: "path", x: 368, y: 408 },
-
     // === MAIN BUILDING - 1st FLOOR ROOMS ===
     // EAST WING
     1001: { id: 1001, name: "Office of Student Services", type: "office", floor: 1, parent: 15 },
@@ -590,8 +589,7 @@ const nodes = {
     6056: { id: 6056, name: "Class Room 612", type: "room", floor: 6, parent: 16 },
     6057: { id: 6057, name: "Class Room 614", type: "room", floor: 6, parent: 16 },
     6058: { id: 6058, name: "Class Room 616", type: "room", floor: 6, parent: 16 },
-    6059: { id: 6059, name: "Class Room 617", type: "room", floor: 6, parent: 16 }
-
+    6059: { id: 6059, name: "Class Room 617", type: "room", floor: 6, parent: 16 },
 }
 
 export const mainCampusData = {
@@ -730,122 +728,19 @@ export const mainCampusData = {
   { from: 75, to: 76, weight: calculateDistance(nodes[75], nodes[76]) },
   { from: 78, to: 81, weight: calculateDistance(nodes[78], nodes[81]) },
   { from: 80, to: 41, weight: calculateDistance(nodes[80], nodes[41]) },
+  // Connect main building wings to their hallways
+    // { from: 15, to: 1030, weight: 5 },  // East Wing to East Wing Hallway
+    // { from: 16, to: 1031, weight: 5 },  // North Wing to North Wing Hallway
+    // { from: 17, to: 1033, weight: 5 },  // South Wing to South Wing Hallway
+    // { from: 18, to: 1032, weight: 5 },  // West Wing to West Wing Hallway
+    // { from: 14, to: 1023, weight: 5 },  // Dome to Dome Hallway
 
-    // // MAIN ENTRANCE AREA
-    // { from: 19, to: 4, weight: 10 },   // Main Gate to Catwalk (primary entrance path)
-    // { from: 4, to: 19, weight: 10 },   // Catwalk to Main Gate (primary exit path)
-    // { from: 4, to: 36, weight: 15 },   // Catwalk to Student Pavilion
-    // { from: 36, to: 5, weight: 25 },   // Student Pavilion to Centennial Monument
-    // { from: 19, to: 31, weight: 35 },  // Main Gate to Mural area
-    // { from: 32, to: 31, weight: 20 },  // Obelisk to Mural (close proximity)
-    // { from: 32, to: 36, weight: 25 },  // Obelisk to Student Pavilion
-    // { from: 31, to: 36, weight: 20 },  // Mural to Student Pavilion
-    // { from: 32, to: 8, weight: 40 },   // Obelisk to Flag Pole
-    
-    // // MAIN BUILDING COMPLEX
-    // { from: 8, to: 14, weight: 35 },   // Flag Pole to Main Building Dome
-    // { from: 14, to: 15, weight: 20 },  // Dome to East Wing
-    // { from: 14, to: 16, weight: 20 },  // Dome to North Wing
-    // { from: 14, to: 17, weight: 20 },  // Dome to South Wing
-    // { from: 14, to: 18, weight: 20 },  // Dome to West Wing
-    // { from: 15, to: 16, weight: 25 },  // East Wing to North Wing
-    // { from: 16, to: 18, weight: 25 },  // North Wing to West Wing
-    // { from: 17, to: 18, weight: 25 },  // South Wing to West Wing
-    // { from: 15, to: 17, weight: 25 },  // East Wing to South Wing
-    
-    // Connect main building wings to their hallways
-    { from: 15, to: 1030, weight: 5 },  // East Wing to East Wing Hallway
-    { from: 16, to: 1031, weight: 5 },  // North Wing to North Wing Hallway
-    { from: 17, to: 1033, weight: 5 },  // South Wing to South Wing Hallway
-    { from: 18, to: 1032, weight: 5 },  // West Wing to West Wing Hallway
-    { from: 14, to: 1023, weight: 5 },  // Dome to Dome Hallway
-
-    // Connect main building wings to their 2nd floor hallways
-    { from: 15, to: 2109, weight: 5 },  // East Wing to 2nd Floor East Wing Hallway
-    { from: 16, to: 2110, weight: 5 },  // North Wing to 2nd Floor North Wing Hallway
-    { from: 17, to: 2112, weight: 5 },  // South Wing to 2nd Floor South Wing Hallway
-    { from: 18, to: 2111, weight: 5 },  // West Wing to 2nd Floor West Wing Hallway
-    { from: 14, to: 2102, weight: 5 },  // Dome to 2nd Floor Dome Hallway
-
-    // // LAGOON AREA
-    // { from: 13, to: 1, weight: 15 },   // Lagoon to Amphitheater
-    // { from: 13, to: 5, weight: 20 },   // Lagoon to Centennial Monument
-    // { from: 13, to: 14, weight: 40 },  // Lagoon to Main Building Dome
-    // { from: 13, to: 11, weight: 30 },  // Lagoon to Interfaith Chapel
-    // { from: 13, to: 20, weight: 35 },  // Lagoon to Freedom Park
-    // { from: 5, to: 1, weight: 20 },    // Centennial Monument to Amphitheater
-    
-    // // FREEDOM PARK AREA
-    // { from: 20, to: 9, weight: 35 },   // Freedom Park to Grandstand
-    // { from: 20, to: 1, weight: 40 },   // Freedom Park to Amphitheater
-    // { from: 9, to: 1, weight: 25 },    // Grandstand to Amphitheater
-    // { from: 20, to: 29, weight: 30 },  // Freedom Park to Public Restroom
-    // { from: 20, to: 8, weight: 45 },   // Freedom Park to Flag Pole
-    
-    // // EASTERN AREA
-    // { from: 7, to: 21, weight: 40 },   // East Gate to Library
-    // { from: 21, to: 15, weight: 45 },  // Library to East Wing
-    // { from: 21, to: 11, weight: 25 },  // Library to Interfaith Chapel
-    // { from: 21, to: 12, weight: 40 },  // Library to Laboratory High School
-    // { from: 11, to: 15, weight: 25 },  // Chapel to East Wing
-    // { from: 12, to: 21, weight: 35 },  // Lab High School to Library
-    
-    // // NORTHERN AREA
-    // { from: 16, to: 22, weight: 30 },  // North Wing to Open Court
-    // { from: 22, to: 38, weight: 25 },  // Open Court to Tennis Court
-    // { from: 22, to: 39, weight: 30 },  // Open Court to Water Tank
-    // { from: 38, to: 39, weight: 20 },  // Tennis Court to Water Tank
-    // { from: 39, to: 40, weight: 25 },  // Water Tank to West Gate
-    
-    // // UPPER NORTHERN AREA
-    // { from: 2, to: 12, weight: 30 },   // Banda Kawayan to Lab High School
-    // { from: 2, to: 21, weight: 45 },   // Banda Kawayan to Library
-    // { from: 2, to: 25, weight: 35 },   // Banda Kawayan to P.E. Building
-    // { from: 25, to: 10, weight: 30 },  // P.E. Building to Gymnasium
-    // { from: 10, to: 37, weight: 25 },  // Gymnasium to Swimming Pool
-    // { from: 37, to: 38, weight: 30 },  // Swimming Pool to Tennis Court
-    
-    // // MAINTENANCE AND CATWALK AREA
-    // { from: 3, to: 27, weight: 25 },   // Maintenance Office to Ferry Station
-    // { from: 4, to: 34, weight: 20 },   // Catwalk to Pylon
-    // { from: 4, to: 33, weight: 25 },   // Catwalk to Property Building
-    // { from: 4, to: 32, weight: 30 },   // Catwalk to Obelisk
-    // { from: 4, to: 19, weight: 35 },   // Catwalk to Main Gate
-    // { from: 34, to: 33, weight: 20 },  // Pylon to Property Building
-    // { from: 33, to: 32, weight: 30 },  // Property Building to Obelisk
-    
-    // // WESTERN SIDE CONNECTIONS
-    // { from: 40, to: 39, weight: 25 },  // West Gate to Water Tank
-    // { from: 34, to: 6, weight: 30 },   // Pylon to Charlie del Rosario Center
-    // { from: 6, to: 30, weight: 25 },   // Charlie del Rosario to Linear Park
-    // { from: 30, to: 35, weight: 20 },  // Linear Park to Sampaguita Building
-    // { from: 35, to: 18, weight: 40 },  // Sampaguita to West Wing
-    
-    // // SOUTHERN AREA
-    // { from: 17, to: 24, weight: 30 },  // South Wing to Oval Field
-    // { from: 24, to: 23, weight: 25 },  // Oval Field to Open University
-    // { from: 23, to: 3, weight: 35 },   // Open University to Maintenance Office
-    // { from: 24, to: 9, weight: 45 },   // Oval Field to Grandstand
-    
-    // // PASIG RIVER AREA
-    // { from: 30, to: 26, weight: 25 },  // Linear Park to Pasig River
-    // { from: 26, to: 27, weight: 20 },  // Pasig River to Ferry Station
-    
-    // // PROPOSED ACCESS ROAD
-    // { from: 28, to: 24, weight: 30 },  // Proposed Access Road to Oval Field
-    // { from: 28, to: 9, weight: 25 },   // Proposed Access Road to Grandstand
-    
-    // // CROSS-CAMPUS MAJOR PATHWAYS
-    // { from: 14, to: 20, weight: 50 },  // Main Building to Freedom Park
-    // { from: 21, to: 32, weight: 45 },  // Library to Obelisk
-    // { from: 10, to: 5, weight: 35 },   // Gymnasium to Centennial Monument
-    // { from: 5, to: 10, weight: 35 },   // Centennial Monument to Gymnasium
-    
-    // // ADDITIONAL LOGICAL CONNECTIONS
-    // { from: 36, to: 35, weight: 25 },  // Student Pavilion to Sampaguita
-    // { from: 35, to: 6, weight: 30 },   // Sampaguita to Charlie del Rosario
-    // { from: 11, to: 17, weight: 30 },  // Interfaith Chapel to South Wing
-    // { from: 23, to: 24, weight: 20 },   // Open University to Oval Field
+    // // Connect main building wings to their 2nd floor hallways
+    // { from: 15, to: 2109, weight: 5 },  // East Wing to 2nd Floor East Wing Hallway
+    // { from: 16, to: 2110, weight: 5 },  // North Wing to 2nd Floor North Wing Hallway
+    // { from: 17, to: 2112, weight: 5 },  // South Wing to 2nd Floor South Wing Hallway
+    // { from: 18, to: 2111, weight: 5 },  // West Wing to 2nd Floor West Wing Hallway
+    // { from: 14, to: 2102, weight: 5 },  // Dome to 2nd Floor Dome Hallway
 
     // === MAIN BUILDING 1ST FLOOR INTERNAL CONNECTIONS ===
     // East Wing Connections through Hallway
@@ -1588,9 +1483,8 @@ export const mainCampusData = {
     { from: 5095, to: 6094, weight: 25 }  // Dome Stairs
 
 
-  ]
-};
-
+]
+}
 // export const mainCampusData = {
 //   nodes: {
 //     1: { id: 1, name: "Amphitheater", type: "building" },
