@@ -16,8 +16,6 @@ export function createAdjacencyList(graph) {
 }
 
 
-
-
 // Dijkstra's algorithm implementation
 export function dijkstra(graph, startNodeId, endNodeId) {
   const adjacencyList = createAdjacencyList(graph);

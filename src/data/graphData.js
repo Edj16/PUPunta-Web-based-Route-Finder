@@ -89,12 +89,515 @@ const nodes = {
     78: { id: 78, type: "path", x: 357, y: 430 },
     79: { id: 79, type: "path", x: 322, y: 258 },
     80: { id: 80, type: "path", x: 544, y: 228 },
-    81: { id: 81, type: "path", x: 368, y: 408 }  
+    81: { id: 81, type: "path", x: 368, y: 408 },
+
+    // === MAIN BUILDING - 1st FLOOR ROOMS ===
+    // EAST WING
+    1001: { id: 1001, name: "Office of Student Services", type: "office", floor: 1, parent: 15 },
+    1002: { id: 1002, name: "Department of Military Science and Tactics", type: "office", floor: 1, parent: 15 },
+    1003: { id: 1003, name: "HRDO Records Office", type: "office", floor: 1, parent: 15 },
+    1004: { id: 1004, name: "Medical Clinic Services", type: "office", floor: 1, parent: 15 },
+    1005: { id: 1005, name: "Dental Clinic Services", type: "office", floor: 1, parent: 15 },
+    1006: { id: 1006, name: "Office of the Director - Student Services", type: "office", floor: 1, parent: 15 },
+    1007: { id: 1007, name: "Office of the Director - Student Affairs", type: "office", floor: 1, parent: 15 },
+
+    // NORTH WING
+    1008: { id: 1008, name: "Commission on Audit Office", type: "office", floor: 1, parent: 16 },
+    1009: { id: 1009, name: "Procurement Office", type: "office", floor: 1, parent: 16 },
+    1010: { id: 1010, name: "Campus Ministry", type: "office", floor: 1, parent: 16 },
+    1011: { id: 1011, name: "Security Office", type: "office", floor: 1, parent: 16 },
+
+    // WEST WING
+    1012: { id: 1012, name: "Office of the University Registrar - Records Retrieval Section", type: "office", floor: 1, parent: 18 },
+    1013: { id: 1013, name: "Office of the Scholarship and Financial Assistance", type: "office", floor: 1, parent: 18 },
+    1014: { id: 1014, name: "Admission and Registration Office", type: "office", floor: 1, parent: 18 },
+
+    // SOUTH WING
+    1015: { id: 1015, name: "Human Resource Management Division", type: "office", floor: 1, parent: 17 },
+    1016: { id: 1016, name: "Students Records Office", type: "office", floor: 1, parent: 17 },
+    1017: { id: 1017, name: "Office of the University Registrar", type: "office", floor: 1, parent: 17 },
+    1018: { id: 1018, name: "Cashier", type: "office", floor: 1, parent: 17 },
+    1019: { id: 1019, name: "Accounting Office", type: "office", floor: 1, parent: 17 },
+    1020: { id: 1020, name: "Budget Services", type: "office", floor: 1, parent: 17 },
+    1021: { id: 1021, name: "Property Extension Office", type: "office", floor: 1, parent: 17 },
+
+    // DOME AND CENTRAL AREA
+    1022: { id: 1022, name: "1st Floor Dome", type: "facility", floor: 1, parent: 14 },
+    1023: { id: 1023, name: "Dome Hallway", type: "hallway", floor: 1, parent: 14 },
+
+    // STAIRS
+    1024: { id: 1024, name: "North Wing Left Stairs", type: "stairs", floor: "1-2", parent: 16 },
+    1025: { id: 1025, name: "North Wing Right Stairs", type: "stairs", floor: "1-2", parent: 16 },
+    1026: { id: 1026, name: "Central Stairs", type: "stairs", floor: "1-2", parent: 14 },
+    1027: { id: 1027, name: "South Wing Left Stairs", type: "stairs", floor: "1-2", parent: 17 },
+    1028: { id: 1028, name: "South Wing Center Stairs", type: "stairs", floor: "1-2", parent: 17 },
+    1029: { id: 1029, name: "South Wing Right Stairs", type: "stairs", floor: "1-2", parent: 17 },
+
+    // HALLWAYS
+    1030: { id: 1030, name: "East Wing Hallway", type: "hallway", floor: 1, parent: 15 },
+    1031: { id: 1031, name: "North Wing Hallway", type: "hallway", floor: 1, parent: 16 },
+    1032: { id: 1032, name: "West Wing Hallway", type: "hallway", floor: 1, parent: 18 },
+    1033: { id: 1033, name: "South Wing Hallway", type: "hallway", floor: 1, parent: 17 },
+
+    // === MAIN BUILDING - 2nd FLOOR ROOMS ===
+    // EAST WING
+    2001: { id: 2001, name: "E219", type: "room", floor: 2, parent: 15 },
+    2002: { id: 2002, name: "E217", type: "room", floor: 2, parent: 15 },
+    2003: { id: 2003, name: "E215", type: "room", floor: 2, parent: 15 },
+    2004: { id: 2004, name: "E213", type: "room", floor: 2, parent: 15 },
+    2005: { id: 2005, name: "E211", type: "room", floor: 2, parent: 15 },
+    2006: { id: 2006, name: "E209", type: "room", floor: 2, parent: 15 },
+    2007: { id: 2007, name: "E207", type: "room", floor: 2, parent: 15 },
+    2008: { id: 2008, name: "E206", type: "room", floor: 2, parent: 15 },
+    2009: { id: 2009, name: "E208", type: "room", floor: 2, parent: 15 },
+    2010: { id: 2010, name: "E210", type: "room", floor: 2, parent: 15 },
+    2011: { id: 2011, name: "E212", type: "room", floor: 2, parent: 15 },
+    2012: { id: 2012, name: "E214", type: "room", floor: 2, parent: 15 },
+    2013: { id: 2013, name: "E216", type: "room", floor: 2, parent: 15 },
+    2014: { id: 2014, name: "E218", type: "room", floor: 2, parent: 15 },
+    2015: { id: 2015, name: "E220", type: "room", floor: 2, parent: 15 },
+
+    // WEST WING
+    2016: { id: 2016, name: "W220", type: "room", floor: 2, parent: 18 },
+    2017: { id: 2017, name: "W218", type: "room", floor: 2, parent: 18 },
+    2018: { id: 2018, name: "W216", type: "room", floor: 2, parent: 18 },
+    2019: { id: 2019, name: "W214", type: "room", floor: 2, parent: 18 },
+    2020: { id: 2020, name: "W212", type: "room", floor: 2, parent: 18 },
+    2021: { id: 2021, name: "W210", type: "room", floor: 2, parent: 18 },
+    2022: { id: 2022, name: "W208", type: "room", floor: 2, parent: 18 },
+    2023: { id: 2023, name: "W206", type: "room", floor: 2, parent: 18 },
+    2024: { id: 2024, name: "W204", type: "room", floor: 2, parent: 18 },
+    2025: { id: 2025, name: "W202", type: "room", floor: 2, parent: 18 },
+    2026: { id: 2026, name: "W200", type: "room", floor: 2, parent: 18 },
+    2027: { id: 2027, name: "W205", type: "room", floor: 2, parent: 18 },
+    2028: { id: 2028, name: "W207", type: "room", floor: 2, parent: 18 },
+    2029: { id: 2029, name: "W209", type: "room", floor: 2, parent: 18 },
+    2030: { id: 2030, name: "W213", type: "room", floor: 2, parent: 18 },
+    2031: { id: 2031, name: "W215", type: "room", floor: 2, parent: 18 },
+    2032: { id: 2032, name: "Faculty Circle", type: "room", floor: 2, parent: 18 },
+    2033: { id: 2033, name: "PUPFFA Office", type: "office", floor: 2, parent: 18 },
+    2034: { id: 2034, name: "Research Center", type: "office", floor: 2, parent: 18 },
+
+    // NORTH WING
+    2035: { id: 2035, name: "College of Science Office", type: "office", floor: 2, parent: 16 },
+    2036: { id: 2036, name: "College of Languages and Linguistics Office", type: "office", floor: 2, parent: 16 },
+    2037: { id: 2037, name: "College of Arts Office", type: "office", floor: 2, parent: 16 },
+    2038: { id: 2038, name: "College of Accountancy Office", type: "office", floor: 2, parent: 16 },
+    2039: { id: 2039, name: "College of Business Office", type: "office", floor: 2, parent: 16 },
+    2040: { id: 2040, name: "College of Education Office", type: "office", floor: 2, parent: 16 },
+
+    // SOUTH WING
+    2041: { id: 2041, name: "Office of the President", type: "office", floor: 2, parent: 17 },
+    2042: { id: 2042, name: "Dr. Pablo T. Mateo Jr. Conference Room", type: "room", floor: 2, parent: 17 },
+    2043: { id: 2043, name: "Office of the University Board Secretary", type: "office", floor: 2, parent: 17 },
+    2044: { id: 2044, name: "Office of the VP for Academic Affairs", type: "office", floor: 2, parent: 17 },
+    2045: { id: 2045, name: "Office of the VP for Administration", type: "office", floor: 2, parent: 17 },
+    2046: { id: 2046, name: "Dr. Ofelia M. Carague Conference Room", type: "room", floor: 2, parent: 17 },
+    2047: { id: 2047, name: "Office of the VP for Research, Extension, and Development", type: "office", floor: 2, parent: 17 },
+
+    // DOME AND CENTRAL AREA
+    2101: { id: 2101, name: "2nd Floor Dome", type: "facility", floor: 2, parent: 14 },
+    2102: { id: 2102, name: "Dome Hallway", type: "hallway", floor: 2, parent: 14 },
+
+    // STAIRS (2nd to 3rd floor)
+    2103: { id: 2103, name: "North Wing Left Stairs", type: "stairs", floor: "2-3", parent: 16 },
+    2104: { id: 2104, name: "North Wing Right Stairs", type: "stairs", floor: "2-3", parent: 16 },
+    2105: { id: 2105, name: "Central Stairs", type: "stairs", floor: "2-3", parent: 14 },
+    2106: { id: 2106, name: "South Wing Left Stairs", type: "stairs", floor: "2-3", parent: 17 },
+    2107: { id: 2107, name: "South Wing Center Stairs", type: "stairs", floor: "2-3", parent: 17 },
+    2108: { id: 2108, name: "South Wing Right Stairs", type: "stairs", floor: "2-3", parent: 17 },
+
+    // HALLWAYS
+    2109: { id: 2109, name: "East Wing Hallway", type: "hallway", floor: 2, parent: 15 },
+    2110: { id: 2110, name: "North Wing Hallway", type: "hallway", floor: 2, parent: 16 },
+    2111: { id: 2111, name: "West Wing Hallway", type: "hallway", floor: 2, parent: 18 },
+    2112: { id: 2112, name: "South Wing Hallway", type: "hallway", floor: 2, parent: 17 },
+
+    // === MAIN BUILDING - 3rd FLOOR ROOMS ===
+    // EAST WING
+    3001: { id: 3001, name: "E313", type: "room", floor: 3, parent: 15 },
+    3002: { id: 3002, name: "E311", type: "room", floor: 3, parent: 15 },
+    3003: { id: 3003, name: "E309", type: "room", floor: 3, parent: 15 },
+    3004: { id: 3004, name: "E307", type: "room", floor: 3, parent: 15 },
+    3005: { id: 3005, name: "E305", type: "room", floor: 3, parent: 15 },
+    3006: { id: 3006, name: "E305A", type: "room", floor: 3, parent: 15 },
+    3007: { id: 3007, name: "E303", type: "room", floor: 3, parent: 15 },
+    3008: { id: 3008, name: "E301", type: "room", floor: 3, parent: 15 },
+    3009: { id: 3009, name: "Male Toilet (East)", type: "facility", floor: 3, parent: 15 },
+    3010: { id: 3010, name: "Female Toilet (East)", type: "facility", floor: 3, parent: 15 },
+    3011: { id: 3011, name: "E310", type: "room", floor: 3, parent: 15 },
+    3012: { id: 3012, name: "E308", type: "room", floor: 3, parent: 15 },
+    3013: { id: 3013, name: "E306", type: "room", floor: 3, parent: 15 },
+    3014: { id: 3014, name: "E304", type: "room", floor: 3, parent: 15 },
+    3015: { id: 3015, name: "E302", type: "room", floor: 3, parent: 15 },
+    3016: { id: 3016, name: "E300", type: "room", floor: 3, parent: 15 },
+    3017: { id: 3017, name: "E300A", type: "room", floor: 3, parent: 15 },
+
+    // WEST WING
+    3018: { id: 3018, name: "W318", type: "room", floor: 3, parent: 18 },
+    3019: { id: 3019, name: "W316", type: "room", floor: 3, parent: 18 },
+    3020: { id: 3020, name: "W314", type: "room", floor: 3, parent: 18 },
+    3021: { id: 3021, name: "W310", type: "room", floor: 3, parent: 18 },
+    3022: { id: 3022, name: "W312", type: "room", floor: 3, parent: 18 },
+    3023: { id: 3023, name: "W308", type: "room", floor: 3, parent: 18 },
+    3024: { id: 3024, name: "W306", type: "room", floor: 3, parent: 18 },
+    3025: { id: 3025, name: "W304", type: "room", floor: 3, parent: 18 },
+    3026: { id: 3026, name: "COABTE Faculty Office", type: "office", floor: 3, parent: 18 },
+    3027: { id: 3027, name: "W311", type: "room", floor: 3, parent: 18 },
+    3028: { id: 3028, name: "W309", type: "room", floor: 3, parent: 18 },
+    3029: { id: 3029, name: "W307", type: "room", floor: 3, parent: 18 },
+    3030: { id: 3030, name: "W305", type: "room", floor: 3, parent: 18 },
+    3031: { id: 3031, name: "W303", type: "room", floor: 3, parent: 18 },
+    3032: { id: 3032, name: "W301", type: "room", floor: 3, parent: 18 },
+    3033: { id: 3033, name: "Female Toilet (West)", type: "facility", floor: 3, parent: 18 },
+    3034: { id: 3034, name: "Male Toilet (West)", type: "facility", floor: 3, parent: 18 },
+
+    // NORTH WING
+    3035: { id: 3035, name: "N301", type: "room", floor: 3, parent: 16 },
+    3036: { id: 3036, name: "N303", type: "room", floor: 3, parent: 16 },
+    3037: { id: 3037, name: "N313", type: "room", floor: 3, parent: 16 },
+    3038: { id: 3038, name: "N315", type: "room", floor: 3, parent: 16 },
+    3039: { id: 3039, name: "N317", type: "room", floor: 3, parent: 16 },
+    3040: { id: 3040, name: "Male Toilet (North Left)", type: "facility", floor: 3, parent: 16 },
+    3041: { id: 3041, name: "Female Toilet (North Left)", type: "facility", floor: 3, parent: 16 },
+    3042: { id: 3042, name: "N304", type: "room", floor: 3, parent: 16 },
+    3043: { id: 3043, name: "N306", type: "room", floor: 3, parent: 16 },
+    3044: { id: 3044, name: "N308", type: "room", floor: 3, parent: 16 },
+    3045: { id: 3045, name: "N310", type: "room", floor: 3, parent: 16 },
+    3046: { id: 3046, name: "N312", type: "room", floor: 3, parent: 16 },
+    3047: { id: 3047, name: "N314", type: "room", floor: 3, parent: 16 },
+    3048: { id: 3048, name: "N316", type: "room", floor: 3, parent: 16 },
+    3049: { id: 3049, name: "N318", type: "room", floor: 3, parent: 16 },
+
+    // SOUTH WING
+    3050: { id: 3050, name: "Chief Legal", type: "office", floor: 3, parent: 17 },
+    3051: { id: 3051, name: "Staff Legal", type: "office", floor: 3, parent: 17 },
+    3052: { id: 3052, name: "Internal Audit", type: "office", floor: 3, parent: 17 },
+    3053: { id: 3053, name: "BAC", type: "office", floor: 3, parent: 17 },
+    3054: { id: 3054, name: "PPDO", type: "office", floor: 3, parent: 17 },
+    3055: { id: 3055, name: "Research Extension", type: "office", floor: 3, parent: 17 },
+    3056: { id: 3056, name: "Electronic Data Processing", type: "office", floor: 3, parent: 17 },
+    3057: { id: 3057, name: "Placement Office", type: "office", floor: 3, parent: 17 },
+    3058: { id: 3058, name: "PFO", type: "office", floor: 3, parent: 17 },
+    3059: { id: 3059, name: "Alumni Relations", type: "office", floor: 3, parent: 17 },
+    3060: { id: 3060, name: "Server", type: "facility", floor: 3, parent: 17 },
+    3061: { id: 3061, name: "Publication Office", type: "office", floor: 3, parent: 17 },
+    3062: { id: 3062, name: "CRO", type: "office", floor: 3, parent: 17 },
+    3063: { id: 3063, name: "CRBDO", type: "office", floor: 3, parent: 17 },
+    3064: { id: 3064, name: "PAO", type: "office", floor: 3, parent: 17 },
+    3065: { id: 3065, name: "AVP Research", type: "office", floor: 3, parent: 17 },
+    3066: { id: 3066, name: "OVPRED", type: "office", floor: 3, parent: 17 },
+
+    // DOME AND CENTRAL AREA
+    3067: { id: 3067, name: "3rd Floor Dome", type: "facility", floor: 3, parent: 14 },
+    3068: { id: 3068, name: "Dome Hallway (3rd Floor)", type: "hallway", floor: 3, parent: 14 },
+    3069: { id: 3069, name: "East Wing Hallway (3rd Floor)", type: "hallway", floor: 3, parent: 15 },
+    3070: { id: 3070, name: "West Wing Hallway (3rd Floor)", type: "hallway", floor: 3, parent: 18 },
+    3071: { id: 3071, name: "North Wing Hallway (3rd Floor)", type: "hallway", floor: 3, parent: 16 },
+    3072: { id: 3072, name: "South Wing Hallway (3rd Floor)", type: "hallway", floor: 3, parent: 17 },
+
+    // === MAIN BUILDING - 4th FLOOR ROOMS ===
+    // EAST WING
+    4001: { id: 4001, name: "E417", type: "room", floor: 4, parent: 15 },
+    4002: { id: 4002, name: "E415", type: "room", floor: 4, parent: 15 },
+    4003: { id: 4003, name: "E413", type: "room", floor: 4, parent: 15 },
+    4004: { id: 4004, name: "E411", type: "room", floor: 4, parent: 15 },
+    4005: { id: 4005, name: "E409", type: "room", floor: 4, parent: 15 },
+    4006: { id: 4006, name: "E407", type: "room", floor: 4, parent: 15 },
+    4007: { id: 4007, name: "E405", type: "room", floor: 4, parent: 15 },
+    4008: { id: 4008, name: "E403", type: "room", floor: 4, parent: 15 },
+    4009: { id: 4009, name: "E401", type: "room", floor: 4, parent: 15 },
+    4010: { id: 4010, name: "Male Toilet (East)", type: "facility", floor: 4, parent: 15 },
+    4011: { id: 4011, name: "Female Toilet (East)", type: "facility", floor: 4, parent: 15 },
+    4012: { id: 4012, name: "Office (East)", type: "office", floor: 4, parent: 15 },
+    4013: { id: 4013, name: "E418", type: "room", floor: 4, parent: 15 },
+    4014: { id: 4014, name: "E416", type: "room", floor: 4, parent: 15 },
+    4015: { id: 4015, name: "E414", type: "room", floor: 4, parent: 15 },
+    4016: { id: 4016, name: "E412", type: "room", floor: 4, parent: 15 },
+    4017: { id: 4017, name: "E410", type: "room", floor: 4, parent: 15 },
+    4018: { id: 4018, name: "E408", type: "room", floor: 4, parent: 15 },
+    4019: { id: 4019, name: "E406", type: "room", floor: 4, parent: 15 },
+    4020: { id: 4020, name: "E404", type: "room", floor: 4, parent: 15 },
+    4021: { id: 4021, name: "E402", type: "room", floor: 4, parent: 15 },
+    4022: { id: 4022, name: "E400", type: "room", floor: 4, parent: 15 },
+
+    // WEST WING
+    4023: { id: 4023, name: "W420", type: "room", floor: 4, parent: 18 },
+    4024: { id: 4024, name: "W414", type: "room", floor: 4, parent: 18 },
+    4025: { id: 4025, name: "W412", type: "room", floor: 4, parent: 18 },
+    4026: { id: 4026, name: "W410", type: "room", floor: 4, parent: 18 },
+    4027: { id: 4027, name: "W408", type: "room", floor: 4, parent: 18 },
+    4028: { id: 4028, name: "W406", type: "room", floor: 4, parent: 18 },
+    4029: { id: 4029, name: "W404", type: "room", floor: 4, parent: 18 },
+    4030: { id: 4030, name: "Faculty Office (West)", type: "office", floor: 4, parent: 18 },
+    4031: { id: 4031, name: "Department Head Office", type: "office", floor: 4, parent: 18 },
+    4032: { id: 4032, name: "W417", type: "room", floor: 4, parent: 18 },
+    4033: { id: 4033, name: "W415", type: "room", floor: 4, parent: 18 },
+    4034: { id: 4034, name: "W413", type: "room", floor: 4, parent: 18 },
+    4035: { id: 4035, name: "W409", type: "room", floor: 4, parent: 18 },
+    4036: { id: 4036, name: "W407", type: "room", floor: 4, parent: 18 },
+    4037: { id: 4037, name: "W405", type: "room", floor: 4, parent: 18 },
+    4038: { id: 4038, name: "W403", type: "room", floor: 4, parent: 18 },
+    4039: { id: 4039, name: "W401", type: "room", floor: 4, parent: 18 },
+    4040: { id: 4040, name: "Female Toilet (West)", type: "facility", floor: 4, parent: 18 },
+    4041: { id: 4041, name: "Male Toilet (West)", type: "facility", floor: 4, parent: 18 },
+
+    // NORTH WING
+    4042: { id: 4042, name: "Office", type: "office", floor: 4, parent: 16 },
+    4043: { id: 4043, name: "N400", type: "room", floor: 4, parent: 16 },
+    4044: { id: 4044, name: "N402", type: "room", floor: 4, parent: 16 },
+    4045: { id: 4045, name: "N404", type: "room", floor: 4, parent: 16 },
+    4046: { id: 4046, name: "N406", type: "room", floor: 4, parent: 16 },
+    4047: { id: 4047, name: "N408", type: "room", floor: 4, parent: 16 },
+    4048: { id: 4048, name: "N410", type: "room", floor: 4, parent: 16 },
+    4049: { id: 4049, name: "N412", type: "room", floor: 4, parent: 16 },
+    4050: { id: 4050, name: "N414", type: "room", floor: 4, parent: 16 },
+    4051: { id: 4051, name: "N416", type: "room", floor: 4, parent: 16 },
+    4052: { id: 4052, name: "N418", type: "room", floor: 4, parent: 16 },
+    4053: { id: 4053, name: "Male Toilet (North)", type: "facility", floor: 4, parent: 16 },
+    4054: { id: 4054, name: "Female Toilet (North)", type: "facility", floor: 4, parent: 16 },
+    4055: { id: 4055, name: "N401", type: "room", floor: 4, parent: 16 },
+    4056: { id: 4056, name: "N403", type: "room", floor: 4, parent: 16 },
+    4057: { id: 4057, name: "N405", type: "room", floor: 4, parent: 16 },
+    4058: { id: 4058, name: "N407", type: "room", floor: 4, parent: 16 },
+    4059: { id: 4059, name: "N409", type: "room", floor: 4, parent: 16 },
+    4060: { id: 4060, name: "N411", type: "room", floor: 4, parent: 16 },
+    4061: { id: 4061, name: "N413", type: "room", floor: 4, parent: 16 },
+    4062: { id: 4062, name: "N415", type: "room", floor: 4, parent: 16 },
+    4063: { id: 4063, name: "N417", type: "room", floor: 4, parent: 16 },
+
+    // SOUTH WING
+    4064: { id: 4064, name: "Vacant Room", type: "room", floor: 4, parent: 17 },
+    4065: { id: 4065, name: "Institutional Planning Office", type: "office", floor: 4, parent: 17 },
+    4066: { id: 4066, name: "Office", type: "office", floor: 4, parent: 17 },
+    4067: { id: 4067, name: "Classroom", type: "room", floor: 4, parent: 17 },
+    4068: { id: 4068, name: "ITSO", type: "office", floor: 4, parent: 17 },
+    4069: { id: 4069, name: "Research Chef's Lounge", type: "room", floor: 4, parent: 17 },
+    4070: { id: 4070, name: "CHE Faculty Room", type: "office", floor: 4, parent: 17 },
+    4071: { id: 4071, name: "SCITECH Research Office", type: "office", floor: 4, parent: 17 },
+    4072: { id: 4072, name: "PUP Film Center", type: "facility", floor: 4, parent: 17 },
+    4073: { id: 4073, name: "Institute of Social History", type: "office", floor: 4, parent: 17 },
+    4074: { id: 4074, name: "Director Global Warning Studies", type: "office", floor: 4, parent: 17 },
+    4075: { id: 4075, name: "IBITS Office", type: "office", floor: 4, parent: 17 },
+    4076: { id: 4076, name: "Office", type: "office", floor: 4, parent: 17 },
+    4077: { id: 4077, name: "CLL Audio Visual Room", type: "room", floor: 4, parent: 17 },
+    4078: { id: 4078, name: "Branches Office", type: "office", floor: 4, parent: 17 },
+    4079: { id: 4079, name: "Office", type: "office", floor: 4, parent: 17 },
+    4080: { id: 4080, name: "Speech Laboratory", type: "laboratory", floor: 4, parent: 17 },
+    4081: { id: 4081, name: "Training Center", type: "room", floor: 4, parent: 17 },
+    4082: { id: 4082, name: "Training Center", type: "room", floor: 4, parent: 17 },
+    4083: { id: 4083, name: "CLL Library", type: "library", floor: 4, parent: 17 },
+    4084: { id: 4084, name: "Class Room", type: "room", floor: 4, parent: 17 },
+    4085: { id: 4085, name: "Class Room", type: "room", floor: 4, parent: 17 },
+    4086: { id: 4086, name: "Extension Center", type: "office", floor: 4, parent: 17 },
+    4087: { id: 4087, name: "Student Center", type: "room", floor: 4, parent: 17 },
+    4088: { id: 4088, name: "Student Lounge", type: "room", floor: 4, parent: 17 },
+
+    // DOME AND CENTRAL AREA
+    4089: { id: 4089, name: "4th Floor Dome", type: "facility", floor: 4, parent: 14 },
+    4090: { id: 4090, name: "Dome Hallway (4th Floor)", type: "hallway", floor: 4, parent: 14 },
+    4091: { id: 4091, name: "East Wing Hallway (4th Floor)", type: "hallway", floor: 4, parent: 15 },
+    4092: { id: 4092, name: "West Wing Hallway (4th Floor)", type: "hallway", floor: 4, parent: 18 },
+    4093: { id: 4093, name: "North Wing Hallway (4th Floor)", type: "hallway", floor: 4, parent: 16 },
+    4094: { id: 4094, name: "South Wing Hallway (4th Floor)", type: "hallway", floor: 4, parent: 17 },
+
+    // === MAIN BUILDING - FIFTH FLOOR ROOMS ===
+    // SOUTH WING
+    5001: { id: 5001, name: "S501", type: "room", floor: 5, parent: 17 },
+    5002: { id: 5002, name: "S502", type: "room", floor: 5, parent: 17 },
+    5003: { id: 5003, name: "S503A", type: "room", floor: 5, parent: 17 },
+    5004: { id: 5004, name: "S503B", type: "room", floor: 5, parent: 17 },
+    5005: { id: 5005, name: "S504", type: "room", floor: 5, parent: 17 },
+    5006: { id: 5006, name: "S505", type: "room", floor: 5, parent: 17 },
+    5007: { id: 5007, name: "S508", type: "room", floor: 5, parent: 17 },
+    5008: { id: 5008, name: "S509", type: "room", floor: 5, parent: 17 },
+    5009: { id: 5009, name: "S510", type: "room", floor: 5, parent: 17 },
+    5010: { id: 5010, name: "S511", type: "room", floor: 5, parent: 17 },
+    5011: { id: 5011, name: "S512B", type: "room", floor: 5, parent: 17 },
+    5012: { id: 5012, name: "S513", type: "room", floor: 5, parent: 17 },
+    5013: { id: 5013, name: "S515", type: "room", floor: 5, parent: 17 },
+    5014: { id: 5014, name: "S517", type: "room", floor: 5, parent: 17 },
+    5015: { id: 5015, name: "S518", type: "room", floor: 5, parent: 17 },
+    5016: { id: 5016, name: "CCMT/Server Room", type: "facility", floor: 5, parent: 17 },
+    5017: { id: 5017, name: "Curriculum Planning & Development Office", type: "office", floor: 5, parent: 17 },
+    5018: { id: 5018, name: "College of Science Faculty Room", type: "office", floor: 5, parent: 17 },
+    5019: { id: 5019, name: "College of Science Accreditation Center", type: "office", floor: 5, parent: 17 },
+    5020: { id: 5020, name: "SCI-TECH Research & Development Center", type: "facility", floor: 5, parent: 17 },
+
+    // EAST WING
+    5021: { id: 5021, name: "E501", type: "room", floor: 5, parent: 15 },
+    5022: { id: 5022, name: "E502", type: "room", floor: 5, parent: 15 },
+    5023: { id: 5023, name: "JPIA Office", type: "office", floor: 5, parent: 15 },
+    5024: { id: 5024, name: "E504", type: "room", floor: 5, parent: 15 },
+    5025: { id: 5025, name: "E506", type: "room", floor: 5, parent: 15 },
+    5026: { id: 5026, name: "E508", type: "room", floor: 5, parent: 15 },
+    5027: { id: 5027, name: "E510", type: "room", floor: 5, parent: 15 },
+    5028: { id: 5028, name: "E512", type: "room", floor: 5, parent: 15 },
+    5029: { id: 5029, name: "E514", type: "room", floor: 5, parent: 15 },
+    5030: { id: 5030, name: "E516", type: "room", floor: 5, parent: 15 },
+    5031: { id: 5031, name: "E518", type: "room", floor: 5, parent: 15 },
+    5032: { id: 5032, name: "E503", type: "room", floor: 5, parent: 15 },
+    5033: { id: 5033, name: "E505", type: "room", floor: 5, parent: 15 },
+    5034: { id: 5034, name: "E507", type: "room", floor: 5, parent: 15 },
+    5035: { id: 5035, name: "E509", type: "room", floor: 5, parent: 15 },
+    5036: { id: 5036, name: "E511", type: "room", floor: 5, parent: 15 },
+    5037: { id: 5037, name: "E513", type: "room", floor: 5, parent: 15 },
+    5038: { id: 5038, name: "E515", type: "room", floor: 5, parent: 15 },
+    5039: { id: 5039, name: "E517", type: "room", floor: 5, parent: 15 },
+    5088: { id: 5088, name: "College of Accountancy Student Council Office", type: "office", floor: 5, parent: 15 },
+
+    // WEST WING
+    5040: { id: 5040, name: "W500", type: "room", floor: 5, parent: 18 },
+    5041: { id: 5041, name: "W501", type: "room", floor: 5, parent: 18 },
+    5042: { id: 5042, name: "W502", type: "room", floor: 5, parent: 18 },
+    5043: { id: 5043, name: "W503", type: "room", floor: 5, parent: 18 },
+    5044: { id: 5044, name: "W504", type: "room", floor: 5, parent: 18 },
+    5045: { id: 5045, name: "W505", type: "room", floor: 5, parent: 18 },
+    5046: { id: 5046, name: "W506", type: "room", floor: 5, parent: 18 },
+    5047: { id: 5047, name: "W507", type: "room", floor: 5, parent: 18 },
+    5048: { id: 5048, name: "W508", type: "room", floor: 5, parent: 18 },
+    5049: { id: 5049, name: "W509", type: "room", floor: 5, parent: 18 },
+    5050: { id: 5050, name: "W510", type: "room", floor: 5, parent: 18 },
+    5051: { id: 5051, name: "W511", type: "room", floor: 5, parent: 18 },
+    5052: { id: 5052, name: "W512", type: "room", floor: 5, parent: 18 },
+    5053: { id: 5053, name: "W513", type: "room", floor: 5, parent: 18 },
+    5054: { id: 5054, name: "W514", type: "room", floor: 5, parent: 18 },
+    5055: { id: 5055, name: "W515", type: "room", floor: 5, parent: 18 },
+    5056: { id: 5056, name: "W516", type: "room", floor: 5, parent: 18 },
+    5057: { id: 5057, name: "W518", type: "room", floor: 5, parent: 18 },
+    5058: { id: 5058, name: "W527", type: "room", floor: 5, parent: 18 },
+    5089: { id: 5089, name: "Bayan Muna/NNARA/Gabriela Office", type: "office", floor: 5, parent: 18 },
+
+    // NORTH WING
+    5059: { id: 5059, name: "College of Accountancy Faculty Room", type: "office", floor: 5, parent: 16 },
+    5060: { id: 5060, name: "N500", type: "room", floor: 5, parent: 16 },
+    5061: { id: 5061, name: "N501", type: "room", floor: 5, parent: 16 },
+    5062: { id: 5062, name: "N502", type: "room", floor: 5, parent: 16 },
+    5063: { id: 5063, name: "N503", type: "room", floor: 5, parent: 16 },
+    5064: { id: 5064, name: "N504", type: "room", floor: 5, parent: 16 },
+    5065: { id: 5065, name: "N505", type: "room", floor: 5, parent: 16 },
+    5066: { id: 5066, name: "N506", type: "room", floor: 5, parent: 16 },
+    5067: { id: 5067, name: "N507", type: "room", floor: 5, parent: 16 },
+    5068: { id: 5068, name: "N508", type: "room", floor: 5, parent: 16 },
+    5069: { id: 5069, name: "N509", type: "room", floor: 5, parent: 16 },
+    5070: { id: 5070, name: "N510", type: "room", floor: 5, parent: 16 },
+    5071: { id: 5071, name: "N511", type: "room", floor: 5, parent: 16 },
+    5072: { id: 5072, name: "N512", type: "room", floor: 5, parent: 16 },
+    5073: { id: 5073, name: "N513", type: "room", floor: 5, parent: 16 },
+    5074: { id: 5074, name: "N514", type: "room", floor: 5, parent: 16 },
+    5075: { id: 5075, name: "N515", type: "room", floor: 5, parent: 16 },
+    5076: { id: 5076, name: "N516", type: "room", floor: 5, parent: 16 },
+    5077: { id: 5077, name: "N517", type: "room", floor: 5, parent: 16 },
+    5078: { id: 5078, name: "N518", type: "room", floor: 5, parent: 16 },
+    5079: { id: 5079, name: "SAMASA COA", type: "office", floor: 5, parent: 16 },
+
+    // FACILITIES
+    5082: { id: 5082, name: "Male Toilet East Wing - 5H", type: "facility", floor: 5, parent: 15 },
+    5083: { id: 5083, name: "Female Toilet East Wing - 5th Floor", type: "facility", floor: 5, parent: 15 },
+    5084: { id: 5084, name: "Male Toilet West Wing - 5th Floor", type: "facility", floor: 5, parent: 18 },
+    5085: { id: 5085, name: "Female Toilet West Wing - 5th Floor", type: "facility", floor: 5, parent: 18 },
+    5086: { id: 5086, name: "Male Toilet North Wing - 5th Floor", type: "facility", floor: 5, parent: 16 },
+    5087: { id: 5087, name: "Female Toilet North Wing - 5th Floor", type: "facility", floor: 5, parent: 16 },
+
+    // HALLWAYS AND SPECIAL AREAS
+    5091: { id: 5091, name: "East Wing Hallway (5th Floor)", type: "hallway", floor: 5, parent: 15 },
+    5092: { id: 5092, name: "West Wing Hallway (5th Floor)", type: "hallway", floor: 5, parent: 18 },
+    5093: { id: 5093, name: "North Wing Hallway (5th Floor)", type: "hallway", floor: 5, parent: 16 },
+    5094: { id: 5094, name: "South Wing Hallway (5th Floor)", type: "hallway", floor: 5, parent: 17 },
+    5095: { id: 5095, name: "5th Floor Dome", type: "facility", floor: 5, parent: 14 },
+
+     // === MAIN BUILDING - 6TH FLOOR ROOMS ===
+    // CLARO M. RECTO HALL (SOUTH WING)
+    6001: { id: 6001, name: "Office", type: "office", floor: 6, parent: 17 },
+    6002: { id: 6002, name: "Class Room", type: "room", floor: 6, parent: 17 },
+    6003: { id: 6003, name: "Extension and Communication Relation", type: "office", floor: 6, parent: 17 },
+    6004: { id: 6004, name: "CA Student Center", type: "facility", floor: 6, parent: 17 },
+    6005: { id: 6005, name: "CA Learning Resource Center", type: "facility", floor: 6, parent: 17 },
+    6006: { id: 6006, name: "CA Accreditation", type: "office", floor: 6, parent: 17 },
+    6007: { id: 6007, name: "Student Lounge", type: "facility", floor: 6, parent: 17 },
+    6008: { id: 6008, name: "Experimental Room", type: "room", floor: 6, parent: 17 },
+    6009: { id: 6009, name: "Psychological Center", type: "facility", floor: 6, parent: 17 },
+    6010: { id: 6010, name: "Class Room", type: "room", floor: 6, parent: 17 },
+    6011: { id: 6011, name: "PUP SRM", type: "facility", floor: 6, parent: 17 },
+
+    // EAST WING
+    6020: { id: 6020, name: "CS Laboratory Storage Room 615", type: "storage", floor: 6, parent: 15 },
+    6021: { id: 6021, name: "CS Laboratory Room 613", type: "laboratory", floor: 6, parent: 15 },
+    6022: { id: 6022, name: "CS Laboratory Room 611", type: "laboratory", floor: 6, parent: 15 },
+    6023: { id: 6023, name: "CS Laboratory Room 609", type: "laboratory", floor: 6, parent: 15 },
+    6024: { id: 6024, name: "Faculty Room 605", type: "office", floor: 6, parent: 15 },
+    6025: { id: 6025, name: "Faculty Room 603", type: "office", floor: 6, parent: 15 },
+    6026: { id: 6026, name: "Class Room 601", type: "room", floor: 6, parent: 15 },
+    6027: { id: 6027, name: "CS Laboratory Room 607", type: "laboratory", floor: 6, parent: 15 },
+    6028: { id: 6028, name: "CS Laboratory Room 605", type: "laboratory", floor: 6, parent: 15 },
+    6029: { id: 6029, name: "Insectarium", type: "facility", floor: 6, parent: 15 },
+
+
+    // WEST WING
+    6030: { id: 6030, name: "CLMC Faculty Room 602-604", type: "office", floor: 6, parent: 18 },
+    6031: { id: 6031, name: "Class Room 606", type: "room", floor: 6, parent: 18 },
+    6032: { id: 6032, name: "Class Room 608", type: "room", floor: 6, parent: 18 },
+    6033: { id: 6033, name: "Class Room 610", type: "room", floor: 6, parent: 18 },
+    6034: { id: 6034, name: "Class Room 612", type: "room", floor: 6, parent: 18 },
+    6035: { id: 6035, name: "Class Room 614", type: "room", floor: 6, parent: 18 },
+    6036: { id: 6036, name: "Class Room 616", type: "room", floor: 6, parent: 18 },
+    6037: { id: 6037, name: "Class Room 618", type: "room", floor: 6, parent: 18 },
+    6038: { id: 6038, name: "Class Room 620", type: "room", floor: 6, parent: 18 },
+    6039: { id: 6039, name: "Laboratory Room 605", type: "laboratory", floor: 6, parent: 18 },
+    6040: { id: 6040, name: "Class Room 603", type: "room", floor: 6, parent: 18 },
+    6068: { id: 6068, name: "Class Room 601", type: "room", floor: 6, parent: 18 },
+
+
+    // NORTH WING
+    6041: { id: 6041, name: "Class Room 632", type: "room", floor: 6, parent: 16 },
+    6042: { id: 6042, name: "Class Room 633", type: "room", floor: 6, parent: 16 },
+    6043: { id: 6043, name: "Class Room 634", type: "room", floor: 6, parent: 16 },
+    6044: { id: 6044, name: "Class Room 635", type: "room", floor: 6, parent: 16 },
+    6045: { id: 6045, name: "Class Room 636", type: "room", floor: 6, parent: 16 },
+    6046: { id: 6046, name: "Class Room 637", type: "room", floor: 6, parent: 16 },
+    6047: { id: 6047, name: "Class Room 638", type: "room", floor: 6, parent: 16 },
+    6048: { id: 6048, name: "Class Room 639", type: "room", floor: 6, parent: 16 },
+    6049: { id: 6049, name: "Class Room 640", type: "room", floor: 6, parent: 16 },
+
+
+    // FACILITIES
+    6060: { id: 6060, name: "Male Toilet South Wing", type: "facility", floor: 6, parent: 17 },
+    6061: { id: 6061, name: "Female Toilet South Wing", type: "facility", floor: 6, parent: 17 },
+    6062: { id: 6062, name: "Male Toilet East Wing", type: "facility", floor: 6, parent: 15 },
+    6063: { id: 6063, name: "Female Toilet East Wing", type: "facility", floor: 6, parent: 15 },
+    6064: { id: 6064, name: "Male Toilet West Wing", type: "facility", floor: 6, parent: 18 },
+    6065: { id: 6065, name: "Female Toilet West Wing", type: "facility", floor: 6, parent: 18 },
+    6066: { id: 6066, name: "Male Toilet North Wing", type: "facility", floor: 6, parent: 16 },
+    6067: { id: 6067, name: "Female Toilet North Wing", type: "facility", floor: 6, parent: 16 },
+
+
+    // HALLWAYS AND SPECIAL AREAS
+    6090: { id: 6090, name: "East Wing Hallway (6th Floor)", type: "hallway", floor: 6, parent: 15 },
+    6091: { id: 6091, name: "West Wing Hallway (6th Floor)", type: "hallway", floor: 6, parent: 18 },
+    6092: { id: 6092, name: "North Wing Hallway (6th Floor)", type: "hallway", floor: 6, parent: 16 },
+    6093: { id: 6093, name: "South Wing Hallway (6th Floor)", type: "hallway", floor: 6, parent: 17 },
+    6094: { id: 6094, name: "6th Floor Dome", type: "facility", floor: 6, parent: 14 },
+    6095: { id: 6095, name: "Dome Hallway (6th Floor)", type: "hallway", floor: 6, parent: 14 },
+
+
+    // NORTH WING
+    6050: { id: 6050, name: "Class Room 600", type: "room", floor: 6, parent: 16 },
+    6051: { id: 6051, name: "Class Room 602", type: "room", floor: 6, parent: 16 },
+    6052: { id: 6052, name: "Class Room 604", type: "room", floor: 6, parent: 16 },
+    6053: { id: 6053, name: "Class Room 606", type: "room", floor: 6, parent: 16 },
+    6054: { id: 6054, name: "Class Room 608", type: "room", floor: 6, parent: 16 },
+    6055: { id: 6055, name: "Class Room 610", type: "room", floor: 6, parent: 16 },
+    6056: { id: 6056, name: "Class Room 612", type: "room", floor: 6, parent: 16 },
+    6057: { id: 6057, name: "Class Room 614", type: "room", floor: 6, parent: 16 },
+    6058: { id: 6058, name: "Class Room 616", type: "room", floor: 6, parent: 16 },
+    6059: { id: 6059, name: "Class Room 617", type: "room", floor: 6, parent: 16 }
+
 }
 
 export const mainCampusData = {
   nodes, edges: [
   { from: 1, to: 13, weight: calculateDistance(nodes[1], nodes[13]) },
+  { from: 1, to: 58, weight: calculateDistance(nodes[1], nodes[58]) },
   { from: 1, to: 72, weight: calculateDistance(nodes[1], nodes[72]) },
   { from: 1, to: 73, weight: calculateDistance(nodes[1], nodes[73]) },
   { from: 2, to: 51, weight: calculateDistance(nodes[2], nodes[51]) },
@@ -226,9 +729,868 @@ export const mainCampusData = {
   { from: 70, to: 80, weight: calculateDistance(nodes[70], nodes[80]) },
   { from: 75, to: 76, weight: calculateDistance(nodes[75], nodes[76]) },
   { from: 78, to: 81, weight: calculateDistance(nodes[78], nodes[81]) },
-  { from: 80, to: 41, weight: calculateDistance(nodes[80], nodes[41]) }
-]
-}
+  { from: 80, to: 41, weight: calculateDistance(nodes[80], nodes[41]) },
+
+    // // MAIN ENTRANCE AREA
+    // { from: 19, to: 4, weight: 10 },   // Main Gate to Catwalk (primary entrance path)
+    // { from: 4, to: 19, weight: 10 },   // Catwalk to Main Gate (primary exit path)
+    // { from: 4, to: 36, weight: 15 },   // Catwalk to Student Pavilion
+    // { from: 36, to: 5, weight: 25 },   // Student Pavilion to Centennial Monument
+    // { from: 19, to: 31, weight: 35 },  // Main Gate to Mural area
+    // { from: 32, to: 31, weight: 20 },  // Obelisk to Mural (close proximity)
+    // { from: 32, to: 36, weight: 25 },  // Obelisk to Student Pavilion
+    // { from: 31, to: 36, weight: 20 },  // Mural to Student Pavilion
+    // { from: 32, to: 8, weight: 40 },   // Obelisk to Flag Pole
+    
+    // // MAIN BUILDING COMPLEX
+    // { from: 8, to: 14, weight: 35 },   // Flag Pole to Main Building Dome
+    // { from: 14, to: 15, weight: 20 },  // Dome to East Wing
+    // { from: 14, to: 16, weight: 20 },  // Dome to North Wing
+    // { from: 14, to: 17, weight: 20 },  // Dome to South Wing
+    // { from: 14, to: 18, weight: 20 },  // Dome to West Wing
+    // { from: 15, to: 16, weight: 25 },  // East Wing to North Wing
+    // { from: 16, to: 18, weight: 25 },  // North Wing to West Wing
+    // { from: 17, to: 18, weight: 25 },  // South Wing to West Wing
+    // { from: 15, to: 17, weight: 25 },  // East Wing to South Wing
+    
+    // Connect main building wings to their hallways
+    { from: 15, to: 1030, weight: 5 },  // East Wing to East Wing Hallway
+    { from: 16, to: 1031, weight: 5 },  // North Wing to North Wing Hallway
+    { from: 17, to: 1033, weight: 5 },  // South Wing to South Wing Hallway
+    { from: 18, to: 1032, weight: 5 },  // West Wing to West Wing Hallway
+    { from: 14, to: 1023, weight: 5 },  // Dome to Dome Hallway
+
+    // Connect main building wings to their 2nd floor hallways
+    { from: 15, to: 2109, weight: 5 },  // East Wing to 2nd Floor East Wing Hallway
+    { from: 16, to: 2110, weight: 5 },  // North Wing to 2nd Floor North Wing Hallway
+    { from: 17, to: 2112, weight: 5 },  // South Wing to 2nd Floor South Wing Hallway
+    { from: 18, to: 2111, weight: 5 },  // West Wing to 2nd Floor West Wing Hallway
+    { from: 14, to: 2102, weight: 5 },  // Dome to 2nd Floor Dome Hallway
+
+    // // LAGOON AREA
+    // { from: 13, to: 1, weight: 15 },   // Lagoon to Amphitheater
+    // { from: 13, to: 5, weight: 20 },   // Lagoon to Centennial Monument
+    // { from: 13, to: 14, weight: 40 },  // Lagoon to Main Building Dome
+    // { from: 13, to: 11, weight: 30 },  // Lagoon to Interfaith Chapel
+    // { from: 13, to: 20, weight: 35 },  // Lagoon to Freedom Park
+    // { from: 5, to: 1, weight: 20 },    // Centennial Monument to Amphitheater
+    
+    // // FREEDOM PARK AREA
+    // { from: 20, to: 9, weight: 35 },   // Freedom Park to Grandstand
+    // { from: 20, to: 1, weight: 40 },   // Freedom Park to Amphitheater
+    // { from: 9, to: 1, weight: 25 },    // Grandstand to Amphitheater
+    // { from: 20, to: 29, weight: 30 },  // Freedom Park to Public Restroom
+    // { from: 20, to: 8, weight: 45 },   // Freedom Park to Flag Pole
+    
+    // // EASTERN AREA
+    // { from: 7, to: 21, weight: 40 },   // East Gate to Library
+    // { from: 21, to: 15, weight: 45 },  // Library to East Wing
+    // { from: 21, to: 11, weight: 25 },  // Library to Interfaith Chapel
+    // { from: 21, to: 12, weight: 40 },  // Library to Laboratory High School
+    // { from: 11, to: 15, weight: 25 },  // Chapel to East Wing
+    // { from: 12, to: 21, weight: 35 },  // Lab High School to Library
+    
+    // // NORTHERN AREA
+    // { from: 16, to: 22, weight: 30 },  // North Wing to Open Court
+    // { from: 22, to: 38, weight: 25 },  // Open Court to Tennis Court
+    // { from: 22, to: 39, weight: 30 },  // Open Court to Water Tank
+    // { from: 38, to: 39, weight: 20 },  // Tennis Court to Water Tank
+    // { from: 39, to: 40, weight: 25 },  // Water Tank to West Gate
+    
+    // // UPPER NORTHERN AREA
+    // { from: 2, to: 12, weight: 30 },   // Banda Kawayan to Lab High School
+    // { from: 2, to: 21, weight: 45 },   // Banda Kawayan to Library
+    // { from: 2, to: 25, weight: 35 },   // Banda Kawayan to P.E. Building
+    // { from: 25, to: 10, weight: 30 },  // P.E. Building to Gymnasium
+    // { from: 10, to: 37, weight: 25 },  // Gymnasium to Swimming Pool
+    // { from: 37, to: 38, weight: 30 },  // Swimming Pool to Tennis Court
+    
+    // // MAINTENANCE AND CATWALK AREA
+    // { from: 3, to: 27, weight: 25 },   // Maintenance Office to Ferry Station
+    // { from: 4, to: 34, weight: 20 },   // Catwalk to Pylon
+    // { from: 4, to: 33, weight: 25 },   // Catwalk to Property Building
+    // { from: 4, to: 32, weight: 30 },   // Catwalk to Obelisk
+    // { from: 4, to: 19, weight: 35 },   // Catwalk to Main Gate
+    // { from: 34, to: 33, weight: 20 },  // Pylon to Property Building
+    // { from: 33, to: 32, weight: 30 },  // Property Building to Obelisk
+    
+    // // WESTERN SIDE CONNECTIONS
+    // { from: 40, to: 39, weight: 25 },  // West Gate to Water Tank
+    // { from: 34, to: 6, weight: 30 },   // Pylon to Charlie del Rosario Center
+    // { from: 6, to: 30, weight: 25 },   // Charlie del Rosario to Linear Park
+    // { from: 30, to: 35, weight: 20 },  // Linear Park to Sampaguita Building
+    // { from: 35, to: 18, weight: 40 },  // Sampaguita to West Wing
+    
+    // // SOUTHERN AREA
+    // { from: 17, to: 24, weight: 30 },  // South Wing to Oval Field
+    // { from: 24, to: 23, weight: 25 },  // Oval Field to Open University
+    // { from: 23, to: 3, weight: 35 },   // Open University to Maintenance Office
+    // { from: 24, to: 9, weight: 45 },   // Oval Field to Grandstand
+    
+    // // PASIG RIVER AREA
+    // { from: 30, to: 26, weight: 25 },  // Linear Park to Pasig River
+    // { from: 26, to: 27, weight: 20 },  // Pasig River to Ferry Station
+    
+    // // PROPOSED ACCESS ROAD
+    // { from: 28, to: 24, weight: 30 },  // Proposed Access Road to Oval Field
+    // { from: 28, to: 9, weight: 25 },   // Proposed Access Road to Grandstand
+    
+    // // CROSS-CAMPUS MAJOR PATHWAYS
+    // { from: 14, to: 20, weight: 50 },  // Main Building to Freedom Park
+    // { from: 21, to: 32, weight: 45 },  // Library to Obelisk
+    // { from: 10, to: 5, weight: 35 },   // Gymnasium to Centennial Monument
+    // { from: 5, to: 10, weight: 35 },   // Centennial Monument to Gymnasium
+    
+    // // ADDITIONAL LOGICAL CONNECTIONS
+    // { from: 36, to: 35, weight: 25 },  // Student Pavilion to Sampaguita
+    // { from: 35, to: 6, weight: 30 },   // Sampaguita to Charlie del Rosario
+    // { from: 11, to: 17, weight: 30 },  // Interfaith Chapel to South Wing
+    // { from: 23, to: 24, weight: 20 },   // Open University to Oval Field
+
+    // === MAIN BUILDING 1ST FLOOR INTERNAL CONNECTIONS ===
+    // East Wing Connections through Hallway
+    { from: 1030, to: 1001, weight: 5 }, // Hallway to Office of Student Services
+    { from: 1030, to: 1002, weight: 5 }, // Hallway to Military Science
+    { from: 1030, to: 1003, weight: 5 }, // Hallway to HRDO Records
+    { from: 1030, to: 1004, weight: 5 }, // Hallway to Medical Clinic
+    { from: 1030, to: 1005, weight: 5 }, // Hallway to Dental Clinic Services
+    { from: 1030, to: 1006, weight: 5 }, // Hallway to Director Student Services
+    { from: 1030, to: 1007, weight: 5 }, // Hallway to Director Student Affairs
+    
+    // North Wing Connections through Hallway
+    { from: 1031, to: 1008, weight: 5 }, // Hallway to Commission on Audit
+    { from: 1031, to: 1009, weight: 5 }, // Hallway to Procurement
+    { from: 1031, to: 1010, weight: 5 }, // Hallway to Campus Ministry
+    { from: 1031, to: 1011, weight: 5 }, // Hallway to Security Office
+    
+    // West Wing Connections through Hallway
+    { from: 1032, to: 1012, weight: 5 }, // Hallway to Registrar Records
+    { from: 1032, to: 1013, weight: 5 }, // Hallway to Scholarship Office
+    { from: 1032, to: 1014, weight: 5 }, // Hallway to Admission Office
+    
+    // South Wing Connections through Hallway
+    { from: 1033, to: 1015, weight: 5 }, // Hallway to HR Management
+    { from: 1033, to: 1016, weight: 5 }, // Hallway to Students Records
+    { from: 1033, to: 1017, weight: 5 }, // Hallway to University Registrar
+    { from: 1033, to: 1018, weight: 5 }, // Hallway to Cashier
+    { from: 1033, to: 1019, weight: 5 }, // Hallway to Accounting
+    { from: 1033, to: 1020, weight: 5 }, // Hallway to Budget Services
+    { from: 1033, to: 1021, weight: 5 }, // Hallway to Property Extension
+    
+    // Dome Area Connections
+    { from: 1023, to: 1022, weight: 3 }, // Dome Hallway to Dome
+    
+    // Hallway to Stairs Connections
+    { from: 1030, to: 1024, weight: 25 }, // East Wing Hallway to North Left Stairs
+    { from: 1031, to: 1025, weight: 25 }, // North Wing Hallway to North Right Stairs
+    { from: 1023, to: 1026, weight: 25 }, // Dome Hallway to Central Stairs
+    { from: 1033, to: 1027, weight: 25 }, // South Wing Hallway to South Left Stairs
+    { from: 1033, to: 1028, weight: 25 }, // South Wing Hallway to South Center Stairs
+    { from: 1033, to: 1029, weight: 25 }, // South Wing Hallway to South Right Stairs
+    
+    // Hallway to Dome Hallway Connections
+    { from: 1023, to: 1030, weight: 10 }, // Dome Hallway to East Wing Hallway
+    { from: 1023, to: 1031, weight: 10 }, // Dome Hallway to North Wing Hallway
+    { from: 1023, to: 1032, weight: 10 }, // Dome Hallway to West Wing Hallway
+    { from: 1023, to: 1033, weight: 10 }, // Dome Hallway to South Wing Hallway
+    
+    // Hallway Interconnections
+    { from: 1030, to: 1031, weight: 15 }, // East Wing to North Wing Hallway
+    { from: 1031, to: 1032, weight: 15 }, // North Wing to West Wing Hallway
+    { from: 1032, to: 1033, weight: 15 }, // West Wing to South Wing Hallway
+    { from: 1033, to: 1030, weight: 15 }, // South Wing to East Wing Hallway
+
+    // === MAIN BUILDING 2ND FLOOR INTERNAL CONNECTIONS ===
+    // Stairs from 1st to 2nd floor connections
+    { from: 1024, to: 2110, weight: 25 }, // North Wing Left Stairs to 2nd floor hallway
+    { from: 1025, to: 2110, weight: 25 }, // North Wing Right Stairs to 2nd floor hallway
+    { from: 1026, to: 2102, weight: 25 }, // Central Stairs to 2nd floor dome hallway
+    { from: 1027, to: 2112, weight: 25 }, // South Wing Left Stairs to 2nd floor hallway
+    { from: 1028, to: 2112, weight: 25 }, // South Wing Center Stairs to 2nd floor hallway
+    { from: 1029, to: 2112, weight: 25 }, // South Wing Right Stairs to 2nd floor hallway
+
+    // East Wing Connections through Hallway
+    { from: 2109, to: 2001, weight: 5 }, // Hallway to E219
+    { from: 2109, to: 2002, weight: 5 }, // Hallway to E217
+    { from: 2109, to: 2003, weight: 5 }, // Hallway to E215
+    { from: 2109, to: 2004, weight: 5 }, // Hallway to E213
+    { from: 2109, to: 2005, weight: 5 }, // Hallway to E211
+    { from: 2109, to: 2006, weight: 5 }, // Hallway to E209
+    { from: 2109, to: 2007, weight: 5 }, // Hallway to E207
+    { from: 2109, to: 2008, weight: 5 }, // Hallway to E206
+    { from: 2109, to: 2009, weight: 5 }, // Hallway to E208
+    { from: 2109, to: 2010, weight: 5 }, // Hallway to E210
+    { from: 2109, to: 2011, weight: 5 }, // Hallway to E212
+    { from: 2109, to: 2012, weight: 5 }, // Hallway to E214
+    { from: 2109, to: 2013, weight: 5 }, // Hallway to E216
+    { from: 2109, to: 2014, weight: 5 }, // Hallway to E218
+    { from: 2109, to: 2015, weight: 5 }, // Hallway to E220
+
+    // West Wing Connections
+    { from: 2111, to: 2016, weight: 5 }, // Hallway to W220
+    { from: 2111, to: 2017, weight: 5 }, // Hallway to W218
+    { from: 2111, to: 2018, weight: 5 }, // Hallway to W216
+    { from: 2111, to: 2019, weight: 5 }, // Hallway to W214
+    { from: 2111, to: 2020, weight: 5 }, // Hallway to W212
+    { from: 2111, to: 2021, weight: 5 }, // Hallway to W210
+    { from: 2111, to: 2022, weight: 5 }, // Hallway to W208
+    { from: 2111, to: 2023, weight: 5 }, // Hallway to W206
+    { from: 2111, to: 2024, weight: 5 }, // Hallway to W204
+    { from: 2111, to: 2025, weight: 5 }, // Hallway to W202
+    { from: 2111, to: 2026, weight: 5 }, // Hallway to W200
+    { from: 2111, to: 2027, weight: 5 }, // Hallway to W205
+    { from: 2111, to: 2028, weight: 5 }, // Hallway to W207
+    { from: 2111, to: 2029, weight: 5 }, // Hallway to W209
+    { from: 2111, to: 2030, weight: 5 }, // Hallway to W213
+    { from: 2111, to: 2031, weight: 5 }, // Hallway to W215
+    { from: 2111, to: 2032, weight: 5 }, // Hallway to Faculty Circle
+    { from: 2111, to: 2033, weight: 5 }, // Hallway to PUPFFA Office
+    { from: 2111, to: 2034, weight: 5 }, // Hallway to Research Center
+
+    // North Wing Connections through Hallway
+    { from: 2110, to: 2035, weight: 5 }, // Hallway to College of Science
+    { from: 2110, to: 2036, weight: 5 }, // Hallway to College of Languages
+    { from: 2110, to: 2037, weight: 5 }, // Hallway to College of Arts
+    { from: 2110, to: 2038, weight: 5 }, // Hallway to College of Accountancy
+    { from: 2110, to: 2039, weight: 5 }, // Hallway to College of Business
+    { from: 2110, to: 2040, weight: 5 }, // Hallway to College of Education
+
+    // South Wing Connections through Hallway
+    { from: 2112, to: 2041, weight: 5 }, // Hallway to President's Office
+    { from: 2112, to: 2042, weight: 5 }, // Hallway to Mateo Conference Room
+    { from: 2112, to: 2043, weight: 5 }, // Hallway to Board Secretary
+    { from: 2112, to: 2044, weight: 5 }, // Hallway to VP Academic Affairs
+    { from: 2112, to: 2045, weight: 5 }, // Hallway to VP Administration
+    { from: 2112, to: 2046, weight: 5 }, // Hallway to Carague Conference Room
+    { from: 2112, to: 2047, weight: 5 }, // Hallway to VP Research
+
+    // Dome Area Connections
+    { from: 2102, to: 2101, weight: 3 }, // Dome Hallway to Dome
+
+    // Hallway to Stairs Connections (2nd to 3rd floor)
+    { from: 2109, to: 2103, weight: 25 }, // East Wing Hallway to North Left Stairs
+    { from: 2110, to: 2104, weight: 25 }, // North Wing Hallway to North Right Stairs
+    { from: 2102, to: 2105, weight: 25 }, // Dome Hallway to Central Stairs
+    { from: 2112, to: 2106, weight: 25 }, // South Wing Hallway to South Left Stairs
+    { from: 2112, to: 2107, weight: 25 }, // South Wing Hallway to South Center Stairs
+    { from: 2112, to: 2108, weight: 25 }, // South Wing Hallway to South Right Stairs
+
+    // Hallway to Dome Hallway Connections
+    { from: 2102, to: 2109, weight: 10 }, // Dome Hallway to East Wing Hallway
+    { from: 2102, to: 2110, weight: 10 }, // Dome Hallway to North Wing Hallway
+    { from: 2102, to: 2111, weight: 10 }, // Dome Hallway to West Wing Hallway
+    { from: 2102, to: 2112, weight: 10 }, // Dome Hallway to South Wing Hallway
+
+    // Hallway Interconnections
+    { from: 2109, to: 2110, weight: 15 }, // East Wing to North Wing Hallway
+    { from: 2110, to: 2111, weight: 15 }, // North Wing to West Wing Hallway
+    { from: 2111, to: 2112, weight: 15 }, // West Wing to South Wing Hallway
+    { from: 2112, to: 2109, weight: 15 }, // South Wing to East Wing Hallway
+
+    // Add new edges for 2nd floor
+    // East Wing Connections
+    { from: 2109, to: 2001, weight: 5 }, // Hallway to E219
+    { from: 2109, to: 2002, weight: 5 }, // Hallway to E217
+    { from: 2109, to: 2003, weight: 5 }, // Hallway to E215
+    { from: 2109, to: 2004, weight: 5 }, // Hallway to E213
+    { from: 2109, to: 2005, weight: 5 }, // Hallway to E211
+    { from: 2109, to: 2006, weight: 5 }, // Hallway to E209
+    { from: 2109, to: 2007, weight: 5 }, // Hallway to E207
+    { from: 2109, to: 2008, weight: 5 }, // Hallway to E206
+    { from: 2109, to: 2009, weight: 5 }, // Hallway to E208
+    { from: 2109, to: 2010, weight: 5 }, // Hallway to E210
+    { from: 2109, to: 2011, weight: 5 }, // Hallway to E212
+    { from: 2109, to: 2012, weight: 5 }, // Hallway to E214
+    { from: 2109, to: 2013, weight: 5 }, // Hallway to E216
+    { from: 2109, to: 2014, weight: 5 }, // Hallway to E218
+    { from: 2109, to: 2015, weight: 5 }, // Hallway to E220
+
+    // West Wing Connections
+    { from: 2111, to: 2016, weight: 5 }, // Hallway to W220
+    { from: 2111, to: 2017, weight: 5 }, // Hallway to W218
+    { from: 2111, to: 2018, weight: 5 }, // Hallway to W216
+    { from: 2111, to: 2019, weight: 5 }, // Hallway to W214
+    { from: 2111, to: 2020, weight: 5 }, // Hallway to W212
+    { from: 2111, to: 2021, weight: 5 }, // Hallway to W210
+    { from: 2111, to: 2022, weight: 5 }, // Hallway to W208
+    { from: 2111, to: 2023, weight: 5 }, // Hallway to W206
+    { from: 2111, to: 2024, weight: 5 }, // Hallway to W204
+    { from: 2111, to: 2025, weight: 5 }, // Hallway to W202
+    { from: 2111, to: 2026, weight: 5 }, // Hallway to W200
+    { from: 2111, to: 2027, weight: 5 }, // Hallway to W205
+    { from: 2111, to: 2028, weight: 5 }, // Hallway to W207
+    { from: 2111, to: 2029, weight: 5 }, // Hallway to W209
+    { from: 2111, to: 2030, weight: 5 }, // Hallway to W213
+    { from: 2111, to: 2031, weight: 5 }, // Hallway to W215
+    { from: 2111, to: 2032, weight: 5 }, // Hallway to Faculty Circle
+    { from: 2111, to: 2033, weight: 5 }, // Hallway to PUPFFA Office
+    { from: 2111, to: 2034, weight: 5 }, // Hallway to Research Center
+
+    // North Wing Connections
+    { from: 2110, to: 2035, weight: 5 }, // Hallway to College of Science
+    { from: 2110, to: 2036, weight: 5 }, // Hallway to College of Languages
+    { from: 2110, to: 2037, weight: 5 }, // Hallway to College of Arts
+    { from: 2110, to: 2038, weight: 5 }, // Hallway to College of Accountancy
+    { from: 2110, to: 2039, weight: 5 }, // Hallway to College of Business
+    { from: 2110, to: 2040, weight: 5 }, // Hallway to College of Education
+
+    // South Wing Connections
+    { from: 2112, to: 2041, weight: 5 }, // Hallway to President's Office
+    { from: 2112, to: 2042, weight: 5 }, // Hallway to Mateo Conference Room
+    { from: 2112, to: 2043, weight: 5 }, // Hallway to Board Secretary
+    { from: 2112, to: 2044, weight: 5 }, // Hallway to VP Academic Affairs
+    { from: 2112, to: 2045, weight: 5 }, // Hallway to VP Administration
+    { from: 2112, to: 2046, weight: 5 }, // Hallway to Carague Conference Room
+    { from: 2112, to: 2047, weight: 5 }, // Hallway to VP Research
+
+    // Adjacent Room Connections
+    { from: 2001, to: 2002, weight: 3 }, // E219 to E217
+    { from: 2002, to: 2003, weight: 3 }, // E217 to E215
+    { from: 2003, to: 2004, weight: 3 }, // E215 to E213
+    { from: 2004, to: 2005, weight: 3 }, // E213 to E211
+    { from: 2005, to: 2006, weight: 3 }, // E211 to E209
+    { from: 2006, to: 2007, weight: 3 }, // E209 to E207
+
+    { from: 2016, to: 2017, weight: 3 }, // W220 to W218
+    { from: 2017, to: 2018, weight: 3 }, // W218 to W216
+    { from: 2018, to: 2019, weight: 3 }, // W216 to W214
+    { from: 2019, to: 2020, weight: 3 }, // W214 to W212
+    { from: 2020, to: 2021, weight: 3 }, // W212 to W210
+    { from: 2021, to: 2022, weight: 3 }, // W210 to W208
+
+    { from: 2041, to: 2042, weight: 3 }, // President's Office to Mateo Conference Room
+    { from: 2042, to: 2043, weight: 3 }, // Mateo Conference Room to Board Secretary
+    { from: 2044, to: 2045, weight: 3 }, // VP Academic to VP Admin
+    { from: 2045, to: 2046, weight: 3 }, // VP Admin to Carague Conference Room
+
+    // Add new edges for 3rd floor
+    // East Wing Connections
+    { from: 3069, to: 3001, weight: 5 }, // Hallway to E313
+    { from: 3069, to: 3002, weight: 5 }, // Hallway to E311
+    { from: 3069, to: 3003, weight: 5 }, // Hallway to E309
+    { from: 3069, to: 3004, weight: 5 }, // Hallway to E307
+    { from: 3069, to: 3005, weight: 5 }, // Hallway to E305
+    { from: 3069, to: 3006, weight: 5 }, // Hallway to E305A
+    { from: 3069, to: 3007, weight: 5 }, // Hallway to E303
+    { from: 3069, to: 3008, weight: 5 }, // Hallway to E301
+    { from: 3069, to: 3009, weight: 5 }, // Hallway to Male Toilet
+    { from: 3069, to: 3010, weight: 5 }, // Hallway to Female Toilet
+    { from: 3069, to: 3011, weight: 5 }, // Hallway to E310
+    { from: 3069, to: 3012, weight: 5 }, // Hallway to E308
+    { from: 3069, to: 3013, weight: 5 }, // Hallway to E306
+    { from: 3069, to: 3014, weight: 5 }, // Hallway to E304
+    { from: 3069, to: 3015, weight: 5 }, // Hallway to E302
+    { from: 3069, to: 3016, weight: 5 }, // Hallway to E300
+    { from: 3069, to: 3017, weight: 5 }, // Hallway to E300A
+
+    // West Wing Connections
+    { from: 3070, to: 3018, weight: 5 }, // Hallway to W318
+    { from: 3070, to: 3019, weight: 5 }, // Hallway to W316
+    { from: 3070, to: 3020, weight: 5 }, // Hallway to W314
+    { from: 3070, to: 3021, weight: 5 }, // Hallway to W310
+    { from: 3070, to: 3022, weight: 5 }, // Hallway to W312
+    { from: 3070, to: 3023, weight: 5 }, // Hallway to W308
+    { from: 3070, to: 3024, weight: 5 }, // Hallway to W306
+    { from: 3070, to: 3025, weight: 5 }, // Hallway to W304
+    { from: 3070, to: 3026, weight: 5 }, // Hallway to COABTE Faculty Office
+    { from: 3070, to: 3027, weight: 5 }, // Hallway to W311
+    { from: 3070, to: 3028, weight: 5 }, // Hallway to W309
+    { from: 3070, to: 3029, weight: 5 }, // Hallway to W307
+    { from: 3070, to: 3030, weight: 5 }, // Hallway to W305
+    { from: 3070, to: 3031, weight: 5 }, // Hallway to W303
+    { from: 3070, to: 3032, weight: 5 }, // Hallway to W301
+    { from: 3070, to: 3033, weight: 5 }, // Hallway to Female Toilet
+    { from: 3070, to: 3034, weight: 5 }, // Hallway to Male Toilet
+
+    // North Wing Connections
+    { from: 3071, to: 3035, weight: 5 }, // Hallway to N301
+    { from: 3071, to: 3036, weight: 5 }, // Hallway to N303
+    { from: 3071, to: 3037, weight: 5 }, // Hallway to N313
+    { from: 3071, to: 3038, weight: 5 }, // Hallway to N315
+    { from: 3071, to: 3039, weight: 5 }, // Hallway to N317
+    { from: 3071, to: 3040, weight: 5 }, // Hallway to Male Toilet
+    { from: 3071, to: 3041, weight: 5 }, // Hallway to Female Toilet
+    { from: 3071, to: 3042, weight: 5 }, // Hallway to N304
+    { from: 3071, to: 3043, weight: 5 }, // Hallway to N306
+    { from: 3071, to: 3044, weight: 5 }, // Hallway to N308
+    { from: 3071, to: 3045, weight: 5 }, // Hallway to N310
+    { from: 3071, to: 3046, weight: 5 }, // Hallway to N312
+    { from: 3071, to: 3047, weight: 5 }, // Hallway to N314
+    { from: 3071, to: 3048, weight: 5 }, // Hallway to N316
+    { from: 3071, to: 3049, weight: 5 }, // Hallway to N318
+
+    // South Wing Connections
+    { from: 3072, to: 3050, weight: 5 }, // Hallway to Chief Legal
+    { from: 3072, to: 3051, weight: 5 }, // Hallway to Staff Legal
+    { from: 3072, to: 3052, weight: 5 }, // Hallway to Internal Audit
+    { from: 3072, to: 3053, weight: 5 }, // Hallway to BAC
+    { from: 3072, to: 3054, weight: 5 }, // Hallway to PPDO
+    { from: 3072, to: 3055, weight: 5 }, // Hallway to Research Extension
+    { from: 3072, to: 3056, weight: 5 }, // Hallway to Electronic Data Processing
+    { from: 3072, to: 3057, weight: 5 }, // Hallway to Placement Office
+    { from: 3072, to: 3058, weight: 5 }, // Hallway to PFO
+    { from: 3072, to: 3059, weight: 5 }, // Hallway to Alumni Relations
+    { from: 3072, to: 3060, weight: 5 }, // Hallway to Server
+    { from: 3072, to: 3061, weight: 5 }, // Hallway to Publication Office
+    { from: 3072, to: 3062, weight: 5 }, // Hallway to CRO
+    { from: 3072, to: 3063, weight: 5 }, // Hallway to CRBDO
+    { from: 3072, to: 3064, weight: 5 }, // Hallway to PAO
+    { from: 3072, to: 3065, weight: 5 }, // Hallway to AVP Research
+    { from: 3072, to: 3066, weight: 5 }, // Hallway to OVPRED
+
+    // Dome and Central Area Connections
+    { from: 3068, to: 3067, weight: 3 }, // Dome Hallway to Dome
+    { from: 3068, to: 3069, weight: 10 }, // Dome Hallway to East Wing Hallway
+    { from: 3068, to: 3070, weight: 10 }, // Dome Hallway to West Wing Hallway
+    { from: 3068, to: 3071, weight: 10 }, // Dome Hallway to North Wing Hallway
+    { from: 3068, to: 3072, weight: 10 }, // Dome Hallway to South Wing Hallway
+
+    // Adjacent Room Connections
+    { from: 3001, to: 3002, weight: 3 }, // E313 to E311
+    { from: 3002, to: 3003, weight: 3 }, // E311 to E309
+    { from: 3003, to: 3004, weight: 3 }, // E309 to E307
+    { from: 3004, to: 3005, weight: 3 }, // E307 to E305
+    { from: 3005, to: 3006, weight: 3 }, // E305 to E305A
+    { from: 3006, to: 3007, weight: 3 }, // E305A to E303
+
+    { from: 3018, to: 3019, weight: 3 }, // W318 to W316
+    { from: 3019, to: 3020, weight: 3 }, // W316 to W314
+    { from: 3020, to: 3021, weight: 3 }, // W314 to W310
+    { from: 3021, to: 3022, weight: 3 }, // W310 to W312
+    { from: 3022, to: 3023, weight: 3 }, // W312 to W308
+
+    { from: 3050, to: 3051, weight: 3 }, // Chief Legal to Staff Legal
+    { from: 3051, to: 3052, weight: 3 }, // Staff Legal to Internal Audit
+    { from: 3052, to: 3053, weight: 3 }, // Internal Audit to BAC
+    { from: 3053, to: 3054, weight: 3 }, // BAC to PPDO
+    { from: 3054, to: 3055, weight: 3 }, // PPDO to Research Extension
+
+    // Stairs Connections (2nd to 3rd floor)
+    { from: 2103, to: 3071, weight: 25 }, // North Wing Left Stairs to 3rd floor hallway
+    { from: 2104, to: 3071, weight: 25 }, // North Wing Right Stairs to 3rd floor hallway
+    { from: 2105, to: 3068, weight: 25 }, // Central Stairs to 3rd floor dome hallway
+    { from: 2106, to: 3072, weight: 25 }, // South Wing Left Stairs to 3rd floor hallway
+    { from: 2107, to: 3072, weight: 25 }, // South Wing Center Stairs to 3rd floor hallway
+    { from: 2108, to: 3072, weight: 25 }, // South Wing Right Stairs to 3rd floor hallway
+
+    // Add new edges for 4th floor
+    // East Wing Connections
+    { from: 4091, to: 4001, weight: 5 }, // Hallway to E417
+    { from: 4091, to: 4002, weight: 5 }, // Hallway to E415
+    { from: 4091, to: 4003, weight: 5 }, // Hallway to E413
+    { from: 4091, to: 4004, weight: 5 }, // Hallway to E411
+    { from: 4091, to: 4005, weight: 5 }, // Hallway to E409
+    { from: 4091, to: 4006, weight: 5 }, // Hallway to E407
+    { from: 4091, to: 4007, weight: 5 }, // Hallway to E405
+    { from: 4091, to: 4008, weight: 5 }, // Hallway to E403
+    { from: 4091, to: 4009, weight: 5 }, // Hallway to E401
+    { from: 4091, to: 4010, weight: 5 }, // Hallway to Male Toilet
+    { from: 4091, to: 4011, weight: 5 }, // Hallway to Female Toilet
+    { from: 4091, to: 4012, weight: 5 }, // Hallway to Office
+    { from: 4091, to: 4013, weight: 5 }, // Hallway to E418
+    { from: 4091, to: 4014, weight: 5 }, // Hallway to E416
+    { from: 4091, to: 4015, weight: 5 }, // Hallway to E414
+    { from: 4091, to: 4016, weight: 5 }, // Hallway to E412
+    { from: 4091, to: 4017, weight: 5 }, // Hallway to E410
+    { from: 4091, to: 4018, weight: 5 }, // Hallway to E408
+    { from: 4091, to: 4019, weight: 5 }, // Hallway to E406
+    { from: 4091, to: 4020, weight: 5 }, // Hallway to E404
+    { from: 4091, to: 4021, weight: 5 }, // Hallway to E402
+    { from: 4091, to: 4022, weight: 5 }, // Hallway to E400
+
+    // West Wing Connections
+    { from: 4092, to: 4023, weight: 5 }, // Hallway to W420
+    { from: 4092, to: 4024, weight: 5 }, // Hallway to W414
+    { from: 4092, to: 4025, weight: 5 }, // Hallway to W412
+    { from: 4092, to: 4026, weight: 5 }, // Hallway to W410
+    { from: 4092, to: 4027, weight: 5 }, // Hallway to W408
+    { from: 4092, to: 4028, weight: 5 }, // Hallway to W406
+    { from: 4092, to: 4029, weight: 5 }, // Hallway to W404
+    { from: 4092, to: 4030, weight: 5 }, // Hallway to Faculty Office
+    { from: 4092, to: 4031, weight: 5 }, // Hallway to Department Head Office
+    { from: 4092, to: 4032, weight: 5 }, // Hallway to W417
+    { from: 4092, to: 4033, weight: 5 }, // Hallway to W415
+    { from: 4092, to: 4034, weight: 5 }, // Hallway to W413
+    { from: 4092, to: 4035, weight: 5 }, // Hallway to W409
+    { from: 4092, to: 4036, weight: 5 }, // Hallway to W407
+    { from: 4092, to: 4037, weight: 5 }, // Hallway to W405
+    { from: 4092, to: 4038, weight: 5 }, // Hallway to W403
+    { from: 4092, to: 4039, weight: 5 }, // Hallway to W401
+    { from: 4092, to: 4040, weight: 5 }, // Hallway to Female Toilet
+    { from: 4092, to: 4041, weight: 5 }, // Hallway to Male Toilet
+
+    // North Wing Connections
+    { from: 4093, to: 4042, weight: 5 }, // Hallway to Office
+    { from: 4093, to: 4043, weight: 5 }, // Hallway to N400
+    { from: 4093, to: 4044, weight: 5 }, // Hallway to N402
+    { from: 4093, to: 4045, weight: 5 }, // Hallway to N404
+    { from: 4093, to: 4046, weight: 5 }, // Hallway to N406
+    { from: 4093, to: 4047, weight: 5 }, // Hallway to N408
+    { from: 4093, to: 4048, weight: 5 }, // Hallway to N410
+    { from: 4093, to: 4049, weight: 5 }, // Hallway to N412
+    { from: 4093, to: 4050, weight: 5 }, // Hallway to N414
+    { from: 4093, to: 4051, weight: 5 }, // Hallway to N416
+    { from: 4093, to: 4052, weight: 5 }, // Hallway to N418
+    { from: 4093, to: 4053, weight: 5 }, // Hallway to Male Toilet
+    { from: 4093, to: 4054, weight: 5 }, // Hallway to Female Toilet
+    { from: 4093, to: 4055, weight: 5 }, // Hallway to N401
+    { from: 4093, to: 4056, weight: 5 }, // Hallway to N403
+    { from: 4093, to: 4057, weight: 5 }, // Hallway to N405
+    { from: 4093, to: 4058, weight: 5 }, // Hallway to N407
+    { from: 4093, to: 4059, weight: 5 }, // Hallway to N409
+    { from: 4093, to: 4060, weight: 5 }, // Hallway to N411
+    { from: 4093, to: 4061, weight: 5 }, // Hallway to N413
+    { from: 4093, to: 4062, weight: 5 }, // Hallway to N415
+    { from: 4093, to: 4063, weight: 5 }, // Hallway to N417
+
+    // South Wing Connections
+    { from: 4094, to: 4064, weight: 5 }, // Hallway to Vacant Room
+    { from: 4094, to: 4065, weight: 5 }, // Hallway to Institutional Planning Office
+    { from: 4094, to: 4066, weight: 5 }, // Hallway to Office
+    { from: 4094, to: 4067, weight: 5 }, // Hallway to Classroom
+    { from: 4094, to: 4068, weight: 5 }, // Hallway to ITSO
+    { from: 4094, to: 4069, weight: 5 }, // Hallway to Research Chef's Lounge
+    { from: 4094, to: 4070, weight: 5 }, // Hallway to CHE Faculty Room
+    { from: 4094, to: 4071, weight: 5 }, // Hallway to SCITECH Research Office
+    { from: 4094, to: 4072, weight: 5 }, // Hallway to PUP Film Center
+    { from: 4094, to: 4073, weight: 5 }, // Hallway to Institute of Social History
+    { from: 4094, to: 4074, weight: 5 }, // Hallway to Director Global Warning Studies
+    { from: 4094, to: 4075, weight: 5 }, // Hallway to IBITS Office
+    { from: 4094, to: 4076, weight: 5 }, // Hallway to Office
+    { from: 4094, to: 4077, weight: 5 }, // Hallway to CLL Audio Visual Room
+    { from: 4094, to: 4078, weight: 5 }, // Hallway to Branches Office
+    { from: 4094, to: 4079, weight: 5 }, // Hallway to Office
+    { from: 4094, to: 4080, weight: 5 }, // Hallway to Speech Laboratory
+    { from: 4094, to: 4081, weight: 5 }, // Hallway to Training Center
+    { from: 4094, to: 4082, weight: 5 }, // Hallway to Training Center
+    { from: 4094, to: 4083, weight: 5 }, // Hallway to CLL Library
+    { from: 4094, to: 4084, weight: 5 }, // Hallway to Class Room
+    { from: 4094, to: 4085, weight: 5 }, // Hallway to Class Room
+    { from: 4094, to: 4086, weight: 5 }, // Hallway to Extension Center
+    { from: 4094, to: 4087, weight: 5 }, // Hallway to Student Center
+    { from: 4094, to: 4088, weight: 5 }, // Hallway to Student Lounge
+
+    // Dome and Central Area Connections
+    { from: 4090, to: 4089, weight: 3 }, // Dome Hallway to Dome
+    { from: 4090, to: 4091, weight: 10 }, // Dome Hallway to East Wing Hallway
+    { from: 4090, to: 4092, weight: 10 }, // Dome Hallway to West Wing Hallway
+    { from: 4090, to: 4093, weight: 10 }, // Dome Hallway to North Wing Hallway
+    { from: 4090, to: 4094, weight: 10 }, // Dome Hallway to South Wing Hallway
+
+    // Adjacent Room Connections
+    { from: 4001, to: 4002, weight: 3 }, // E417 to E415
+    { from: 4002, to: 4003, weight: 3 }, // E415 to E413
+    { from: 4003, to: 4004, weight: 3 }, // E413 to E411
+    { from: 4004, to: 4005, weight: 3 }, // E411 to E409
+    { from: 4005, to: 4006, weight: 3 }, // E409 to E407
+    { from: 4006, to: 4007, weight: 3 }, // E407 to E405
+    { from: 4007, to: 4008, weight: 3 }, // E405 to E403
+    { from: 4008, to: 4009, weight: 3 }, // E403 to E401
+
+    { from: 4013, to: 4014, weight: 3 }, // E418 to E416
+    { from: 4014, to: 4015, weight: 3 }, // E416 to E414
+    { from: 4015, to: 4016, weight: 3 }, // E414 to E412
+    { from: 4016, to: 4017, weight: 3 }, // E412 to E410
+    { from: 4017, to: 4018, weight: 3 }, // E410 to E408
+    { from: 4018, to: 4019, weight: 3 }, // E408 to E406
+    { from: 4019, to: 4020, weight: 3 }, // E406 to E404
+    { from: 4020, to: 4021, weight: 3 }, // E404 to E402
+    { from: 4021, to: 4022, weight: 3 }, // E402 to E400
+
+    { from: 4023, to: 4024, weight: 3 }, // W420 to W414
+    { from: 4024, to: 4025, weight: 3 }, // W414 to W412
+    { from: 4025, to: 4026, weight: 3 }, // W412 to W410
+    { from: 4026, to: 4027, weight: 3 }, // W410 to W408
+    { from: 4027, to: 4028, weight: 3 }, // W408 to W406
+    { from: 4028, to: 4029, weight: 3 }, // W406 to W404
+
+    { from: 4032, to: 4033, weight: 3 }, // W417 to W415
+    { from: 4033, to: 4034, weight: 3 }, // W415 to W413
+    { from: 4034, to: 4035, weight: 3 }, // W413 to W409
+    { from: 4035, to: 4036, weight: 3 }, // W409 to W407
+    { from: 4036, to: 4037, weight: 3 }, // W407 to W405
+    { from: 4037, to: 4038, weight: 3 }, // W405 to W403
+    { from: 4038, to: 4039, weight: 3 }, // W403 to W401
+
+    // Stairs Connections (3rd to 4th floor)
+    { from: 3071, to: 4093, weight: 8 }, // North Wing Stairs to 4th floor hallway
+    { from: 3068, to: 4090, weight: 8 }, // Central Stairs to 4th floor dome hallway
+    { from: 3072, to: 4094, weight: 8 }, // South Wing Stairs to 4th floor hallway
+
+    // === FIFTH FLOOR CONNECTIONS ===
+    
+    // South Wing Connections
+    { from: 5094, to: 5001, weight: 3 }, // South Wing Hallway to S501
+    { from: 5001, to: 5002, weight: 3 }, // S501 to S502
+    { from: 5002, to: 5003, weight: 3 }, // S502 to S503A
+    { from: 5003, to: 5004, weight: 3 }, // S503A to S503B
+    { from: 5004, to: 5005, weight: 3 }, // S503B to S504
+    { from: 5005, to: 5006, weight: 3 }, // S504 to S505
+    { from: 5006, to: 5017, weight: 3 }, // S505 to Curriculum Planning & Development Office
+    
+    { from: 5007, to: 5008, weight: 3 }, // S508 to S509
+    { from: 5008, to: 5009, weight: 3 }, // S509 to S510
+    { from: 5009, to: 5010, weight: 3 }, // S510 to S511
+    { from: 5010, to: 5011, weight: 3 }, // S511 to S512B
+    { from: 5011, to: 5012, weight: 3 }, // S512B to S513
+    { from: 5007, to: 5020, weight: 3 }, // S508 to SCI-TECH Research & Development Center
+    
+    { from: 5013, to: 5014, weight: 3 }, // S515 to S517
+    { from: 5014, to: 5015, weight: 3 }, // S517 to S518
+    { from: 5015, to: 5016, weight: 3 }, // S518 to CCMT/Server Room
+    { from: 5016, to: 5017, weight: 3 }, // CCMT/Server Room to Curriculum Planning Office
+
+    // East Wing Connections
+    { from: 5020, to: 5021, weight: 3 }, // E502 to E504
+    { from: 5021, to: 5022, weight: 3 }, // E504 to E506
+    { from: 5022, to: 5023, weight: 3 }, // E506 to JPIA Office
+    { from: 5023, to: 5024, weight: 3 }, // JPIA Office to E508
+    { from: 5024, to: 5025, weight: 3 }, // E508 to E510
+    { from: 5025, to: 5026, weight: 3 }, // E510 to E512
+    { from: 5026, to: 5027, weight: 3 }, // E512 to E514
+    { from: 5027, to: 5028, weight: 3 }, // E514 to E516
+    { from: 5091, to: 5023, weight: 2 }, // East Wing Hallway to JPIA Office
+    { from: 5091, to: 5088, weight: 2 }, // East Wing Hallway to College of Accountancy Student Council Office
+    { from: 5088, to: 5039, weight: 3 }, // College of Accountancy Student Council Office to E517
+
+    { from: 5029, to: 5030, weight: 3 }, // E501 to E503
+    { from: 5030, to: 5031, weight: 3 }, // E503 to E505
+    { from: 5031, to: 5032, weight: 3 }, // E505 to E507
+    { from: 5032, to: 5033, weight: 3 }, // E507 to E509
+    { from: 5033, to: 5034, weight: 3 }, // E509 to E511
+    { from: 5034, to: 5035, weight: 3 }, // E511 to E513
+    { from: 5035, to: 5036, weight: 3 }, // E513 to E515
+    { from: 5036, to: 5037, weight: 3 }, // E515 to E517
+    { from: 5037, to: 5082, weight: 2 }, // E517 to Male Toilet
+    { from: 5037, to: 5083, weight: 2 }, // E517 to Female Toilet
+
+    // West Wing Connections
+    { from: 5040, to: 5041, weight: 3 }, // W502 to W504
+    { from: 5041, to: 5042, weight: 3 }, // W504 to W506
+    { from: 5042, to: 5043, weight: 3 }, // W506 to W508
+    { from: 5043, to: 5044, weight: 3 }, // W508 to W510
+    { from: 5044, to: 5045, weight: 3 }, // W510 to W512
+    { from: 5045, to: 5046, weight: 3 }, // W512 to W514
+    { from: 5046, to: 5047, weight: 3 }, // W514 to W516
+    { from: 5047, to: 5048, weight: 3 }, // W516 to W518
+    { from: 5049, to: 5050, weight: 3 }, // W501 to W503
+    { from: 5050, to: 5051, weight: 3 }, // W503 to W505
+    { from: 5051, to: 5052, weight: 3 }, // W505 to W507
+    { from: 5052, to: 5053, weight: 3 }, // W507 to W509
+    { from: 5053, to: 5054, weight: 3 }, // W509 to W511
+    { from: 5054, to: 5055, weight: 3 }, // W511 to W513
+    { from: 5055, to: 5056, weight: 3 }, // W513 to W515
+    { from: 5056, to: 5057, weight: 3 }, // W515 to W517
+    { from: 5057, to: 5089, weight: 3 }, // W517 to Bayan Muna Office
+    { from: 5092, to: 5089, weight: 2 }, // West Wing Hallway to Bayan Muna Office
+
+    // North Wing Connections
+    { from: 5060, to: 5061, weight: 3 }, // N502 to N504
+    { from: 5061, to: 5062, weight: 3 }, // N504 to N506
+    { from: 5062, to: 5063, weight: 3 }, // N506 to N508
+    { from: 5063, to: 5064, weight: 3 }, // N508 to N510
+    { from: 5064, to: 5065, weight: 3 }, // N510 to N512
+    { from: 5065, to: 5066, weight: 3 }, // N512 to N514
+    { from: 5066, to: 5067, weight: 3 }, // N514 to N516
+    { from: 5067, to: 5068, weight: 3 }, // N516 to N518
+
+    { from: 5069, to: 5070, weight: 3 }, // N501 to N503
+    { from: 5070, to: 5071, weight: 3 }, // N503 to N505
+    { from: 5071, to: 5072, weight: 3 }, // N505 to N507
+    { from: 5072, to: 5073, weight: 3 }, // N507 to N509
+    { from: 5073, to: 5074, weight: 3 }, // N509 to N511
+    { from: 5074, to: 5075, weight: 3 }, // N511 to N513
+    { from: 5075, to: 5076, weight: 3 }, // N513 to N515
+    { from: 5076, to: 5077, weight: 3 }, // N515 to N517
+
+    // Stairs Connections (4th to 5th floor)
+    { from: 4093, to: 5093, weight: 25 }, // North Wing Stairs to 5th floor hallway
+    { from: 4090, to: 5095, weight: 25 }, // Central Stairs to 5th floor dome
+    { from: 4094, to: 5094, weight: 25 }, // South Wing Stairs to 5th floor hallway
+    { from: 4092, to: 5092, weight: 25 }, // West Wing Stairs to 5th floor hallway
+
+    // Wing Connections to Central Area
+    { from: 5093, to: 5095, weight: 5 }, // North Wing to Central Area
+    { from: 5095, to: 5094, weight: 5 }, // Central Area to South Wing
+    { from: 5095, to: 5091, weight: 5 }, // Central Area to East Wing
+    { from: 5095, to: 5092, weight: 5 }, // Central Area to West Wing
+
+    // Wing Hallway Connections
+    { from: 5093, to: 5060, weight: 2 }, // North Wing Central to Right Hallway
+    { from: 5093, to: 5069, weight: 2 }, // North Wing Central to Left Hallway
+    { from: 5094, to: 5001, weight: 2 }, // South Wing Central to Left Hallway
+    { from: 5094, to: 5007, weight: 2 }, // South Wing Central to Right Hallway
+    { from: 5091, to: 5020, weight: 2 }, // East Wing Central to Bottom Hallway
+    { from: 5091, to: 5029, weight: 2 }, // East Wing Central to Top Hallway
+    { from: 5092, to: 5040, weight: 2 }, // West Wing Central to Bottom Hallway
+    { from: 5092, to: 5049, weight: 2 }, // West Wing Central to Top Hallway
+
+    { from: 5029, to: 5030, weight: 3 }, // E501 to E503
+
+    // === 6TH FLOOR CONNECTIONS ===
+    // Dome and Central Area Connections
+    { from: 6094, to: 6095, weight: 3 },  // 6th Floor Dome to Dome Hallway
+    { from: 6095, to: 6090, weight: 10 }, // Dome Hallway to East Wing Hallway
+    { from: 6095, to: 6091, weight: 10 }, // Dome Hallway to West Wing Hallway
+    { from: 6095, to: 6092, weight: 10 }, // Dome Hallway to North Wing Hallway
+    { from: 6095, to: 6093, weight: 10 }, // Dome Hallway to South Wing Hallway
+
+
+    // Hallway Interconnections
+    { from: 6090, to: 6092, weight: 15 }, // East Wing to North Wing Hallway
+    { from: 6092, to: 6091, weight: 15 }, // North Wing to West Wing Hallway
+    { from: 6091, to: 6093, weight: 15 }, // West Wing to South Wing Hallway
+    { from: 6093, to: 6090, weight: 15 }, // South Wing to East Wing Hallway
+
+
+    // South Wing (Claro M. Recto Hall) Connections
+    { from: 6093, to: 6001, weight: 5 }, // Hallway to Office
+    { from: 6093, to: 6002, weight: 5 }, // Hallway to Class Room
+    { from: 6093, to: 6003, weight: 5 }, // Hallway to Extension and Communication Relation
+    { from: 6093, to: 6004, weight: 5 }, // Hallway to CA Student Center
+    { from: 6093, to: 6005, weight: 5 }, // Hallway to CA Learning Resource Center
+    { from: 6093, to: 6006, weight: 5 }, // Hallway to CA Accreditation
+    { from: 6093, to: 6007, weight: 5 }, // Hallway to Student Lounge
+    { from: 6093, to: 6008, weight: 5 }, // Hallway to Experimental Room
+    { from: 6093, to: 6009, weight: 5 }, // Hallway to Psychological Center
+    { from: 6093, to: 6010, weight: 5 }, // Hallway to Class Room
+    { from: 6093, to: 6011, weight: 5 }, // Hallway to PUP SRM
+    { from: 6093, to: 6060, weight: 5 }, // Hallway to Male Toilet South Wing
+    { from: 6093, to: 6061, weight: 5 }, // Hallway to Female Toilet South Wing
+
+
+    // Adjacent Room Connections in South Wing
+    { from: 6001, to: 6002, weight: 3 }, // Office to Class Room
+    { from: 6002, to: 6003, weight: 3 }, // Class Room to Extension and Communication Relation
+    { from: 6003, to: 6004, weight: 3 }, // Extension to CA Student Center
+    { from: 6004, to: 6005, weight: 3 }, // CA Student Center to Learning Resource Center
+    { from: 6005, to: 6006, weight: 3 }, // Learning Resource Center to CA Accreditation
+    { from: 6006, to: 6007, weight: 3 }, // CA Accreditation to Student Lounge
+    { from: 6007, to: 6008, weight: 3 }, // Student Lounge to Experimental Room
+    { from: 6008, to: 6009, weight: 3 }, // Experimental Room to Psychological Center
+    { from: 6009, to: 6010, weight: 3 }, // Psychological Center to Class Room
+    { from: 6010, to: 6011, weight: 3 }, // Class Room to PUP SRM
+
+
+    // East Wing Connections
+    { from: 6090, to: 6020, weight: 5 }, // Hallway to CS Laboratory Storage Room 615
+    { from: 6090, to: 6021, weight: 5 }, // Hallway to CS Laboratory Room 613
+    { from: 6090, to: 6022, weight: 5 }, // Hallway to CS Laboratory Room 611
+    { from: 6090, to: 6023, weight: 5 }, // Hallway to CS Laboratory Room 609
+    { from: 6090, to: 6024, weight: 5 }, // Hallway to Faculty Room 605
+    { from: 6090, to: 6025, weight: 5 }, // Hallway to Faculty Room 603
+    { from: 6090, to: 6026, weight: 5 }, // Hallway to Class Room 601
+    { from: 6090, to: 6027, weight: 5 }, // Hallway to CS Laboratory Room 607
+    { from: 6090, to: 6028, weight: 5 }, // Hallway to CS Laboratory Room 605
+    { from: 6090, to: 6029, weight: 5 }, // Hallway to Insectarium
+    { from: 6090, to: 6062, weight: 5 }, // Hallway to Male Toilet East Wing
+    { from: 6090, to: 6063, weight: 5 }, // Hallway to Female Toilet East Wing
+
+
+    // Adjacent Room Connections in East Wing
+    { from: 6020, to: 6021, weight: 3 }, // Storage 615 to Lab Room 613
+    { from: 6021, to: 6022, weight: 3 }, // Lab Room 613 to 611
+    { from: 6022, to: 6023, weight: 3 }, // Lab Room 611 to 609
+    { from: 6023, to: 6027, weight: 3 }, // Lab Room 609 to 607
+    { from: 6027, to: 6028, weight: 3 }, // Lab Room 607 to 605
+    { from: 6028, to: 6024, weight: 3 }, // Lab Room 605 to Faculty Room 605
+    { from: 6024, to: 6025, weight: 3 }, // Faculty Room 605 to 603
+    { from: 6025, to: 6026, weight: 3 }, // Faculty Room 603 to Class Room 601
+    { from: 6026, to: 6029, weight: 3 }, // Class Room 601 to Insectarium
+    { from: 6062, to: 6063, weight: 2 }, // Male to Female Toilet East Wing
+    { from: 6064, to: 6065, weight: 2 }, // Male to Female Toilet West Wing
+    { from: 6066, to: 6067, weight: 2 }, // Male to Female Toilet North Wing
+    { from: 6060, to: 6061, weight: 2 }, // Male to Female Toilet South Wing
+
+
+    // West Wing Connections
+    { from: 6091, to: 6030, weight: 5 }, // Hallway to CLMC Faculty Room 602-604
+    { from: 6091, to: 6031, weight: 5 }, // Hallway to Class Room 606
+    { from: 6091, to: 6032, weight: 5 }, // Hallway to Class Room 608
+    { from: 6091, to: 6033, weight: 5 }, // Hallway to Class Room 610
+    { from: 6091, to: 6034, weight: 5 }, // Hallway to Class Room 612
+    { from: 6091, to: 6035, weight: 5 }, // Hallway to Class Room 614
+    { from: 6091, to: 6036, weight: 5 }, // Hallway to Class Room 616
+    { from: 6091, to: 6037, weight: 5 }, // Hallway to Class Room 618
+    { from: 6091, to: 6038, weight: 5 }, // Hallway to Class Room 620
+    { from: 6091, to: 6039, weight: 5 }, // Hallway to Laboratory Room 605
+    { from: 6091, to: 6040, weight: 5 }, // Hallway to Class Room 603
+    { from: 6091, to: 6068, weight: 5 }, // Hallway to Class Room 601
+    { from: 6091, to: 6064, weight: 5 }, // Hallway to Male Toilet West Wing
+    { from: 6091, to: 6065, weight: 5 }, // Hallway to Female Toilet West Wing
+
+
+    // Adjacent Room Connections in West Wing
+    { from: 6030, to: 6031, weight: 3 }, // Faculty Room 602-604 to Class Room 606
+    { from: 6031, to: 6032, weight: 3 }, // Class Room 606 to 608
+    { from: 6032, to: 6033, weight: 3 }, // Class Room 608 to 610
+    { from: 6033, to: 6034, weight: 3 }, // Class Room 610 to 612
+    { from: 6034, to: 6035, weight: 3 }, // Class Room 612 to 614
+    { from: 6035, to: 6036, weight: 3 }, // Class Room 614 to 616
+    { from: 6036, to: 6037, weight: 3 }, // Class Room 616 to 618
+    { from: 6037, to: 6038, weight: 3 }, // Class Room 618 to 620
+    { from: 6068, to: 6040, weight: 3 }, // Class Room 601 to 603
+    { from: 6040, to: 6039, weight: 3 }, // Class Room 603 to Laboratory Room 605
+
+
+    // North Wing Connections
+    { from: 6092, to: 6050, weight: 5 }, // Hallway to Class Room 600
+    { from: 6092, to: 6051, weight: 5 }, // Hallway to Class Room 602
+    { from: 6092, to: 6052, weight: 5 }, // Hallway to Class Room 604
+    { from: 6092, to: 6053, weight: 5 }, // Hallway to Class Room 606
+    { from: 6092, to: 6054, weight: 5 }, // Hallway to Class Room 608
+    { from: 6092, to: 6055, weight: 5 }, // Hallway to Class Room 610
+    { from: 6092, to: 6056, weight: 5 }, // Hallway to Class Room 612
+    { from: 6092, to: 6057, weight: 5 }, // Hallway to Class Room 614
+    { from: 6092, to: 6058, weight: 5 }, // Hallway to Class Room 616
+    { from: 6092, to: 6059, weight: 5 }, // Hallway to Class Room 617
+    { from: 6092, to: 6041, weight: 5 }, // Hallway to Class Room 632
+    { from: 6092, to: 6042, weight: 5 }, // Hallway to Class Room 633
+    { from: 6092, to: 6043, weight: 5 }, // Hallway to Class Room 634
+    { from: 6092, to: 6044, weight: 5 }, // Hallway to Class Room 635
+    { from: 6092, to: 6045, weight: 5 }, // Hallway to Class Room 636
+    { from: 6092, to: 6046, weight: 5 }, // Hallway to Class Room 637
+    { from: 6092, to: 6047, weight: 5 }, // Hallway to Class Room 638
+    { from: 6092, to: 6048, weight: 5 }, // Hallway to Class Room 639
+    { from: 6092, to: 6049, weight: 5 }, // Hallway to Class Room 640
+    { from: 6092, to: 6066, weight: 5 }, // Hallway to Male Toilet North Wing
+    { from: 6092, to: 6067, weight: 5 }, // Hallway to Female Toilet North Wing
+
+
+    // Adjacent Room Connections in North Wing (600s)
+    { from: 6050, to: 6051, weight: 3 }, // Class Room 600 to 602
+    { from: 6051, to: 6052, weight: 3 }, // Class Room 602 to 604
+    { from: 6052, to: 6053, weight: 3 }, // Class Room 604 to 606
+    { from: 6053, to: 6054, weight: 3 }, // Class Room 606 to 608
+    { from: 6054, to: 6055, weight: 3 }, // Class Room 608 to 610
+    { from: 6055, to: 6056, weight: 3 }, // Class Room 610 to 612
+    { from: 6056, to: 6057, weight: 3 }, // Class Room 612 to 614
+    { from: 6057, to: 6058, weight: 3 }, // Class Room 614 to 616
+    { from: 6058, to: 6059, weight: 3 }, // Class Room 616 to 617
+
+
+    // Adjacent Room Connections in North Wing (630s)
+    { from: 6041, to: 6042, weight: 3 }, // Class Room 632 to 633
+    { from: 6042, to: 6043, weight: 3 }, // Class Room 633 to 634
+    { from: 6043, to: 6044, weight: 3 }, // Class Room 634 to 635
+    { from: 6044, to: 6045, weight: 3 }, // Class Room 635 to 636
+    { from: 6045, to: 6046, weight: 3 }, // Class Room 636 to 637
+    { from: 6046, to: 6047, weight: 3 }, // Class Room 637 to 638
+    { from: 6047, to: 6048, weight: 3 }, // Class Room 638 to 639
+    { from: 6048, to: 6049, weight: 3 }, // Class Room 639 to 640
+
+
+    // Stair connections from 5th to 6th floor
+    { from: 5091, to: 6090, weight: 25 }, // East Wing Stairs
+    { from: 5092, to: 6091, weight: 25 }, // West Wing Stairs
+    { from: 5093, to: 6092, weight: 25 }, // North Wing Stairs
+    { from: 5094, to: 6093, weight: 25 }, // South Wing Stairs
+    { from: 5095, to: 6094, weight: 25 }  // Dome Stairs
+
+
+  ]
+};
+
 // export const mainCampusData = {
 //   nodes: {
 //     1: { id: 1, name: "Amphitheater", type: "building" },

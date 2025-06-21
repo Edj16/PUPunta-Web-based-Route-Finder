@@ -3,6 +3,43 @@ import { cocLocations, findCOCRoute } from './graphs/coc.js';
 import { ceaLocations, findCEARoute } from './graphs/cea.js';
 import { mainCampusData } from './data/graphData.js';
 
+let currentBuilding = 'MAIN';
+let currentFloor = 1; // Default to floor 1
+
+
+const floorPlanImages = {
+  "MAIN-1": "../src/images/mainBuilding/15-F1.jpg",
+  "MAIN-2": "../src/images/mainBuilding/15-F2.jpg",
+  "MAIN-3": "../src/images/mainBuilding/15-F3.jpg",
+  "MAIN-4": "../src/images/mainBuilding/15-F4.jpg",
+  "MAIN-5": "../src/images/mainBuilding/15-F5.jpg",
+  "COC": "../src/images/COC.png",
+  "CEA": "../src/images/CEALAYOUT.png"
+};
+
+// function toggleFloorButtons(buildingCode) {
+//   const controls = document.getElementById('floor-controls');
+//   if (!controls) return;
+
+//   const isMultiFloor = multiFloorBuildings.hasOwnProperty(buildingCode);
+//   controls.style.display = isMultiFloor ? 'block' : 'none';
+// }
+
+// function updateMapByBuildingAndFloor(building, floor = 1) {
+//   currentBuilding = building;
+//   currentFloor = floor;
+
+//   const key = building === 'MAIN' ? `${building}-${floor}` : building;
+//   const mapURL = floorPlanImages[key] || getMapImageForCampus(building);
+
+//   initializeMap(mapURL);
+
+//   // Show/hide floor buttons based on current building
+//   toggleFloorButtons(building);
+// }
+
+
+
 function plotVerticesOnMap(pathNodeIds = [], nodes = mainCampusData.nodes) {
   const map = document.getElementById('map');
   if (!map) return;
@@ -13,11 +50,7 @@ function plotVerticesOnMap(pathNodeIds = [], nodes = mainCampusData.nodes) {
     if (node.x !== undefined && node.y !== undefined) {
       const dot = document.createElement('div');
       dot.className = 'point';
-
-      if (pathNodeIds.includes(node.id)) {
-        dot.classList.add('path-node');
-      }
-
+      if (pathNodeIds.includes(node.id)) dot.classList.add('path-node');
       dot.style.left = `${node.x}px`;
       dot.style.top = `${node.y}px`;
       map.appendChild(dot);
@@ -25,11 +58,8 @@ function plotVerticesOnMap(pathNodeIds = [], nodes = mainCampusData.nodes) {
   });
 }
 
-
-
 // Inter-campus connection system
 const interCampusConnections = {
-  // Connection points for each campus (main exits/entrances)
   campusGateways: {
     MAIN: {
       mainGate: { nodeId: 19, name: "Main Gate" },
@@ -37,36 +67,16 @@ const interCampusConnections = {
       westGate: { nodeId: 40, name: "West Gate" }
     },
     COC: {
-      mainEntrance: { nodeId: 1, name: "COC Building Entrance" } // Using COC Building Entrance as main entrance
+      mainEntrance: { nodeId: 1, name: "COC Building Entrance" }
     },
     CEA: {
-      mainEntrance: { nodeId: 1, name: "CEA Building Entrance" } // Using CEA Building Entrance as main entrance
+      mainEntrance: { nodeId: 1, name: "CEA Building Entrance" }
     }
   },
- 
-  // Inter-campus routes with distances and travel options
   routes: {
-    "MAIN-COC": {
-      distance: 800, // meters - approximate walking distance
-      walkingTime: 15, // minutes
-      tricycleTime: 5, // minutes
-      transportOptions: ["walking", "tricycle"],
-      route: "Via Anonas Street"
-    },
-    "MAIN-CEA": {
-      distance: 1200, // meters - approximate walking distance
-      walkingTime: 20, // minutes
-      tricycleTime: 10, // minutes
-      transportOptions: ["walking", "tricycle"],
-      route: "Via Anonas Street"
-    },
-    "COC-CEA": {
-      distance: 400, // meters - approximate walking distance
-      walkingTime: 5, // minutes
-      tricycleTime: 2, // minutes
-      transportOptions: ["walking", "tricycle"],
-      route: "Via Anonas Street"
-    }
+    "MAIN-COC": { distance: 800, walkingTime: 15, tricycleTime: 5, transportOptions: ["walking", "tricycle"], route: "Via Anonas Street" },
+    "MAIN-CEA": { distance: 1200, walkingTime: 20, tricycleTime: 10, transportOptions: ["walking", "tricycle"], route: "Via Anonas Street" },
+    "COC-CEA": { distance: 400, walkingTime: 5, tricycleTime: 2, transportOptions: ["walking", "tricycle"], route: "Via Anonas Street" }
   }
 };
 
@@ -122,7 +132,19 @@ $(document).ready(function() {
     startNavigating();
   });
 
+  $('#floor-up').on('click', function () {
+    if (currentBuilding === 'MAIN' && currentFloor < 5) {
+      currentFloor++;
+      updateMapByBuildingAndFloor('MAIN', currentFloor);
+    }
+  });
 
+  $('#floor-down').on('click', function () {
+    if (currentBuilding === 'MAIN' && currentFloor > 1) {
+      currentFloor--;
+      updateMapByBuildingAndFloor('MAIN', currentFloor);
+    }
+  });
 
 
   // Set up form submission
@@ -200,6 +222,18 @@ function initializeMap(backgroundImageURL) {
   // ✅ Clean old nodes/lines
   mapDiv.querySelectorAll('.point, .path-line').forEach(el => el.remove());
 }
+
+function updateMapByBuildingAndFloor(building, floor = 1) {
+  currentBuilding = building;
+  currentFloor = floor;
+
+  const key = building === 'MAIN' ? `${building}-${floor}` : building;
+  const mapURL = floorPlanImages[key] || getMapImageForCampus(building);
+  initializeMap(mapURL);
+}
+
+
+
 
 
 
@@ -650,15 +684,26 @@ function highlightPath(nodeIds, nodes) {
   const map = document.getElementById("map");
   if (!map || !nodeIds || nodeIds.length < 2) return;
 
-  // plotVerticesOnMap(nodeIds); // ✅ Draw points first
-
-  // 🧹 Clear old lines
+  // Clear previous lines
   map.querySelectorAll(".path-line").forEach(el => el.remove());
+
+  // Define parent node IDs for Main Building
+  const mainBuildingParentIds = [15, 16, 17, 18];
 
   for (let i = 0; i < nodeIds.length - 1; i++) {
     const from = nodes[nodeIds[i]];
     const to = nodes[nodeIds[i + 1]];
+
     if (!from || !to || from.x === undefined || to.x === undefined) continue;
+
+    // 🔄 If the node is inside the Main Building and changes floor, switch map
+    if (
+      from.floor &&
+      mainBuildingParentIds.includes(from.parent) &&
+      from.floor !== currentFloor
+    ) {
+      updateMapByBuildingAndFloor('MAIN', from.floor);
+    }
 
     const dx = to.x - from.x;
     const dy = to.y - from.y;
@@ -678,9 +723,79 @@ function highlightPath(nodeIds, nodes) {
 
 
 
+function highlightCOCPath(nodeIds, pathWithFloors) {
+  updateMapByBuildingAndFloor('COC');
+
+  if (nodeIds && nodeIds.length > 0) {
+    plotVerticesOnMap(nodeIds, cocLocations); // ✅ now uses COC nodes
+    highlightPath(nodeIds, cocLocations);
+  }
+}
+
+function highlightCEAPath(nodeIds, pathWithFloors) {
+  updateMapByBuildingAndFloor('CEA');
+
+  if (nodeIds && nodeIds.length > 0) {
+    plotVerticesOnMap(nodeIds, ceaLocations); // ✅ now uses CEA nodes
+    highlightPath(nodeIds, ceaLocations);
+  }
+}
 
 
 
+function highlightInterCampusPath(route) {
+  // Show the MAIN campus map as base (or create multi-campus if needed)
+  initializeMap(getMapImageForCampus('MAIN'));
+
+  const map = document.getElementById("map");
+
+  if (!map) return;
+
+  // 🧹 Clear old lines and dots
+  map.querySelectorAll(".point, .path-line").forEach(el => el.remove());
+
+  // Highlight start campus path
+  if (route.startCampus === 'MAIN') {
+    highlightPath(route.segments.withinStartCampus.nodeIds, mainLocations);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
+  } else if (route.startCampus === 'COC') {
+    highlightPath(route.segments.withinStartCampus.nodeIds, cocLocations);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
+  } else if (route.startCampus === 'CEA') {
+    highlightPath(route.segments.withinStartCampus.nodeIds, ceaLocations);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
+  }
+
+  // Optional: Add a visual "break" or icon to indicate inter-campus travel
+
+  // Highlight end campus path
+  if (route.endCampus === 'MAIN') {
+    highlightPath(route.segments.withinEndCampus.nodeIds, mainLocations);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
+  } else if (route.endCampus === 'COC') {
+    highlightPath(route.segments.withinEndCampus.nodeIds, cocLocations);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
+  } else if (route.endCampus === 'CEA') {
+    highlightPath(route.segments.withinEndCampus.nodeIds, ceaLocations);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
+  }
+}
+
+
+// Make functions available globally (if needed for HTML onclick handlers)
+window.startNavigating = startNavigating;
+window.findRoute = findRoute;
+
+
+
+
+// Export functions for potential use by other modules
+export {
+  findCompleteRoute,
+  displayInterCampusRouteEnhanced,
+  interCampusConnections,
+  highlightInterCampusPath
+};
 
 
 
@@ -699,23 +814,61 @@ function highlightPath(nodeIds, nodes) {
 // }
 
 
-function highlightCOCPath(nodeIds, pathWithFloors) {
-  initializeMap(getMapImageForCampus('COC'));
+// // Function to highlight inter-campus paths
+// function highlightInterCampusPath(route) {
+//   let mapHTML = `<div class="inter-campus-map">
+//     <div class="campus-connection-visualization">
+//       <h4>Inter-Campus Route Visualization</h4>
+     
+//       <div class="campus-segment">
+//         <h5>${route.startCampus} Campus Route:</h5>
+//         <div class="campus-path">${route.segments.withinStartCampus.path.join(' → ')}</div>
+//       </div>
+     
+//       <div class="connection-segment">
+//         <h5>Inter-Campus Connection:</h5>
+//         <div class="connection-info">
+//           <p><strong>${route.routeDescription}</strong></p>
+//           <p>Distance: ${route.segments.interCampus.distance}m</p>
+//           <div class="transport-times">
+//             <span class="walking-time">🚶 ${route.segments.interCampus.walkingTime} min</span>
+//             <span class="tricycle-time">🛺 ${route.segments.interCampus.tricycleTime} min</span>
+//           </div>
+//         </div>
+//       </div>
+     
+//       <div class="campus-segment">
+//         <h5>${route.endCampus} Campus Route:</h5>
+//         <div class="campus-path">${route.segments.withinEndCampus.path.join(' → ')}</div>
+//       </div>
+     
+//       <div class="total-summary">
+//         <p><strong>Total Journey:</strong> ${route.formattedDistance} | 🚶 ${route.walkingTime} min | 🛺 ${route.tricycleTime} min</p>
+//       </div>
+//     </div>
+//   </div>`;
+ 
+//   $('#map-container').html(mapHTML);
+// }
 
-  if (nodeIds && nodeIds.length > 0) {
-    plotVerticesOnMap(nodeIds, cocLocations); // ✅ now uses COC nodes
-    highlightPath(nodeIds, cocLocations);
-  }
-}
 
-function highlightCEAPath(nodeIds, pathWithFloors) {
-  initializeMap(getMapImageForCampus('CEA'));
 
-  if (nodeIds && nodeIds.length > 0) {
-    plotVerticesOnMap(nodeIds, ceaLocations); // ✅ now uses CEA nodes
-    highlightPath(nodeIds, ceaLocations);
-  }
-}
+
+
+// 🧪 Test Route – TEMPORARY DEBUG
+// $(document).ready(() => {
+//   const testRoute = findMainCampusRoute("Main Gate", "Main Building - Dome"); // ✅ Define it here
+
+//   if (testRoute && !testRoute.error) {
+//     console.log("🟢 Test Route Found:", testRoute);
+
+//     plotVerticesOnMap(testRoute.nodeIds); // ✅ Show path dots
+//     highlightPath(testRoute.nodeIds, mainCampusData.nodes); // ✅ Draw line
+//     displayRoute(testRoute, "Main Gate", "Main Building - Dome", "Main Campus"); // ✅ Show text route
+//   } else {
+//     console.error("❌ Test route error:", testRoute?.message);
+//   }
+// });
 
 
 // Function to highlight COC building path with floor information
@@ -836,118 +989,6 @@ function highlightCEAPath(nodeIds, pathWithFloors) {
  
 //   $('#map-container').html(mapHTML);
 // }
-
-function highlightInterCampusPath(route) {
-  // Show the MAIN campus map as base (or create multi-campus if needed)
-  initializeMap(getMapImageForCampus('MAIN'));
-
-  const map = document.getElementById("map");
-
-  if (!map) return;
-
-  // 🧹 Clear old lines and dots
-  map.querySelectorAll(".point, .path-line").forEach(el => el.remove());
-
-  // Highlight start campus path
-  if (route.startCampus === 'MAIN') {
-    highlightPath(route.segments.withinStartCampus.nodeIds, mainLocations);
-    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
-  } else if (route.startCampus === 'COC') {
-    highlightPath(route.segments.withinStartCampus.nodeIds, cocLocations);
-    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
-  } else if (route.startCampus === 'CEA') {
-    highlightPath(route.segments.withinStartCampus.nodeIds, ceaLocations);
-    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds);
-  }
-
-  // Optional: Add a visual "break" or icon to indicate inter-campus travel
-
-  // Highlight end campus path
-  if (route.endCampus === 'MAIN') {
-    highlightPath(route.segments.withinEndCampus.nodeIds, mainLocations);
-    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
-  } else if (route.endCampus === 'COC') {
-    highlightPath(route.segments.withinEndCampus.nodeIds, cocLocations);
-    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
-  } else if (route.endCampus === 'CEA') {
-    highlightPath(route.segments.withinEndCampus.nodeIds, ceaLocations);
-    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds);
-  }
-}
-
-
-
-// // Function to highlight inter-campus paths
-// function highlightInterCampusPath(route) {
-//   let mapHTML = `<div class="inter-campus-map">
-//     <div class="campus-connection-visualization">
-//       <h4>Inter-Campus Route Visualization</h4>
-     
-//       <div class="campus-segment">
-//         <h5>${route.startCampus} Campus Route:</h5>
-//         <div class="campus-path">${route.segments.withinStartCampus.path.join(' → ')}</div>
-//       </div>
-     
-//       <div class="connection-segment">
-//         <h5>Inter-Campus Connection:</h5>
-//         <div class="connection-info">
-//           <p><strong>${route.routeDescription}</strong></p>
-//           <p>Distance: ${route.segments.interCampus.distance}m</p>
-//           <div class="transport-times">
-//             <span class="walking-time">🚶 ${route.segments.interCampus.walkingTime} min</span>
-//             <span class="tricycle-time">🛺 ${route.segments.interCampus.tricycleTime} min</span>
-//           </div>
-//         </div>
-//       </div>
-     
-//       <div class="campus-segment">
-//         <h5>${route.endCampus} Campus Route:</h5>
-//         <div class="campus-path">${route.segments.withinEndCampus.path.join(' → ')}</div>
-//       </div>
-     
-//       <div class="total-summary">
-//         <p><strong>Total Journey:</strong> ${route.formattedDistance} | 🚶 ${route.walkingTime} min | 🛺 ${route.tricycleTime} min</p>
-//       </div>
-//     </div>
-//   </div>`;
- 
-//   $('#map-container').html(mapHTML);
-// }
-
-
-
-
-// Make functions available globally (if needed for HTML onclick handlers)
-window.startNavigating = startNavigating;
-window.findRoute = findRoute;
-
-
-
-
-// Export functions for potential use by other modules
-export {
-  findCompleteRoute,
-  displayInterCampusRouteEnhanced,
-  interCampusConnections,
-  highlightInterCampusPath
-};
-
-// 🧪 Test Route – TEMPORARY DEBUG
-// $(document).ready(() => {
-//   const testRoute = findMainCampusRoute("Main Gate", "Main Building - Dome"); // ✅ Define it here
-
-//   if (testRoute && !testRoute.error) {
-//     console.log("🟢 Test Route Found:", testRoute);
-
-//     plotVerticesOnMap(testRoute.nodeIds); // ✅ Show path dots
-//     highlightPath(testRoute.nodeIds, mainCampusData.nodes); // ✅ Draw line
-//     displayRoute(testRoute, "Main Gate", "Main Building - Dome", "Main Campus"); // ✅ Show text route
-//   } else {
-//     console.error("❌ Test route error:", testRoute?.message);
-//   }
-// });
-
-
 
 
 
