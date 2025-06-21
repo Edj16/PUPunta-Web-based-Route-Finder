@@ -1,5 +1,4 @@
 // Main Campus Graph Data
-
 function calculateDistance(p1, p2) {
   const dx = p2.x - p1.x;
   const dy = p2.y - p1.y;
@@ -7,28 +6,28 @@ function calculateDistance(p1, p2) {
 }
 
 const nodes = {
-   1: { id: 1, name: "Amphitheater", type: "building" ,x:257,y:261},
-    2: { id: 2, name: "Banda Kawayan, Sining Lahi Headquarters", type: "building", x:187, y:58},
-    3: { id: 3, name: "Building and Grounds Maintenance Office", type: "building", x:232, y:446 },
-    4: { id: 4, name: "Catwalk", type: "path", x:444, y:207  },
-    5: { id: 5, name: "Centennial Monument", type: "landmark", x:330, y:215 },
-    6: { id: 6, name: "Charlie del Rosario Student Development Center", type: "building", x:131, y:200 },
-    7: { id: 7, name: "East Gate", type: "entrance", x:585, y:430},
-    8: { id: 8, name: "Flag Pole", type: "landmark", x:349, y:284 },
-    9: { id: 9, name: "Grandstand", type: "building", x:430, y:305 },
-    10: { id: 10, name: "Gymnasium", type: "building", x:477, y:84 },
-    11: { id: 11, name: "Interfaith Chapel", type: "building", x:326, y:380},
-    12: { id: 12, name: "Laboratory High School", type: "building", x:127, y:127},
-    13: { id: 13, name: "Lagoon", type: "landmark", x:281, y:222 },
-    14: { id: 14, name: "Main Building - Dome", type: "building", x:249, y:331 },
-    15: { id: 15, name: "Main Building - East Wing", type: "building" , x:248, y:388},
-    16: { id: 16, name: "Main Building - North Wing", type: "building", x:298, y:300},
-    17: { id: 17, name: "Main Building - South Wing", type: "building", x:182, y:367},
-    18: { id: 18, name: "Main Building - West Wing", type: "building", x:194, y:299},
-    19: { id: 19, name: "Main Gate", type: "entrance", x:587, y:220 },
-    20: { id: 20, name: "Nemesio E. Prudente Freedom Park", type: "landmark", x:359, y:265 },
-    21: { id: 21, name: "Ninoy Aquino Library and Learning Resources Center", type: "building", x:235, y:120 },
-    22: { id: 22, name: "Open Court", type: "landmark", x:417, y:155 },
+    1: { id: 1, name: "Amphitheater", type: "building" ,x:257,y:261},
+      2: { id: 2, name: "Banda Kawayan, Sining Lahi Headquarters", type: "building", x:187, y:58},
+      3: { id: 3, name: "Building and Grounds Maintenance Office", type: "building", x:232, y:446 },
+      4: { id: 4, name: "Catwalk", type: "path", x:444, y:207  },
+      5: { id: 5, name: "Centennial Monument", type: "landmark", x:330, y:215 },
+      6: { id: 6, name: "Charlie del Rosario Student Development Center", type: "building", x:131, y:200 },
+      7: { id: 7, name: "East Gate", type: "entrance", x:585, y:430},
+      8: { id: 8, name: "Flag Pole", type: "landmark", x:349, y:284 },
+      9: { id: 9, name: "Grandstand", type: "building", x:430, y:305 },
+      10: { id: 10, name: "Gymnasium", type: "building", x:477, y:84 },
+      11: { id: 11, name: "Interfaith Chapel", type: "building", x:326, y:380},
+      12: { id: 12, name: "Laboratory High School", type: "building", x:127, y:127},
+      13: { id: 13, name: "Lagoon", type: "landmark", x:281, y:222 },
+      14: { id: 14, name: "Main Building - Dome", type: "building", x:249, y:331 },
+      15: { id: 15, name: "Main Building - East Wing", type: "building" , x:248, y:388},
+      16: { id: 16, name: "Main Building - North Wing", type: "building", x:298, y:300},
+      17: { id: 17, name: "Main Building - South Wing", type: "building", x:182, y:367},
+      18: { id: 18, name: "Main Building - West Wing", type: "building", x:194, y:299},
+      19: { id: 19, name: "Main Gate", type: "entrance", x:587, y:220 },
+      20: { id: 20, name: "Nemesio E. Prudente Freedom Park", type: "landmark", x:359, y:265 },
+      21: { id: 21, name: "Ninoy Aquino Library and Learning Resources Center", type: "building", x:235, y:120 },
+      22: { id: 22, name: "Open Court", type: "landmark", x:417, y:155 },
     23: { id: 23, name: "Open University / Nontraditional Studies Program", type: "building", x:312, y:446 },
     24: { id: 24, name: "Oval Open Field", type: "landmark", x:495, y:344 },
     25: { id: 25, name: "P.E. Building", type: "building", x:322, y:88},
@@ -48,7 +47,7 @@ const nodes = {
     39: { id: 39, name: "Water Tank", type: "landmark", x:196, y:90 },
     40: { id: 40, name: "West Gate", type: "entrance", x:591, y:151},
 
-    //path
+       //path
     41: { id: 41, type: "path", x: 500, y: 225 },
     42: { id: 42, type: "path", x: 476, y: 264 },
     43: { id: 43, type: "path", x: 556, y: 151 },
@@ -90,6 +89,7 @@ const nodes = {
     79: { id: 79, type: "path", x: 322, y: 258 },
     80: { id: 80, type: "path", x: 544, y: 228 },
     81: { id: 81, type: "path", x: 368, y: 408 },
+
     // === MAIN BUILDING - 1st FLOOR ROOMS ===
     // EAST WING
     1001: { id: 1001, name: "Office of Student Services", type: "office", floor: 1, parent: 15 },
@@ -125,18 +125,22 @@ const nodes = {
     1023: { id: 1023, name: "Dome Hallway", type: "hallway", floor: 1, parent: 14 },
 
     // STAIRS
-    1024: { id: 1024, name: "North Wing Left Stairs", type: "stairs", floor: "1-2", parent: 16 },
-    1025: { id: 1025, name: "North Wing Right Stairs", type: "stairs", floor: "1-2", parent: 16 },
-    1026: { id: 1026, name: "Central Stairs", type: "stairs", floor: "1-2", parent: 14 },
-    1027: { id: 1027, name: "South Wing Left Stairs", type: "stairs", floor: "1-2", parent: 17 },
-    1028: { id: 1028, name: "South Wing Center Stairs", type: "stairs", floor: "1-2", parent: 17 },
-    1029: { id: 1029, name: "South Wing Right Stairs", type: "stairs", floor: "1-2", parent: 17 },
+    1024: { id: 1024, name: "North Wing Left Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 16 },
+    1025: { id: 1025, name: "North Wing Right Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 16 },
+    1026: { id: 1026, name: "North Wing Center Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 16 },
+    1027: { id: 1027, name: "South Wing Left Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 17 },
+    1028: { id: 1028, name: "South Wing Center Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 17 },
+    1029: { id: 1029, name: "South Wing Right Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 17 },
+    1034: { id: 1034, name: "East Wing Left Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 15 },
+    1035: { id: 1035, name: "East Wing Right Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 15 },
+    1036: { id: 1036, name: "West Wing Left Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 18 },
+    1037: { id: 1037, name: "West Wing Right Stairs (1st floor)", type: "stairs", floor: "1-2", parent: 18 },
 
     // HALLWAYS
-    1030: { id: 1030, name: "East Wing Hallway", type: "hallway", floor: 1, parent: 15 },
-    1031: { id: 1031, name: "North Wing Hallway", type: "hallway", floor: 1, parent: 16 },
-    1032: { id: 1032, name: "West Wing Hallway", type: "hallway", floor: 1, parent: 18 },
-    1033: { id: 1033, name: "South Wing Hallway", type: "hallway", floor: 1, parent: 17 },
+    1030: { id: 1030, name: "East Wing Hallway (1st floor)", type: "hallway", floor: 1, parent: 15 },
+    1031: { id: 1031, name: "North Wing Hallway (1st floor)", type: "hallway", floor: 1, parent: 16 },
+    1032: { id: 1032, name: "West Wing Hallway (1st floor)", type: "hallway", floor: 1, parent: 18 },
+    1033: { id: 1033, name: "South Wing Hallway (1st floor)", type: "hallway", floor: 1, parent: 17 },
 
     // === MAIN BUILDING - 2nd FLOOR ROOMS ===
     // EAST WING
@@ -199,18 +203,21 @@ const nodes = {
     2102: { id: 2102, name: "Dome Hallway", type: "hallway", floor: 2, parent: 14 },
 
     // STAIRS (2nd to 3rd floor)
-    2103: { id: 2103, name: "North Wing Left Stairs", type: "stairs", floor: "2-3", parent: 16 },
-    2104: { id: 2104, name: "North Wing Right Stairs", type: "stairs", floor: "2-3", parent: 16 },
-    2105: { id: 2105, name: "Central Stairs", type: "stairs", floor: "2-3", parent: 14 },
-    2106: { id: 2106, name: "South Wing Left Stairs", type: "stairs", floor: "2-3", parent: 17 },
-    2107: { id: 2107, name: "South Wing Center Stairs", type: "stairs", floor: "2-3", parent: 17 },
-    2108: { id: 2108, name: "South Wing Right Stairs", type: "stairs", floor: "2-3", parent: 17 },
+    2103: { id: 2103, name: "North Wing Left Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 16 },
+    2104: { id: 2104, name: "North Wing Right Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 16 },
+    2106: { id: 2106, name: "South Wing Left Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 17 },
+    2107: { id: 2107, name: "South Wing Center Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 17 },
+    2108: { id: 2108, name: "South Wing Right Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 17 },
+    2113: { id: 2113, name: "East Wing Left Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 15 },
+    2114: { id: 2114, name: "East Wing Right Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 15 },
+    2115: { id: 2115, name: "West Wing Left Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 18 },
+    2116: { id: 2116, name: "West Wing Right Stairs (2nd floor)", type: "stairs", floor: "2-3", parent: 18 },
 
     // HALLWAYS
-    2109: { id: 2109, name: "East Wing Hallway", type: "hallway", floor: 2, parent: 15 },
-    2110: { id: 2110, name: "North Wing Hallway", type: "hallway", floor: 2, parent: 16 },
-    2111: { id: 2111, name: "West Wing Hallway", type: "hallway", floor: 2, parent: 18 },
-    2112: { id: 2112, name: "South Wing Hallway", type: "hallway", floor: 2, parent: 17 },
+    2109: { id: 2109, name: "East Wing Hallway (2nd floor)", type: "hallway", floor: 2, parent: 15 },
+    2110: { id: 2110, name: "North Wing Hallway (2nd floor)", type: "hallway", floor: 2, parent: 16 },
+    2111: { id: 2111, name: "West Wing Hallway (2nd floor)", type: "hallway", floor: 2, parent: 18 },
+    2112: { id: 2112, name: "South Wing Hallway (2nd floor)", type: "hallway", floor: 2, parent: 17 },
 
     // === MAIN BUILDING - 3rd FLOOR ROOMS ===
     // EAST WING
@@ -295,6 +302,17 @@ const nodes = {
     3071: { id: 3071, name: "North Wing Hallway (3rd Floor)", type: "hallway", floor: 3, parent: 16 },
     3072: { id: 3072, name: "South Wing Hallway (3rd Floor)", type: "hallway", floor: 3, parent: 17 },
 
+    // Add missing stair nodes for third floor
+    3073: { id: 3073, name: "North Wing Left Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 16 },
+    3074: { id: 3074, name: "North Wing Right Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 16 },
+    3076: { id: 3076, name: "South Wing Left Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 17 },
+    3077: { id: 3077, name: "South Wing Center Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 17 },
+    3078: { id: 3078, name: "South Wing Right Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 17 },
+    3079: { id: 3079, name: "East Wing Left Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 15 },
+    3080: { id: 3080, name: "East Wing Right Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 15 },
+    3081: { id: 3081, name: "West Wing Left Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 18 },
+    3082: { id: 3082, name: "West Wing Right Stairs (3rd Floor)", type: "stairs", floor: "3-4", parent: 18 },
+
     // === MAIN BUILDING - 4th FLOOR ROOMS ===
     // EAST WING
     4001: { id: 4001, name: "E417", type: "room", floor: 4, parent: 15 },
@@ -353,8 +371,8 @@ const nodes = {
     4050: { id: 4050, name: "N414", type: "room", floor: 4, parent: 16 },
     4051: { id: 4051, name: "N416", type: "room", floor: 4, parent: 16 },
     4052: { id: 4052, name: "N418", type: "room", floor: 4, parent: 16 },
-    4053: { id: 4053, name: "Male Toilet (North)", type: "facility", floor: 4, parent: 16 },
-    4054: { id: 4054, name: "Female Toilet (North)", type: "facility", floor: 4, parent: 16 },
+    4053: { id: 4053, name: "Male Toilet (North - 4th floor)", type: "facility", floor: 4, parent: 16 },
+    4054: { id: 4054, name: "Female Toilet (North - 4th floor)", type: "facility", floor: 4, parent: 16 },
     4055: { id: 4055, name: "N401", type: "room", floor: 4, parent: 16 },
     4056: { id: 4056, name: "N403", type: "room", floor: 4, parent: 16 },
     4057: { id: 4057, name: "N405", type: "room", floor: 4, parent: 16 },
@@ -399,6 +417,17 @@ const nodes = {
     4092: { id: 4092, name: "West Wing Hallway (4th Floor)", type: "hallway", floor: 4, parent: 18 },
     4093: { id: 4093, name: "North Wing Hallway (4th Floor)", type: "hallway", floor: 4, parent: 16 },
     4094: { id: 4094, name: "South Wing Hallway (4th Floor)", type: "hallway", floor: 4, parent: 17 },
+
+    //STAIRS
+    4095: { id: 4095, name: "South Wing Left Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 17 },
+    4096: { id: 4096, name: "South Wing Center Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 17 },
+    4097: { id: 4097, name: "South Wing Right Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 17 },
+    4098: { id: 4098, name: "East Wing Left Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 15 },
+    4099: { id: 4099, name: "East Wing Right Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 15 },
+    4100: { id: 4100, name: "West Wing Left Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 18 },
+    4101: { id: 4101, name: "West Wing Right Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 18 },
+    4102: { id: 4102, name: "North Wing Left Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 16 },
+    4103: { id: 4103, name: "North Wing Right Stairs (4th Floor)", type: "stairs", floor: "4-5", parent: 16 },
 
     // === MAIN BUILDING - FIFTH FLOOR ROOMS ===
     // SOUTH WING
@@ -491,7 +520,7 @@ const nodes = {
     5079: { id: 5079, name: "SAMASA COA", type: "office", floor: 5, parent: 16 },
 
     // FACILITIES
-    5082: { id: 5082, name: "Male Toilet East Wing - 5H", type: "facility", floor: 5, parent: 15 },
+    5082: { id: 5082, name: "Male Toilet East Wing - 5th floor", type: "facility", floor: 5, parent: 15 },
     5083: { id: 5083, name: "Female Toilet East Wing - 5th Floor", type: "facility", floor: 5, parent: 15 },
     5084: { id: 5084, name: "Male Toilet West Wing - 5th Floor", type: "facility", floor: 5, parent: 18 },
     5085: { id: 5085, name: "Female Toilet West Wing - 5th Floor", type: "facility", floor: 5, parent: 18 },
@@ -504,6 +533,16 @@ const nodes = {
     5093: { id: 5093, name: "North Wing Hallway (5th Floor)", type: "hallway", floor: 5, parent: 16 },
     5094: { id: 5094, name: "South Wing Hallway (5th Floor)", type: "hallway", floor: 5, parent: 17 },
     5095: { id: 5095, name: "5th Floor Dome", type: "facility", floor: 5, parent: 14 },
+
+    5096: { id: 5096, name: "South Wing Left Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 17 },
+    5097: { id: 5097, name: "South Wing Center Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 17 },
+    5098: { id: 5098, name: "South Wing Right Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 17 },
+    5099: { id: 5099, name: "East Wing Left Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 15 },
+    5100: { id: 5100, name: "East Wing Right Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 15 },
+    5101: { id: 5101, name: "West Wing Left Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 18 },
+    5102: { id: 5102, name: "West Wing Right Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 18 },
+    5103: { id: 5103, name: "North Wing Left Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 16 },
+    5104: { id: 5104, name: "North Wing Right Stairs (5th Floor)", type: "stairs", floor: "4-5", parent: 16 },
 
      // === MAIN BUILDING - 6TH FLOOR ROOMS ===
     // CLARO M. RECTO HALL (SOUTH WING)
@@ -560,14 +599,14 @@ const nodes = {
 
 
     // FACILITIES
-    6060: { id: 6060, name: "Male Toilet South Wing", type: "facility", floor: 6, parent: 17 },
-    6061: { id: 6061, name: "Female Toilet South Wing", type: "facility", floor: 6, parent: 17 },
-    6062: { id: 6062, name: "Male Toilet East Wing", type: "facility", floor: 6, parent: 15 },
-    6063: { id: 6063, name: "Female Toilet East Wing", type: "facility", floor: 6, parent: 15 },
-    6064: { id: 6064, name: "Male Toilet West Wing", type: "facility", floor: 6, parent: 18 },
-    6065: { id: 6065, name: "Female Toilet West Wing", type: "facility", floor: 6, parent: 18 },
-    6066: { id: 6066, name: "Male Toilet North Wing", type: "facility", floor: 6, parent: 16 },
-    6067: { id: 6067, name: "Female Toilet North Wing", type: "facility", floor: 6, parent: 16 },
+    6060: { id: 6060, name: "Male Toilet South Wing (6th floor)", type: "facility", floor: 6, parent: 17 },
+    6061: { id: 6061, name: "Female Toilet South Wing (6th floor)", type: "facility", floor: 6, parent: 17 },
+    6062: { id: 6062, name: "Male Toilet East Wing (6th floor)", type: "facility", floor: 6, parent: 15 },
+    6063: { id: 6063, name: "Female Toilet East Wing (6th floor) ", type: "facility", floor: 6, parent: 15 },
+    6064: { id: 6064, name: "Male Toilet West Wing (6th floor)", type: "facility", floor: 6, parent: 18 },
+    6065: { id: 6065, name: "Female Toilet West Wing (6th floor)", type: "facility", floor: 6, parent: 18 },
+    6066: { id: 6066, name: "Male Toilet North Wing (6th floor)", type: "facility", floor: 6, parent: 16 },
+    6067: { id: 6067, name: "Female Toilet North Wing (6th floor)", type: "facility", floor: 6, parent: 16 },
 
 
     // HALLWAYS AND SPECIAL AREAS
@@ -578,6 +617,16 @@ const nodes = {
     6094: { id: 6094, name: "6th Floor Dome", type: "facility", floor: 6, parent: 14 },
     6095: { id: 6095, name: "Dome Hallway (6th Floor)", type: "hallway", floor: 6, parent: 14 },
 
+    // STAIRS
+    6096: { id: 6096, name: "South Wing Left Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 17 },
+    6097: { id: 6097, name: "South Wing Center Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 17 },
+    6098: { id: 6098, name: "South Wing Right Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 17 },
+    6099: { id: 6099, name: "East Wing Left Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 15 },
+    6100: { id: 6100, name: "East Wing Right Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 15 },
+    6101: { id: 6101, name: "West Wing Left Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 18 },
+    6102: { id: 6102, name: "West Wing Right Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 18 },
+    6103: { id: 6103, name: "North Wing Left Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 16 },
+    6104: { id: 6104, name: "North Wing Right Stairs (6th Floor)", type: "stairs", floor: "5-6", parent: 16 },
 
     // NORTH WING
     6050: { id: 6050, name: "Class Room 600", type: "room", floor: 6, parent: 16 },
@@ -589,12 +638,13 @@ const nodes = {
     6056: { id: 6056, name: "Class Room 612", type: "room", floor: 6, parent: 16 },
     6057: { id: 6057, name: "Class Room 614", type: "room", floor: 6, parent: 16 },
     6058: { id: 6058, name: "Class Room 616", type: "room", floor: 6, parent: 16 },
-    6059: { id: 6059, name: "Class Room 617", type: "room", floor: 6, parent: 16 },
+    6059: { id: 6059, name: "Class Room 617", type: "room", floor: 6, parent: 16 }
 }
 
 export const mainCampusData = {
-  nodes, edges: [
-  { from: 1, to: 13, weight: calculateDistance(nodes[1], nodes[13]) },
+  nodes, 
+  edges: [
+    { from: 1, to: 13, weight: calculateDistance(nodes[1], nodes[13]) },
   { from: 1, to: 58, weight: calculateDistance(nodes[1], nodes[58]) },
   { from: 1, to: 72, weight: calculateDistance(nodes[1], nodes[72]) },
   { from: 1, to: 73, weight: calculateDistance(nodes[1], nodes[73]) },
@@ -728,19 +778,29 @@ export const mainCampusData = {
   { from: 75, to: 76, weight: calculateDistance(nodes[75], nodes[76]) },
   { from: 78, to: 81, weight: calculateDistance(nodes[78], nodes[81]) },
   { from: 80, to: 41, weight: calculateDistance(nodes[80], nodes[41]) },
-  // Connect main building wings to their hallways
-    // { from: 15, to: 1030, weight: 5 },  // East Wing to East Wing Hallway
-    // { from: 16, to: 1031, weight: 5 },  // North Wing to North Wing Hallway
-    // { from: 17, to: 1033, weight: 5 },  // South Wing to South Wing Hallway
-    // { from: 18, to: 1032, weight: 5 },  // West Wing to West Wing Hallway
-    // { from: 14, to: 1023, weight: 5 },  // Dome to Dome Hallway
 
-    // // Connect main building wings to their 2nd floor hallways
-    // { from: 15, to: 2109, weight: 5 },  // East Wing to 2nd Floor East Wing Hallway
-    // { from: 16, to: 2110, weight: 5 },  // North Wing to 2nd Floor North Wing Hallway
-    // { from: 17, to: 2112, weight: 5 },  // South Wing to 2nd Floor South Wing Hallway
+    // Add connection from West Wing Hallway and stairs to Lagoon path
+    { from: 1032, to: 13, weight: 20 },  // West Wing Hallway to Lagoon
+    { from: 13, to: 1032, weight: 20 },  // Lagoon to West Wing Hallway
+    { from: 1036, to: 13, weight: 15 },  // West Wing Left Stairs to Lagoon
+    { from: 13, to: 1036, weight: 15 },   // Lagoon to West Wing Left Stairs
+      
+    // Connect main building wings to their hallways
+    { from: 15, to: 1030, weight: 5 },  // East Wing to East Wing Hallway
+    { from: 16, to: 1031, weight: 5 },  // North Wing to North Wing Hallway
+    { from: 17, to: 1033, weight: 5 },  // South Wing to South Wing Hallway
+    // Removing direct building-to-hallway connection that bypasses stairs
+    // { from: 18, to: 1032, weight: 5 },  // West Wing to West Wing Hallway
+    { from: 14, to: 1023, weight: 5 },  // Dome to Dome Hallway
+
+    // Connect main building wings to their 2nd floor hallways
+    { from: 15, to: 2109, weight: 5 },  // East Wing to 2nd Floor East Wing Hallway
+    { from: 16, to: 2110, weight: 5 },  // North Wing to 2nd Floor North Wing Hallway
+    { from: 17, to: 2112, weight: 5 },  // South Wing to 2nd Floor South Wing Hallway
+    // Removing direct building-to-hallway connection that bypasses stairs
     // { from: 18, to: 2111, weight: 5 },  // West Wing to 2nd Floor West Wing Hallway
-    // { from: 14, to: 2102, weight: 5 },  // Dome to 2nd Floor Dome Hallway
+    { from: 14, to: 2102, weight: 5 },  // Dome to 2nd Floor Dome Hallway
+
 
     // === MAIN BUILDING 1ST FLOOR INTERNAL CONNECTIONS ===
     // East Wing Connections through Hallway
@@ -778,7 +838,9 @@ export const mainCampusData = {
     // Hallway to Stairs Connections
     { from: 1030, to: 1024, weight: 25 }, // East Wing Hallway to North Left Stairs
     { from: 1031, to: 1025, weight: 25 }, // North Wing Hallway to North Right Stairs
-    { from: 1023, to: 1026, weight: 25 }, // Dome Hallway to Central Stairs
+    { from: 1031, to: 1026, weight: 25 }, // North Wing Hallway to North Center Stairs
+    { from: 1026, to: 2110, weight: 25 }, // North Center Stairs to 2nd floor hallway
+
     { from: 1033, to: 1027, weight: 25 }, // South Wing Hallway to South Left Stairs
     { from: 1033, to: 1028, weight: 25 }, // South Wing Hallway to South Center Stairs
     { from: 1033, to: 1029, weight: 25 }, // South Wing Hallway to South Right Stairs
@@ -799,7 +861,7 @@ export const mainCampusData = {
     // Stairs from 1st to 2nd floor connections
     { from: 1024, to: 2110, weight: 25 }, // North Wing Left Stairs to 2nd floor hallway
     { from: 1025, to: 2110, weight: 25 }, // North Wing Right Stairs to 2nd floor hallway
-    { from: 1026, to: 2102, weight: 25 }, // Central Stairs to 2nd floor dome hallway
+
     { from: 1027, to: 2112, weight: 25 }, // South Wing Left Stairs to 2nd floor hallway
     { from: 1028, to: 2112, weight: 25 }, // South Wing Center Stairs to 2nd floor hallway
     { from: 1029, to: 2112, weight: 25 }, // South Wing Right Stairs to 2nd floor hallway
@@ -865,7 +927,7 @@ export const mainCampusData = {
     // Hallway to Stairs Connections (2nd to 3rd floor)
     { from: 2109, to: 2103, weight: 25 }, // East Wing Hallway to North Left Stairs
     { from: 2110, to: 2104, weight: 25 }, // North Wing Hallway to North Right Stairs
-    { from: 2102, to: 2105, weight: 25 }, // Dome Hallway to Central Stairs
+
     { from: 2112, to: 2106, weight: 25 }, // South Wing Hallway to South Left Stairs
     { from: 2112, to: 2107, weight: 25 }, // South Wing Hallway to South Center Stairs
     { from: 2112, to: 2108, weight: 25 }, // South Wing Hallway to South Right Stairs
@@ -882,61 +944,7 @@ export const mainCampusData = {
     { from: 2111, to: 2112, weight: 15 }, // West Wing to South Wing Hallway
     { from: 2112, to: 2109, weight: 15 }, // South Wing to East Wing Hallway
 
-    // Add new edges for 2nd floor
-    // East Wing Connections
-    { from: 2109, to: 2001, weight: 5 }, // Hallway to E219
-    { from: 2109, to: 2002, weight: 5 }, // Hallway to E217
-    { from: 2109, to: 2003, weight: 5 }, // Hallway to E215
-    { from: 2109, to: 2004, weight: 5 }, // Hallway to E213
-    { from: 2109, to: 2005, weight: 5 }, // Hallway to E211
-    { from: 2109, to: 2006, weight: 5 }, // Hallway to E209
-    { from: 2109, to: 2007, weight: 5 }, // Hallway to E207
-    { from: 2109, to: 2008, weight: 5 }, // Hallway to E206
-    { from: 2109, to: 2009, weight: 5 }, // Hallway to E208
-    { from: 2109, to: 2010, weight: 5 }, // Hallway to E210
-    { from: 2109, to: 2011, weight: 5 }, // Hallway to E212
-    { from: 2109, to: 2012, weight: 5 }, // Hallway to E214
-    { from: 2109, to: 2013, weight: 5 }, // Hallway to E216
-    { from: 2109, to: 2014, weight: 5 }, // Hallway to E218
-    { from: 2109, to: 2015, weight: 5 }, // Hallway to E220
-
-    // West Wing Connections
-    { from: 2111, to: 2016, weight: 5 }, // Hallway to W220
-    { from: 2111, to: 2017, weight: 5 }, // Hallway to W218
-    { from: 2111, to: 2018, weight: 5 }, // Hallway to W216
-    { from: 2111, to: 2019, weight: 5 }, // Hallway to W214
-    { from: 2111, to: 2020, weight: 5 }, // Hallway to W212
-    { from: 2111, to: 2021, weight: 5 }, // Hallway to W210
-    { from: 2111, to: 2022, weight: 5 }, // Hallway to W208
-    { from: 2111, to: 2023, weight: 5 }, // Hallway to W206
-    { from: 2111, to: 2024, weight: 5 }, // Hallway to W204
-    { from: 2111, to: 2025, weight: 5 }, // Hallway to W202
-    { from: 2111, to: 2026, weight: 5 }, // Hallway to W200
-    { from: 2111, to: 2027, weight: 5 }, // Hallway to W205
-    { from: 2111, to: 2028, weight: 5 }, // Hallway to W207
-    { from: 2111, to: 2029, weight: 5 }, // Hallway to W209
-    { from: 2111, to: 2030, weight: 5 }, // Hallway to W213
-    { from: 2111, to: 2031, weight: 5 }, // Hallway to W215
-    { from: 2111, to: 2032, weight: 5 }, // Hallway to Faculty Circle
-    { from: 2111, to: 2033, weight: 5 }, // Hallway to PUPFFA Office
-    { from: 2111, to: 2034, weight: 5 }, // Hallway to Research Center
-
-    // North Wing Connections
-    { from: 2110, to: 2035, weight: 5 }, // Hallway to College of Science
-    { from: 2110, to: 2036, weight: 5 }, // Hallway to College of Languages
-    { from: 2110, to: 2037, weight: 5 }, // Hallway to College of Arts
-    { from: 2110, to: 2038, weight: 5 }, // Hallway to College of Accountancy
-    { from: 2110, to: 2039, weight: 5 }, // Hallway to College of Business
-    { from: 2110, to: 2040, weight: 5 }, // Hallway to College of Education
-
-    // South Wing Connections
-    { from: 2112, to: 2041, weight: 5 }, // Hallway to President's Office
-    { from: 2112, to: 2042, weight: 5 }, // Hallway to Mateo Conference Room
-    { from: 2112, to: 2043, weight: 5 }, // Hallway to Board Secretary
-    { from: 2112, to: 2044, weight: 5 }, // Hallway to VP Academic Affairs
-    { from: 2112, to: 2045, weight: 5 }, // Hallway to VP Administration
-    { from: 2112, to: 2046, weight: 5 }, // Hallway to Carague Conference Room
-    { from: 2112, to: 2047, weight: 5 }, // Hallway to VP Research
+    // 2nd Floor Connections are already defined above
 
     // Adjacent Room Connections
     { from: 2001, to: 2002, weight: 3 }, // E219 to E217
@@ -1063,7 +1071,7 @@ export const mainCampusData = {
     // Stairs Connections (2nd to 3rd floor)
     { from: 2103, to: 3071, weight: 25 }, // North Wing Left Stairs to 3rd floor hallway
     { from: 2104, to: 3071, weight: 25 }, // North Wing Right Stairs to 3rd floor hallway
-    { from: 2105, to: 3068, weight: 25 }, // Central Stairs to 3rd floor dome hallway
+
     { from: 2106, to: 3072, weight: 25 }, // South Wing Left Stairs to 3rd floor hallway
     { from: 2107, to: 3072, weight: 25 }, // South Wing Center Stairs to 3rd floor hallway
     { from: 2108, to: 3072, weight: 25 }, // South Wing Right Stairs to 3rd floor hallway
@@ -1207,10 +1215,6 @@ export const mainCampusData = {
     { from: 4037, to: 4038, weight: 3 }, // W405 to W403
     { from: 4038, to: 4039, weight: 3 }, // W403 to W401
 
-    // Stairs Connections (3rd to 4th floor)
-    { from: 3071, to: 4093, weight: 8 }, // North Wing Stairs to 4th floor hallway
-    { from: 3068, to: 4090, weight: 8 }, // Central Stairs to 4th floor dome hallway
-    { from: 3072, to: 4094, weight: 8 }, // South Wing Stairs to 4th floor hallway
 
     // === FIFTH FLOOR CONNECTIONS ===
     
@@ -1298,11 +1302,35 @@ export const mainCampusData = {
     { from: 5075, to: 5076, weight: 3 }, // N513 to N515
     { from: 5076, to: 5077, weight: 3 }, // N515 to N517
 
-    // Stairs Connections (4th to 5th floor)
-    { from: 4093, to: 5093, weight: 25 }, // North Wing Stairs to 5th floor hallway
-    { from: 4090, to: 5095, weight: 25 }, // Central Stairs to 5th floor dome
-    { from: 4094, to: 5094, weight: 25 }, // South Wing Stairs to 5th floor hallway
-    { from: 4092, to: 5092, weight: 25 }, // West Wing Stairs to 5th floor hallway
+    // Proper stair connections between 4th and 5th floors
+    // Left Stairs
+    { from: 5094, to: 5096, weight: 35 }, // 5th floor hallway to left stairs
+    { from: 5096, to: 4095, weight: 25 }, // 5th floor left stairs to 4th floor left stairs
+    { from: 4095, to: 4094, weight: 25 }, // 4th floor left stairs to hallway
+    { from: 4094, to: 4095, weight: 25 }, // 4th floor hallway to left stairs
+    { from: 4095, to: 5096, weight: 25 }, // 4th floor left stairs to 5th floor left stairs
+    { from: 5096, to: 5094, weight: 35 }, // 5th floor left stairs to hallway
+
+    // Center Stairs
+    { from: 5094, to: 5097, weight: 20 }, // 5th floor hallway to center stairs
+    { from: 5097, to: 4096, weight: 25 }, // 5th floor center stairs to 4th floor center stairs
+    { from: 4096, to: 4094, weight: 25 }, // 4th floor center stairs to hallway
+    { from: 4094, to: 4096, weight: 25 }, // 4th floor hallway to center stairs
+    { from: 4096, to: 5097, weight: 25 }, // 4th floor center stairs to 5th floor center stairs
+    { from: 5097, to: 5094, weight: 20 }, // 5th floor center stairs to hallway
+
+    // Right Stairs
+    { from: 5094, to: 5098, weight: 30 }, // 5th floor hallway to right stairs
+    { from: 5098, to: 4097, weight: 25 }, // 5th floor right stairs to 4th floor right stairs
+    { from: 4097, to: 4094, weight: 25 }, // 4th floor right stairs to hallway
+    { from: 4094, to: 4097, weight: 25 }, // 4th floor hallway to right stairs
+    { from: 4097, to: 5098, weight: 25 }, // 4th floor right stairs to 5th floor right stairs
+    { from: 5098, to: 5094, weight: 30 }, // 5th floor right stairs to hallway
+
+    // Connect 4th floor stairs to 3rd floor stairs
+    { from: 4095, to: 3076, weight: 25 }, // 4th floor left stairs to 3rd floor left stairs
+    { from: 4096, to: 3077, weight: 15 }, // 4th floor center stairs to 3rd floor center stairs
+    { from: 4097, to: 3078, weight: 25 }, // 4th floor right stairs to 3rd floor right stairs
 
     // Wing Connections to Central Area
     { from: 5093, to: 5095, weight: 5 }, // North Wing to Central Area
@@ -1475,164 +1503,247 @@ export const mainCampusData = {
     { from: 6048, to: 6049, weight: 3 }, // Class Room 639 to 640
 
 
+    // Remove direct connection between 4th and 5th floors
+    { from: 4093, to: 5093, weight: 25 }, // North Wing Stairs to 5th floor hallway - USING STAIRS
+
+    { from: 4094, to: 5094, weight: 25 }, // South Wing Stairs to 5th floor hallway - USING STAIRS
+
     // Stair connections from 5th to 6th floor
     { from: 5091, to: 6090, weight: 25 }, // East Wing Stairs
     { from: 5092, to: 6091, weight: 25 }, // West Wing Stairs
     { from: 5093, to: 6092, weight: 25 }, // North Wing Stairs
     { from: 5094, to: 6093, weight: 25 }, // South Wing Stairs
-    { from: 5095, to: 6094, weight: 25 }  // Dome Stairs
+    { from: 5095, to: 6094, weight: 25 },  // Dome Stairs
 
+    // Add stair connections for third floor
+    { from: 2103, to: 3073, weight: 25 }, // North Wing Left Stairs 2nd to 3rd
+    { from: 2104, to: 3074, weight: 25 }, // North Wing Right Stairs 2nd to 3rd
 
-]
-}
-// export const mainCampusData = {
-//   nodes: {
-//     1: { id: 1, name: "Amphitheater", type: "building" },
-//     2: { id: 2, name: "Banda Kawayan, Sining Lahi Headquarters", type: "building" },
-//     3: { id: 3, name: "Building and Grounds Maintenance Office", type: "building" },
-//     4: { id: 4, name: "Catwalk", type: "path" },
-//     5: { id: 5, name: "Centennial Monument", type: "landmark" },
-//     6: { id: 6, name: "Charlie del Rosario Student Development Center", type: "building" },
-//     7: { id: 7, name: "East Gate", type: "entrance" },
-//     8: { id: 8, name: "Flag Pole", type: "landmark" },
-//     9: { id: 9, name: "Grandstand", type: "building" },
-//     10: { id: 10, name: "Gymnasium", type: "building" },
-//     11: { id: 11, name: "Interfaith Chapel", type: "building" },
-//     12: { id: 12, name: "Laboratory High School", type: "building" },
-//     13: { id: 13, name: "Lagoon", type: "landmark" },
-//     14: { id: 14, name: "Main Building - Dome", type: "building" },
-//     15: { id: 15, name: "Main Building - East Wing", type: "building" },
-//     16: { id: 16, name: "Main Building - North Wing", type: "building" },
-//     17: { id: 17, name: "Main Building - South Wing", type: "building" },
-//     18: { id: 18, name: "Main Building - West Wing", type: "building" },
-//     19: { id: 19, name: "Main Gate", type: "entrance" },
-//     20: { id: 20, name: "Nemesio E. Prudente Freedom Park", type: "landmark" },
-//     21: { id: 21, name: "Ninoy Aquino Library and Learning Resources Center", type: "building" },
-//     22: { id: 22, name: "Open Court", type: "landmark" },
-//     23: { id: 23, name: "Open University / Nontraditional Studies Program", type: "building" },
-//     24: { id: 24, name: "Oval Open Field", type: "landmark" },
-//     25: { id: 25, name: "P.E. Building", type: "building" },
-//     26: { id: 26, name: "Pasig River", type: "landmark" },
-//     27: { id: 27, name: "Pasig River Ferry (Sta. Mesa Station)", type: "entrance" },
-//     28: { id: 28, name: "Proposed Access Road", type: "path" },
-//     29: { id: 29, name: "Public Restroom", type: "building" },
-//     30: { id: 30, name: "PUP Linear Park", type: "landmark" },
-//     31: { id: 31, name: "PUP Mural and the Shrine of Heroism", type: "landmark" },
-//     32: { id: 32, name: "PUP Obelisk (and the Mabini Monument)", type: "landmark" },
-//     33: { id: 33, name: "PUP Property Building and Motorpool", type: "building" },
-//     34: { id: 34, name: "PUP Pylon", type: "landmark" },
-//     35: { id: 35, name: "Sampaguita Building", type: "building" },
-//     36: { id: 36, name: "Student Pavilion", type: "building" },
-//     37: { id: 37, name: "Swimming Pool", type: "landmark" },
-//     38: { id: 38, name: "Tennis Open Court", type: "landmark" },
-//     39: { id: 39, name: "Water Tank", type: "landmark" },
-//     40: { id: 40, name: "West Gate", type: "entrance" }
-//   },
-//   edges: [
-//     // MAIN ENTRANCE AREA
-//     { from: 19, to: 4, weight: 10 },   // Main Gate to Catwalk (primary entrance path)
-//     { from: 4, to: 19, weight: 10 },   // Catwalk to Main Gate (primary exit path)
-//     { from: 4, to: 36, weight: 15 },   // Catwalk to Student Pavilion
-//     { from: 36, to: 5, weight: 25 },   // Student Pavilion to Centennial Monument
-//     { from: 19, to: 31, weight: 35 },  // Main Gate to Mural area
-//     { from: 32, to: 31, weight: 20 },  // Obelisk to Mural (close proximity)
-//     { from: 32, to: 36, weight: 25 },  // Obelisk to Student Pavilion
-//     { from: 31, to: 36, weight: 20 },  // Mural to Student Pavilion
-//     { from: 32, to: 8, weight: 40 },   // Obelisk to Flag Pole
-   
-//     // MAIN BUILDING COMPLEX
-//     { from: 8, to: 14, weight: 35 },   // Flag Pole to Main Building Dome
-//     { from: 14, to: 15, weight: 20 },  // Dome to East Wing
-//     { from: 14, to: 16, weight: 20 },  // Dome to North Wing
-//     { from: 14, to: 17, weight: 20 },  // Dome to South Wing
-//     { from: 14, to: 18, weight: 20 },  // Dome to West Wing
-//     { from: 15, to: 16, weight: 25 },  // East Wing to North Wing
-//     { from: 16, to: 18, weight: 25 },  // North Wing to West Wing
-//     { from: 17, to: 18, weight: 25 },  // South Wing to West Wing
-//     { from: 15, to: 17, weight: 25 },  // East Wing to South Wing
-   
-//     // LAGOON AREA
-//     { from: 13, to: 1, weight: 15 },   // Lagoon to Amphitheater
-//     { from: 13, to: 5, weight: 20 },   // Lagoon to Centennial Monument
-//     { from: 13, to: 14, weight: 40 },  // Lagoon to Main Building Dome
-//     { from: 13, to: 11, weight: 30 },  // Lagoon to Interfaith Chapel
-//     { from: 13, to: 20, weight: 35 },  // Lagoon to Freedom Park
-//     { from: 5, to: 1, weight: 20 },    // Centennial Monument to Amphitheater
-   
-//     // FREEDOM PARK AREA
-//     { from: 20, to: 9, weight: 35 },   // Freedom Park to Grandstand
-//     { from: 20, to: 1, weight: 40 },   // Freedom Park to Amphitheater
-//     { from: 9, to: 1, weight: 25 },    // Grandstand to Amphitheater
-//     { from: 20, to: 29, weight: 30 },  // Freedom Park to Public Restroom
-//     { from: 20, to: 8, weight: 45 },   // Freedom Park to Flag Pole
-   
-//     // EASTERN AREA
-//     { from: 7, to: 21, weight: 40 },   // East Gate to Library
-//     { from: 21, to: 15, weight: 45 },  // Library to East Wing
-//     { from: 21, to: 11, weight: 25 },  // Library to Interfaith Chapel
-//     { from: 21, to: 12, weight: 40 },  // Library to Laboratory High School
-//     { from: 11, to: 15, weight: 25 },  // Chapel to East Wing
-//     { from: 12, to: 21, weight: 35 },  // Lab High School to Library
-   
-//     // NORTHERN AREA
-//     { from: 16, to: 22, weight: 30 },  // North Wing to Open Court
-//     { from: 22, to: 38, weight: 25 },  // Open Court to Tennis Court
-//     { from: 22, to: 39, weight: 30 },  // Open Court to Water Tank
-//     { from: 38, to: 39, weight: 20 },  // Tennis Court to Water Tank
-//     { from: 39, to: 40, weight: 25 },  // Water Tank to West Gate
-   
-//     // UPPER NORTHERN AREA
-//     { from: 2, to: 12, weight: 30 },   // Banda Kawayan to Lab High School
-//     { from: 2, to: 21, weight: 45 },   // Banda Kawayan to Library
-//     { from: 2, to: 25, weight: 35 },   // Banda Kawayan to P.E. Building
-//     { from: 25, to: 10, weight: 30 },  // P.E. Building to Gymnasium
-//     { from: 10, to: 37, weight: 25 },  // Gymnasium to Swimming Pool
-//     { from: 37, to: 38, weight: 30 },  // Swimming Pool to Tennis Court
-   
-//     // MAINTENANCE AND CATWALK AREA
-//     { from: 3, to: 27, weight: 25 },   // Maintenance Office to Ferry Station
-//     { from: 4, to: 34, weight: 20 },   // Catwalk to Pylon
-//     { from: 4, to: 33, weight: 25 },   // Catwalk to Property Building
-//     { from: 4, to: 32, weight: 30 },   // Catwalk to Obelisk
-//     { from: 4, to: 19, weight: 35 },   // Catwalk to Main Gate
-//     { from: 34, to: 33, weight: 20 },  // Pylon to Property Building
-//     { from: 33, to: 32, weight: 30 },  // Property Building to Obelisk
-   
-//     // WESTERN SIDE CONNECTIONS
-//     { from: 40, to: 39, weight: 25 },  // West Gate to Water Tank
-//     { from: 34, to: 6, weight: 30 },   // Pylon to Charlie del Rosario Center
-//     { from: 6, to: 30, weight: 25 },   // Charlie del Rosario to Linear Park
-//     { from: 30, to: 35, weight: 20 },  // Linear Park to Sampaguita Building
-//     { from: 35, to: 18, weight: 40 },  // Sampaguita to West Wing
-   
-//     // SOUTHERN AREA
-//     { from: 17, to: 24, weight: 30 },  // South Wing to Oval Field
-//     { from: 24, to: 23, weight: 25 },  // Oval Field to Open University
-//     { from: 23, to: 3, weight: 35 },   // Open University to Maintenance Office
-//     { from: 24, to: 9, weight: 45 },   // Oval Field to Grandstand
-   
-//     // PASIG RIVER AREA
-//     { from: 30, to: 26, weight: 25 },  // Linear Park to Pasig River
-//     { from: 26, to: 27, weight: 20 },  // Pasig River to Ferry Station
-   
-//     // PROPOSED ACCESS ROAD
-//     { from: 28, to: 24, weight: 30 },  // Proposed Access Road to Oval Field
-//     { from: 28, to: 9, weight: 25 },   // Proposed Access Road to Grandstand
-   
-//     // CROSS-CAMPUS MAJOR PATHWAYS
-//     { from: 14, to: 20, weight: 50 },  // Main Building to Freedom Park
-//     { from: 21, to: 32, weight: 45 },  // Library to Obelisk
-//     { from: 10, to: 5, weight: 35 },   // Gymnasium to Centennial Monument
-//     { from: 5, to: 10, weight: 35 },   // Centennial Monument to Gymnasium
-   
-//     // ADDITIONAL LOGICAL CONNECTIONS
-//     { from: 36, to: 35, weight: 25 },  // Student Pavilion to Sampaguita
-//     { from: 35, to: 6, weight: 30 },   // Sampaguita to Charlie del Rosario
-//     { from: 11, to: 17, weight: 30 },  // Interfaith Chapel to South Wing
-//     { from: 23, to: 24, weight: 20 }   // Open University to Oval Field
-//   ]
-// };
+    { from: 2106, to: 3076, weight: 25 }, // South Wing Left Stairs 2nd to 3rd
+    { from: 2107, to: 3077, weight: 25 }, // South Wing Center Stairs 2nd to 3rd
+    { from: 2108, to: 3078, weight: 25 }, // South Wing Right Stairs 2nd to 3rd
 
+    // Connect third floor stairs to hallways
+    { from: 3073, to: 3071, weight: 25 }, // North Wing Left Stairs to hallway
+    { from: 3074, to: 3071, weight: 25 }, // North Wing Right Stairs to hallway
+
+    { from: 3076, to: 3072, weight: 35 }, // South Wing Left Stairs to hallway (farther from dome)
+    { from: 3077, to: 3072, weight: 15 }, // South Wing Center Stairs to hallway (closest to dome)
+    { from: 3078, to: 3072, weight: 35 }, // South Wing Right Stairs to hallway (farther from dome)
+
+    // Connect third floor stairs to fourth floor
+    { from: 3073, to: 4093, weight: 25 }, // North Wing Left Stairs to 4th floor
+    { from: 3074, to: 4093, weight: 25 }, // North Wing Right Stairs to 4th floor
+
+    { from: 3076, to: 4094, weight: 25 }, // South Wing Left Stairs to 4th floor
+    { from: 3077, to: 4094, weight: 25 }, // South Wing Center Stairs to 4th floor
+    { from: 3078, to: 4094, weight: 25 }, // South Wing Right Stairs to 4th floor
+
+    // Add proper stair connections for South Wing (5th to 1st floor)
+    // 5th to 4th floor
+    { from: 5094, to: 5076, weight: 25 }, // South Wing Hallway to South Wing Stairs (5th floor)
+    { from: 5076, to: 4094, weight: 25 }, // South Wing Stairs to South Wing Hallway (4th floor)
+
+    // 4th to 3rd floor
+    { from: 4094, to: 4076, weight: 25 }, // South Wing Hallway to South Wing Stairs (4th floor)
+    { from: 4076, to: 3076, weight: 25 }, // South Wing Stairs to South Wing Hallway (3rd floor)
+    { from: 3076, to: 3072, weight: 25 }, // South Wing Stairs to South Wing Hallway (3rd floor)
+
+    // 3rd to 2nd floor
+    { from: 3072, to: 3077, weight: 15 }, // South Wing Hallway to Center Stairs (closest to dome)
+    { from: 3072, to: 3076, weight: 35 }, // South Wing Hallway to Left Stairs (farther from dome)
+    { from: 3072, to: 3078, weight: 35 }, // South Wing Hallway to Right Stairs (farther from dome)
+    { from: 3076, to: 2106, weight: 25 }, // Left Stairs down to 2nd floor
+    { from: 3077, to: 2107, weight: 25 }, // Center Stairs down to 2nd floor
+    { from: 3078, to: 2108, weight: 25 }, // Right Stairs down to 2nd floor
+
+    // 2nd to 1st floor
+    { from: 2112, to: 2106, weight: 25 }, // South Wing Hallway to South Wing Stairs (2nd floor)
+    { from: 2106, to: 1027, weight: 25 }, // 2nd floor stairs to 1st floor stairs
+    { from: 1027, to: 1033, weight: 25 }, // Stairs to South Wing Hallway (1st floor)
+
+    // East Wing Stair Connections (1st to 2nd floor)
+    { from: 1030, to: 1034, weight: 25 }, // East Wing Hallway to Left Stairs (1st floor)
+    { from: 1030, to: 1035, weight: 25 }, // East Wing Hallway to Right Stairs (1st floor)
+    { from: 1034, to: 2113, weight: 25 }, // East Wing Left Stairs (1st to 2nd floor)
+    { from: 1035, to: 2114, weight: 25 }, // East Wing Right Stairs (1st to 2nd floor)
+    { from: 2113, to: 2109, weight: 25 }, // East Wing Left Stairs to Hallway (2nd floor)
+    { from: 2114, to: 2109, weight: 25 }, // East Wing Right Stairs to Hallway (2nd floor)
+    
+    // Add reverse connections for East Wing
+    { from: 2109, to: 2113, weight: 25 }, // East Wing Hallway to Left Stairs (2nd floor)
+    { from: 2109, to: 2114, weight: 25 }, // East Wing Hallway to Right Stairs (2nd floor)
+    { from: 2113, to: 1034, weight: 25 }, // East Wing Left Stairs (2nd to 1st floor)
+    { from: 2114, to: 1035, weight: 25 }, // East Wing Right Stairs (2nd to 1st floor)
+    { from: 1034, to: 1030, weight: 25 }, // East Wing Left Stairs to Hallway (1st floor)
+    { from: 1035, to: 1030, weight: 25 }, // East Wing Right Stairs to Hallway (1st floor)
+
+    // West Wing Stair Connections (1st to 2nd floor)
+    { from: 1032, to: 1036, weight: 25 }, // West Wing Hallway to Left Stairs (1st floor)
+    { from: 1032, to: 1037, weight: 25 }, // West Wing Hallway to Right Stairs (1st floor)
+    { from: 1036, to: 2115, weight: 25 }, // West Wing Left Stairs (1st to 2nd floor)
+    { from: 1037, to: 2116, weight: 25 }, // West Wing Right Stairs (1st to 2nd floor)
+    { from: 2115, to: 2111, weight: 25 }, // West Wing Left Stairs to Hallway (2nd floor)
+    { from: 2116, to: 2111, weight: 25 }, // West Wing Right Stairs to Hallway (2nd floor)
+    
+    // Add reverse connections for West Wing
+    { from: 2111, to: 2115, weight: 25 }, // West Wing Hallway to Left Stairs (2nd floor)
+    { from: 2111, to: 2116, weight: 25 }, // West Wing Hallway to Right Stairs (2nd floor)
+    { from: 2115, to: 1036, weight: 25 }, // West Wing Left Stairs (2nd to 1st floor)
+    { from: 2116, to: 1037, weight: 25 }, // West Wing Right Stairs (2nd to 1st floor)
+    { from: 1036, to: 1032, weight: 25 }, // West Wing Left Stairs to Hallway (1st floor)
+    { from: 1037, to: 1032, weight: 25 }, // West Wing Right Stairs to Hallway (1st floor)
+
+    // Connect 4th floor stairs to 3rd floor stairs
+    { from: 4095, to: 3076, weight: 25 }, // 4th floor left stairs to 3rd floor left stairs
+    { from: 4096, to: 3077, weight: 15 }, // 4th floor center stairs to 3rd floor center stairs
+    { from: 4097, to: 3078, weight: 25 }, // 4th floor right stairs to 3rd floor right stairs
+
+    // Add connections for East Wing 3rd floor stairs
+    { from: 3079, to: 3069, weight: 25 }, // East Wing Left Stairs to East Wing Hallway (3rd floor)
+    { from: 3080, to: 3069, weight: 25 }, // East Wing Right Stairs to East Wing Hallway (3rd floor)
+    { from: 3069, to: 3079, weight: 25 }, // East Wing Hallway to East Wing Left Stairs (3rd floor)
+    { from: 3069, to: 3080, weight: 25 }, // East Wing Hallway to East Wing Right Stairs (3rd floor)
+
+    // Add connections for West Wing 3rd floor stairs
+    { from: 3081, to: 3070, weight: 25 }, // West Wing Left Stairs to West Wing Hallway (3rd floor)
+    { from: 3082, to: 3070, weight: 25 }, // West Wing Right Stairs to West Wing Hallway (3rd floor)
+    { from: 3070, to: 3081, weight: 25 }, // West Wing Hallway to West Wing Left Stairs (3rd floor)
+    { from: 3070, to: 3082, weight: 25 }, // West Wing Hallway to West Wing Right Stairs (3rd floor)
+
+    // Connect to 2nd floor stairs
+    { from: 2113, to: 3069, weight: 25 }, // East Wing Left Stairs (2nd) to East Wing Hallway (3rd)
+    { from: 2114, to: 3069, weight: 25 }, // East Wing Right Stairs (2nd) to East Wing Hallway (3rd)
+      { from: 2115, to: 3070, weight: 25 }, // West Wing Left Stairs (2nd) to West Wing Hallway (3rd)
+    { from: 2116, to: 3070, weight: 25 }, // West Wing Right Stairs (2nd) to West Wing Hallway (3rd)
+
+    // Connect to 4th floor stairs
+    { from: 3079, to: 4091, weight: 25 }, // East Wing Left Stairs (3rd) to East Wing Hallway (4th)
+    { from: 3080, to: 4091, weight: 25 }, // East Wing Right Stairs (3rd) to East Wing Hallway (4th)
+    { from: 3081, to: 4092, weight: 25 }, // West Wing Left Stairs (3rd) to West Wing Hallway (4th)
+    { from: 3082, to: 4092, weight: 25 }, // West Wing Right Stairs (3rd) to West Wing Hallway (4th)
+
+    // Connect to 4th floor hallways
+    { from: 4098, to: 4091, weight: 25 }, // East Wing Left Stairs to East Wing Hallway (4th floor)
+    { from: 4099, to: 4091, weight: 25 }, // East Wing Right Stairs to East Wing Hallway (4th floor)
+    { from: 4091, to: 4098, weight: 25 }, // East Wing Hallway to East Wing Left Stairs (4th floor)
+    { from: 4091, to: 4099, weight: 25 }, // East Wing Hallway to East Wing Right Stairs (4th floor)
+
+    { from: 4100, to: 4092, weight: 25 }, // West Wing Left Stairs to West Wing Hallway (4th floor)
+    { from: 4101, to: 4092, weight: 25 }, // West Wing Right Stairs to West Wing Hallway (4th floor)
+    { from: 4092, to: 4100, weight: 25 }, // West Wing Hallway to West Wing Left Stairs (4th floor)
+    { from: 4092, to: 4101, weight: 25 }, // West Wing Hallway to West Wing Right Stairs (4th floor)
+
+    // Connect to 3rd floor stairs
+    { from: 3079, to: 4098, weight: 25 }, // East Wing Left Stairs (3rd) to East Wing Left Stairs (4th)
+    { from: 3080, to: 4099, weight: 25 }, // East Wing Right Stairs (3rd) to East Wing Right Stairs (4th)
+    { from: 3081, to: 4100, weight: 25 }, // West Wing Left Stairs (3rd) to West Wing Left Stairs (4th)
+    { from: 3082, to: 4101, weight: 25 }, // West Wing Right Stairs (3rd) to West Wing Right Stairs (4th)
+
+    // Connect to 5th floor stairs (assuming they exist with IDs 5098-5101)
+    { from: 4098, to: 5098, weight: 25 }, // East Wing Left Stairs (4th) to East Wing Left Stairs (5th)
+    { from: 4099, to: 5099, weight: 25 }, // East Wing Right Stairs (4th) to East Wing Right Stairs (5th)
+    { from: 4100, to: 5100, weight: 25 }, // West Wing Left Stairs (4th) to West Wing Left Stairs (5th)
+    { from: 4101, to: 5101, weight: 25 }, // West Wing Right Stairs (4th) to West Wing Right Stairs (5th)
+
+    // Connect North Wing 4th floor stairs to hallways
+    { from: 4102, to: 4093, weight: 25 }, // North Wing Left Stairs to North Wing Hallway (4th floor)
+    { from: 4103, to: 4093, weight: 25 }, // North Wing Right Stairs to North Wing Hallway (4th floor)
+    { from: 4093, to: 4102, weight: 25 }, // North Wing Hallway to North Wing Left Stairs (4th floor)
+    { from: 4093, to: 4103, weight: 25 }, // North Wing Hallway to North Wing Right Stairs (4th floor)
+
+    // Connect to 3rd floor stairs
+    { from: 3073, to: 4102, weight: 25 }, // North Wing Left Stairs (3rd) to North Wing Left Stairs (4th)
+    { from: 3074, to: 4103, weight: 25 }, // North Wing Right Stairs (3rd) to North Wing Right Stairs (4th)
+
+    // Connect to 5th floor stairs (assuming they exist with IDs 5102-5103)
+    { from: 4102, to: 5102, weight: 25 }, // North Wing Left Stairs (4th) to North Wing Left Stairs (5th)
+    { from: 4103, to: 5103, weight: 25 }, // North Wing Right Stairs (4th) to North Wing Right Stairs (5th)
+    // Connect 5th floor stairs to their hallways and 4th floor stairs
+    // East Wing
+    { from: 5091, to: 5099, weight: 35 }, // 5th floor hallway to left stairs
+    { from: 5099, to: 4098, weight: 25 }, // 5th floor left stairs to 4th floor left stairs
+    { from: 4098, to: 5099, weight: 25 }, // 4th floor left stairs to 5th floor left stairs
+    { from: 5099, to: 5091, weight: 35 }, // 5th floor left stairs to hallway
+
+    { from: 5091, to: 5100, weight: 35 }, // 5th floor hallway to right stairs
+    { from: 5100, to: 4099, weight: 25 }, // 5th floor right stairs to 4th floor right stairs
+    { from: 4099, to: 5100, weight: 25 }, // 4th floor right stairs to 5th floor right stairs
+    { from: 5100, to: 5091, weight: 35 }, // 5th floor right stairs to hallway
+
+    // West Wing
+    { from: 5092, to: 5101, weight: 35 }, // 5th floor hallway to left stairs
+    { from: 5101, to: 4100, weight: 25 }, // 5th floor left stairs to 4th floor left stairs
+    { from: 4100, to: 5101, weight: 25 }, // 4th floor left stairs to 5th floor left stairs
+    { from: 5101, to: 5092, weight: 35 }, // 5th floor left stairs to hallway
+
+    { from: 5092, to: 5102, weight: 35 }, // 5th floor hallway to right stairs
+    { from: 5102, to: 4101, weight: 25 }, // 5th floor right stairs to 4th floor right stairs
+    { from: 4101, to: 5102, weight: 25 }, // 4th floor right stairs to 5th floor right stairs
+    { from: 5102, to: 5092, weight: 35 }, // 5th floor right stairs to hallway
+
+    // North Wing
+    { from: 5093, to: 5103, weight: 35 }, // 5th floor hallway to left stairs
+    { from: 5103, to: 4102, weight: 25 }, // 5th floor left stairs to 4th floor left stairs
+    { from: 4102, to: 5103, weight: 25 }, // 4th floor left stairs to 5th floor left stairs
+    { from: 5103, to: 5093, weight: 35 }, // 5th floor left stairs to hallway
+
+    { from: 5093, to: 5104, weight: 35 }, // 5th floor hallway to right stairs
+    { from: 5104, to: 4103, weight: 25 }, // 5th floor right stairs to 4th floor right stairs
+    { from: 4103, to: 5104, weight: 25 }, // 4th floor right stairs to 5th floor right stairs
+    { from: 5104, to: 5093, weight: 35 }, // 5th floor right stairs to hallway
+
+    // 6th Floor Stairs Connections
+    // South Wing
+    { from: 6093, to: 6096, weight: 35 }, // 6th floor hallway to left stairs
+    { from: 6096, to: 5096, weight: 25 }, // 6th floor left stairs to 5th floor left stairs
+    { from: 5096, to: 6096, weight: 25 }, // 5th floor left stairs to 6th floor left stairs
+    { from: 6096, to: 6093, weight: 35 }, // 6th floor left stairs to hallway
+
+    { from: 6093, to: 6097, weight: 20 }, // 6th floor hallway to center stairs
+    { from: 6097, to: 5097, weight: 25 }, // 6th floor center stairs to 5th floor center stairs
+    { from: 5097, to: 6097, weight: 25 }, // 5th floor center stairs to 6th floor center stairs
+    { from: 6097, to: 6093, weight: 20 }, // 6th floor center stairs to hallway
+
+    { from: 6093, to: 6098, weight: 35 }, // 6th floor hallway to right stairs
+    { from: 6098, to: 5098, weight: 25 }, // 6th floor right stairs to 5th floor right stairs
+    { from: 5098, to: 6098, weight: 25 }, // 5th floor right stairs to 6th floor right stairs
+    { from: 6098, to: 6093, weight: 35 }, // 6th floor right stairs to hallway
+
+    // East Wing
+    { from: 6090, to: 6099, weight: 35 }, // 6th floor hallway to left stairs
+    { from: 6099, to: 5099, weight: 25 }, // 6th floor left stairs to 5th floor left stairs
+    { from: 5099, to: 6099, weight: 25 }, // 5th floor left stairs to 6th floor left stairs
+    { from: 6099, to: 6090, weight: 35 }, // 6th floor left stairs to hallway
+
+    { from: 6090, to: 6100, weight: 35 }, // 6th floor hallway to right stairs
+    { from: 6100, to: 5100, weight: 25 }, // 6th floor right stairs to 5th floor right stairs
+    { from: 5100, to: 6100, weight: 25 }, // 5th floor right stairs to 6th floor right stairs
+    { from: 6100, to: 6090, weight: 35 }, // 6th floor right stairs to hallway
+
+    // West Wing
+    { from: 6091, to: 6101, weight: 35 }, // 6th floor hallway to left stairs
+    { from: 6101, to: 5101, weight: 25 }, // 6th floor left stairs to 5th floor left stairs
+    { from: 5101, to: 6101, weight: 25 }, // 5th floor left stairs to 6th floor left stairs
+    { from: 6101, to: 6091, weight: 35 }, // 6th floor left stairs to hallway
+
+    { from: 6091, to: 6102, weight: 35 }, // 6th floor hallway to right stairs
+    { from: 6102, to: 5102, weight: 25 }, // 6th floor right stairs to 5th floor right stairs
+    { from: 5102, to: 6102, weight: 25 }, // 5th floor right stairs to 6th floor right stairs
+    { from: 6102, to: 6091, weight: 35 }, // 6th floor right stairs to hallway
+
+    // North Wing
+    { from: 6092, to: 6103, weight: 35 }, // 6th floor hallway to left stairs
+    { from: 6103, to: 5103, weight: 25 }, // 6th floor left stairs to 5th floor left stairs
+    { from: 5103, to: 6103, weight: 25 }, // 5th floor left stairs to 6th floor left stairs
+    { from: 6103, to: 6092, weight: 35 }, // 6th floor left stairs to hallway
+
+    { from: 6092, to: 6104, weight: 35 }, // 6th floor hallway to right stairs
+    { from: 6104, to: 5104, weight: 25 }, // 6th floor right stairs to 5th floor right stairs
+    { from: 5104, to: 6104, weight: 25 }, // 5th floor right stairs to 6th floor right stairs
+    { from: 6104, to: 6092, weight: 35 } // 6th floor right stairs to hallway
+  ]
+};
 
 // COC Building Graph Data
 export const cocData = {
@@ -1698,7 +1809,6 @@ export const cocData = {
     { from: 1, to: 27, weight: 8 },  // Entrance to bottom hallway (optional, slightly longer)
     { from: 27, to: 26, weight: 10 }, // Bottom hallway to main hallway
 
-
     // Left wing
     { from: 26, to: 2, weight: 10 }, // Main hallway to Communications Society
     { from: 2, to: 3, weight: 5 },   // Communications Society to Toilet (Left)
@@ -1706,16 +1816,13 @@ export const cocData = {
     { from: 4, to: 5, weight: 5 },   // Dept. of Broadcast Comm to Dean's Office
     { from: 5, to: 6, weight: 5 },   // Dean's Office to Faculty Room
 
-
     // Right wing
     { from: 26, to: 7, weight: 10 }, // Main hallway to Lecture Room 101
     { from: 7, to: 8, weight: 5 },   // Lecture Room 101 to Student Council Room
     { from: 8, to: 9, weight: 5 },   // Student Council Room to Toilet (Right)
 
-
     // Central vertical connections
     { from: 26, to: 10, weight: 10 }, // Main hallway to Dental Clinic
-
 
     // Bottom row of rooms (left to right)
     { from: 27, to: 11, weight: 8 },  // Bottom hallway to Lecture Room 105
@@ -1726,7 +1833,6 @@ export const cocData = {
     { from: 15, to: 16, weight: 5 },  // Male Toilet to Medical Clinic
     { from: 16, to: 27, weight: 8 },  // Medical Clinic to bottom hallway (loop)
 
-
     // Bottom row continues to right
     { from: 16, to: 17, weight: 8 },  // Medical Clinic to Lecture Room 110
     { from: 17, to: 18, weight: 5 },  // 110 to 111
@@ -1735,32 +1841,27 @@ export const cocData = {
     { from: 20, to: 21, weight: 5 },  // 113 to 114
     { from: 21, to: 27, weight: 8 },  // 114 to bottom hallway (loop)
 
-
     // STAIRS CONNECTIONS (1st to 2nd floor)
-    { from: 22, to: 28, weight: 10 }, // Main Stairs Left (1st to 2nd)
-    { from: 23, to: 29, weight: 10 }, // Main Stairs Right (1st to 2nd)
-    { from: 24, to: 30, weight: 10 }, // Side Stairs Left (1st to 2nd)
-    { from: 25, to: 31, weight: 10 }, // Side Stairs Right (1st to 2nd)
-
+    { from: 22, to: 28, weight: 25 }, // Main Stairs Left (1st to 2nd)
+    { from: 23, to: 29, weight: 25 }, // Main Stairs Right (1st to 2nd)
+    { from: 24, to: 30, weight: 25 }, // Side Stairs Left (1st to 2nd)
+    { from: 25, to: 31, weight: 25 }, // Side Stairs Right (1st to 2nd)
 
     // Connect stairs to main hallway (1st floor)
-    { from: 26, to: 22, weight: 5 },  // Main hallway to Main Stairs Left
-    { from: 26, to: 23, weight: 5 },  // Main hallway to Main Stairs Right
-    { from: 27, to: 24, weight: 5 },  // Bottom hallway to Side Stairs Left
-    { from: 27, to: 25, weight: 5 },  // Bottom hallway to Side Stairs Right
-
+    { from: 26, to: 22, weight: 25 },  // Main hallway to Main Stairs Left
+    { from: 26, to: 23, weight: 25 },  // Main hallway to Main Stairs Right
+    { from: 27, to: 24, weight: 25 },  // Bottom hallway to Side Stairs Left
+    { from: 27, to: 25, weight: 25 },  // Bottom hallway to Side Stairs Right
 
     // SECOND FLOOR EDGES
     // Connect stairs to hallways (2nd floor)
-    { from: 28, to: 32, weight: 5 },  // Main Stairs Left to Main Hallway (2nd)
-    { from: 29, to: 32, weight: 5 },  // Main Stairs Right to Main Hallway (2nd)
-    { from: 30, to: 33, weight: 5 },  // Side Stairs Left to Bottom Hallway (2nd)
-    { from: 31, to: 33, weight: 5 },  // Side Stairs Right to Bottom Hallway (2nd)
-
+    { from: 28, to: 32, weight: 25 },  // Main Stairs Left to Main Hallway (2nd)
+    { from: 29, to: 32, weight: 25 },  // Main Stairs Right to Main Hallway (2nd)
+    { from: 30, to: 33, weight: 25 },  // Side Stairs Left to Bottom Hallway (2nd)
+    { from: 31, to: 33, weight: 25 },  // Side Stairs Right to Bottom Hallway (2nd)
 
     // Connect hallways (2nd floor)
     { from: 32, to: 33, weight: 10 }, // Main hallway to Bottom hallway (2nd floor)
-
 
     // Top wing (2nd floor) - Left side
     { from: 32, to: 34, weight: 8 },  // Main hallway to Lecture Room (left)
@@ -1768,13 +1869,11 @@ export const cocData = {
     { from: 32, to: 36, weight: 10 }, // Main hallway to DAPR
     { from: 36, to: 37, weight: 5 },  // DAPR to Faculty OCT
 
-
     // Top wing (2nd floor) - Right side
     { from: 32, to: 38, weight: 10 }, // Main hallway to AVR
     { from: 38, to: 39, weight: 5 },  // AVR to Unknown Room
     { from: 32, to: 40, weight: 8 },  // Main hallway to Student Area
     { from: 40, to: 41, weight: 5 },  // Student Area to DOCR Communication Research
-
 
     // Bottom wing (2nd floor) - Left to right
     { from: 33, to: 42, weight: 8 },  // Bottom hallway to Library
@@ -1789,7 +1888,6 @@ export const cocData = {
     { from: 50, to: 51, weight: 5 },  // Lecture Room 210 to 211
     { from: 51, to: 33, weight: 8 },  // Lecture Room 211 back to bottom hallway (loop)
 
-
     // THEATER BUILDING CONNECTION
     // Direct connection from COC to Theater Building entrance
     { from: 26, to: 52, weight: 15 }, // Main hallway to Theater Building Entrance (longer walk outside)
@@ -1797,7 +1895,6 @@ export const cocData = {
     { from: 10, to: 52, weight: 12 }, // Dental Clinic to Theater Entrance (alternative route)
   ]
 };
-
 
 // CEA Building Graph Data
 export const ceaData = {
@@ -1807,7 +1904,7 @@ export const ceaData = {
     2: { id: 2, name: "Exit", type: "exit", floor: 1 },
     3: { id: 3, name: "Main Hallway (1st Floor)", type: "hallway", floor: 1 },
     4: { id: 4, name: "Central Corridor (1st Floor)", type: "hallway", floor: 1 },
-   
+    
     // First Floor Rooms
     5: { id: 5, name: "Room 100", type: "classroom", floor: 1 },
     6: { id: 6, name: "Room 101", type: "classroom", floor: 1 },
@@ -1830,9 +1927,11 @@ export const ceaData = {
     23: { id: 23, name: "Civil Engineering Dean's Office", type: "office", floor: 1 },
     24: { id: 24, name: "Civil Engineering Chairperson's Office", type: "office", floor: 1 },
     25: { id: 25, name: "Accreditation Center", type: "office", floor: 1 },
-    26: { id: 26, name: "Female Toilet (1st Floor)", type: "facility", floor: 1 },
-    27: { id: 27, name: "Male Toilet (1st Floor)", type: "facility", floor: 1 },
-   
+    26: { id: 26, name: "Female Toilet (Upper Left - 1st Floor)", type: "facility", floor: 1 },
+    27: { id: 27, name: "Male Toilet (Lower Left - 1st Floor)", type: "facility", floor: 1 },
+    141: { id: 141, name: "Female Toilet (Upper Right - 1st Floor)", type: "facility", floor: 1 },
+    142: { id: 142, name: "Male Toilet (Lower Right - 1st Floor)", type: "facility", floor: 1 },
+
     // First Floor Open Courts and Stairs
     28: { id: 28, name: "Open Court (Left)", type: "open_area", floor: 1 },
     29: { id: 29, name: "Open Court (Right)", type: "open_area", floor: 1 },
@@ -1840,11 +1939,13 @@ export const ceaData = {
     31: { id: 31, name: "Stairs (Center Left)", type: "stairs", floor: "1-2" },
     32: { id: 32, name: "Stairs (Center Right)", type: "stairs", floor: "1-2" },
     33: { id: 33, name: "Stairs (Right)", type: "stairs", floor: "1-2" },
-   
+    
+    
+    
     // Second Floor
     34: { id: 34, name: "Main Hallway (2nd Floor)", type: "hallway", floor: 2 },
     35: { id: 35, name: "Central Corridor (2nd Floor)", type: "hallway", floor: 2 },
-   
+    
     // Second Floor Rooms
     36: { id: 36, name: "CAD Laboratory Room 200", type: "laboratory", floor: 2 },
     37: { id: 37, name: "Architecture Lecture Room 201", type: "classroom", floor: 2 },
@@ -1879,11 +1980,11 @@ export const ceaData = {
     66: { id: 66, name: "Open Court (Left 2nd Floor)", type: "open_area", floor: 2 },
     67: { id: 67, name: "Open Court (Right 2nd Floor)", type: "open_area", floor: 2 },
     68: { id: 68, name: "Deck on Second Floor", type: "open_area", floor: 2 },
-   
+    
     // Third Floor
     69: { id: 69, name: "Main Hallway (3rd Floor)", type: "hallway", floor: 3 },
     70: { id: 70, name: "Central Corridor (3rd Floor)", type: "hallway", floor: 3 },
-   
+    
     // Third Floor Rooms
     71: { id: 71, name: "CPE Multimedia Room 300", type: "classroom", floor: 3 },
     72: { id: 72, name: "Computer Engineering Laboratory Office 301", type: "office", floor: 3 },
@@ -1916,11 +2017,11 @@ export const ceaData = {
     99: { id: 99, name: "Tool Room (3rd Floor)", type: "facility", floor: 3 },
     100: { id: 100, name: "Open Court (Left 3rd Floor)", type: "open_area", floor: 3 },
     101: { id: 101, name: "Open Court (Right 3rd Floor)", type: "open_area", floor: 3 },
-   
+    
     // Fourth Floor
     102: { id: 102, name: "Main Hallway (4th Floor)", type: "hallway", floor: 4 },
     103: { id: 103, name: "Central Corridor (4th Floor)", type: "hallway", floor: 4 },
-   
+    
     // Fourth Floor Rooms
     104: { id: 104, name: "Chemical Prep Room 400", type: "laboratory", floor: 4 },
     105: { id: 105, name: "Faculty Center 401", type: "office", floor: 4 },
@@ -1957,7 +2058,7 @@ export const ceaData = {
     136: { id: 136, name: "Open Court (Left 4th Floor)", type: "open_area", floor: 4 },
     137: { id: 137, name: "Open Court (Center 4th Floor)", type: "open_area", floor: 4 },
     138: { id: 138, name: "Open Court (Right 4th Floor)", type: "open_area", floor: 4 },
-   
+    
     // Stairs connecting all floors
     139: { id: 139, name: "Main Stairs (2-3)", type: "stairs", floor: "2-3" },
     140: { id: 140, name: "Main Stairs (3-4)", type: "stairs", floor: "3-4" },
@@ -1967,20 +2068,20 @@ export const ceaData = {
     { from: 1, to: 3, weight: 5 },   // Entrance to main hallway
     { from: 1, to: 2, weight: 3 },   // Entrance to exit
     { from: 3, to: 4, weight: 8 },   // Main hallway to central corridor
-   
+    
     // Direct path to Accreditation Center
     { from: 1, to: 24, weight: 8 },   // Entrance to Chairperson's Office/Accreditation Center (direct path)
     { from: 24, to: 25, weight: 1 },  // Chairperson's Office to Accreditation Center (they share the same space)
     { from: 3, to: 24, weight: 5 },   // Main hallway to Chairperson's Office (alternate path)
-   
+    
     // Dean's Office connections
     { from: 3, to: 23, weight: 10 },  // Main hallway to Dean's Office
     { from: 23, to: 24, weight: 5 },  // Dean's Office to Chairperson's Office
-   
+    
     // Room 108 connections
     { from: 3, to: 17, weight: 8 },   // Main hallway to Room 108
     { from: 17, to: 23, weight: 5 },  // Room 108 to Dean's Office
-   
+    
     // Rest of the building connections
     { from: 3, to: 5, weight: 10 },  // Hallway to Room 100
     { from: 4, to: 6, weight: 8 },   // Corridor to Room 101
@@ -1992,7 +2093,7 @@ export const ceaData = {
     { from: 11, to: 12, weight: 5 }, // Room 105A to 105B
     { from: 4, to: 13, weight: 18 }, // Corridor to Room 106
     { from: 13, to: 14, weight: 5 }, // Room 106 to Tool Room
-   
+    
     // Left wing connections
     { from: 3, to: 15, weight: 12 }, // Hallway to Room 107A
     { from: 15, to: 16, weight: 5 }, // Room 107A to 107B
@@ -2001,34 +2102,42 @@ export const ceaData = {
     { from: 23, to: 24, weight: 5 }, // Dean's Office to Chairperson's Office
     { from: 24, to: 25, weight: 5 }, // Chairperson's Office to Accreditation Center
     { from: 17, to: 22, weight: 10 }, // Room 108 to Library
-   
+    
     // Right wing connections
     { from: 4, to: 18, weight: 20 }, // Corridor to Room 109
     { from: 18, to: 19, weight: 5 }, // Room 109 to 110
     { from: 19, to: 20, weight: 5 }, // Room 110 to 111
     { from: 20, to: 21, weight: 5 }, // Room 111 to 112
-   
-    // Toilet connections
-    { from: 3, to: 26, weight: 6 },  // Hallway to Female Toilet
-    { from: 3, to: 27, weight: 8 },  // Hallway to Male Toilet
-   
+    
+    // Toilet connections - updated with all four toilets
+    { from: 3, to: 26, weight: 6 },  // Hallway to Female Toilet (Upper Left)
+    { from: 3, to: 27, weight: 8 },  // Hallway to Male Toilet (Lower Left)
+    { from: 4, to: 141, weight: 6 }, // Corridor to Female Toilet (Upper Right)
+    { from: 4, to: 142, weight: 8 }, // Corridor to Male Toilet (Lower Right)
+    
+    // Additional connections for the toilets based on floor plan
+    { from: 7, to: 141, weight: 5 },  // Room 102 to Female Toilet (Upper Right)
+    { from: 21, to: 142, weight: 5 }, // Room 112 to Male Toilet (Lower Right)
+    { from: 16, to: 26, weight: 5 },  // Room 107B to Female Toilet (Upper Left)
+    { from: 22, to: 27, weight: 5 },  // Library to Male Toilet (Lower Left)
+    
     // Open courts and stairs
     { from: 3, to: 28, weight: 12 }, // Hallway to Left Open Court
     { from: 4, to: 29, weight: 12 }, // Corridor to Right Open Court
-    { from: 3, to: 30, weight: 10 }, // Hallway to Left Stairs
-    { from: 17, to: 31, weight: 8 }, // Room 108 to Center Left Stairs
-    { from: 4, to: 32, weight: 10 }, // Corridor to Center Right Stairs
-    { from: 4, to: 33, weight: 15 }, // Corridor to Right Stairs
-   
+    { from: 3, to: 30, weight: 25 }, // Hallway to Left Stairs
+    { from: 17, to: 31, weight: 25 }, // Room 108 to Center Left Stairs
+    { from: 4, to: 32, weight: 25 }, // Corridor to Center Right Stairs
+    { from: 4, to: 33, weight: 25 }, // Corridor to Right Stairs
+    
     // Stairs to second floor
-    { from: 30, to: 34, weight: 15 }, // Left Stairs to 2nd Floor Hallway
-    { from: 31, to: 34, weight: 12 }, // Center Left Stairs to 2nd Floor Hallway
-    { from: 32, to: 35, weight: 12 }, // Center Right Stairs to 2nd Floor Corridor
-    { from: 33, to: 35, weight: 15 }, // Right Stairs to 2nd Floor Corridor
-   
+    { from: 30, to: 34, weight: 25 }, // Left Stairs to 2nd Floor Hallway
+    { from: 31, to: 34, weight: 25 }, // Center Left Stairs to 2nd Floor Hallway
+    { from: 32, to: 35, weight: 25 }, // Center Right Stairs to 2nd Floor Corridor
+    { from: 33, to: 35, weight: 25 }, // Right Stairs to 2nd Floor Corridor
+    
     // Second Floor connections
     { from: 34, to: 35, weight: 10 }, // 2nd Floor Hallway to Corridor
-   
+    
     // Second floor left wing
     { from: 34, to: 36, weight: 18 }, // Hallway to CAD Lab 200
     { from: 34, to: 37, weight: 15 }, // Hallway to Architecture Lecture 201
@@ -2037,7 +2146,7 @@ export const ceaData = {
     { from: 34, to: 40, weight: 10 }, // Hallway to Lecture Room 203
     { from: 34, to: 41, weight: 8 },  // Hallway to Clinic 204
     { from: 34, to: 42, weight: 6 },  // Hallway to I.E. Lecture 205
-   
+    
     // Second floor top wing
     { from: 35, to: 43, weight: 8 },  // Corridor to Mechanical Drafting 3-206
     { from: 43, to: 44, weight: 5 },  // Room 206 to 207
@@ -2045,14 +2154,14 @@ export const ceaData = {
     { from: 35, to: 46, weight: 12 }, // Corridor to Classroom 209B
     { from: 35, to: 47, weight: 15 }, // Corridor to Manufacturing Lab 209
     { from: 47, to: 48, weight: 8 },  // Manufacturing Lab to Industrial Eng Lab 210
-   
+    
     // Second floor bottom wing
     { from: 35, to: 49, weight: 20 }, // Corridor to Multi-Media 211
     { from: 49, to: 50, weight: 5 },  // Multi-Media to CAFA Office 212
     { from: 50, to: 51, weight: 5 },  // CAFA Office to Arch Drafting 1-213
     { from: 51, to: 52, weight: 5 },  // Arch Drafting 1 to 2-214
     { from: 52, to: 53, weight: 5 },  // Arch Drafting 2 to 3-215
-   
+    
     // Second floor department offices
     { from: 34, to: 54, weight: 12 }, // Hallway to Time Motion Lab 221
     { from: 34, to: 55, weight: 10 }, // Hallway to EE Dept Office
@@ -2060,7 +2169,7 @@ export const ceaData = {
     { from: 34, to: 57, weight: 6 },  // Hallway to CE Dept Office
     { from: 35, to: 58, weight: 8 },  // Corridor to ME Dept Office
     { from: 35, to: 59, weight: 10 }, // Corridor to IE Dept Office
-   
+    
     // Second floor facilities
     { from: 34, to: 60, weight: 5 },  // Hallway to Stock Room
     { from: 60, to: 61, weight: 3 },  // Stock Room to Tool Room
@@ -2068,21 +2177,21 @@ export const ceaData = {
     { from: 35, to: 63, weight: 18 }, // Corridor to Power Room
     { from: 34, to: 64, weight: 7 },  // Hallway to Female Toilet
     { from: 35, to: 65, weight: 7 },  // Corridor to Male Toilet
-   
+    
     // Second floor open areas
     { from: 34, to: 66, weight: 12 }, // Hallway to Left Open Court
     { from: 35, to: 67, weight: 12 }, // Corridor to Right Open Court
     { from: 35, to: 68, weight: 15 }, // Corridor to Deck
-   
+    
     // Second to Third floor stairs
-    { from: 34, to: 139, weight: 8 },  // 2nd Floor Hallway to Stairs 2-3
-    { from: 35, to: 139, weight: 10 }, // 2nd Floor Corridor to Stairs 2-3
-    { from: 139, to: 69, weight: 12 }, // Stairs 2-3 to 3rd Floor Hallway
-    { from: 139, to: 70, weight: 15 }, // Stairs 2-3 to 3rd Floor Corridor
-   
+    { from: 34, to: 139, weight: 25 },  // 2nd Floor Hallway to Stairs 2-3
+    { from: 35, to: 139, weight: 25 }, // 2nd Floor Corridor to Stairs 2-3
+    { from: 139, to: 69, weight: 25 }, // Stairs 2-3 to 3rd Floor Hallway
+    { from: 139, to: 70, weight: 25 }, // Stairs 2-3 to 3rd Floor Corridor
+    
     // Third Floor connections
     { from: 69, to: 70, weight: 10 }, // 3rd Floor Hallway to Corridor
-   
+    
     // Third floor right wing
     { from: 69, to: 71, weight: 18 }, // Hallway to CPE Multimedia 300
     { from: 69, to: 72, weight: 15 }, // Hallway to CPE Lab Office 301
@@ -2095,7 +2204,7 @@ export const ceaData = {
     { from: 78, to: 79, weight: 5 },  // SMART Wireless to Comm Eng Lab 305B
     { from: 70, to: 80, weight: 15 }, // Corridor to EE Lecture 306A
     { from: 80, to: 81, weight: 5 },  // EE Lecture 306A to 306B
-   
+    
     // Third floor left wing
     { from: 69, to: 82, weight: 12 }, // Hallway to ECE Library 307
     { from: 69, to: 83, weight: 10 }, // Hallway to EE Auto Control Lab 308
@@ -2107,30 +2216,30 @@ export const ceaData = {
     { from: 88, to: 89, weight: 5 },  // EMERSON Lab to CPE Lecture 315
     { from: 89, to: 90, weight: 5 },  // CPE Lecture 315 to 316
     { from: 70, to: 91, weight: 15 }, // Corridor to Sensors Lab 318
-   
+    
     // Third floor offices
     { from: 69, to: 92, weight: 8 },  // Hallway to Accreditation Center 319
     { from: 69, to: 93, weight: 6 },  // Hallway to Faculty Checker 320
     { from: 70, to: 94, weight: 8 },  // Corridor to CPE Chair Office 321
     { from: 70, to: 95, weight: 10 }, // Corridor to EE Chair Office 322
     { from: 70, to: 96, weight: 12 }, // Corridor to Eng Sciences Chair Office 323
-   
+    
     // Third floor facilities
     { from: 69, to: 97, weight: 6 },  // Hallway to Female Toilet
     { from: 70, to: 98, weight: 6 },  // Corridor to Male Toilet
     { from: 69, to: 99, weight: 8 },  // Hallway to Tool Room
     { from: 69, to: 100, weight: 12 }, // Hallway to Left Open Court
     { from: 70, to: 101, weight: 12 }, // Corridor to Right Open Court
-   
+    
     // Third to Fourth floor stairs
-    { from: 69, to: 140, weight: 8 },  // 3rd Floor Hallway to Stairs 3-4
-    { from: 70, to: 140, weight: 10 }, // 3rd Floor Corridor to Stairs 3-4
-    { from: 140, to: 102, weight: 12 }, // Stairs 3-4 to 4th Floor Hallway
-    { from: 140, to: 103, weight: 15 }, // Stairs 3-4 to 4th Floor Corridor
-   
+    { from: 69, to: 140, weight: 25 },  // 3rd Floor Hallway to Stairs 3-4
+    { from: 70, to: 140, weight: 25 }, // 3rd Floor Corridor to Stairs 3-4
+    { from: 140, to: 102, weight: 25 }, // Stairs 3-4 to 4th Floor Hallway
+    { from: 140, to: 103, weight: 25 }, // Stairs 3-4 to 4th Floor Corridor
+    
     // Fourth Floor connections
     { from: 102, to: 103, weight: 10 }, // 4th Floor Hallway to Corridor
-   
+    
     // Fourth floor right wing
     { from: 102, to: 104, weight: 18 }, // Hallway to Chemical Prep 400
     { from: 102, to: 105, weight: 15 }, // Hallway to Chemical Lab 401
@@ -2141,7 +2250,7 @@ export const ceaData = {
     { from: 108, to: 109, weight: 5 },  // Gen Physics Lab 404 to 405
     { from: 102, to: 110, weight: 10 }, // Hallway to Lecture Room 406
     { from: 110, to: 111, weight: 5 },  // Lecture Room 406 to 407
-   
+    
     // Fourth floor center connections
     { from: 103, to: 112, weight: 8 },  // Corridor to Electrical Fund Lab 408
     { from: 103, to: 113, weight: 10 }, // Corridor to Electrical Fund Lab 409B
@@ -2154,7 +2263,7 @@ export const ceaData = {
     { from: 119, to: 120, weight: 5 },  // Lecture Room 415 to 416
     { from: 120, to: 121, weight: 5 },  // Lecture Room 416 to 417
     { from: 121, to: 122, weight: 5 },  // Lecture Room 417 to 418
-   
+    
     // Fourth floor right wing connections
     { from: 103, to: 123, weight: 15 }, // Corridor to Gen Chemistry Lab A 419
     { from: 123, to: 124, weight: 5 },  // Chemistry Lab A to Lab Equipment 420
@@ -2166,17 +2275,17 @@ export const ceaData = {
     { from: 102, to: 130, weight: 8 },  // Hallway to CoE 300 Library
     { from: 130, to: 131, weight: 5 },  // CoE 300 Library to Library
     { from: 131, to: 132, weight: 5 },  // Library to A V R
-   
+    
     // Fourth floor facilities
     { from: 103, to: 133, weight: 12 }, // Corridor to Power Room
     { from: 102, to: 134, weight: 6 },  // Hallway to Female Toilet
     { from: 103, to: 135, weight: 6 },  // Corridor to Male Toilet
-   
+    
     // Fourth floor open areas
     { from: 102, to: 136, weight: 12 }, // Hallway to Left Open Court
     { from: 103, to: 137, weight: 10 }, // Corridor to Center Open Court
     { from: 103, to: 138, weight: 15 }, // Corridor to Right Open Court
-   
+    
     // Inter-floor stair connections that were missing
     { from: 28, to: 66, weight: 15 },   // Left Open Court 1st to 2nd Floor
     { from: 29, to: 67, weight: 15 },   // Right Open Court 1st to 2nd Floor
@@ -2185,7 +2294,7 @@ export const ceaData = {
     { from: 100, to: 136, weight: 15 }, // Left Open Court 3rd to 4th Floor
     { from: 101, to: 137, weight: 15 }, // Right Open Court 3rd to 4th Floor Center
     { from: 101, to: 138, weight: 18 }, // Right Open Court 3rd to 4th Floor Right
-   
+    
     // Additional cross-floor connections for better navigation
     { from: 26, to: 64, weight: 15 },   // Female Toilet 1st to 2nd Floor
     { from: 27, to: 65, weight: 15 },   // Male Toilet 1st to 2nd Floor
@@ -2193,12 +2302,9 @@ export const ceaData = {
     { from: 65, to: 98, weight: 15 },   // Male Toilet 2nd to 3rd Floor
     { from: 97, to: 134, weight: 15 },  // Female Toilet 3rd to 4th Floor
     { from: 98, to: 135, weight: 15 },  // Male Toilet 3rd to 4th Floor
-   
+    
     // Tool room connections across floors
     { from: 14, to: 61, weight: 20 },   // Tool Room 1st to 2nd Floor
     { from: 61, to: 99, weight: 20 },   // Tool Room 2nd to 3rd Floor
   ]
-};
-
-
-
+}; 
