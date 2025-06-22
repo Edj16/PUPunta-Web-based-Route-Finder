@@ -1744,7 +1744,6 @@ export const mainCampusData = {
     { from: 6104, to: 6092, weight: 35 } // 6th floor right stairs to hallway
   ]
 };
-
 // COC Building Graph Data
 export const cocData = {
   nodes: {
@@ -1769,19 +1768,32 @@ export const cocData = {
     19: { id: 19, name: "Lecture Room 112", type: "classroom", floor: 1 },
     20: { id: 20, name: "Lecture Room 113", type: "classroom", floor: 1 },
     21: { id: 21, name: "Lecture Room 114", type: "classroom", floor: 1 },
-    22: { id: 22, name: "Main Stairs (Left)", type: "stairs", floor: "1-2" },
-    23: { id: 23, name: "Main Stairs (Right)", type: "stairs", floor: "1-2" },
-    24: { id: 24, name: "Side Stairs (Left)", type: "stairs", floor: "1-2" },
-    25: { id: 25, name: "Side Stairs (Right)", type: "stairs", floor: "1-2" },
-    26: { id: 26, name: "Main Hallway (1st Floor)", type: "hallway", floor: 1 },
+
+
+    //STAIRS - 1ST FLOOR
+    22: { id: 22, name: "Upper Left Stairs", type: "stairs", floor: "1-2" },
+    23: { id: 23, name: "Upper Right Stairs", type: "stairs", floor: "1-2" },
+    24: { id: 24, name: "Lower Left Stairs", type: "stairs", floor: "1-2" },
+    25: { id: 25, name: "Lower Right Stairs", type: "stairs", floor: "1-2" },
+    53: { id: 53, name: "Center Stairs", type: "stairs", floor: "1-2" },
+    //hallways
+    26: { id: 26, name: "Center Hallway (1st Floor)", type: "hallway", floor: 1 }, // Renamed from Main Hallway
     27: { id: 27, name: "Bottom Hallway (1st Floor)", type: "hallway", floor: 1 },
-  // Second Floor Nodes (28-50)
-    28: { id: 28, name: "Main Stairs (Left) - 2nd Floor", type: "stairs", floor: "1-2" },
-    29: { id: 29, name: "Main Stairs (Right) - 2nd Floor", type: "stairs", floor: "1-2" },
-    30: { id: 30, name: "Side Stairs (Left) - 2nd Floor", type: "stairs", floor: "1-2" },
-    31: { id: 31, name: "Side Stairs (Right) - 2nd Floor", type: "stairs", floor: "1-2" },
-    32: { id: 32, name: "Main Hallway (2nd Floor)", type: "hallway", floor: 2 },
+    55: { id: 55, name: "Top Hallway (1st Floor)", type: "hallway", floor: 1 },
+   
+
+
+//STAIRS - 2ND FLOOR
+    28: { id: 28, name: "Upper Left Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
+    29: { id: 29, name: "Upper Right Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
+    30: { id: 30, name: "Lower Left Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
+    31: { id: 31, name: "Lower Right Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
+    54: { id: 54, name: "Center Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
+    //hallways
+    32: { id: 32, name: "Center Hallway (2nd Floor)", type: "hallway", floor: 2 }, // Renamed from Main Hallway
     33: { id: 33, name: "Bottom Hallway (2nd Floor)", type: "hallway", floor: 2 },
+    56: { id: 56, name: "Top Hallway (2nd Floor)", type: "hallway", floor: 2 },
+    //rooms
     34: { id: 34, name: "Lecture Room", type: "classroom", floor: 2 },
     35: { id: 35, name: "Lecture Room", type: "classroom", floor: 2 },
     36: { id: 36, name: "DAPR", type: "office", floor: 2 },
@@ -1801,100 +1813,144 @@ export const cocData = {
     50: { id: 50, name: "Lecture Room 210", type: "classroom", floor: 2 },
     51: { id: 51, name: "Lecture Room 211", type: "classroom", floor: 2 },
     52: { id: 52, name: "Theater Building Entrance", type: "entrance", floor: 1 },
+    57: { id: 57, name: "COC Gate", type: "entrance", floor: 1 },  // Adding COC gate node
   },
   edges: [
     // FIRST FLOOR EDGES
-    // Entrance and central hallway
-    { from: 1, to: 26, weight: 5 },  // Entrance to main hallway (direct, shortest)
-    { from: 1, to: 27, weight: 8 },  // Entrance to bottom hallway (optional, slightly longer)
-    { from: 27, to: 26, weight: 10 }, // Bottom hallway to main hallway
+    // Gate to entrance connection
+    { from: 57, to: 1, weight: 5 },     // COC Gate to Building Entrance
+   
+    // Entrance and hallway connections
+    { from: 1, to: 26, weight: 5 },     // Entrance to center hallway
+    { from: 26, to: 55, weight: 5 },    // Center hallway to top hallway
+    { from: 26, to: 27, weight: 5 },    // Center hallway to bottom hallway
+   
+    // Top hallway connections
+    { from: 55, to: 2, weight: 5 },     // Top hallway to Communications Society
+    { from: 55, to: 3, weight: 5 },     // Top hallway to Toilet
+    { from: 55, to: 4, weight: 5 },     // Top hallway to Dept. of Broadcast Comm
+    { from: 55, to: 5, weight: 5 },     // Top hallway to Dean's Office
+    { from: 55, to: 6, weight: 5 },     // Top hallway to Faculty Room
+    { from: 55, to: 7, weight: 5 },     // Top hallway to Lecture Room 101
+    { from: 55, to: 8, weight: 5 },     // Top hallway to Student Council Room
+    { from: 55, to: 9, weight: 5 },     // Top hallway to Right Wing Toilet
 
-    // Left wing
-    { from: 26, to: 2, weight: 10 }, // Main hallway to Communications Society
-    { from: 2, to: 3, weight: 5 },   // Communications Society to Toilet (Left)
-    { from: 2, to: 4, weight: 5 },   // Communications Society to Dept. of Broadcast Comm
-    { from: 4, to: 5, weight: 5 },   // Dept. of Broadcast Comm to Dean's Office
-    { from: 5, to: 6, weight: 5 },   // Dean's Office to Faculty Room
 
-    // Right wing
-    { from: 26, to: 7, weight: 10 }, // Main hallway to Lecture Room 101
-    { from: 7, to: 8, weight: 5 },   // Lecture Room 101 to Student Council Room
-    { from: 8, to: 9, weight: 5 },   // Student Council Room to Toilet (Right)
+    // Center hallway connections
+    { from: 26, to: 10, weight: 5 },    // Center hallway to Dental Clinic
+    { from: 26, to: 53, weight: 5 },    // Center hallway to Center Stairs
+    { from: 26, to: 36, weight: 5 },    // Center hallway to DAPR
+    { from: 26, to: 37, weight: 5 },    // Center hallway to Faculty OCT
 
-    // Central vertical connections
-    { from: 26, to: 10, weight: 10 }, // Main hallway to Dental Clinic
 
-    // Bottom row of rooms (left to right)
-    { from: 27, to: 11, weight: 8 },  // Bottom hallway to Lecture Room 105
-    { from: 11, to: 12, weight: 5 },  // 105 to 106
-    { from: 12, to: 13, weight: 5 },  // 106 to 107
-    { from: 13, to: 14, weight: 5 },  // 107 to Female Toilet
-    { from: 14, to: 15, weight: 5 },  // Female Toilet to Male Toilet
-    { from: 15, to: 16, weight: 5 },  // Male Toilet to Medical Clinic
-    { from: 16, to: 27, weight: 8 },  // Medical Clinic to bottom hallway (loop)
+    // Bottom hallway connections
+    { from: 27, to: 11, weight: 5 },    // Bottom hallway to Lecture Room 105
+    { from: 27, to: 12, weight: 5 },    // Bottom hallway to Lecture Room 106
+    { from: 27, to: 13, weight: 5 },    // Bottom hallway to Lecture Room 107
+    { from: 27, to: 14, weight: 5 },    // Bottom hallway to Female Toilet
+    { from: 27, to: 15, weight: 5 },    // Bottom hallway to Male Toilet
+    { from: 27, to: 16, weight: 5 },    // Bottom hallway to Medical Clinic
+    { from: 27, to: 17, weight: 5 },    // Bottom hallway to Lecture Room 110
+    { from: 27, to: 18, weight: 5 },    // Bottom hallway to Lecture Room 111
+    { from: 27, to: 19, weight: 5 },    // Bottom hallway to Lecture Room 112
+    { from: 27, to: 20, weight: 5 },    // Bottom hallway to Lecture Room 113
+    { from: 27, to: 21, weight: 5 },    // Bottom hallway to Lecture Room 114
 
-    // Bottom row continues to right
-    { from: 16, to: 17, weight: 8 },  // Medical Clinic to Lecture Room 110
-    { from: 17, to: 18, weight: 5 },  // 110 to 111
-    { from: 18, to: 19, weight: 5 },  // 111 to 112
-    { from: 19, to: 20, weight: 5 },  // 112 to 113
-    { from: 20, to: 21, weight: 5 },  // 113 to 114
-    { from: 21, to: 27, weight: 8 },  // 114 to bottom hallway (loop)
 
-    // STAIRS CONNECTIONS (1st to 2nd floor)
-    { from: 22, to: 28, weight: 25 }, // Main Stairs Left (1st to 2nd)
-    { from: 23, to: 29, weight: 25 }, // Main Stairs Right (1st to 2nd)
-    { from: 24, to: 30, weight: 25 }, // Side Stairs Left (1st to 2nd)
-    { from: 25, to: 31, weight: 25 }, // Side Stairs Right (1st to 2nd)
+    // Room-to-room connections (alternative routes)
+    { from: 2, to: 4, weight: 5 },      // Communications Society to Dept. of Broadcast Comm
+    { from: 4, to: 5, weight: 5 },      // Dept. of Broadcast Comm to Dean's Office
+    { from: 5, to: 6, weight: 5 },      // Dean's Office to Faculty Room
+    { from: 7, to: 8, weight: 5 },      // Lecture Room 101 to Student Council Room
+    { from: 11, to: 12, weight: 5 },    // Lecture Room 105 to 106
+    { from: 12, to: 13, weight: 5 },    // Lecture Room 106 to 107
+    { from: 13, to: 14, weight: 5 },    // Lecture Room 107 to Female Toilet
+    { from: 14, to: 15, weight: 5 },    // Female Toilet to Male Toilet
+    { from: 15, to: 16, weight: 5 },    // Male Toilet to Medical Clinic
+    { from: 16, to: 17, weight: 5 },    // Medical Clinic to Lecture Room 110
+    { from: 17, to: 18, weight: 5 },    // Lecture Room 110 to 111
+    { from: 18, to: 19, weight: 5 },    // Lecture Room 111 to 112
+    { from: 19, to: 20, weight: 5 },    // Lecture Room 112 to 113
+    { from: 20, to: 21, weight: 5 },    // Lecture Room 113 to 114
 
-    // Connect stairs to main hallway (1st floor)
-    { from: 26, to: 22, weight: 25 },  // Main hallway to Main Stairs Left
-    { from: 26, to: 23, weight: 25 },  // Main hallway to Main Stairs Right
-    { from: 27, to: 24, weight: 25 },  // Bottom hallway to Side Stairs Left
-    { from: 27, to: 25, weight: 25 },  // Bottom hallway to Side Stairs Right
+
+    // Stairs connections
+    { from: 22, to: 28, weight: 25 },   // Upper Left Stairs (1st to 2nd)
+    { from: 23, to: 29, weight: 25 },   // Upper Right Stairs (1st to 2nd)
+    { from: 24, to: 30, weight: 25 },   // Lower Left Stairs (1st to 2nd)
+    { from: 25, to: 31, weight: 25 },   // Lower Right Stairs (1st to 2nd)
+    { from: 53, to: 54, weight: 15 },   // Center Stairs (1st to 2nd) - lower weight as it's central
+
+
+    // Connect stairs to hallways (1st floor)
+    { from: 55, to: 22, weight: 5 },    // Top hallway to Upper Left Stairs
+    { from: 55, to: 23, weight: 5 },    // Top hallway to Upper Right Stairs
+    { from: 27, to: 24, weight: 5 },    // Bottom hallway to Lower Left Stairs
+    { from: 27, to: 25, weight: 5 },    // Bottom hallway to Lower Right Stairs
+
 
     // SECOND FLOOR EDGES
+    // Connect hallways
+    { from: 32, to: 56, weight: 5 },    // Center hallway to top hallway (2nd floor)
+    { from: 32, to: 33, weight: 5 },    // Center hallway to bottom hallway (2nd floor)
+
+
     // Connect stairs to hallways (2nd floor)
-    { from: 28, to: 32, weight: 25 },  // Main Stairs Left to Main Hallway (2nd)
-    { from: 29, to: 32, weight: 25 },  // Main Stairs Right to Main Hallway (2nd)
-    { from: 30, to: 33, weight: 25 },  // Side Stairs Left to Bottom Hallway (2nd)
-    { from: 31, to: 33, weight: 25 },  // Side Stairs Right to Bottom Hallway (2nd)
+    { from: 56, to: 28, weight: 5 },    // Top hallway to Upper Left Stairs
+    { from: 56, to: 29, weight: 5 },    // Top hallway to Upper Right Stairs
+    { from: 33, to: 30, weight: 5 },    // Bottom hallway to Lower Left Stairs
+    { from: 33, to: 31, weight: 5 },    // Bottom hallway to Lower Right Stairs
+    { from: 32, to: 54, weight: 5 },    // Center hallway to Center Stairs
 
-    // Connect hallways (2nd floor)
-    { from: 32, to: 33, weight: 10 }, // Main hallway to Bottom hallway (2nd floor)
 
-    // Top wing (2nd floor) - Left side
-    { from: 32, to: 34, weight: 8 },  // Main hallway to Lecture Room (left)
-    { from: 34, to: 35, weight: 5 },  // Lecture Room to Lecture Room
-    { from: 32, to: 36, weight: 10 }, // Main hallway to DAPR
-    { from: 36, to: 37, weight: 5 },  // DAPR to Faculty OCT
+    // Top hallway connections (2nd floor)
+    { from: 56, to: 34, weight: 5 },    // Top hallway to Lecture Room
+    { from: 56, to: 35, weight: 5 },    // Top hallway to Lecture Room
+    { from: 56, to: 36, weight: 5 },    // Top hallway to DAPR
+    { from: 56, to: 37, weight: 5 },    // Top hallway to Faculty OCT
+    { from: 56, to: 38, weight: 5 },    // Top hallway to AVR
+    { from: 56, to: 39, weight: 5 },    // Top hallway to Unknown Room
+    { from: 56, to: 40, weight: 5 },    // Top hallway to Student Area
+    { from: 56, to: 41, weight: 5 },    // Top hallway to DOCR
 
-    // Top wing (2nd floor) - Right side
-    { from: 32, to: 38, weight: 10 }, // Main hallway to AVR
-    { from: 38, to: 39, weight: 5 },  // AVR to Unknown Room
-    { from: 32, to: 40, weight: 8 },  // Main hallway to Student Area
-    { from: 40, to: 41, weight: 5 },  // Student Area to DOCR Communication Research
 
-    // Bottom wing (2nd floor) - Left to right
-    { from: 33, to: 42, weight: 8 },  // Bottom hallway to Library
-    { from: 42, to: 43, weight: 5 },  // Library to Toilet
-    { from: 43, to: 44, weight: 5 },  // Toilet to DACOM Room
-    { from: 44, to: 45, weight: 5 },  // DACOM Room to Main Input
-    { from: 45, to: 46, weight: 5 },  // Main Input to Unknown Room
-    { from: 46, to: 47, weight: 5 },  // Unknown Room to NEWS Room
-    { from: 47, to: 48, weight: 5 },  // NEWS Room to TV Studio
-    { from: 48, to: 49, weight: 5 },  // TV Studio to Lecture Room 209
-    { from: 49, to: 50, weight: 5 },  // Lecture Room 209 to 210
-    { from: 50, to: 51, weight: 5 },  // Lecture Room 210 to 211
-    { from: 51, to: 33, weight: 8 },  // Lecture Room 211 back to bottom hallway (loop)
+    // Bottom hallway connections (2nd floor)
+    { from: 33, to: 42, weight: 5 },    // Bottom hallway to Library
+    { from: 33, to: 43, weight: 5 },    // Bottom hallway to Toilet
+    { from: 33, to: 44, weight: 5 },    // Bottom hallway to DACOM Room
+    { from: 33, to: 45, weight: 5 },    // Bottom hallway to Main Input
+    { from: 33, to: 46, weight: 5 },    // Bottom hallway to Unknown Room
+    { from: 33, to: 47, weight: 5 },    // Bottom hallway to NEWS Room
+    { from: 33, to: 48, weight: 5 },    // Bottom hallway to TV Studio
+    { from: 33, to: 49, weight: 5 },    // Bottom hallway to Lecture Room 209
+    { from: 33, to: 50, weight: 5 },    // Bottom hallway to Lecture Room 210
+    { from: 33, to: 51, weight: 5 },    // Bottom hallway to Lecture Room 211
 
-    // THEATER BUILDING CONNECTION
-    // Direct connection from COC to Theater Building entrance
-    { from: 26, to: 52, weight: 15 }, // Main hallway to Theater Building Entrance (longer walk outside)
-    { from: 7, to: 52, weight: 12 },  // Lecture Room 101 to Theater Entrance (closer route)
-    { from: 10, to: 52, weight: 12 }, // Dental Clinic to Theater Entrance (alternative route)
+
+    // Room-to-room connections (2nd floor)
+    { from: 34, to: 35, weight: 5 },    // Lecture Room to Lecture Room
+    { from: 36, to: 37, weight: 5 },    // DAPR to Faculty OCT
+    { from: 38, to: 39, weight: 5 },    // AVR to Unknown Room
+    { from: 40, to: 41, weight: 5 },    // Student Area to DOCR
+    { from: 42, to: 43, weight: 5 },    // Library to Toilet
+    { from: 43, to: 44, weight: 5 },    // Toilet to DACOM Room
+    { from: 44, to: 45, weight: 5 },    // DACOM Room to Main Input
+    { from: 45, to: 46, weight: 5 },    // Main Input to Unknown Room
+    { from: 46, to: 47, weight: 5 },    // Unknown Room to NEWS Room
+    { from: 47, to: 48, weight: 5 },    // NEWS Room to TV Studio
+    { from: 48, to: 49, weight: 5 },    // TV Studio to Lecture Room 209
+    { from: 49, to: 50, weight: 5 },    // Lecture Room 209 to 210
+    { from: 50, to: 51, weight: 5 },    // Lecture Room 210 to 211
+
+
+    // Theater Building connections
+    { from: 26, to: 52, weight: 15 },   // Center hallway to Theater Building Entrance
+    { from: 7, to: 52, weight: 12 },    // Lecture Room 101 to Theater Entrance
+    { from: 10, to: 52, weight: 12 }    // Dental Clinic to Theater Entrance
   ]
 };
+
+
 
 // CEA Building Graph Data
 export const ceaData = {
@@ -2348,64 +2404,70 @@ export const ceaData = {
 export const overviewData = {
 
   nodes: {
-    1: { id: 1, name: "Main Gate", type: "landmark", x: 300, y: 150},
-    2: { id: 2, name: "Twin's Brew", type: "landmark", x: 320, y: 180},
-    3: { id: 3, name: "Grace Bedspacer", type: "landmark", x: 340, y: 200},
-    4: { id: 4, name: "Road 11", type: "landmark", x: 360, y: 220},
-    5: { id: 5, name: "MACT Enterprise", type: "landmark", x: 380, y: 240},
-    6: { id: 6, name: "Road 10", type: "landmark", x: 400, y: 260},
-    7: { id: 7, name: "node 7", type: "landmark", x: 420, y: 280},
-    8: { id: 8, name: "Dream Rolls", type: "landmark", x: 440, y: 300},
-    9: { id: 9, name: "Kim Let Store", type: "landmark", x: 460, y: 320},
-    10: { id: 10, name: "PUP Food testing Center", type: "landmark", x: 480, y: 340},
-    11: { id: 11, name: "Jeng Jeng Store", type: "landmark", x: 500, y: 360},
-    12: { id: 12, name: "Mc Tulin's Crib", type: "landmark", x: 520, y: 380},
-    13: { id: 13, name: "Road 2", type: "landmark", x: 540, y: 400},
-    14: { id: 14, name: "Road 3", type: "landmark", x: 560, y: 420},
-    15: { id: 15, name: "Study Corner", type: "landmark", x: 580, y: 440},
-    16: { id: 16, name: "COC Landmark", type: "landmark", x: 600, y: 460},
-    17: { id: 17, name: "Arkneth Store", type: "landmark", x: 620, y: 480},
-    18: { id: 18, name: "Node 18", type: "landmark", x: 640, y: 500},
-    19: { id: 19, name: "Crab Motor", type: "landmark", x: 660, y: 520},
-    20: { id: 20, name: "Node 20", type: "landmark", x: 680, y: 540},
-    21: { id: 21, name: "CEA entrance", type: "landmark", x: 700, y: 560},
-    22: { id: 22, name: "COC entrance", type: "landmark", x: 600, y: 500}
+    1: { id: 1, name: "Main Gate", type: "landmark", x: 846, y: 159},
+    2: { id: 2, name: "Twin's Brew", type: "landmark", x: 729, y: 50},
+    3: { id: 3, name: "Grace Bedspacer", type: "landmark", x: 695, y: 41},
+    4: { id: 4, name: "Road 11", type: "landmark", x: 570, y: 107},
+    5: { id: 5, name: "MACT Enterprise", type: "landmark", x: 542, y: 58},
+    6: { id: 6, name: "Road 10", type: "landmark", x: 562, y: 89},
+    7: { id: 7, name: "node 7", type: "landmark", x: 527, y: 23},
+    8: { id: 8, name: "Dream Rolls", type: "landmark", x: 499, y: 74},
+    9: { id: 9, name: "Kim Let Store", type: "landmark", x: 433, y: 58},
+    10: { id: 10, name: "PUP Food testing Center", type: "landmark", x: 306, y: 145},
+    11: { id: 11, name: "Jeng Jeng Store", type: "landmark", x: 302, y: 98},
+    12: { id: 12, name: "Mc Tulin's Crib", type: "landmark", x: 299, y: 55},
+    13: { id: 13, name: "Road 2", type: "landmark", x: 262, y: 58},
+    14: { id: 14, name: "Road 3", type: "landmark", x: 226, y: 61},
+    15: { id: 15, name: "Study Corner", type: "landmark", x: 235, y: 114},
+    16: { id: 16, name: "COC entrance", type: "landmark", x: 252, y: 175},
+    17: { id: 17, name: "Arkneth Store", type: "landmark", x: 157, y: 199},
+    18: { id: 18, name: "Node 18", type: "landmark", x: 154, y: 150},
+    19: { id: 19, name: "Crab Motor", type: "landmark", x: 154, y: 70},
+    20: { id: 20, name: "Node 20", type: "landmark", x: 173, y: 27},
+    21: { id: 21, name: "CEA entrance", type: "landmark", x: 51, y: 201},
+    22: { id: 22, name: "node 22", type: "landmark", x: 5, y: 234},
+    23: { id: 23, name: "node 23", type: "landmark", x: 15, y: 243},
+    24: { id: 24, name: "node 24", type: "landmark", x: 482, y: 44},
+    25: { id: 25, name: "node 25", type: "landmark", x: 404, y: 109}
   },
   edges: [
     // Main path from Main Gate
-    { from: 1, to: 2, weight: 190 },
-    { from: 2, to: 3, weight: 150 },
-    { from: 3, to: 4, weight: 100 },
-    { from: 4, to: 5, weight: 120 },
-    { from: 5, to: 6, weight: 80 },
+    { from: 1, to: 2, weight: calculateDistance(nodes[1], nodes[2])},
+    { from: 2, to: 3, weight: calculateDistance(nodes[2], nodes[3])},
+    { from: 3, to: 5, weight: calculateDistance(nodes[3], nodes[5]) },
+    { from: 5, to: 6, weight: calculateDistance(nodes[5], nodes[6]) },
+    { from: 5, to: 7, weight: calculateDistance(nodes[5], nodes[7]) },
+    { from: 5, to: 8, weight: calculateDistance(nodes[5], nodes[8]) },
     
     // Connecting paths
-    { from: 6, to: 7, weight: 90 },
-    { from: 7, to: 8, weight: 70 },
-    { from: 8, to: 9, weight: 110 },
-    { from: 9, to: 10, weight: 130 },
-    
-    // Path to CEA
-    { from: 10, to: 11, weight: 100 },
-    { from: 11, to: 12, weight: 85 },
-    { from: 12, to: 13, weight: 95 },
-    { from: 13, to: 14, weight: 75 },
-    { from: 14, to: 15, weight: 120 },
-    { from: 15, to: 16, weight: 140 },
-    { from: 16, to: 17, weight: 90 },
-    { from: 17, to: 18, weight: 110 },
-    { from: 18, to: 19, weight: 80 },
-    { from: 19, to: 20, weight: 100 },
-    { from: 20, to: 21, weight: 150 }, // Connection to CEA entrance
+    { from: 6, to: 4, weight: calculateDistance(nodes[6], nodes[4])},
+    { from: 8, to: 24, weight: (calculateDistance(nodes[8], nodes[24])+1000)},
+    { from: 24, to: 9, weight: calculateDistance(nodes[24], nodes[9])},
+    { from: 8, to: 25, weight: calculateDistance(nodes[8], nodes[25])},
+    { from: 25, to: 10, weight: calculateDistance(nodes[25], nodes[10])},
+    { from: 9, to: 12, weight: calculateDistance(nodes[9], nodes[12])},
+    { from: 9, to: 11, weight: calculateDistance(nodes[9], nodes[11])},
     
     // Path to COC
-    { from: 15, to: 22, weight: 180 }, // Connection to COC entrance
+    { from: 10, to: 11, weight: calculateDistance(nodes[10], nodes[11])},
+    { from: 10, to: 16, weight: calculateDistance(nodes[10], nodes[16])},
+    { from: 11, to: 12, weight: calculateDistance(nodes[11], nodes[12])},
+    { from: 11, to: 15, weight: calculateDistance(nodes[11], nodes[15])},
+    { from: 12, to: 13, weight: calculateDistance(nodes[12], nodes[13])},
+    { from: 13, to: 14, weight: calculateDistance(nodes[13], nodes[14])},
+    { from: 14, to: 15, weight: calculateDistance(nodes[14], nodes[15])},
+    { from: 14, to: 19, weight: calculateDistance(nodes[14], nodes[19])},
+    { from: 15, to: 18, weight: calculateDistance(nodes[15], nodes[18])},
+    { from: 16, to: 17, weight: calculateDistance(nodes[16], nodes[17])},
+    { from: 18, to: 19, weight: calculateDistance(nodes[18], nodes[19])},
+    { from: 18, to: 17, weight: calculateDistance(nodes[18], nodes[17])},
+    { from: 17, to: 21, weight: calculateDistance(nodes[17], nodes[21]) }, // Connection to CEA entrance
     
-    // Alternative paths
-    { from: 6, to: 11, weight: 160 },
-    { from: 9, to: 13, weight: 140 },
-    { from: 14, to: 18, weight: 170 },
-    { from: 16, to: 20, weight: 200 }
+    // Path to CEA
+    { from: 21, to: 22, weight: calculateDistance(nodes[21], nodes[22])}, // Connection to COC entrance
+    { from: 21, to: 23, weight: calculateDistance(nodes[21], nodes[23]) },
+    { from: 17, to: 22, weight: calculateDistance(nodes[17], nodes[22]) },
+    { from: 17, to: 23, weight: calculateDistance(nodes[17], nodes[23]) },
   ]
 };
 

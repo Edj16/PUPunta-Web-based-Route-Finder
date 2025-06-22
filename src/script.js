@@ -1,20 +1,39 @@
 import { mainLocations, findMainCampusRoute } from './graphs/mainCampus.js';
 import { cocLocations, findCOCRoute } from './graphs/coc.js';
 import { ceaLocations, findCEARoute } from './graphs/cea.js';
-import { mainCampusData, cocData, ceaData } from './data/graphData.js';
+import { mainCampusData, cocData, ceaData, overviewData } from './data/graphData.js';
 
-function plotVerticesOnMap(pathNodeIds = [], nodes = mainCampusData.nodes) {
+function plotVerticesOnMap(pathNodeIds = [], mapType = 'MAIN') {
   const map = document.getElementById('map');
   if (!map) return;
 
-  // Clear only points for current map
-  map.querySelectorAll(`.point[data-map-index="${currentMapIndex}"]`).forEach(el => el.remove());
+  // Clear all existing points for the current map type
+  map.querySelectorAll(`.point[data-map-type="${mapType}"]`).forEach(el => el.remove());
+
+  // Get the appropriate nodes based on map type
+  let nodes;
+  switch (mapType) {
+    case 'MAIN':
+      nodes = mainCampusData.nodes;
+      break;
+    case 'COC':
+      nodes = cocData.nodes;
+      break;
+    case 'CEA':
+      nodes = ceaData.nodes;
+      break;
+    case 'OVERVIEW':
+      nodes = overviewData.nodes;
+      break;
+    default:
+      nodes = mainCampusData.nodes;
+  }
 
   Object.values(nodes).forEach(node => {
     if (node.x !== undefined && node.y !== undefined) {
       const dot = document.createElement('div');
       dot.className = 'point';
-      dot.setAttribute('data-map-index', currentMapIndex);
+      dot.setAttribute('data-map-type', mapType);
 
       if (pathNodeIds.includes(node.id)) {
         dot.classList.add('path-node');
@@ -46,7 +65,7 @@ const interCampusConnections = {
       westGate: { nodeId: 40, name: "West Gate" }
     },
     COC: {
-      mainEntrance: { nodeId: 1, name: "COC Building Entrance" } // Using COC Building Entrance as main entrance
+      mainEntrance: { nodeId: 57, name: "COC Gate" } // Using COC Building Entrance as main entrance
     },
     CEA: {
       mainEntrance: { nodeId: 1, name: "CEA Building Entrance" } // Using CEA Building Entrance as main entrance
@@ -101,38 +120,30 @@ $(document).ready(function() {
     width: "100%"
   });
 
-
-
-
   // Set up the start campus change event handler
   $('#startCampus').on('change', function() {
     const selectedCampus = $(this).val();
     updateLocationDropdown('start', selectedCampus);
+    clearAllPathsAndNodes(); // Clear existing paths when start campus changes
+    initializeMap(getMapImageForCampus(selectedCampus));
   });
-
-
-
 
   // Set up the end campus change event handler
   $('#endCampus').on('change', function() {
     const selectedCampus = $(this).val();
     updateLocationDropdown('end', selectedCampus);
+    clearAllPathsAndNodes(); // Clear existing paths when end campus changes
   });
 
-  // Auto-change map when campus changes
-  $('#startCampus').on('change', function () {
-    const selectedCampus = $(this).val();
-    initializeMap(getMapImageForCampus(selectedCampus));
+  // Add change handlers for individual location dropdowns
+  $('#start, #end').on('change', function() {
+    clearAllPathsAndNodes();
   });
-
 
   // Set up the start navigating button
   $('.btn').on('click', function() {
     startNavigating();
   });
-
-
-
 
   // Set up form submission
   $('#route-form').on('submit', function(event) {
@@ -418,14 +429,17 @@ function switchMap(direction) {
   });
 
   // If no elements exist for this map yet and we have path data, create them
-  if (mapElements.length === 0 && nextMap.nodeIds && nextMap.nodes) {
-    highlightPath(nextMap.nodeIds, nextMap.nodes);
-    plotVerticesOnMap(nextMap.nodeIds, nextMap.nodes);
-    // Tag the newly created elements
-    const newElements = map.querySelectorAll('.path-line, .point');
-    newElements.forEach(el => {
-      el.setAttribute('data-map-index', currentMapIndex);
-    });
+  if (mapElements.length === 0) {
+    if (nextMap.campus === 'OVERVIEW') {
+      // For overview map, show all vertices and highlight the path
+      plotVerticesOnMap(nextMap.nodeIds, 'OVERVIEW');
+      if (nextMap.nodeIds && nextMap.nodeIds.length > 0) {
+        highlightPath(nextMap.nodeIds, nextMap.nodes);
+      }
+    } else if (nextMap.nodeIds) {
+      highlightPath(nextMap.nodeIds, nextMap.nodes);
+      plotVerticesOnMap(nextMap.nodeIds, nextMap.campus);
+    }
   }
 }
 
@@ -487,35 +501,68 @@ function findRoute() {
       // Store node IDs and nodes for each map in the sequence
       currentMapSequence[0].nodeIds = route.segments.withinStartCampus.nodeIds;
       currentMapSequence[0].nodes = startCampus === 'MAIN' ? mainCampusData.nodes : 
-                                   startCampus === 'COC' ? cocLocations : ceaLocations;
+                                   startCampus === 'COC' ? cocData.nodes : ceaData.nodes;
+      currentMapSequence[0].campus = startCampus;
+      
+      // Handle overview map path
+      if (currentMapSequence.length > 1) {
+        // Get the gateway nodes for the overview map path
+        const startGateway = startCampus === 'MAIN' ? 1 : // Main Gate node in overview map
+                            startCampus === 'COC' ? 16 : // COC landmark node in overview map
+                            21; // CEA entrance node in overview map
+        
+        const endGateway = endCampus === 'MAIN' ? 1 :
+                          endCampus === 'COC' ? 16 : // COC landmark node in overview map
+                          21;
+
+        // Find path between gateways in overview map
+        const overviewPath = findOverviewPath(startGateway, endGateway);
+        
+        currentMapSequence[1].nodeIds = overviewPath;
+        currentMapSequence[1].nodes = overviewData.nodes;
+        currentMapSequence[1].campus = 'OVERVIEW';
+      }
       
       if (currentMapSequence.length > 2) {
         currentMapSequence[2].nodeIds = route.segments.withinEndCampus.nodeIds;
-        currentMapSequence[2].nodes = endCampus === 'MAIN' ? mainLocations :
-                                     endCampus === 'COC' ? cocLocations : ceaLocations;
+        currentMapSequence[2].nodes = endCampus === 'MAIN' ? mainCampusData.nodes :
+                                     endCampus === 'COC' ? cocData.nodes : ceaData.nodes;
+        currentMapSequence[2].campus = endCampus;
+
+        // Plot the end campus path
+        if (currentMapIndex === 2) {
+          highlightPath(route.segments.withinEndCampus.nodeIds, currentMapSequence[2].nodes);
+          plotVerticesOnMap(route.segments.withinEndCampus.nodeIds, endCampus);
+        }
       }
       
-      highlightPath(route.segments.withinStartCampus.nodeIds, currentMapSequence[0].nodes);
-      plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, currentMapSequence[0].nodes);
+      // Plot the start campus path
+      if (currentMapIndex === 0) {
+        highlightPath(route.segments.withinStartCampus.nodeIds, currentMapSequence[0].nodes);
+        plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, startCampus);
+      }
     } else {
       if (startCampus === 'MAIN') {
         displayRoute(route, start, end, 'MAIN Campus');
         currentMapSequence[0].nodeIds = route.nodeIds;
         currentMapSequence[0].nodes = mainCampusData.nodes;
+        currentMapSequence[0].campus = 'MAIN';
         highlightPath(route.nodeIds, mainCampusData.nodes);
-        plotVerticesOnMap(route.nodeIds, mainCampusData.nodes);
+        plotVerticesOnMap(route.nodeIds, 'MAIN');
       } else if (startCampus === 'COC') {
-        displayCOCRoute(route, start, end, 'COC Campus');
+        displayCOCRoute(route, start, end);
         currentMapSequence[0].nodeIds = route.nodeIds;
-        currentMapSequence[0].nodes = cocLocations;
-        highlightPath(route.nodeIds, cocLocations);
-        plotVerticesOnMap(route.nodeIds, cocLocations);
+        currentMapSequence[0].nodes = cocData.nodes;
+        currentMapSequence[0].campus = 'COC';
+        highlightPath(route.nodeIds, cocData.nodes);
+        plotVerticesOnMap(route.nodeIds, 'COC');
       } else if (startCampus === 'CEA') {
         displayCEARoute(route, start, end);
         currentMapSequence[0].nodeIds = route.nodeIds;
-        currentMapSequence[0].nodes = ceaLocations;
-        highlightPath(route.nodeIds, ceaLocations);
-        plotVerticesOnMap(route.nodeIds, ceaLocations);
+        currentMapSequence[0].nodes = ceaData.nodes;
+        currentMapSequence[0].campus = 'CEA';
+        highlightPath(route.nodeIds, ceaData.nodes);
+        plotVerticesOnMap(route.nodeIds, 'CEA');
       }
     }
   } else {
@@ -525,8 +572,65 @@ function findRoute() {
   document.getElementById("route-result").style.display = "block";
 }
 
-
-
+// Function to find path between two nodes in overview map
+function findOverviewPath(startNode, endNode) {
+  // Simple Dijkstra implementation for overview map
+  const nodes = overviewData.nodes;
+  const edges = overviewData.edges;
+  
+  // Initialize distances
+  const distances = {};
+  const previous = {};
+  const unvisited = new Set();
+  
+  Object.keys(nodes).forEach(nodeId => {
+    distances[nodeId] = Infinity;
+    previous[nodeId] = null;
+    unvisited.add(parseInt(nodeId));
+  });
+  
+  distances[startNode] = 0;
+  
+  while (unvisited.size > 0) {
+    // Find minimum distance node
+    let minNode = null;
+    let minDist = Infinity;
+    
+    for (const nodeId of unvisited) {
+      if (distances[nodeId] < minDist) {
+        minDist = distances[nodeId];
+        minNode = nodeId;
+      }
+    }
+    
+    if (minNode === null) break;
+    if (minNode === endNode) break;
+    
+    unvisited.delete(minNode);
+    
+    // Update distances to neighbors
+    const currentEdges = edges.filter(edge => edge.from === minNode || edge.to === minNode);
+    for (const edge of currentEdges) {
+      const neighbor = edge.from === minNode ? edge.to : edge.from;
+      const newDist = distances[minNode] + edge.weight;
+      
+      if (newDist < distances[neighbor]) {
+        distances[neighbor] = newDist;
+        previous[neighbor] = minNode;
+      }
+    }
+  }
+  
+  // Reconstruct path
+  const path = [];
+  let current = endNode;
+  while (current !== null) {
+    path.unshift(current);
+    current = previous[current];
+  }
+  
+  return path;
+}
 
 // Function to display regular campus routes
 function displayRoute(route, start, end, campusName) {
@@ -832,11 +936,9 @@ function highlightPath(nodeIds, nodes) {
 
 
 function highlightCOCPath(nodeIds, pathWithFloors) {
-  initializeMap(getMapImageForCampus('COC'));
-
   if (nodeIds && nodeIds.length > 0) {
-    plotVerticesOnMap(nodeIds, cocLocations); // ✅ now uses COC nodes
-    highlightPath(nodeIds, cocLocations);
+    plotVerticesOnMap(nodeIds, 'COC'); // Use the map type instead of nodes
+    highlightPath(nodeIds, cocData.nodes); // Use cocData.nodes instead of cocLocations
   }
 }
 
@@ -974,36 +1076,33 @@ function highlightInterCampusPath(route) {
   initializeMap(getMapImageForCampus('MAIN'));
 
   const map = document.getElementById("map");
-
   if (!map) return;
 
-  // 🧹 Clear old lines and dots
+  // Clear old lines and dots
   map.querySelectorAll(".point, .path-line").forEach(el => el.remove());
 
   // Highlight start campus path
   if (route.startCampus === 'MAIN') {
     highlightPath(route.segments.withinStartCampus.nodeIds, mainCampusData.nodes);
-    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, mainCampusData.nodes);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, 'MAIN');
   } else if (route.startCampus === 'COC') {
-    highlightPath(route.segments.withinStartCampus.nodeIds, cocLocations);
-    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, cocLocations);
+    highlightPath(route.segments.withinStartCampus.nodeIds, cocData.nodes);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, 'COC');
   } else if (route.startCampus === 'CEA') {
-    highlightPath(route.segments.withinStartCampus.nodeIds, ceaLocations);
-    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, ceaLocations);
+    highlightPath(route.segments.withinStartCampus.nodeIds, ceaData.nodes);
+    plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, 'CEA');
   }
-
-  // Optional: Add a visual "break" or icon to indicate inter-campus travel
 
   // Highlight end campus path
   if (route.endCampus === 'MAIN') {
     highlightPath(route.segments.withinEndCampus.nodeIds, mainCampusData.nodes);
-    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds, mainCampusData.nodes);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds, 'MAIN');
   } else if (route.endCampus === 'COC') {
-    highlightPath(route.segments.withinEndCampus.nodeIds, cocLocations);
-    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds, cocLocations);
+    highlightPath(route.segments.withinEndCampus.nodeIds, cocData.nodes);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds, 'COC');
   } else if (route.endCampus === 'CEA') {
-    highlightPath(route.segments.withinEndCampus.nodeIds, ceaLocations);
-    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds, ceaLocations);
+    highlightPath(route.segments.withinEndCampus.nodeIds, ceaData.nodes);
+    plotVerticesOnMap(route.segments.withinEndCampus.nodeIds, 'CEA');
   }
 }
 
@@ -1078,6 +1177,16 @@ export {
 //     console.error("❌ Test route error:", testRoute?.message);
 //   }
 // });
+
+function clearAllPathsAndNodes() {
+  const map = document.getElementById('map');
+  if (!map) return;
+  
+  // Clear all points and path lines
+  map.querySelectorAll('.point, .path-line').forEach(el => {
+    el.remove();
+  });
+}
 
 
 
