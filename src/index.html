@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>PUPunta - Campus Route Finder</title>
+   
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+   
+    <!-- jQuery (required by Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+<style>
+       #map {
+            position: relative;
+            width: 900px;
+            height: 500px;
+            border: 2px solid black;
+            background-image: url('../src/images/MAINlandmarks.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+        }
+        .path-node {
+            background-color: yellow;
+            border: 2px solid black;
+            width: 12px;
+            height: 12px;
+            z-index: 25;
+        }
+
+        .path-line {
+              position: absolute;
+                height: 6px;
+                background-color: rgb(47, 0, 255) !important;
+                z-index: 9999;
+                pointer-events: none;
+        }
+
+        .point {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .label {
+            position: absolute;
+            background-color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 12px;
+            transform: translate(-50%, -150%);
+        }
+        #coordinates{
+            position: relative;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            color: white;
+            padding: 2px 6px;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+</style>
+<body>
+    <section id="front" class="front">
+        <h1 id="f_header">PUPunta</h1>
+        <img id="f_logo" src="images/puplogo.png" alt="PUP Logo">
+        <h2 id="f_sub-header">Navigate the PUP Sta. Mesa campus with ease.</h2>
+        <button class="btn" onclick="startNavigating()">
+            <img id="btn_icon" src="images/sendicon.png" alt="Send icon" class="rotated-icon">
+            Start navigating
+        </button>
+    </section>
+   
+    <!-- Navigation Section -->
+    <section id="navigation" class="navigation" style="display: none;">
+        <div class="background">
+            <a href="index.html"><img class="bg_logo" src="images/puplogo.png" alt="PUP Logo"></a>
+            <div class="text-container">
+                <h1 class="header">Welcome to PUPunta</h1>
+                <h2 class="sub-header">Navigate the PUP Sta. Mesa campus with ease.</h2>
+            </div>
+        </div>
+       
+        <!-- Route Form with Campus Filters -->
+        <div class="form-container">
+            <form id="route-form" onsubmit="return false;">
+                <!-- Start Campus Filter -->
+                <label for="startCampus">Start Campus:</label>
+                <select id="startCampus" class="select searchable-select" required>
+                    <option value="">-- Select Start Campus --</option>
+                    <option value="MAIN">Main Campus</option>
+                    <option value="CEA">CEA</option>
+                    <option value="COC">COC</option>
+                </select>
+               
+                <!-- Start Location Dropdown -->
+                <label for="start">Start Location:</label>
+                <select id="start" class="select searchable-select" required>
+                    <option value="">-- Select Start Location --</option>
+                </select>
+               
+                <!-- End Campus Filter -->
+                <label for="endCampus">End Campus:</label>
+                <select id="endCampus" class="select searchable-select" required>
+                    <option value="">-- Select End Campus --</option>
+                    <option value="MAIN">Main Campus</option>
+                    <option value="CEA">CEA</option>
+                    <option value="COC">COC</option>
+                </select>
+               
+                <!-- End Location Dropdown -->
+                <label for="end">Destination:</label>
+                <select id="end" class="select searchable-select" required>
+                    <option value="">-- Select Destination --</option>
+                </select>
+               
+                <!-- Submit Button -->
+                <button id="findbtn" type="submit" onclick="findRoute()">Find Route</button>
+            </form>
+        </div>
+       
+        <!-- Coordinates display -->
+        <div id="coordinates">X: 0 Y:0</div>
+        
+        <!-- Map Container - Will hold our campus map visualization -->
+        <div id="map-container" class="map-container">
+            <button id="prev-map" class="nav-btn side-nav prev-nav" title="Previous Map">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <button id="next-map" class="nav-btn side-nav next-nav" title="Next Map">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+            <div id="current-map-label" class="current-map-label">Main Campus</div>
+            <!-- Map will be loaded here -->
+        </div>
+       
+        <!-- Route Results -->
+        <div id="route-result" style="display: none;" class="route-result-container"></div>
+    </section>
+
+    <script>
+        const mapDiv = document.createElement('div');
+        mapDiv.id = 'map';
+        const map_container = document.getElementById('map-container').appendChild(mapDiv);
+        
+
+        // Now set up the event listeners
+        const map = document.getElementById('map');
+        const coord = document.getElementById('coordinates');
+        const points = [];
+
+        map.addEventListener('mousemove', function (e) {
+        const rect = map.getBoundingClientRect();
+        const x = Math.round(e.clientX - rect.left);
+        const y = Math.round(e.clientY - rect.top);
+        coord.textContent = `X: ${x}, Y: ${y}`;
+        });
+
+        map.addEventListener('click', function (e) {
+        const rect = map.getBoundingClientRect();
+        const x = Math.round(e.clientX - rect.left);
+        const y = Math.round(e.clientY - rect.top);
+
+        const point = document.createElement('div');
+        point.classList.add('point');
+        point.style.left = `${x}px`;
+        point.style.top = `${y}px`;
+
+        const label = document.createElement('div');
+        label.classList.add('label');
+        label.textContent = `X:${x}, Y:${y}`;
+        label.style.left = `${x}px`;
+        label.style.top = `${y}px`;
+
+        map.appendChild(point);
+        map.appendChild(label);
+
+        points.push({ x, y });
+        console.log(`Marked at: (${x}, ${y})`);
+        });
+
+        // Optional: Add your clearBtn logic here if you have a #clearBtn
+    </script>
+   
+    <!-- JavaScript modules -->
+    <script type="module" src="script.js"></script>
+
+   
+    <!-- Fallback for browsers that don't support ES modules -->
+    <script nomodule>
+        document.body.innerHTML = '<p class="error">This application requires a modern browser that supports JavaScript modules. Please update your browser.</p>';
+    </script>
+</body>
+</html>
+
+
+
