@@ -14,7 +14,7 @@ export function createAdjacencyList(graph) {
  
   return adjacencyList;
 }
-
+                                  
 
 // Dijkstra's algorithm implementation
 export function dijkstra(graph, startNodeId, endNodeId) {
@@ -132,8 +132,8 @@ export function findRouteByName(graph, startName, endName) {
     path: formattedPath,
     pathWithTypes: pathWithTypes,
     nodeIds: result.path,
-    distance: result.distance,
-    formattedDistance: `${result.distance} meters`,
+    distance: Number(result.distance.toFixed(2)),
+    formattedDistance: `${result.distance.toFixed(2)} meters`,
     estimatedMinutes: Math.ceil(result.distance / 60)
   };
 }

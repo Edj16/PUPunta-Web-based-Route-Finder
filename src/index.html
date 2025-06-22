@@ -64,7 +64,6 @@
             top: 0;
             left: 0;
             z-index: 100;
-            background-color: rgba(0,0,0,0.7);
             color: white;
             padding: 2px 6px;
             font-size: 14px;
@@ -131,15 +130,22 @@
             </form>
         </div>
        
+        <!-- Coordinates display -->
+        <div id="coordinates">X: 0 Y:0</div>
+        
         <!-- Map Container - Will hold our campus map visualization -->
         <div id="map-container" class="map-container">
-            <div id="coordinates">X: 0 Y:0</div>
-            <div id="floor-controls" style="display: none; gap: 8px;">
-            <button id="floor-down">⬇ Floor Down</button>
-            <span id="floor-label">Floor 1</span>
-            <button id="floor-up">⬆ Floor Up</button>
-            </div>
-        
+            <button id="prev-map" class="nav-btn side-nav prev-nav" title="Previous Map">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <button id="next-map" class="nav-btn side-nav next-nav" title="Next Map">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+            <div id="current-map-label" class="current-map-label">Main Campus</div>
             <!-- Map will be loaded here -->
         </div>
        

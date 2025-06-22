@@ -366,14 +366,17 @@ label {
 
 /* Map Container Styles */
 .map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 10px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 400px;
+    background: var(--background-light);
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow);
+    transition: all 0.3s ease;
     position: relative;
+
 }
 
 
@@ -620,74 +623,189 @@ label {
 }
 
 
-.floor-navigation {
-  margin: 20px 0;
-  padding: 15px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
+.map-navigation {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-.floor-navigation h4 {
-  margin: 0 0 10px 0;
-  color: #333;
+
+.nav-btn {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.floor-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+
+.nav-btn:hover {
+    background: #f0f0f0;
 }
 
-.floor-button {
-  padding: 8px 16px;
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.floor-button:hover {
-  background-color: #f0f0f0;
-  border-color: #999;
+
+#current-map-label {
+    font-weight: bold;
+    padding: 0 10px;
 }
 
-.floor-button.active {
-  background-color: #007bff;
-  color: white;
-  border-color: #0056b3;
+
+.side-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(128, 0, 0, 0.85);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(128, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    color: white;
 }
 
-.floor-change-note {
-  margin: 10px 0;
-  padding: 10px;
-  background-color: #fff3cd;
-  border: 1px solid #ffeeba;
-  border-radius: 4px;
-  color: #856404;
+
+.side-nav svg {
+    stroke: white;
+    stroke-width: 2.5;
 }
 
-.route-steps {
-  margin: 20px 0;
-  padding-left: 20px;
+
+.side-nav:hover {
+    background: rgb(128, 0, 0);
+    box-shadow: 0 4px 15px rgba(128, 0, 0, 0.6);
+    transform: translateY(-50%) scale(1.1);
+    border-color: white;
 }
 
-.route-steps li {
-  margin: 10px 0;
-  padding: 5px 0;
-  border-bottom: 1px solid #eee;
+
+.side-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: translateY(-50%) scale(1);
+    box-shadow: none;
 }
 
-#map {
-  width: 900px;
-  height: 500px;
-  position: relative;
-  border: 2px solid #ccc;
-  margin: 20px auto;
-  background-color: #f5f5f5;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
+
+.prev-nav {
+    left: 10px;
+}
+
+
+.next-nav {
+    right: 10px;
+}
+
+
+.current-map-label {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(128, 0, 0, 0.85);
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 2px 8px rgba(128, 0, 0, 0.4);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+
+.current-map-label:hover {
+    background: rgb(128, 0, 0);
+    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.6);
+    border-color: white;
+}
+
+
+#coordinates {
+    background: rgba(128, 0, 0, 0.85);
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    border-top: 2px solid white;
+    box-shadow: 0 2px 8px rgba(128, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+
+#coordinates:hover {
+    background: rgb(128, 0, 0);
+    border-color: white;
+    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.6);
+}
+
+
+.point {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 1000;
+}
+
+
+.point:hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    z-index: 20000;
+}
+
+
+.vertex-tooltip {
+    position: absolute;
+    background: rgba(128, 0, 0, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    left: 50%;
+    bottom: 100%;
+    margin-bottom: 5px;
+    transform: translateX(-50%);
+    transition: opacity 0.2s ease;
+    z-index: 20000;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+.point:hover .vertex-tooltip {
+    opacity: 1;
 }
 
 
