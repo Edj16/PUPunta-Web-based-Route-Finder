@@ -2,6 +2,8 @@ import { mainLocations, findMainCampusRoute } from './graphs/mainCampus.js';
 import { cocLocations, findCOCRoute } from './graphs/coc.js';
 import { ceaLocations, findCEARoute } from './graphs/cea.js';
 import { mainCampusData, cocData, ceaData, overviewData } from './data/graphData.js';
+import EnhancedMapPlotter from './utils/mapPlotter.js';
+import { findPath } from './utils/pathfinding.js';
 
 function plotVerticesOnMap(pathNodeIds = [], mapType = 'MAIN') {
   const map = document.getElementById('map');
@@ -29,21 +31,63 @@ function plotVerticesOnMap(pathNodeIds = [], mapType = 'MAIN') {
       nodes = mainCampusData.nodes;
   }
 
+  // Get building names if we're in COC map
+  const buildings = {};
+  if (mapType === 'COC') {
+    Object.values(nodes).forEach(node => {
+      if (node.type === 'building') {
+        buildings[node.id] = node.name;
+      }
+    });
+  }
+
+  // Create a set of parent nodes that are part of the path
+  const parentNodesInPath = new Set();
+  if (mapType === 'COC') {
+    pathNodeIds.forEach(nodeId => {
+      const node = nodes[nodeId];
+      if (node && node.parent) {
+        parentNodesInPath.add(node.parent);
+      }
+    });
+  }
+
   Object.values(nodes).forEach(node => {
     if (node.x !== undefined && node.y !== undefined) {
       const dot = document.createElement('div');
       dot.className = 'point';
       dot.setAttribute('data-map-type', mapType);
 
-      if (pathNodeIds.includes(node.id)) {
+      // Add path-node class if:
+      // 1. The node is directly in the path, OR
+      // 2. The node is a parent of a node in the path
+      if (pathNodeIds.includes(node.id) || parentNodesInPath.has(node.id)) {
         dot.classList.add('path-node');
       }
 
-      // Add tooltip if name exists
+      // Add building-specific class for COC map
+      if (mapType === 'COC' && node.parent) {
+        dot.classList.add(`building-${node.parent}`);
+      }
+
+      // Add tooltip with enhanced information
       if (node.name) {
         const tooltip = document.createElement('div');
         tooltip.className = 'vertex-tooltip';
-        tooltip.textContent = node.name;
+        
+        let tooltipText = node.name;
+        
+        // Add building info for COC map
+        if (mapType === 'COC' && node.parent && buildings[node.parent]) {
+          tooltipText += ` [${buildings[node.parent]}]`;
+        }
+        
+        // Add floor info for COC map
+        if (mapType === 'COC' && node.floor) {
+          tooltipText += ` (Floor ${node.floor})`;
+        }
+        
+        tooltip.textContent = tooltipText;
         dot.appendChild(tooltip);
       }
 
@@ -68,7 +112,7 @@ const interCampusConnections = {
       mainEntrance: { nodeId: 57, name: "COC Gate" } // Using COC Building Entrance as main entrance
     },
     CEA: {
-      mainEntrance: { nodeId: 1, name: "CEA Building Entrance" } // Using CEA Building Entrance as main entrance
+      mainEntrance: { nodeId: 143, name: "CEA Gate" } // Using CEA Building Entrance as main entrance
     }
   },
  
@@ -310,7 +354,84 @@ function findInterCampusRoute(startCampus, startLocation, endCampus, endLocation
  
   // Find route within end campus from its main entrance to destination
   const endCampusGateway = getBestGateway(endCampus, startCampus);
-  const endCampusRoute = findSameCampusRoute(endCampus, endCampusGateway.name, endLocation);
+  let endCampusRoute;
+  
+  if (endCampus === 'COC') {
+    // For COC, first get route to the gate, then to the final destination
+    const routeToGate = findSameCampusRoute(endCampus, endCampusGateway.name, 'COC Gate');
+    
+    // Find the parent node for the destination
+    let parentNode = 'COC Gate'; // Default to COC Gate if no specific parent
+    if (endLocation !== 'COC Gate' && endLocation !== 'COC Building') {
+      // Get the node data for the destination
+      const destNode = Object.values(cocData.nodes).find(node => node.name === endLocation);
+      if (destNode && destNode.parent) {
+        parentNode = destNode.parent;
+      }
+    }
+    
+    // Get route from gate to parent node first
+    const routeToParent = findSameCampusRoute(endCampus, 'COC Gate', parentNode);
+    
+    // Then get route from parent to final destination if needed
+    const routeToDestination = parentNode !== endLocation ? 
+      findSameCampusRoute(endCampus, parentNode, endLocation) :
+      { ...routeToParent, nodeIds: [], path: [], pathWithTypes: [], distance: 0, estimatedMinutes: 0 };
+    
+    if (!routeToGate.error && !routeToParent.error && !routeToDestination.error) {
+      // Combine all routes
+      endCampusRoute = {
+        error: false,
+        path: [...routeToGate.path, ...routeToParent.path.slice(1), ...routeToDestination.path.slice(1)],
+        pathWithTypes: [...routeToGate.pathWithTypes, ...routeToParent.pathWithTypes.slice(1), ...routeToDestination.pathWithTypes.slice(1)],
+        nodeIds: [...routeToGate.nodeIds, ...routeToParent.nodeIds.slice(1), ...routeToDestination.nodeIds.slice(1)],
+        distance: routeToGate.distance + routeToParent.distance + routeToDestination.distance,
+        formattedDistance: `${routeToGate.distance + routeToParent.distance + routeToDestination.distance} meters`,
+        estimatedMinutes: routeToGate.estimatedMinutes + routeToParent.estimatedMinutes + routeToDestination.estimatedMinutes
+      };
+    } else {
+      endCampusRoute = routeToGate.error ? routeToGate : (routeToParent.error ? routeToParent : routeToDestination);
+    }
+  } else if (endCampus === 'CEA') {
+    // For CEA, first get route to the entrance
+    const routeToEntrance = findSameCampusRoute(endCampus, endCampusGateway.name, 'CEA Building Entrance');
+    
+    // Find the parent node for the destination
+    let parentNode = 'CEA Building Entrance'; // Default to entrance if no specific parent
+    if (endLocation !== 'CEA Building Entrance') {
+      // Get the node data for the destination
+      const destNode = Object.values(ceaData.nodes).find(node => node.name === endLocation);
+      if (destNode && destNode.parent) {
+        parentNode = destNode.parent;
+      }
+    }
+    
+    // Get route from entrance to parent node first
+    const routeToParent = findSameCampusRoute(endCampus, 'CEA Building Entrance', parentNode);
+    
+    // Then get route from parent to final destination if needed
+    const routeToDestination = parentNode !== endLocation ? 
+      findSameCampusRoute(endCampus, parentNode, endLocation) :
+      { ...routeToParent, nodeIds: [], path: [], pathWithTypes: [], distance: 0, estimatedMinutes: 0 };
+    
+    if (!routeToEntrance.error && !routeToParent.error && !routeToDestination.error) {
+      // Combine all routes
+      endCampusRoute = {
+        error: false,
+        path: [...routeToEntrance.path, ...routeToParent.path.slice(1), ...routeToDestination.path.slice(1)],
+        pathWithTypes: [...routeToEntrance.pathWithTypes, ...routeToParent.pathWithTypes.slice(1), ...routeToDestination.pathWithTypes.slice(1)],
+        nodeIds: [...routeToEntrance.nodeIds, ...routeToParent.nodeIds.slice(1), ...routeToDestination.nodeIds.slice(1)],
+        distance: routeToEntrance.distance + routeToParent.distance + routeToDestination.distance,
+        formattedDistance: `${routeToEntrance.distance + routeToParent.distance + routeToDestination.distance} meters`,
+        estimatedMinutes: routeToEntrance.estimatedMinutes + routeToParent.estimatedMinutes + routeToDestination.estimatedMinutes
+      };
+    } else {
+      endCampusRoute = routeToEntrance.error ? routeToEntrance : (routeToParent.error ? routeToParent : routeToDestination);
+    }
+  } else {
+    // For MAIN campus, use the original route finding
+    endCampusRoute = findSameCampusRoute(endCampus, endCampusGateway.name, endLocation);
+  }
  
   // Check for errors in campus-internal routes
   if (startCampusRoute.error || endCampusRoute.error) {
@@ -421,26 +542,8 @@ function switchMap(direction) {
   initializeMap(nextMap.image);
   updateMapNavigation();
 
-  // Show elements for the new current map
-  const map = document.getElementById('map');
-  const mapElements = map.querySelectorAll(`[data-map-index="${currentMapIndex}"]`);
-  mapElements.forEach(el => {
-    el.style.display = ''; // Show elements for this map
-  });
-
-  // If no elements exist for this map yet and we have path data, create them
-  if (mapElements.length === 0) {
-    if (nextMap.campus === 'OVERVIEW') {
-      // For overview map, show all vertices and highlight the path
-      plotVerticesOnMap(nextMap.nodeIds, 'OVERVIEW');
-      if (nextMap.nodeIds && nextMap.nodeIds.length > 0) {
-        highlightPath(nextMap.nodeIds, nextMap.nodes);
-      }
-    } else if (nextMap.nodeIds) {
-      highlightPath(nextMap.nodeIds, nextMap.nodes);
-      plotVerticesOnMap(nextMap.nodeIds, nextMap.campus);
-    }
-  }
+  // Plot paths for the new current map
+  plotPathsForCurrentMap();
 }
 
 // Initialize map navigation controls
@@ -483,7 +586,13 @@ function findRoute() {
   const endCampus = $('#endCampus').val();
   const end = $('#end').val();
 
-  if (startCampus && start && endCampus && end) {
+  // Special handling for COC Building destination
+  let adjustedEnd = end;
+  if (endCampus === 'COC' && end === 'COC Building') {
+    adjustedEnd = 'COC Gate';  // Use the gate instead of the building itself
+  }
+
+  if (startCampus && start && endCampus && adjustedEnd) {
     // Generate map sequence based on route
     currentMapSequence = generateMapSequence(startCampus, endCampus);
     currentMapIndex = 0;
@@ -493,10 +602,12 @@ function findRoute() {
     updateMapNavigation();
 
     // Find and display route
-    const route = findCompleteRoute(startCampus, start, endCampus, end);
+    const route = findCompleteRoute(startCampus, start, endCampus, adjustedEnd);
 
     if (route.type === 'inter-campus') {
-      displayInterCampusRouteEnhanced(route, start, end);
+      // If the original destination was COC Building, modify the display text
+      const displayEnd = end === 'COC Building' ? end : adjustedEnd;
+      displayInterCampusRouteEnhanced(route, start, displayEnd);
       
       // Store node IDs and nodes for each map in the sequence
       currentMapSequence[0].nodeIds = route.segments.withinStartCampus.nodeIds;
@@ -524,23 +635,15 @@ function findRoute() {
       }
       
       if (currentMapSequence.length > 2) {
+        // Store the complete end campus route
         currentMapSequence[2].nodeIds = route.segments.withinEndCampus.nodeIds;
         currentMapSequence[2].nodes = endCampus === 'MAIN' ? mainCampusData.nodes :
                                      endCampus === 'COC' ? cocData.nodes : ceaData.nodes;
         currentMapSequence[2].campus = endCampus;
-
-        // Plot the end campus path
-        if (currentMapIndex === 2) {
-          highlightPath(route.segments.withinEndCampus.nodeIds, currentMapSequence[2].nodes);
-          plotVerticesOnMap(route.segments.withinEndCampus.nodeIds, endCampus);
-        }
       }
       
-      // Plot the start campus path
-      if (currentMapIndex === 0) {
-        highlightPath(route.segments.withinStartCampus.nodeIds, currentMapSequence[0].nodes);
-        plotVerticesOnMap(route.segments.withinStartCampus.nodeIds, startCampus);
-      }
+      // Plot initial paths based on current map index
+      plotPathsForCurrentMap();
     } else {
       if (startCampus === 'MAIN') {
         displayRoute(route, start, end, 'MAIN Campus');
@@ -570,6 +673,21 @@ function findRoute() {
   }
 
   document.getElementById("route-result").style.display = "block";
+}
+
+// Function to plot paths for the current map
+function plotPathsForCurrentMap() {
+  const currentMap = currentMapSequence[currentMapIndex];
+  if (!currentMap || !currentMap.nodeIds || !currentMap.nodes) return;
+
+  // Clear existing paths and vertices
+  const map = document.getElementById('map');
+  if (!map) return;
+  map.querySelectorAll('.point, .path-line').forEach(el => el.remove());
+
+  // Plot new paths and vertices
+  highlightPath(currentMap.nodeIds, currentMap.nodes);
+  plotVerticesOnMap(currentMap.nodeIds, currentMap.campus);
 }
 
 // Function to find path between two nodes in overview map
@@ -631,9 +749,52 @@ function findOverviewPath(startNode, endNode) {
   
   return path;
 }
+/**
+ * Traverses up the parent chain of a node to find the top-level building.
+ * @param {object} node - The node to start from.
+ * @param {object} allNodes - The complete map of all nodes.
+ * @returns {object|null} The top-level building node, or null.
+ */
+function getTopLevelBuilding(node, allNodes) {
+    if (!node) return null;
+   
+    // If the node itself is a building, return it.
+    if (node.type === 'building' || node.type === 'building-wing') {
+        return node;
+    }
+
+
+    if (!node.parent) {
+        return null; // It's an outside node
+    }
+
+
+    let current = allNodes[node.parent];
+    let topParent = current;
+
+
+    while (current && current.parent) {
+        current = allNodes[current.parent];
+        if (current) {
+            topParent = current;
+        }
+    }
+   
+    // Check if the found parent is actually a building
+    if (topParent && (topParent.type === 'building' || topParent.type === 'building-wing')) {
+      return topParent;
+    }
+
+
+    return null;
+}
+
+
+
 
 // Function to display regular campus routes
 function displayRoute(route, start, end, campusName) {
+  $('#route-result').show();
   if (route.error) {
     $('#route-result').html(`<p class="error">${route.message}</p>`);
   } else {
@@ -644,21 +805,33 @@ function displayRoute(route, start, end, campusName) {
       <p><strong>Distance:</strong> ${route.formattedDistance}</p>
       <ol class="route-steps">`;
    
-    route.path.forEach((location, index) => {
-      routeHTML += `<li>${location}${index < route.path.length - 1 ? ' →' : ''}</li>`;
+    let lastBuildingId = null;
+    route.nodeIds.forEach((nodeId, index) => {
+      const node = mainCampusData.nodes[nodeId];
+      if (!node || !node.name) return; // Skip nodes without names
+
+      const building = getTopLevelBuilding(node, mainCampusData.nodes);
+      const currentBuildingId = building ? building.id : null;
+
+      // If we've entered a new building, add a step to indicate it.
+      if (currentBuildingId && currentBuildingId !== lastBuildingId) {
+        // Don't show "Entering..." for the very first step if it's already inside
+        if (index > 0 && building.name) {
+          routeHTML += `<li><strong>Entering ${building.name}</strong> →</li>`;
+        }
+      }
+      lastBuildingId = currentBuildingId;
+     
+      routeHTML += `<li>${node.name}${index < route.nodeIds.length - 1 ? ' →' : ''}</li>`;
     });
    
     routeHTML += `</ol>`;
    
     $('#route-result').html(routeHTML);
-   
-    // Highlight the path on the map (if map visualization is implemented)
-    highlightPath(route.nodeIds, mainCampusData.nodes);      // ✅ correct
-
-
-
   }
 }
+
+
 
 
 
@@ -667,19 +840,21 @@ function displayRoute(route, start, end, campusName) {
 function displayCOCRoute(route, start, end) {
   console.log('Displaying COC route:', route); // Debug log
 
-
-
-
   if (!route || route.error) {
     const errorMessage = route && route.message ? route.message : "Could not find a route between these locations";
     $('#route-result').html(`<p class="error">${errorMessage}</p>`);
     return;
   }
 
+  // Get building names for reference
+  const buildings = {};
+  Object.values(cocData.nodes).forEach(node => {
+    if (node.type === 'building' && node.name) {
+      buildings[node.id] = node.name;
+    }
+  });
 
-
-
-  // Display the route with floor information
+  // Display the route with floor and building information
   let routeHTML = `
     <h3>Route from ${start} to ${end}</h3>
     <p><strong>Building:</strong> COC (College of Communication)</p>
@@ -688,30 +863,55 @@ function displayCOCRoute(route, start, end) {
     <ol class="route-steps">`;
  
   route.pathWithTypes.forEach((location, index) => {
+    // Skip locations without names
+    if (!location || !location.name) return;
+
     const floorInfo = location.floor === "1-2" ? "(Stairs)" : `(Floor ${location.floor})`;
     const typeInfo = location.type === 'hallway' ? '' : ` - ${location.type}`;
+    
+    // Get building info
+    const node = Object.values(cocData.nodes).find(n => n.name === location.name);
+    let buildingInfo = '';
+    if (node && node.parent && buildings[node.parent]) {
+      buildingInfo = ` [${buildings[node.parent]}]`;
+    }
    
     routeHTML += `
       <li>
-        <strong>${location.name}</strong> ${floorInfo}${typeInfo}
+        <strong>${location.name}</strong>${buildingInfo} ${floorInfo}${typeInfo}
         ${index < route.pathWithTypes.length - 1 ? ' →' : ''}
       </li>`;
   });
  
   routeHTML += `</ol>`;
  
-  // Add helpful navigation notes if changing floors
+  // Add helpful navigation notes if changing floors or buildings
   if (route.pathWithTypes.length > 0) {
-    const startFloor = route.pathWithTypes[0].floor;
-    const endFloor = route.pathWithTypes[route.pathWithTypes.length - 1].floor;
-   
-    if (startFloor !== endFloor &&
-        typeof startFloor === 'number' &&
-        typeof endFloor === 'number') {
-      routeHTML += `<div class="route-note">
-        <p><strong>Note:</strong> This route involves moving from Floor ${startFloor} to Floor ${endFloor}.
-        Follow the stairs as indicated in the route.</p>
-      </div>`;
+    const validLocations = route.pathWithTypes.filter(loc => loc && loc.name);
+    if (validLocations.length > 0) {
+      const startFloor = validLocations[0].floor;
+      const endFloor = validLocations[validLocations.length - 1].floor;
+      
+      // Get start and end nodes
+      const startNode = Object.values(cocData.nodes).find(n => n.name === validLocations[0].name);
+      const endNode = Object.values(cocData.nodes).find(n => n.name === validLocations[validLocations.length - 1].name);
+      
+      // Check for building changes
+      if (startNode && endNode && startNode.parent !== endNode.parent) {
+        routeHTML += `<div class="route-note">
+          <p><strong>Note:</strong> This route involves moving between different buildings:
+          from ${buildings[startNode.parent] || 'main building'} to ${buildings[endNode.parent] || 'main building'}.</p>
+        </div>`;
+      }
+     
+      if (startFloor !== endFloor &&
+          typeof startFloor === 'number' &&
+          typeof endFloor === 'number') {
+        routeHTML += `<div class="route-note">
+          <p><strong>Note:</strong> This route involves moving from Floor ${startFloor} to Floor ${endFloor}.
+          Follow the stairs as indicated in the route.</p>
+        </div>`;
+      }
     }
   }
  
@@ -730,17 +930,11 @@ function displayCOCRoute(route, start, end) {
 function displayCEARoute(route, start, end) {
   console.log('Displaying CEA route:', route); // Debug log
 
-
-
-
   if (!route || route.error) {
     const errorMessage = route && route.message ? route.message : "Could not find a route between these locations";
     $('#route-result').html(`<p class="error">${errorMessage}</p>`);
     return;
   }
-
-
-
 
   // Display the route with floor information
   let routeHTML = `
@@ -751,6 +945,9 @@ function displayCEARoute(route, start, end) {
     <ol class="route-steps">`;
  
   route.pathWithTypes.forEach((location, index) => {
+    // Skip locations without names
+    if (!location || !location.name) return;
+
     // Handle different floor types (numbers, "1-2", "2-3", "3-4" for stairs)
     let floorInfo;
     if (typeof location.floor === 'string' && location.floor.includes('-')) {
@@ -772,16 +969,19 @@ function displayCEARoute(route, start, end) {
  
   // Add helpful navigation notes for multi-floor routes
   if (route.pathWithTypes.length > 0) {
-    const startFloor = route.pathWithTypes[0].floor;
-    const endFloor = route.pathWithTypes[route.pathWithTypes.length - 1].floor;
-   
-    if (startFloor !== endFloor &&
-        typeof startFloor === 'number' &&
-        typeof endFloor === 'number') {
-      routeHTML += `<div class="route-note">
-        <p><strong>Note:</strong> This route involves moving from Floor ${startFloor} to Floor ${endFloor}.
-        Follow the stairs as indicated in the route.</p>
-      </div>`;
+    const validLocations = route.pathWithTypes.filter(loc => loc && loc.name);
+    if (validLocations.length > 0) {
+      const startFloor = validLocations[0].floor;
+      const endFloor = validLocations[validLocations.length - 1].floor;
+     
+      if (startFloor !== endFloor &&
+          typeof startFloor === 'number' &&
+          typeof endFloor === 'number') {
+        routeHTML += `<div class="route-note">
+          <p><strong>Note:</strong> This route involves moving from Floor ${startFloor} to Floor ${endFloor}.
+          Follow the stairs as indicated in the route.</p>
+        </div>`;
+      }
     }
   }
  
@@ -836,8 +1036,12 @@ function displayInterCampusRouteEnhanced(route, startLocation, endLocation) {
         <h5>Within ${route.startCampus} Campus:</h5>
         <ol class="route-steps">`;
  
-  route.segments.withinStartCampus.path.forEach((location, index) => {
-    routeHTML += `<li>${location}${index < route.segments.withinStartCampus.path.length - 1 ? ' →' : ''}</li>`;
+  // Filter out "Unknown Location" from start campus path
+  const startCampusPath = route.segments.withinStartCampus.path.filter(location => 
+    location && location !== "Unknown Location"
+  );
+  startCampusPath.forEach((location, index) => {
+    routeHTML += `<li>${location}${index < startCampusPath.length - 1 ? ' →' : ''}</li>`;
   });
  
   routeHTML += `
@@ -846,8 +1050,24 @@ function displayInterCampusRouteEnhanced(route, startLocation, endLocation) {
       </div>
      
       <div class="route-segment inter-campus-segment">
-        <h5>Between Campuses:</h5>
+        <h5>Between Campuses (Overview Map):</h5>
         <p><strong>Route:</strong> ${route.routeDescription}</p>
+        <ol class="route-steps">`;
+
+  // Add overview map path with node names, filtering out unknown locations
+  if (currentMapSequence.length > 1 && currentMapSequence[1].nodeIds) {
+    const overviewPath = currentMapSequence[1].nodeIds
+      .map(nodeId => overviewData.nodes[nodeId])
+      .filter(node => node && node.name && node.name !== "Unknown Location")
+      .map(node => node.name);
+    
+    overviewPath.forEach((nodeName, index) => {
+      routeHTML += `<li>${nodeName}${index < overviewPath.length - 1 ? ' →' : ''}</li>`;
+    });
+  }
+
+  routeHTML += `
+        </ol>
         <p><strong>Distance:</strong> ${route.segments.interCampus.distance} meters</p>
         <p><strong>Options:</strong></p>
         <ul>
@@ -860,8 +1080,12 @@ function displayInterCampusRouteEnhanced(route, startLocation, endLocation) {
         <h5>Within ${route.endCampus} Campus:</h5>
         <ol class="route-steps">`;
  
-  route.segments.withinEndCampus.path.forEach((location, index) => {
-    routeHTML += `<li>${location}${index < route.segments.withinEndCampus.path.length - 1 ? ' →' : ''}</li>`;
+  // Filter out "Unknown Location" from end campus path
+  const endCampusPath = route.segments.withinEndCampus.path.filter(location => 
+    location && location !== "Unknown Location"
+  );
+  endCampusPath.forEach((location, index) => {
+    routeHTML += `<li>${location}${index < endCampusPath.length - 1 ? ' →' : ''}</li>`;
   });
  
   routeHTML += `
@@ -890,10 +1114,33 @@ function highlightPath(nodeIds, nodes) {
   // Clear only path lines for current map
   map.querySelectorAll(`.path-line[data-map-index="${currentMapIndex}"]`).forEach(el => el.remove());
 
+  // Create a map of parent nodes to their coordinates
+  const parentCoords = {};
+  if (nodes === cocData.nodes) {
+    Object.values(nodes).forEach(node => {
+      if (node.type === 'building' && node.x !== undefined && node.y !== undefined) {
+        parentCoords[node.id] = { x: node.x, y: node.y };
+      }
+    });
+  }
+
   for (let i = 0; i < nodeIds.length - 1; i++) {
-    const from = nodes[nodeIds[i]];
-    const to = nodes[nodeIds[i + 1]];
-    if (!from || !to || from.x === undefined || to.x === undefined) continue;
+    const fromNode = nodes[nodeIds[i]];
+    const toNode = nodes[nodeIds[i + 1]];
+    if (!fromNode || !toNode) continue;
+
+    // Get the actual coordinates to use for the line
+    const from = {
+      x: fromNode.x !== undefined ? fromNode.x : (fromNode.parent && parentCoords[fromNode.parent] ? parentCoords[fromNode.parent].x : undefined),
+      y: fromNode.y !== undefined ? fromNode.y : (fromNode.parent && parentCoords[fromNode.parent] ? parentCoords[fromNode.parent].y : undefined)
+    };
+
+    const to = {
+      x: toNode.x !== undefined ? toNode.x : (toNode.parent && parentCoords[toNode.parent] ? parentCoords[toNode.parent].x : undefined),
+      y: toNode.y !== undefined ? toNode.y : (toNode.parent && parentCoords[toNode.parent] ? parentCoords[toNode.parent].y : undefined)
+    };
+
+    if (from.x === undefined || to.x === undefined) continue;
 
     const dx = to.x - from.x;
     const dy = to.y - from.y;
@@ -937,8 +1184,19 @@ function highlightPath(nodeIds, nodes) {
 
 function highlightCOCPath(nodeIds, pathWithFloors) {
   if (nodeIds && nodeIds.length > 0) {
-    plotVerticesOnMap(nodeIds, 'COC'); // Use the map type instead of nodes
-    highlightPath(nodeIds, cocData.nodes); // Use cocData.nodes instead of cocLocations
+    // Get the last node in the path
+    const lastNode = cocData.nodes[nodeIds[nodeIds.length - 1]];
+    
+    // If the last node has a parent, add the parent node to the path
+    if (lastNode && lastNode.parent) {
+      const parentNode = cocData.nodes[lastNode.parent];
+      if (parentNode) {
+        nodeIds = [...nodeIds, lastNode.parent];
+      }
+    }
+    
+    plotVerticesOnMap(nodeIds, 'COC');
+    highlightPath(nodeIds, cocData.nodes);
   }
 }
 
@@ -946,8 +1204,19 @@ function highlightCEAPath(nodeIds, pathWithFloors) {
   initializeMap(getMapImageForCampus('CEA'));
 
   if (nodeIds && nodeIds.length > 0) {
-    plotVerticesOnMap(nodeIds, ceaLocations); // ✅ now uses CEA nodes
-    highlightPath(nodeIds, ceaLocations);
+    // Get the last node in the path
+    const lastNode = ceaData.nodes[nodeIds[nodeIds.length - 1]];
+    
+    // If the last node has a parent, add the parent node to the path
+    if (lastNode && lastNode.parent) {
+      const parentNode = ceaData.nodes[lastNode.parent];
+      if (parentNode) {
+        nodeIds = [...nodeIds, lastNode.parent];
+      }
+    }
+    
+    plotVerticesOnMap(nodeIds, 'CEA');
+    highlightPath(nodeIds, ceaData.nodes);
   }
 }
 
@@ -1188,6 +1457,81 @@ function clearAllPathsAndNodes() {
   });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('mapCanvas');
+  if (!canvas) {
+    console.error('Canvas element not found!');
+    return;
+  }
+  const plotter = new EnhancedMapPlotter(canvas);
+
+  // Function to initialize the map view without drawing a path
+  const initializeMap = async () => {
+    const mapImage = await plotter.loadImageForMap('overview');
+    plotter.currentMapImage = mapImage;
+
+    // Set the initial map data without plotting a path
+    plotter.currentMap = 'overview';
+    const currentMapData = plotter.getCurrentMapData();
+    
+    // Redraw the canvas with the background and nodes, but no path
+    plotter.redrawCurrentState(currentMapData.nodes, []);
+  };
+
+  // Initialize the map on page load
+  initializeMap();
+  
+  // Setup search form
+  const searchForm = document.getElementById('searchForm');
+  if (searchForm) {
+    searchForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const startLocation = document.getElementById('startLocation').value;
+      const endLocation = document.getElementById('endLocation').value;
+      
+      if (!startLocation || !endLocation) {
+        showMessage('Please enter both a start and end location.', 'error');
+        return;
+      }
+
+      try {
+        const pathResult = await findPath(startLocation, endLocation);
+        
+        if (pathResult.success && pathResult.path.length > 0) {
+          const nodes = plotter.getAllNodes();
+          
+          // Redraw the state with the new path
+          plotter.redrawCurrentState(nodes, pathResult.path);
+          showMessage('Path found! Follow the highlighted route.', 'success');
+        } else {
+          // If no path, just show the nodes
+          const nodes = plotter.getAllNodes();
+          plotter.redrawCurrentState(nodes, []);
+          showMessage('No path found between these locations.', 'error');
+        }
+      } catch (error) {
+        console.error('Error finding path:', error);
+        const nodes = plotter.getAllNodes();
+        plotter.redrawCurrentState(nodes, []);
+        showMessage(`Error: ${error.message}`, 'error');
+      }
+    });
+  }
+});
+
+function showMessage(message, type) {
+  const messageDiv = document.getElementById('message');
+  if (messageDiv) {
+    messageDiv.textContent = message;
+    messageDiv.className = `message ${type}`;
+    messageDiv.style.display = 'block';
+    
+    setTimeout(() => {
+      messageDiv.style.display = 'none';
+    }, 5000);
+  }
+}
 
 
 

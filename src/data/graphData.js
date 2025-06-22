@@ -780,10 +780,10 @@ export const mainCampusData = {
   { from: 80, to: 41, weight: calculateDistance(nodes[80], nodes[41]) },
 
     // Add connection from West Wing Hallway and stairs to Lagoon path
-    { from: 1032, to: 13, weight: 20 },  // West Wing Hallway to Lagoon
-    { from: 13, to: 1032, weight: 20 },  // Lagoon to West Wing Hallway
-    { from: 1036, to: 13, weight: 15 },  // West Wing Left Stairs to Lagoon
-    { from: 13, to: 1036, weight: 15 },   // Lagoon to West Wing Left Stairs
+    { from: 1032, to: 18, weight: 20 },  // West Wing Hallway to Lagoon
+    { from: 18, to: 1032, weight: 20 },  // Lagoon to West Wing Hallway
+    { from: 1036, to: 18, weight: 15 },  // West Wing Left Stairs to Lagoon
+    { from: 18, to: 1036, weight: 15 },   // Lagoon to West Wing Left Stairs
       
     // Connect main building wings to their hallways
     { from: 15, to: 1030, weight: 5 },  // East Wing to East Wing Hallway
@@ -928,9 +928,9 @@ export const mainCampusData = {
     { from: 2109, to: 2103, weight: 25 }, // East Wing Hallway to North Left Stairs
     { from: 2110, to: 2104, weight: 25 }, // North Wing Hallway to North Right Stairs
 
-    { from: 2112, to: 2106, weight: 25 }, // South Wing Hallway to South Left Stairs
-    { from: 2112, to: 2107, weight: 25 }, // South Wing Hallway to South Center Stairs
-    { from: 2112, to: 2108, weight: 25 }, // South Wing Hallway to South Right Stairs
+    { from: 2112, to: 2106, weight: 10 }, // South Wing Hallway to South Left Stairs
+    { from: 2112, to: 2107, weight: 5 },  // South Wing Hallway to South Center Stairs - lower weight for preferred path
+    { from: 2112, to: 2108, weight: 10 }, // South Wing Hallway to South Right Stairs
 
     // Hallway to Dome Hallway Connections
     { from: 2102, to: 2109, weight: 10 }, // Dome Hallway to East Wing Hallway
@@ -1073,7 +1073,7 @@ export const mainCampusData = {
     { from: 2104, to: 3071, weight: 25 }, // North Wing Right Stairs to 3rd floor hallway
 
     { from: 2106, to: 3072, weight: 25 }, // South Wing Left Stairs to 3rd floor hallway
-    { from: 2107, to: 3072, weight: 25 }, // South Wing Center Stairs to 3rd floor hallway
+    { from: 2107, to: 3072, weight: 15 }, // South Wing Center Stairs to 3rd floor hallway - lower weight for preferred path
     { from: 2108, to: 3072, weight: 25 }, // South Wing Right Stairs to 3rd floor hallway
 
     // Add new edges for 4th floor
@@ -1147,9 +1147,6 @@ export const mainCampusData = {
     { from: 4093, to: 4063, weight: 5 }, // Hallway to N417
 
     // South Wing Connections
-    { from: 4094, to: 4064, weight: 5 }, // Hallway to Vacant Room
-    { from: 4094, to: 4065, weight: 5 }, // Hallway to Institutional Planning Office
-    { from: 4094, to: 4066, weight: 5 }, // Hallway to Office
     { from: 4094, to: 4067, weight: 5 }, // Hallway to Classroom
     { from: 4094, to: 4068, weight: 5 }, // Hallway to ITSO
     { from: 4094, to: 4069, weight: 5 }, // Hallway to Research Chef's Lounge
@@ -1745,77 +1742,98 @@ export const mainCampusData = {
   ]
 };
 // COC Building Graph Data
+// COC Building Graph Data
 export const cocData = {
   nodes: {
-    1: { id: 1, name: "COC Building Entrance", type: "entrance", floor: 1 },
-    2: { id: 2, name: "Communications Society", type: "room", floor: 1 },
-    3: { id: 3, name: "Toilet (Left Wing 1st Floor)", type: "facility", floor: 1 },
-    4: { id: 4, name: "Department of Broadcast Communication", type: "office", floor: 1 },
-    5: { id: 5, name: "Office of the College Dean", type: "office", floor: 1 },
-    6: { id: 6, name: "Faculty Room (1st Floor)", type: "room", floor: 1 },
-    7: { id: 7, name: "Lecture Room 101", type: "classroom", floor: 1 },
-    8: { id: 8, name: "Student Council Room", type: "room", floor: 1 },
-    9: { id: 9, name: "Toilet (Right Wing 1st Floor)", type: "facility", floor: 1 },
-    10: { id: 10, name: "Dental Clinic", type: "clinic", floor: 1 },
-    11: { id: 11, name: "Lecture Room 105", type: "classroom", floor: 1 },
-    12: { id: 12, name: "Lecture Room 106", type: "classroom", floor: 1 },
-    13: { id: 13, name: "Lecture Room 107", type: "classroom", floor: 1 },
-    14: { id: 14, name: "Female Toilet (Bottom Wing)", type: "facility", floor: 1 },
-    15: { id: 15, name: "Male Toilet (Bottom Wing)", type: "facility", floor: 1 },
-    16: { id: 16, name: "Medical Clinic", type: "clinic", floor: 1 },
-    17: { id: 17, name: "Lecture Room 110", type: "classroom", floor: 1 },
-    18: { id: 18, name: "Lecture Room 111", type: "classroom", floor: 1 },
-    19: { id: 19, name: "Lecture Room 112", type: "classroom", floor: 1 },
-    20: { id: 20, name: "Lecture Room 113", type: "classroom", floor: 1 },
-    21: { id: 21, name: "Lecture Room 114", type: "classroom", floor: 1 },
+    0: { id: 0, name: "COC Building", type: "building", x:545, y:252},
+    57: { id: 57, name: "COC Gate", type: "entrance", x:562, y:21},  // Adding COC gate node
+    59: { id: 59, name: "Parking Area", type: "landmark", x:674, y:134},  // Parking Area
+    666: { id: 666, type: "pathway", x:545, y:252},
+
+
+    1: { id: 1, name: "COC Building Entrance", type: "entrance", floor: 1, parent: 0},
+    2: { id: 2, name: "Communications Society", type: "room", floor: 1, parent: 0},
+    3: { id: 3, name: "Toilet (Left Wing 1st Floor)", type: "facility", floor: 1, parent: 0},
+    4: { id: 4, name: "Department of Broadcast Communication", type: "office", floor: 1, parent: 0},
+    5: { id: 5, name: "Office of the College Dean", type: "office", floor: 1, parent: 0},
+    6: { id: 6, name: "Faculty Room (1st Floor)", type: "room", floor: 1, parent: 0},
+    7: { id: 7, name: "Lecture Room 101", type: "classroom", floor: 1, parent: 0},
+    8: { id: 8, name: "Student Council Room", type: "room", floor: 1, parent: 0},
+    9: { id: 9, name: "Toilet (Right Wing 1st Floor)", type: "facility", floor: 1, parent: 0},
+    10: { id: 10, name: "Dental Clinic", type: "clinic", floor: 1, parent: 0},
+    11: { id: 11, name: "Lecture Room 105", type: "classroom", floor: 1, parent: 0},
+    12: { id: 12, name: "Lecture Room 106", type: "classroom", floor: 1, parent: 0},
+    13: { id: 13, name: "Lecture Room 107", type: "classroom", floor: 1, parent: 0},
+    14: { id: 14, name: "Female Toilet (Bottom Wing)", type: "facility", floor: 1, parent: 0},
+    15: { id: 15, name: "Male Toilet (Bottom Wing)", type: "facility", floor: 1, parent: 0},
+    16: { id: 16, name: "Medical Clinic", type: "clinic", floor: 1, parent: 0},
+    17: { id: 17, name: "Lecture Room 110", type: "classroom", floor: 1, parent: 0},
+    18: { id: 18, name: "Lecture Room 111", type: "classroom", floor: 1, parent: 0},
+    19: { id: 19, name: "Lecture Room 112", type: "classroom", floor: 1, parent: 0},
+    20: { id: 20, name: "Lecture Room 113", type: "classroom", floor: 1, parent: 0},
+    21: { id: 21, name: "Lecture Room 114", type: "classroom", floor: 1, parent: 0},
 
 
     //STAIRS - 1ST FLOOR
-    22: { id: 22, name: "Upper Left Stairs", type: "stairs", floor: "1-2" },
-    23: { id: 23, name: "Upper Right Stairs", type: "stairs", floor: "1-2" },
-    24: { id: 24, name: "Lower Left Stairs", type: "stairs", floor: "1-2" },
-    25: { id: 25, name: "Lower Right Stairs", type: "stairs", floor: "1-2" },
-    53: { id: 53, name: "Center Stairs", type: "stairs", floor: "1-2" },
+    22: { id: 22, name: "Upper Left Stairs", type: "stairs", floor: "1-2", parent: 0},
+    23: { id: 23, name: "Upper Right Stairs", type: "stairs", floor: "1-2", parent: 0},
+    24: { id: 24, name: "Lower Left Stairs", type: "stairs", floor: "1-2", parent: 0},
+    25: { id: 25, name: "Lower Right Stairs", type: "stairs", floor: "1-2", parent: 0},
+    53: { id: 53, name: "Center Stairs", type: "stairs", floor: "1-2", parent: 0},
     //hallways
-    26: { id: 26, name: "Center Hallway (1st Floor)", type: "hallway", floor: 1 }, // Renamed from Main Hallway
-    27: { id: 27, name: "Bottom Hallway (1st Floor)", type: "hallway", floor: 1 },
-    55: { id: 55, name: "Top Hallway (1st Floor)", type: "hallway", floor: 1 },
+    26: { id: 26, name: "Center Hallway (1st Floor)", type: "hallway", floor: 1, parent: 0}, // Renamed from Main Hallway
+    27: { id: 27, name: "Bottom Hallway (1st Floor)", type: "hallway", floor: 1, parent: 0},
+    55: { id: 55, name: "Top Hallway (1st Floor)", type: "hallway", floor: 1, parent: 0},
    
 
 
 //STAIRS - 2ND FLOOR
-    28: { id: 28, name: "Upper Left Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
-    29: { id: 29, name: "Upper Right Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
-    30: { id: 30, name: "Lower Left Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
-    31: { id: 31, name: "Lower Right Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
-    54: { id: 54, name: "Center Stairs - 2nd Floor", type: "stairs", floor: "1-2" },
+    28: { id: 28, name: "Upper Left Stairs - 2nd Floor", type: "stairs", floor: "1-2", parent: 0},
+    29: { id: 29, name: "Upper Right Stairs - 2nd Floor", type: "stairs", floor: "1-2", parent: 0},
+    30: { id: 30, name: "Lower Left Stairs - 2nd Floor", type: "stairs", floor: "1-2", parent: 0},
+    31: { id: 31, name: "Lower Right Stairs - 2nd Floor", type: "stairs", floor: "1-2", parent: 0},
+    54: { id: 54, name: "Center Stairs - 2nd Floor", type: "stairs", floor: "1-2", parent: 0},
     //hallways
-    32: { id: 32, name: "Center Hallway (2nd Floor)", type: "hallway", floor: 2 }, // Renamed from Main Hallway
-    33: { id: 33, name: "Bottom Hallway (2nd Floor)", type: "hallway", floor: 2 },
-    56: { id: 56, name: "Top Hallway (2nd Floor)", type: "hallway", floor: 2 },
+    32: { id: 32, name: "Center Hallway (2nd Floor)", type: "hallway", floor: 2, parent: 0}, // Renamed from Main Hallway
+    33: { id: 33, name: "Bottom Hallway (2nd Floor)", type: "hallway", floor: 2, parent: 0},
+    56: { id: 56, name: "Top Hallway (2nd Floor)", type: "hallway", floor: 2, parent: 0},
     //rooms
-    34: { id: 34, name: "Lecture Room", type: "classroom", floor: 2 },
-    35: { id: 35, name: "Lecture Room", type: "classroom", floor: 2 },
-    36: { id: 36, name: "DAPR", type: "office", floor: 2 },
-    37: { id: 37, name: "Faculty OCT", type: "room", floor: 2 },
-    38: { id: 38, name: "Audio Visual Room (AVR)", type: "room", floor: 2 },
-    39: { id: 39, name: "Unknown Room (Top Right)", type: "room", floor: 2 },
-    40: { id: 40, name: "Student Area", type: "room", floor: 2 },
-    41: { id: 41, name: "DOCR Communication Research", type: "office", floor: 2 },
-    42: { id: 42, name: "Library", type: "library", floor: 2 },
-    43: { id: 43, name: "Toilet (Bottom Left)", type: "facility", floor: 2 },
-    44: { id: 44, name: "DACOM Room", type: "office", floor: 2 },
-    45: { id: 45, name: "Main Input", type: "facility", floor: 2 },
-    46: { id: 46, name: "Unknown Room (Bottom Center)", type: "room", floor: 2 },
-    47: { id: 47, name: "NEWS Room", type: "room", floor: 2 },
-    48: { id: 48, name: "TV Studio", type: "studio", floor: 2 },
-    49: { id: 49, name: "Lecture Room 209", type: "classroom", floor: 2 },
-    50: { id: 50, name: "Lecture Room 210", type: "classroom", floor: 2 },
-    51: { id: 51, name: "Lecture Room 211", type: "classroom", floor: 2 },
-    52: { id: 52, name: "Theater Building Entrance", type: "entrance", floor: 1 },
-    57: { id: 57, name: "COC Gate", type: "entrance", floor: 1 },  // Adding COC gate node
+    34: { id: 34, name: "Lecture Room", type: "classroom", floor: 2, parent: 0},
+    35: { id: 35, name: "Lecture Room", type: "classroom", floor: 2, parent: 0},
+    36: { id: 36, name: "DAPR", type: "office", floor: 2, parent: 0},
+    37: { id: 37, name: "Faculty OCT", type: "room", floor: 2, parent: 0},
+    38: { id: 38, name: "Audio Visual Room (AVR)", type: "room", floor: 2, parent: 0},
+    39: { id: 39, name: "Unknown Room (Top Right)", type: "room", floor: 2, parent: 0},
+    40: { id: 40, name: "Student Area", type: "room", floor: 2, parent: 0},
+    41: { id: 41, name: "DOCR Communication Research", type: "office", floor: 2, parent: 0},
+    42: { id: 42, name: "Library", type: "library", floor: 2, parent: 0},
+    43: { id: 43, name: "Toilet (Bottom Left)", type: "facility", floor: 2, parent: 0},
+    44: { id: 44, name: "DACOM Room", type: "office", floor: 2, parent: 0},
+    45: { id: 45, name: "Main Input", type: "facility", floor: 2, parent: 0},
+    46: { id: 46, name: "Unknown Room (Bottom Center)", type: "room", floor: 2, parent: 0},
+    47: { id: 47, name: "NEWS Room", type: "room", floor: 2, parent: 0},
+    48: { id: 48, name: "TV Studio", type: "studio", floor: 2, parent: 0},
+    49: { id: 49, name: "Lecture Room 209", type: "classroom", floor: 2, parent: 0},
+    50: { id: 50, name: "Lecture Room 210", type: "classroom", floor: 2, parent: 0},
+    51: { id: 51, name: "Lecture Room 211", type: "classroom", floor: 2, parent: 0},
+
+    52: { id: 52, name: "Theater Building Entrance", type: "entrance", floor: 1, parent: 58},
+    58: { id: 58, name: "Theater Building ", type: "building", x:232, y:113},
   },
   edges: [
+
+    { from: 57, to: 666, weight: 2 },
+    { from: 666, to: 1, weight: 2},
+
+    // 0: { id: 0, name: "COC Building", type: "building", floor: 1, x:545, y:252},
+    // 57: { id: 57, name: "COC Gate", type: "entrance", floor: 1, x:562, y:21},  // Adding COC gate node
+    // 59: { id: 59, name: "Parking Area", type: "landmark", floor: 1, x:674, y:134},  // Parking Area
+    // 58: { id: 58, name: "Theater Building ", type: "building", floor: 1, x:232, y:113},
+
+    // Building connections
+    { from: 57, to: 0, weight: 30 },  // COC Gate to COC Building - using fixed weight
+    { from: 0, to: 58, weight: 40 },  // COC Building to Theater Building - using fixed weight
+    
     // FIRST FLOOR EDGES
     // Gate to entrance connection
     { from: 57, to: 1, weight: 5 },     // COC Gate to Building Entrance
@@ -1952,174 +1970,215 @@ export const cocData = {
 
 
 
+
+
+
 // CEA Building Graph Data
 export const ceaData = {
   nodes: {
+
+    166: { id: 0, type: "path", floor: 1, x: 446, y: 284 },
+
     // Ground Floor / First Floor - Entrance and Main Areas
-    1: { id: 1, name: "CEA Building Entrance", type: "entrance", floor: 1 },
-    2: { id: 2, name: "Exit", type: "exit", floor: 1 },
-    3: { id: 3, name: "Main Hallway (1st Floor)", type: "hallway", floor: 1 },
-    4: { id: 4, name: "Central Corridor (1st Floor)", type: "hallway", floor: 1 },
-    
+    0: { id: 0, name: "CEA Building", type: "building", floor: 1, x: 446, y: 284 },
+    143: { id: 143, name: "CEA Gate", type: "gate", floor: 1, x:434, y:460 },
+
+    1: { id: 1, name: "CEA Building Entrance", type: "entrance", floor: 1, parent: 0},
+    2: { id: 2, name: "Exit", type: "exit", floor: 1, parent: 0},
+    3: { id: 3, name: "Main Hallway (1st Floor)", type: "hallway", floor: 1, parent: 0},
+    4: { id: 4, name: "Central Corridor (1st Floor)", type: "hallway", floor: 1, parent: 0},
+   
     // First Floor Rooms
-    5: { id: 5, name: "Room 100", type: "classroom", floor: 1 },
-    6: { id: 6, name: "Room 101", type: "classroom", floor: 1 },
-    7: { id: 7, name: "Room 102", type: "classroom", floor: 1 },
-    8: { id: 8, name: "Room 103A", type: "classroom", floor: 1 },
-    9: { id: 9, name: "Room 103B", type: "classroom", floor: 1 },
-    10: { id: 10, name: "Room 104", type: "classroom", floor: 1 },
-    11: { id: 11, name: "Room 105A", type: "classroom", floor: 1 },
-    12: { id: 12, name: "Room 105B", type: "classroom", floor: 1 },
-    13: { id: 13, name: "Room 106", type: "classroom", floor: 1 },
-    14: { id: 14, name: "Tool Room", type: "facility", floor: 1 },
-    15: { id: 15, name: "Room 107A", type: "classroom", floor: 1 },
-    16: { id: 16, name: "Room 107B", type: "classroom", floor: 1 },
-    17: { id: 17, name: "Room 108", type: "classroom", floor: 1 },
-    18: { id: 18, name: "Room 109", type: "classroom", floor: 1 },
-    19: { id: 19, name: "Room 110", type: "classroom", floor: 1 },
-    20: { id: 20, name: "Room 111", type: "classroom", floor: 1 },
-    21: { id: 21, name: "Room 112", type: "classroom", floor: 1 },
-    22: { id: 22, name: "Civil Engineering Library", type: "library", floor: 1 },
-    23: { id: 23, name: "Civil Engineering Dean's Office", type: "office", floor: 1 },
-    24: { id: 24, name: "Civil Engineering Chairperson's Office", type: "office", floor: 1 },
-    25: { id: 25, name: "Accreditation Center", type: "office", floor: 1 },
-    26: { id: 26, name: "Female Toilet (Upper Left - 1st Floor)", type: "facility", floor: 1 },
-    27: { id: 27, name: "Male Toilet (Lower Left - 1st Floor)", type: "facility", floor: 1 },
-    141: { id: 141, name: "Female Toilet (Upper Right - 1st Floor)", type: "facility", floor: 1 },
-    142: { id: 142, name: "Male Toilet (Lower Right - 1st Floor)", type: "facility", floor: 1 },
+    5: { id: 5, name: "Room 100", type: "classroom", floor: 1, parent: 0},
+    6: { id: 6, name: "Room 101", type: "classroom", floor: 1, parent: 0},
+    7: { id: 7, name: "Room 102", type: "classroom", floor: 1, parent: 0},
+    8: { id: 8, name: "Room 103A", type: "classroom", floor: 1, parent: 0},
+    9: { id: 9, name: "Room 103B", type: "classroom", floor: 1,  parent: 0},
+    10: { id: 10, name: "Room 104", type: "classroom", floor: 1, parent: 0},
+    11: { id: 11, name: "Room 105A", type: "classroom", floor: 1, parent: 0},
+    12: { id: 12, name: "Room 105B", type: "classroom", floor: 1, parent: 0},
+    13: { id: 13, name: "Room 106", type: "classroom", floor: 1, parent: 0},
+    14: { id: 14, name: "Tool Room", type: "facility", floor: 1, parent: 0},
+    15: { id: 15, name: "Room 107A", type: "classroom", floor: 1, parent: 0},
+    16: { id: 16, name: "Room 107B", type: "classroom", floor: 1, parent: 0},
+    17: { id: 17, name: "Room 108", type: "classroom", floor: 1, parent: 0},
+    18: { id: 18, name: "Room 109", type: "classroom", floor: 1 , parent: 0},
+    19: { id: 19, name: "Room 110", type: "classroom", floor: 1 , parent: 0},
+    20: { id: 20, name: "Room 111", type: "classroom", floor: 1 , parent: 0},
+    21: { id: 21, name: "Room 112", type: "classroom", floor: 1 , parent: 0},
+    22: { id: 22, name: "Civil Engineering Library", type: "library", floor: 1 , parent: 0},
+    23: { id: 23, name: "Civil Engineering Dean's Office", type: "office", floor: 1 , parent: 0},
+    24: { id: 24, name: "Civil Engineering Chairperson's Office", type: "office", floor: 1 , parent: 0},
+    25: { id: 25, name: "Accreditation Center", type: "office", floor: 1 , parent: 0},
+    26: { id: 26, name: "Female Toilet (Upper Left - 1st Floor)", type: "facility", floor: 1 , parent: 0},
+    27: { id: 27, name: "Male Toilet (Lower Left - 1st Floor)", type: "facility", floor: 1 , parent: 0},
+    141: { id: 141, name: "Female Toilet (Upper Right - 1st Floor)", type: "facility", floor: 1 , parent: 0},
+    142: { id: 142, name: "Male Toilet (Lower Right - 1st Floor)", type: "facility", floor: 1 , parent: 0},
+
 
     // First Floor Open Courts and Stairs
-    28: { id: 28, name: "Open Court (Left)", type: "open_area", floor: 1 },
-    29: { id: 29, name: "Open Court (Right)", type: "open_area", floor: 1 },
-    30: { id: 30, name: "Stairs (Left)", type: "stairs", floor: "1-2" },
-    31: { id: 31, name: "Stairs (Center Left)", type: "stairs", floor: "1-2" },
-    32: { id: 32, name: "Stairs (Center Right)", type: "stairs", floor: "1-2" },
-    33: { id: 33, name: "Stairs (Right)", type: "stairs", floor: "1-2" },
-    
-    
-    
+    28: { id: 28, name: "Open Court (Left)", type: "open_area", floor: 1 , parent: 0},
+    29: { id: 29, name: "Open Court (Right)", type: "open_area", floor: 1 , parent: 0},
+    30: { id: 30, name: "Stairs (Left)", type: "stairs", floor: "1-2" , parent: 0},
+    31: { id: 31, name: "Stairs (Center Left)", type: "stairs", floor: "1-2" , parent: 0},
+    32: { id: 32, name: "Stairs (Center Right)", type: "stairs", floor: "1-2" , parent: 0},
+    33: { id: 33, name: "Stairs (Right)", type: "stairs", floor: "1-2" , parent: 0},
+   
+   
     // Second Floor
-    34: { id: 34, name: "Main Hallway (2nd Floor)", type: "hallway", floor: 2 },
-    35: { id: 35, name: "Central Corridor (2nd Floor)", type: "hallway", floor: 2 },
-    
+    34: { id: 34, name: "Main Hallway (2nd Floor)", type: "hallway", floor: 2 , parent: 0},
+    35: { id: 35, name: "Central Corridor (2nd Floor)", type: "hallway", floor: 2 , parent: 0},
+   
     // Second Floor Rooms
-    36: { id: 36, name: "CAD Laboratory Room 200", type: "laboratory", floor: 2 },
-    37: { id: 37, name: "Architecture Lecture Room 201", type: "classroom", floor: 2 },
-    38: { id: 38, name: "Lecture Room 201 Extension", type: "classroom", floor: 2 },
-    39: { id: 39, name: "Visual Techniques Room 202", type: "classroom", floor: 2 },
-    40: { id: 40, name: "Lecture Room 203", type: "classroom", floor: 2 },
-    41: { id: 41, name: "Clinic Room 204", type: "clinic", floor: 2 },
-    42: { id: 42, name: "I.E. Lecture Room 205", type: "classroom", floor: 2 },
-    43: { id: 43, name: "Mechanical Drafting Room 3 - 206", type: "classroom", floor: 2 },
-    44: { id: 44, name: "Mechanical Drafting Room 2 - 207", type: "classroom", floor: 2 },
-    45: { id: 45, name: "Mechanical Drafting Room 1 - 208", type: "classroom", floor: 2 },
-    46: { id: 46, name: "Classroom 209B", type: "classroom", floor: 2 },
-    47: { id: 47, name: "Manufacturing Laboratory Room 209", type: "laboratory", floor: 2 },
-    48: { id: 48, name: "Industrial Engineering and Printing Laboratory Room 210", type: "laboratory", floor: 2 },
-    49: { id: 49, name: "Multi-Media Room 211", type: "classroom", floor: 2 },
-    50: { id: 50, name: "CAFA Office Room 212", type: "office", floor: 2 },
-    51: { id: 51, name: "Architecture Drafting Room 1 - 213", type: "classroom", floor: 2 },
-    52: { id: 52, name: "Architecture Drafting Room 2 - 214", type: "classroom", floor: 2 },
-    53: { id: 53, name: "Architecture Drafting Room 3 - 215", type: "classroom", floor: 2 },
-    54: { id: 54, name: "Time and Motion Laboratory 221", type: "laboratory", floor: 2 },
-    55: { id: 55, name: "Electrical Engineering Department Office", type: "office", floor: 2 },
-    56: { id: 56, name: "Architecture Department Office", type: "office", floor: 2 },
-    57: { id: 57, name: "Civil Engineering Department Office", type: "office", floor: 2 },
-    58: { id: 58, name: "Mechanical Engineering Department Office", type: "office", floor: 2 },
-    59: { id: 59, name: "IE Department Office", type: "office", floor: 2 },
-    60: { id: 60, name: "Stock Room", type: "facility", floor: 2 },
-    61: { id: 61, name: "Tool Room", type: "facility", floor: 2 },
-    62: { id: 62, name: "Dark Room", type: "facility", floor: 2 },
-    63: { id: 63, name: "Power Room", type: "facility", floor: 2 },
-    64: { id: 64, name: "Female Toilet (2nd Floor)", type: "facility", floor: 2 },
-    65: { id: 65, name: "Male Toilet (2nd Floor)", type: "facility", floor: 2 },
-    66: { id: 66, name: "Open Court (Left 2nd Floor)", type: "open_area", floor: 2 },
-    67: { id: 67, name: "Open Court (Right 2nd Floor)", type: "open_area", floor: 2 },
-    68: { id: 68, name: "Deck on Second Floor", type: "open_area", floor: 2 },
-    
+    36: { id: 36, name: "CAD Laboratory Room 200", type: "laboratory", floor: 2 , parent: 0},
+    37: { id: 37, name: "Architecture Lecture Room 201", type: "classroom", floor: 2 , parent: 0},
+    38: { id: 38, name: "Lecture Room 201 Extension", type: "classroom", floor: 2 , parent: 0},
+    39: { id: 39, name: "Visual Techniques Room 202", type: "classroom", floor: 2 , parent: 0},
+    40: { id: 40, name: "Lecture Room 203", type: "classroom", floor: 2 , parent: 0},
+    41: { id: 41, name: "Clinic Room 204", type: "clinic", floor: 2 , parent: 0},
+    42: { id: 42, name: "I.E. Lecture Room 205", type: "classroom", floor: 2 , parent: 0},
+    43: { id: 43, name: "Mechanical Drafting Room 3 - 206", type: "classroom", floor: 2 , parent: 0},
+    44: { id: 44, name: "Mechanical Drafting Room 2 - 207", type: "classroom", floor: 2 , parent: 0},
+    45: { id: 45, name: "Mechanical Drafting Room 1 - 208", type: "classroom", floor: 2 , parent: 0},
+    46: { id: 46, name: "Classroom 209B", type: "classroom", floor: 2 , parent: 0},
+    47: { id: 47, name: "Manufacturing Laboratory Room 209", type: "laboratory", floor: 2 , parent: 0},
+    48: { id: 48, name: "Industrial Engineering and Printing Laboratory Room 210", type: "laboratory", floor: 2 , parent: 0},
+    49: { id: 49, name: "Multi-Media Room 211", type: "classroom", floor: 2 , parent: 0},
+    50: { id: 50, name: "CAFA Office Room 212", type: "office", floor: 2 , parent: 0},
+    51: { id: 51, name: "Architecture Drafting Room 1 - 213", type: "classroom", floor: 2 , parent: 0},
+    52: { id: 52, name: "Architecture Drafting Room 2 - 214", type: "classroom", floor: 2 , parent: 0},
+    53: { id: 53, name: "Architecture Drafting Room 3 - 215", type: "classroom", floor: 2 , parent: 0},
+    54: { id: 54, name: "Time and Motion Laboratory 221", type: "laboratory", floor: 2 , parent: 0},
+    55: { id: 55, name: "Electrical Engineering Department Office", type: "office", floor: 2 , parent: 0},
+    56: { id: 56, name: "Architecture Department Office", type: "office", floor: 2 , parent: 0},
+    57: { id: 57, name: "Civil Engineering Department Office", type: "office", floor: 2 , parent: 0},
+    58: { id: 58, name: "Mechanical Engineering Department Office", type: "office", floor: 2 , parent: 0},
+    59: { id: 59, name: "IE Department Office", type: "office", floor: 2 , parent: 0},
+    60: { id: 60, name: "Stock Room", type: "facility", floor: 2 , parent: 0},
+    61: { id: 61, name: "Tool Room", type: "facility", floor: 2 , parent: 0},
+    62: { id: 62, name: "Dark Room", type: "facility", floor: 2 , parent: 0},
+    63: { id: 63, name: "Power Room", type: "facility", floor: 2 , parent: 0},
+    64: { id: 64, name: "Female Toilet (2nd Floor)", type: "facility", floor: 2 , parent: 0},
+    65: { id: 65, name: "Male Toilet (2nd Floor)", type: "facility", floor: 2 , parent: 0},
+    66: { id: 66, name: "Open Court (Left 2nd Floor)", type: "open_area", floor: 2 , parent: 0},
+    67: { id: 67, name: "Open Court (Right 2nd Floor)", type: "open_area", floor: 2 , parent: 0},
+    68: { id: 68, name: "Deck on Second Floor", type: "open_area", floor: 2 , parent: 0},
+   
     // Third Floor
-    69: { id: 69, name: "Main Hallway (3rd Floor)", type: "hallway", floor: 3 },
-    70: { id: 70, name: "Central Corridor (3rd Floor)", type: "hallway", floor: 3 },
-    
+    69: { id: 69, name: "Main Hallway (3rd Floor)", type: "hallway", floor: 3 , parent: 0},
+    70: { id: 70, name: "Central Corridor (3rd Floor)", type: "hallway", floor: 3 , parent: 0},
+   
     // Third Floor Rooms
-    71: { id: 71, name: "CPE Multimedia Room 300", type: "classroom", floor: 3 },
-    72: { id: 72, name: "Computer Engineering Laboratory Office 301", type: "office", floor: 3 },
-    73: { id: 73, name: "Computer Engineering Lecture Room 302", type: "classroom", floor: 3 },
-    74: { id: 74, name: "Center for Industrial Electronics Technology Room 2 - 303B", type: "laboratory", floor: 3 },
-    75: { id: 75, name: "Center for Industrial Electronics Technology Room 1 - 303A", type: "laboratory", floor: 3 },
-    76: { id: 76, name: "Advanced Technologies and Multimedia Center 304B", type: "laboratory", floor: 3 },
-    77: { id: 77, name: "Office of the Laboratory Head Electronics Engineering Department 304A", type: "office", floor: 3 },
-    78: { id: 78, name: "SMART Wireless Laboratory 305A", type: "laboratory", floor: 3 },
-    79: { id: 79, name: "Communications Engineering Laboratory 305B", type: "laboratory", floor: 3 },
-    80: { id: 80, name: "Electronics Engineering Lecture Room 306A", type: "classroom", floor: 3 },
-    81: { id: 81, name: "Electronics Engineering Lecture Room 306B", type: "classroom", floor: 3 },
-    82: { id: 82, name: "ECE Library, Research and Extension Center 307", type: "library", floor: 3 },
-    83: { id: 83, name: "EE Automatic Control Laboratory 308", type: "laboratory", floor: 3 },
-    84: { id: 84, name: "Computer Engineering Lecture Room 310", type: "classroom", floor: 3 },
-    85: { id: 85, name: "Artificial Intelligence Laboratory Room 311", type: "laboratory", floor: 3 },
-    86: { id: 86, name: "Computer Engineering Laboratory Room 312", type: "laboratory", floor: 3 },
-    87: { id: 87, name: "Computer Engineering Laboratory Room 313", type: "laboratory", floor: 3 },
-    88: { id: 88, name: "EMERSON Laboratory Room 314", type: "laboratory", floor: 3 },
-    89: { id: 89, name: "Computer Engineering Lecture Room 315", type: "laboratory", floor: 3 },
-    90: { id: 90, name: "Computer Engineering Lecture Room 316", type: "classroom", floor: 3 },
-    91: { id: 91, name: "Sensors and Mechatronics Laboratory 318", type: "laboratory", floor: 3 },
-    92: { id: 92, name: "Accreditation Center 319", type: "office", floor: 3 },
-    93: { id: 93, name: "Faculty Checker 320", type: "office", floor: 3 },
-    94: { id: 94, name: "Office of the Chairperson Computer Engineering Department 321", type: "office", floor: 3 },
-    95: { id: 95, name: "Office of the Chairperson Electronics Engineering Department 322", type: "office", floor: 3 },
-    96: { id: 96, name: "Office of the Chairperson Engineering Sciences Department 323", type: "office", floor: 3 },
-    97: { id: 97, name: "Female Toilet (3rd Floor)", type: "facility", floor: 3 },
-    98: { id: 98, name: "Male Toilet (3rd Floor)", type: "facility", floor: 3 },
-    99: { id: 99, name: "Tool Room (3rd Floor)", type: "facility", floor: 3 },
-    100: { id: 100, name: "Open Court (Left 3rd Floor)", type: "open_area", floor: 3 },
-    101: { id: 101, name: "Open Court (Right 3rd Floor)", type: "open_area", floor: 3 },
-    
+    71: { id: 71, name: "CPE Multimedia Room 300", type: "classroom", floor: 3 , parent: 0},
+    72: { id: 72, name: "Computer Engineering Laboratory Office 301", type: "office", floor: 3 , parent: 0},
+    73: { id: 73, name: "Computer Engineering Lecture Room 302", type: "classroom", floor: 3 , parent: 0},
+    74: { id: 74, name: "Center for Industrial Electronics Technology Room 2 - 303B", type: "laboratory", floor: 3 , parent: 0},
+    75: { id: 75, name: "Center for Industrial Electronics Technology Room 1 - 303A", type: "laboratory", floor: 3 , parent: 0},
+    76: { id: 76, name: "Advanced Technologies and Multimedia Center 304B", type: "laboratory", floor: 3 , parent: 0},
+    77: { id: 77, name: "Office of the Laboratory Head Electronics Engineering Department 304A", type: "office", floor: 3 , parent: 0},
+    78: { id: 78, name: "SMART Wireless Laboratory 305A", type: "laboratory", floor: 3 , parent: 0},
+    79: { id: 79, name: "Communications Engineering Laboratory 305B", type: "laboratory", floor: 3 , parent: 0},
+    80: { id: 80, name: "Electronics Engineering Lecture Room 306A", type: "classroom", floor: 3 , parent: 0},
+    81: { id: 81, name: "Electronics Engineering Lecture Room 306B", type: "classroom", floor: 3 , parent: 0},
+    82: { id: 82, name: "ECE Library, Research and Extension Center 307", type: "library", floor: 3 , parent: 0},
+    83: { id: 83, name: "EE Automatic Control Laboratory 308", type: "laboratory", floor: 3 , parent: 0},
+    84: { id: 84, name: "Computer Engineering Lecture Room 310", type: "classroom", floor: 3 , parent: 0},
+    85: { id: 85, name: "Artificial Intelligence Laboratory Room 311", type: "laboratory", floor: 3 , parent: 0},
+    86: { id: 86, name: "Computer Engineering Laboratory Room 312", type: "laboratory", floor: 3 , parent: 0},
+    87: { id: 87, name: "Computer Engineering Laboratory Room 313", type: "laboratory", floor: 3 , parent: 0},
+    88: { id: 88, name: "EMERSON Laboratory Room 314", type: "laboratory", floor: 3 , parent: 0 },
+    89: { id: 89, name: "Computer Engineering Lecture Room 315", type: "laboratory", floor: 3 , parent: 0},
+    90: { id: 90, name: "Computer Engineering Lecture Room 316", type: "classroom", floor: 3 , parent: 0},
+    91: { id: 91, name: "Sensors and Mechatronics Laboratory 318", type: "laboratory", floor: 3 , parent: 0},
+    92: { id: 92, name: "Accreditation Center 319", type: "office", floor: 3 , parent: 0},
+    93: { id: 93, name: "Faculty Checker 320", type: "office", floor: 3 , parent: 0},
+    94: { id: 94, name: "Office of the Chairperson Computer Engineering Department 323", type: "office", floor: 3 , parent: 0},
+    95: { id: 95, name: "Office of the Chairperson Electronics Engineering Department 322", type: "office", floor: 3 , parent: 0},
+    96: { id: 96, name: "Office of the Chairperson Engineering Sciences Department 323", type: "office", floor: 3 , parent: 0},
+    97: { id: 97, name: "Female Toilet (Left Side - 3rd Floor)", type: "facility", floor: 3 , parent: 0},
+    98: { id: 98, name: "Male Toilet (Left Side - 3rd Floor)", type: "facility", floor: 3 , parent: 0},
+    99: { id: 99, name: "Tool Room (3rd Floor)", type: "facility", floor: 3 , parent: 0},
+    100: { id: 100, name: "Open Court (Left 3rd Floor)", type: "open_area", floor: 3 , parent: 0},
+    101: { id: 101, name: "Open Court (Right 3rd Floor)", type: "open_area", floor: 3 , parent: 0},
+   
+    // Third Floor Stairs
+    3001: { id: 3001, name: "Left Stairs (3rd Floor)", type: "stairs", floor: 3, parent: 0 },
+    3002: { id: 3002, name: "Center Stairs (3rd Floor)", type: "stairs", floor: 3, parent: 0 },
+    3003: { id: 3003, name: "Right Stairs (3rd Floor)", type: "stairs", floor: 3, parent: 0 },
+    // Adding right side toilets for third floor
+    3036: { id: 3036, name: "Male Toilet (Right Side - 3rd Floor)", type: "facility", floor: 3, parent: 0 },
+    3037: { id: 3037, name: "Female Toilet (Right Side - 3rd Floor)", type: "facility", floor: 3, parent: 0 },
+   
+   
     // Fourth Floor
-    102: { id: 102, name: "Main Hallway (4th Floor)", type: "hallway", floor: 4 },
-    103: { id: 103, name: "Central Corridor (4th Floor)", type: "hallway", floor: 4 },
-    
+    102: { id: 102, name: "Main Hallway (4th Floor)", type: "hallway", floor: 4, parent: 0 },
+    103: { id: 103, name: "Central Corridor (4th Floor)", type: "hallway", floor: 4, parent: 0 },
+   
     // Fourth Floor Rooms
-    104: { id: 104, name: "Chemical Prep Room 400", type: "laboratory", floor: 4 },
-    105: { id: 105, name: "Faculty Center 401", type: "office", floor: 4 },
-    106: { id: 106, name: "Extension Services and Community Involvement 402", type: "office", floor: 4 },
-    107: { id: 107, name: "Student Council Office 403", type: "office", floor: 4 },
-    108: { id: 108, name: "Gen. Physics Lab 2 - 404", type: "laboratory", floor: 4 },
-    109: { id: 109, name: "Gen. Physics Lab 2 - 405", type: "laboratory", floor: 4 },
-    110: { id: 110, name: "Lecture Room 406", type: "classroom", floor: 4 },
-    111: { id: 111, name: "Lecture Room 407", type: "classroom", floor: 4 },
-    112: { id: 112, name: "Electrical Fundamental Lab 2 - 408", type: "laboratory", floor: 4 },
-    113: { id: 113, name: "Electrical Fundamental Lab 1 - 409B", type: "laboratory", floor: 4 },
-    114: { id: 114, name: "Electrical Fundamental Lab 2 - 409A", type: "laboratory", floor: 4 },
-    115: { id: 115, name: "Lecture Room 411", type: "classroom", floor: 4 },
-    116: { id: 116, name: "Lecture Room 412", type: "classroom", floor: 4 },
-    117: { id: 117, name: "Lecture Room 413", type: "classroom", floor: 4 },
-    118: { id: 118, name: "Lecture Room 414", type: "classroom", floor: 4 },
-    119: { id: 119, name: "Lecture Room 415", type: "classroom", floor: 4 },
-    120: { id: 120, name: "Lecture Room 416", type: "classroom", floor: 4 },
-    121: { id: 121, name: "Lecture Room 417", type: "classroom", floor: 4 },
-    122: { id: 122, name: "Lecture Room 418", type: "classroom", floor: 4 },
-    123: { id: 123, name: "Gen. Chemistry Lab A 419", type: "laboratory", floor: 4 },
-    124: { id: 124, name: "Lab Equipment Room 420", type: "facility", floor: 4 },
-    125: { id: 125, name: "Gen. Chemistry Lab B 421", type: "laboratory", floor: 4 },
-    126: { id: 126, name: "Natural Science Laboratory Office 422", type: "office", floor: 4 },
-    127: { id: 127, name: "Department of Natural Science Faculty Room 421", type: "office", floor: 4 },
-    128: { id: 128, name: "Laboratory Equipment Room", type: "facility", floor: 4 },
-    129: { id: 129, name: "Spectrum Office", type: "office", floor: 4 },
-    130: { id: 130, name: "CoE 300 Library", type: "library", floor: 4 },
-    131: { id: 131, name: "Library", type: "library", floor: 4 },
-    132: { id: 132, name: "A V R", type: "facility", floor: 4 },
-    133: { id: 133, name: "Power Room (4th Floor)", type: "facility", floor: 4 },
-    134: { id: 134, name: "Female Toilet (4th Floor)", type: "facility", floor: 4 },
-    135: { id: 135, name: "Male Toilet (4th Floor)", type: "facility", floor: 4 },
-    136: { id: 136, name: "Open Court (Left 4th Floor)", type: "open_area", floor: 4 },
-    137: { id: 137, name: "Open Court (Center 4th Floor)", type: "open_area", floor: 4 },
-    138: { id: 138, name: "Open Court (Right 4th Floor)", type: "open_area", floor: 4 },
-    
+    104: { id: 104, name: "Chemical Prep Room 400", type: "laboratory", floor: 4 , parent: 0 },
+    105: { id: 105, name: "Faculty Center 401", type: "office", floor: 4 , parent: 0 },
+    106: { id: 106, name: "Extension Services and Community Involvement 402", type: "office", floor: 4 , parent: 0 },
+    107: { id: 107, name: "Student Council Office 403", type: "office", floor: 4 , parent: 0 },
+    108: { id: 108, name: "Gen. Physics Lab 2 - 404", type: "laboratory", floor: 4 , parent: 0 },
+    109: { id: 109, name: "Gen. Physics Lab 2 - 405", type: "laboratory", floor: 4 , parent: 0 },
+    110: { id: 110, name: "Lecture Room 406", type: "classroom", floor: 4 , parent: 0 },
+    111: { id: 111, name: "Lecture Room 407", type: "classroom", floor: 4 , parent: 0 },
+    112: { id: 112, name: "Electrical Fundamental Lab 2 - 408", type: "laboratory", floor: 4 , parent: 0 },
+    113: { id: 113, name: "Electrical Fundamental Lab 1 - 409B", type: "laboratory", floor: 4 , parent: 0 },
+    114: { id: 114, name: "Electrical Fundamental Lab 2 - 409A", type: "laboratory", floor: 4 , parent: 0 },
+    115: { id: 115, name: "Lecture Room 411", type: "classroom", floor: 4 , parent: 0 },
+    116: { id: 116, name: "Lecture Room 412", type: "classroom", floor: 4 , parent: 0 },
+    117: { id: 117, name: "Lecture Room 413", type: "classroom", floor: 4 , parent: 0 },
+    118: { id: 118, name: "Lecture Room 414", type: "classroom", floor: 4 , parent: 0 },
+    119: { id: 119, name: "Lecture Room 415", type: "classroom", floor: 4 , parent: 0 },
+    120: { id: 120, name: "Lecture Room 416", type: "classroom", floor: 4 , parent: 0 },
+    121: { id: 121, name: "Lecture Room 417", type: "classroom", floor: 4 , parent: 0 },
+    122: { id: 122, name: "Lecture Room 418", type: "classroom", floor: 4 , parent: 0 },
+    123: { id: 123, name: "Gen. Chemistry Lab A 419", type: "laboratory", floor: 4 , parent: 0 },
+    124: { id: 124, name: "Lab Equipment Room 420", type: "facility", floor: 4 , parent: 0 },
+    125: { id: 125, name: "Gen. Chemistry Lab B 421", type: "laboratory", floor: 4 , parent: 0 },
+    126: { id: 126, name: "Natural Science Laboratory Office 422", type: "office", floor: 4 , parent: 0 },
+    127: { id: 127, name: "Department of Natural Science Faculty Room 421", type: "office", floor: 4 , parent: 0 },
+    128: { id: 128, name: "Laboratory Equipment Room", type: "facility", floor: 4 , parent: 0 },
+    129: { id: 129, name: "Spectrum Office", type: "office", floor: 4,parent: 0 },
+    130: { id: 130, name: "CoE 300 Library", type: "library", floor: 4 , parent: 0},
+    131: { id: 131, name: "Library", type: "library", floor: 4, parent: 0},
+    132: { id: 132, name: "A V R", type: "facility", floor: 4, parent: 0 },
+    133: { id: 133, name: "Power Room (4th Floor)", type: "facility", floor: 4, parent: 0 },
+    134: { id: 134, name: "Female Toilet (4th Floor)", type: "facility", floor: 4, parent: 0 },
+    135: { id: 135, name: "Male Toilet (4th Floor)", type: "facility", floor: 4, parent: 0 },
+    136: { id: 136, name: "Open Court (Left 4th Floor)", type: "open_area", floor: 4, parent: 0 },
+    137: { id: 137, name: "Open Court (Center 4th Floor)", type: "open_area", floor: 4, parent: 0 },
+    138: { id: 138, name: "Open Court (Right 4th Floor)", type: "open_area", floor: 4, parent: 0 },
+   
     // Stairs connecting all floors
-    139: { id: 139, name: "Main Stairs (2-3)", type: "stairs", floor: "2-3" },
-    140: { id: 140, name: "Main Stairs (3-4)", type: "stairs", floor: "3-4" },
+    139: { id: 139, name: "Main Stairs (2-3)", type: "stairs", floor: "2-3", parent: 0 },
+    140: { id: 140, name: "Main Stairs (3-4)", type: "stairs", floor: "3-4", parent: 0 },
   },
+
   edges: [
+
+    { from: 143, to: 166, weight: 2},
+    { from: 166, to: 1, weight: 2},
+
+    { from: 143, to: 0, weight: 3 },
+
+    { from: 143, to: 1, weight: 5 },    // CEA Gate to CEA Building Entrance
+    { from: 143, to: 2, weight: 5 },     // CEA Gate to Exit
+    { from: 143, to: 3, weight: 15 },    // CEA Gate to Main Hallway (1st Floor)
+    
+    // // Existing connections - modify to route through gate
+    // { from: 1, to: 3, weight: 5 },     // Building Entrance to Main Hallway
+    // { from: 1, to: 4, weight: 10 },    // Building Entrance to Central Corridor
+    // { from: 2, to: 3, weight: 5 },     // Exit to Main Hallway
+    // { from: 3, to: 4, weight: 10 },    // Main Hallway to Central Corridor
+
+    { from: 143, to: 1, weight: 5 },    // CEA Gate to CEA Building Entrance
+    { from: 1, to: 3, weight: 5 },     // Building Entrance to Main Hallway
+    { from: 1, to: 4, weight: 10 },    // Building Entrance to Central Corridor
+    { from: 2, to: 3, weight: 5 },     // Exit to Main Hallway
+    { from: 3, to: 4, weight: 10 },    // Main Hallway to Central Corridor
+    
     // Main path from Main Gate
     { from: 1, to: 2, weight: 190 },
     { from: 2, to: 3, weight: 150 },
