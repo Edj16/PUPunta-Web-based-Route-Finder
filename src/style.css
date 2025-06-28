@@ -772,7 +772,7 @@ label {
     border-radius: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    z-index: 100;
+    z-index: 999;
     transition: all 0.2s ease;
 }
 
@@ -782,16 +782,19 @@ label {
     width: 10px;
     height: 10px;
     box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    z-index: 998;
 }
 
 
 .point:hover {
+    z-index: 1001;
     transform: translate(-50%, -50%) scale(1.5);
     box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
 }
 
 
 .point.path-node:hover {
+    z-index: 1001;
     box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
 }
 
@@ -799,7 +802,7 @@ label {
 .vertex-tooltip {
     position: absolute;
     visibility: hidden;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
@@ -807,11 +810,13 @@ label {
     white-space: nowrap;
     left: 50%;
     transform: translateX(-50%);
-    bottom: calc(100% + 5px);
-    z-index: 101;
+    bottom: calc(100% + 10px);
+    z-index: 1000;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 
@@ -821,9 +826,9 @@ label {
 }
 
 
-/* Ensure vertices stay on top of paths */
+/* Ensure path lines stay below points */
 .path-line {
-    z-index: 99;
+    z-index: 90;
 }
 
 

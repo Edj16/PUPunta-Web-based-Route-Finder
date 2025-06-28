@@ -5,6 +5,8 @@ import { mainCampusData, cocData, ceaData, overviewData } from './data/graphData
 import EnhancedMapPlotter from './utils/mapPlotter.js';
 import { findPath } from './utils/pathfinding.js';
 
+
+//plot Vertices on Map
 function plotVerticesOnMap(pathNodeIds = [], mapType = 'MAIN') {
   const map = document.getElementById('map');
   if (!map) return;
@@ -233,7 +235,7 @@ function getMapImageForCampus(campusCode) {
 }
 
 
-
+//NAVIGATION
 // Function to switch from intro screen to navigation screen
 function startNavigating() {
   $('#front').hide();
@@ -243,6 +245,9 @@ function startNavigating() {
   initializeMap(getMapImageForCampus(selectedCampus));
 }
 
+
+//INITIALIZE MAP
+//initialize the map base on the required campus map
 function initializeMap(mapImage) {
   const mapContainer = document.getElementById('map-container');
   let map = document.getElementById('map');
@@ -263,28 +268,6 @@ function initializeMap(mapImage) {
   map.style.backgroundSize = 'cover';
   map.style.backgroundPosition = 'center';
 }
-
-
-
-// Initialize the map display
-// function initializeMap() {
-//    if (!document.getElementById('map')) {
-//     const mapDiv = document.createElement('div');
-//     mapDiv.id = 'map';
-//     mapDiv.style.position = 'relative';
-//     mapDiv.style.width = '900px';
-//     mapDiv.style.height = '500px';
-//     mapDiv.style.backgroundImage = "url('../src/images/MAINlandmarks.jpg')";
-//     mapDiv.style.backgroundSize = 'cover';
-//     mapDiv.style.border = '2px solid black';
-//     document.getElementById('map-container').appendChild(mapDiv);
-//   }
-
-//   plotVerticesOnMap();
-//   // if (!$('#map-container').length) {
-//   //   $('#route-result').before('<div id="map-container" class="map-container"><div class="map-placeholder">Campus Map Placeholder</div></div>');
-//   // }
-// }
 
 
 
@@ -493,7 +476,7 @@ function findCompleteRoute(startCampus, startLocation, endCampus, endLocation) {
 
 
 
-
+//UPDATING MAP NAVIGATION
 // Global state for map navigation
 let currentMapSequence = [];
 let currentMapIndex = 0;
@@ -1107,6 +1090,7 @@ function displayInterCampusRouteEnhanced(route, startLocation, endLocation) {
   $('#route-result').html(routeHTML);
 }
 
+//HIGHLIGHT PATHS
 function highlightPath(nodeIds, nodes) {
   const map = document.getElementById("map");
   if (!map || !nodeIds || nodeIds.length < 2) return;
@@ -1158,28 +1142,6 @@ function highlightPath(nodeIds, nodes) {
     map.appendChild(line);
   }
 }
-
-
-
-
-
-
-
-
-
-// // Function to highlight the path on the map visualization
-// function highlightPath(nodeIds) {
-//   console.log("Path to highlight:", nodeIds);
- 
-//   let mapHTML = `<div class="map-with-path">
-//     <div class="map-placeholder">
-//       <p>Main Campus Path visualization would go here</p>
-//       <p>Nodes: ${nodeIds ? nodeIds.join(' → ') : 'No nodes available'}</p>
-//     </div>
-//   </div>`;
- 
-//   $('#map-container').html(mapHTML);
-// }
 
 
 function highlightCOCPath(nodeIds, pathWithFloors) {

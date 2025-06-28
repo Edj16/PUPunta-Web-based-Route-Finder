@@ -1,3 +1,5 @@
+
+//CREATE ADJACENCY LIST
 // Shared pathfinding utilities
 // Create adjacency list for graph traversal
 export function createAdjacencyList(graph) {
@@ -60,6 +62,7 @@ export function createAdjacencyList(graph) {
   return adjacencyList;
 }
 
+//DJIKSTRA ALGORITHM
 // Dijkstra's algorithm implementation with optimizations
 export function dijkstra(graph, startId, endId) {
   const nodes = graph.nodes;
@@ -185,6 +188,7 @@ export function dijkstra(graph, startId, endId) {
   };
 }
 
+//GETLOCATION
 // Helper function to get location name with safety checks
 export function getLocationName(graph, nodeId) {
   const node = graph.nodes[nodeId];
@@ -192,6 +196,7 @@ export function getLocationName(graph, nodeId) {
   return node.name;
 }
 
+//FINDROUTEBYNAME
 // Enhanced route finding function
 export function findRouteByName(graph, startName, endName) {
   let startNodeId = null;
