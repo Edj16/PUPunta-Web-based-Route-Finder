@@ -1,7 +1,7 @@
 # PUPunta - Campus Route Finder
 
 <div align="center">
-  <img src="PUPunta-Web-based-Route-Finder/src/images/puplogo.png" alt="PUP Logo" width="200"/>
+  <img src="src/images/puplogo.png" alt="PUP Logo" width="200"/>
   <h3>Navigate the PUP Sta. Mesa campus with ease</h3>
 </div>
 
